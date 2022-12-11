@@ -5,19 +5,19 @@ import clsx from 'clsx';
 import {Link} from 'react-router-dom';
 import {useFormik} from 'formik';
 import {getUserByToken, login} from '../core/_requests';
-import {toAbsoluteUrl} from '../../../../_metronic/helpers';
+import {toAbsoluteUrl} from '@_metronic/helpers';
 import {useAuth} from '../core/Auth';
 
 const loginSchema = Yup.object().shape({
   email: Yup.string()
-    .email('Wrong email format')
-    .min(3, 'Minimum 3 symbols')
-    .max(50, 'Maximum 50 symbols')
-    .required('Email is required'),
+  .email('Wrong email format')
+  .min(3, 'Minimum 3 symbols')
+  .max(50, 'Maximum 50 symbols')
+  .required('Email is required'),
   password: Yup.string()
-    .min(3, 'Minimum 3 symbols')
-    .max(50, 'Maximum 50 symbols')
-    .required('Password is required'),
+  .min(3, 'Minimum 3 symbols')
+  .max(50, 'Maximum 50 symbols')
+  .required('Password is required'),
 });
 
 const initialValues = {
@@ -32,7 +32,7 @@ const initialValues = {
 */
 
 export function Login() {
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState<boolean>(false);
   const {saveAuth, setCurrentUser} = useAuth();
 
   const formik = useFormik({
@@ -144,7 +144,7 @@ export function Login() {
             {'is-invalid': formik.touched.email && formik.errors.email},
             {
               'is-valid': formik.touched.email && !formik.errors.email,
-            }
+            },
           )}
           type='email'
           name='email'
@@ -172,7 +172,7 @@ export function Login() {
             },
             {
               'is-valid': formik.touched.password && !formik.errors.password,
-            }
+            },
           )}
         />
         {formik.touched.password && formik.errors.password && (

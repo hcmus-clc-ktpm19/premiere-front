@@ -38,6 +38,7 @@ export default ({mode}: any) => {
         '@models': path.resolve(__dirname, './src/models'),
         '@services': path.resolve(__dirname, './src/services'),
         '@_metronic': path.resolve(__dirname, './src/_metronic'),
+        '@pages': path.resolve(__dirname, './src/app/pages'),
       },
     },
   });
