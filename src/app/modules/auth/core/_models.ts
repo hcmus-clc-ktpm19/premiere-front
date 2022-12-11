@@ -3,6 +3,11 @@ export interface AuthModel {
   refreshToken?: string;
 }
 
+export interface KeycloakAuthModel {
+  access_token: string;
+  refresh_token: string;
+}
+
 export interface UserAddressModel {
   addressLine: string;
   city: string;

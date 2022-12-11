@@ -4,7 +4,7 @@ import * as Yup from 'yup';
 import clsx from 'clsx';
 import {Link} from 'react-router-dom';
 import {useFormik} from 'formik';
-import {getUserByToken, login} from '../core/_requests';
+import {AuthService, getUserByToken, login} from '../core/_requests';
 import {toAbsoluteUrl} from '@_metronic/helpers';
 import {useAuth} from '../core/Auth';
 
@@ -24,6 +24,10 @@ const initialValues = {
   email: 'admin@demo.com',
   password: 'demo',
 };
+
+AuthService.loginKeycloak('customer', 'customer').then((response) => {
+  console.log(response);
+});
 
 /*
   Formik+YUP+Typescript:

@@ -1,22 +1,24 @@
 import axios from 'axios';
-import {AuthModel, UserModel} from './_models';
+import {AuthModel, KeycloakAuthModel, UserModel} from './_models';
+import qs from 'qs';
 
 const API_URL = process.env.REACT_APP_API_URL;
 const KEYCLOAK_ACCESS_TOKEN_URL: string = process.env.KEYCLOAK_ACCESS_TOKEN_URL!!;
-const KEYCLOAK_SCOPE = process.env.KEYCLOAK_SCOPE;
-const KEYCLOAK_CLIENT_ID = process.env.KEYCLOAK_CLIENT_ID;
-const KEYCLOAK_GRANT_TYPE = process.env.KEYCLOAK_GRANT_TYPE;
+const KEYCLOAK_SCOPE: string = process.env.KEYCLOAK_SCOPE!!;
+const KEYCLOAK_CLIENT_ID: string = process.env.KEYCLOAK_CLIENT_ID!!;
+const KEYCLOAK_GRANT_TYPE: string = process.env.KEYCLOAK_GRANT_TYPE!!;
 
-console.log(
-  axios.post(KEYCLOAK_ACCESS_TOKEN_URL, {
-    grant_type: KEYCLOAK_GRANT_TYPE,
-    username: 'customer',
-    password: 'customer',
-    scope: KEYCLOAK_SCOPE,
-    client_id: KEYCLOAK_CLIENT_ID,
-    client_secret: '',
-  })
-);
+const keycloakAuthRequestAttributes = {
+  grant_type: KEYCLOAK_GRANT_TYPE,
+  scope: KEYCLOAK_SCOPE,
+  client_id: KEYCLOAK_CLIENT_ID,
+};
+
+const keycloakConfig = {
+  headers: {
+    'Content-Type': 'application/x-www-form-urlencoded',
+  }
+}
 
 export const GET_USER_BY_ACCESSTOKEN_URL = `${API_URL}/verify_token`;
 export const LOGIN_URL = `${API_URL}/login`;
@@ -60,3 +62,26 @@ export function getUserByToken(token: string) {
     api_token: token,
   });
 }
+
+
+export const AuthService = {
+  login,
+
+  register,
+
+  requestPassword,
+
+  getUserByToken,
+
+  loginKeycloak(username: string, password: string) {
+    return axios.post<KeycloakAuthModel>(
+      KEYCLOAK_ACCESS_TOKEN_URL,
+      qs.stringify({
+        ...keycloakAuthRequestAttributes,
+        username,
+        password,
+      }),
+      keycloakConfig
+    );
+  },
+};
