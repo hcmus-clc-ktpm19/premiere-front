@@ -7,27 +7,38 @@ import {useFormik} from 'formik';
 import {AuthService, getUserByToken, login} from '../core/_requests';
 import {toAbsoluteUrl} from '@_metronic/helpers';
 import {useAuth} from '../core/Auth';
+import {UserModel} from '@/app/modules/auth';
 
 const loginSchema = Yup.object().shape({
-  email: Yup.string()
-  .email('Wrong email format')
-  .min(3, 'Minimum 3 symbols')
-  .max(50, 'Maximum 50 symbols')
-  .required('Email is required'),
-  password: Yup.string()
-  .min(3, 'Minimum 3 symbols')
-  .max(50, 'Maximum 50 symbols')
-  .required('Password is required'),
+  // TODO: Ignore for testing
+  // email: Yup.string()
+  //   .email('Wrong email format')
+  //   .min(3, 'Minimum 3 symbols')
+  //   .max(50, 'Maximum 50 symbols')
+  //   .required('Email is required'),
+  // password: Yup.string()
+  //   .min(3, 'Minimum 3 symbols')
+  //   .max(50, 'Maximum 50 symbols')
+  //   .required('Password is required'),
 });
+
+// const initialValues = {
+//   email: 'admin@demo.com',
+//   password: 'demo',
+// };
 
 const initialValues = {
-  email: 'admin@demo.com',
-  password: 'demo',
+  email: 'admin',
+  password: 'admin',
 };
 
-AuthService.loginKeycloak('customer', 'customer').then((response) => {
-  console.log(response);
-});
+// TODO: Hard code for testing
+const user: UserModel = {
+  email: 'admin@test.com', first_name: 'admin', last_name: 'admin',
+  id: 1,
+  username: 'admin',
+  password: 'admin'
+}
 
 /*
   Formik+YUP+Typescript:
@@ -45,9 +56,10 @@ export function Login() {
     onSubmit: async (values, {setStatus, setSubmitting}) => {
       setLoading(true);
       try {
-        const {data: auth} = await login(values.email, values.password);
+        const {data: auth} = await AuthService.loginKeycloak(values.email, values.password);
         saveAuth(auth);
-        const {data: user} = await getUserByToken(auth.api_token);
+        console.log('auth', auth);
+        // const {data: user} = await getUserByToken(auth.access_token);
         setCurrentUser(user);
       } catch (error) {
         console.error(error);
@@ -139,16 +151,16 @@ export function Login() {
 
       {/* begin::Form group */}
       <div className='fv-row mb-8'>
-        <label className='form-label fs-6 fw-bolder text-dark'>Email</label>
+        <label className='form-label fs-6 fw-bolder text-dark'>Phone number</label>
         <input
-          placeholder='Email'
+          placeholder='Phone number'
           {...formik.getFieldProps('email')}
           className={clsx(
             'form-control bg-transparent',
             {'is-invalid': formik.touched.email && formik.errors.email},
             {
               'is-valid': formik.touched.email && !formik.errors.email,
-            },
+            }
           )}
           type='email'
           name='email'
@@ -176,7 +188,7 @@ export function Login() {
             },
             {
               'is-valid': formik.touched.password && !formik.errors.password,
-            },
+            }
           )}
         />
         {formik.touched.password && formik.errors.password && (

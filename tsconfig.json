@@ -22,7 +22,7 @@
       "@models/*": ["./src/models/*"],
       "@services/*": ["./src/services/*"],
       "@_metronic/*": ["./src/_metronic/*"],
-      "@pages/*": ["./src/app/pages/*"],
+      "@pages/*": ["./src/app/pages/*"]
     }
   },
   "include": ["src"]

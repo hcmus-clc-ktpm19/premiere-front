@@ -1,5 +1,5 @@
 import axios from 'axios';
-import {AuthModel, KeycloakAuthModel, UserModel} from './_models';
+import {AuthModel, UserModel} from './_models';
 import qs from 'qs';
 
 const API_URL = process.env.REACT_APP_API_URL;
@@ -17,8 +17,8 @@ const keycloakAuthRequestAttributes = {
 const keycloakConfig = {
   headers: {
     'Content-Type': 'application/x-www-form-urlencoded',
-  }
-}
+  },
+};
 
 export const GET_USER_BY_ACCESSTOKEN_URL = `${API_URL}/verify_token`;
 export const LOGIN_URL = `${API_URL}/login`;
@@ -63,7 +63,6 @@ export function getUserByToken(token: string) {
   });
 }
 
-
 export const AuthService = {
   login,
 
@@ -74,7 +73,7 @@ export const AuthService = {
   getUserByToken,
 
   loginKeycloak(username: string, password: string) {
-    return axios.post<KeycloakAuthModel>(
+    return axios.post<AuthModel>(
       KEYCLOAK_ACCESS_TOKEN_URL,
       qs.stringify({
         ...keycloakAuthRequestAttributes,
