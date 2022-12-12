@@ -60,6 +60,13 @@ const AuthProvider: FC<WithChildren> = ({children}) => {
   );
 };
 
+const data: UserModel = {
+  email: 'admin@test.com', first_name: 'admin', last_name: 'admin',
+  id: 1,
+  username: 'admin',
+  password: 'admin'
+}
+
 const AuthInit: FC<WithChildren> = ({children}) => {
   const {auth, logout, setCurrentUser} = useAuth();
   const didRequest = useRef(false);
@@ -69,7 +76,7 @@ const AuthInit: FC<WithChildren> = ({children}) => {
     const requestUser = async (apiToken: string) => {
       try {
         if (!didRequest.current) {
-          const {data} = await getUserByToken(apiToken);
+          // const {data} = await getUserByToken(apiToken);
           if (data) {
             setCurrentUser(data);
           }
