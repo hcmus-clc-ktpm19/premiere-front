@@ -4,7 +4,7 @@ import * as Yup from 'yup';
 import clsx from 'clsx';
 import {Link} from 'react-router-dom';
 import {useFormik} from 'formik';
-import {AuthService} from '../core/_requests';
+import {AuthService, getUserByToken} from '../core/_requests';
 import {toAbsoluteUrl} from '@_metronic/helpers';
 import {useAuth} from '../core/Auth';
 import {UserModel} from '@/app/modules/auth';
@@ -59,7 +59,8 @@ export function Login() {
         const {data: auth} = await AuthService.loginKeycloak(values.email, values.password);
         saveAuth(auth);
         console.log('auth', auth);
-        // const {data: user} = await getUserByToken(auth.access_token);
+        const {data: user} = await getUserByToken();
+        console.log('user', user);
         setCurrentUser(user);
       } catch (error) {
         console.error(error);
