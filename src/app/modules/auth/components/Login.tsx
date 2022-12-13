@@ -4,26 +4,41 @@ import * as Yup from 'yup';
 import clsx from 'clsx';
 import {Link} from 'react-router-dom';
 import {useFormik} from 'formik';
-import {getUserByToken, login} from '../core/_requests';
-import {toAbsoluteUrl} from '../../../../_metronic/helpers';
+import {AuthService, getUserByToken} from '../core/_requests';
+import {toAbsoluteUrl} from '@_metronic/helpers';
 import {useAuth} from '../core/Auth';
+import {UserModel} from '@/app/modules/auth';
 
 const loginSchema = Yup.object().shape({
-  email: Yup.string()
-    .email('Wrong email format')
-    .min(3, 'Minimum 3 symbols')
-    .max(50, 'Maximum 50 symbols')
-    .required('Email is required'),
-  password: Yup.string()
-    .min(3, 'Minimum 3 symbols')
-    .max(50, 'Maximum 50 symbols')
-    .required('Password is required'),
+  // TODO: Ignore for testing
+  // email: Yup.string()
+  //   .email('Wrong email format')
+  //   .min(3, 'Minimum 3 symbols')
+  //   .max(50, 'Maximum 50 symbols')
+  //   .required('Email is required'),
+  // password: Yup.string()
+  //   .min(3, 'Minimum 3 symbols')
+  //   .max(50, 'Maximum 50 symbols')
+  //   .required('Password is required'),
 });
 
+// const initialValues = {
+//   email: 'admin@demo.com',
+//   password: 'demo',
+// };
+
 const initialValues = {
-  email: 'admin@demo.com',
-  password: 'demo',
+  email: 'admin',
+  password: 'admin',
 };
+
+// TODO: Hard code for testing
+const user: UserModel = {
+  email: 'admin@test.com', first_name: 'admin', last_name: 'admin',
+  id: 1,
+  username: 'admin',
+  password: 'admin'
+}
 
 /*
   Formik+YUP+Typescript:
@@ -32,7 +47,7 @@ const initialValues = {
 */
 
 export function Login() {
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState<boolean>(false);
   const {saveAuth, setCurrentUser} = useAuth();
 
   const formik = useFormik({
@@ -41,9 +56,11 @@ export function Login() {
     onSubmit: async (values, {setStatus, setSubmitting}) => {
       setLoading(true);
       try {
-        const {data: auth} = await login(values.email, values.password);
+        const {data: auth} = await AuthService.loginKeycloak(values.email, values.password);
         saveAuth(auth);
-        const {data: user} = await getUserByToken(auth.api_token);
+        console.log('auth', auth);
+        const {data: user} = await getUserByToken();
+        console.log('user', user);
         setCurrentUser(user);
       } catch (error) {
         console.error(error);
@@ -135,9 +152,9 @@ export function Login() {
 
       {/* begin::Form group */}
       <div className='fv-row mb-8'>
-        <label className='form-label fs-6 fw-bolder text-dark'>Email</label>
+        <label className='form-label fs-6 fw-bolder text-dark'>Phone number</label>
         <input
-          placeholder='Email'
+          placeholder='Phone number'
           {...formik.getFieldProps('email')}
           className={clsx(
             'form-control bg-transparent',

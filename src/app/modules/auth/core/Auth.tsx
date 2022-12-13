@@ -1,18 +1,18 @@
 import {
-  FC,
-  useState,
-  useEffect,
   createContext,
-  useContext,
-  useRef,
   Dispatch,
+  FC,
   SetStateAction,
+  useContext,
+  useEffect,
+  useRef,
+  useState,
 } from 'react';
-import {LayoutSplashScreen} from '../../../../_metronic/layout/core';
+import {LayoutSplashScreen} from '@_metronic/layout/core';
 import {AuthModel, UserModel} from './_models';
 import * as authHelper from './AuthHelpers';
 import {getUserByToken} from './_requests';
-import {WithChildren} from '../../../../_metronic/helpers';
+import {WithChildren} from '@_metronic/helpers';
 
 type AuthContextProps = {
   auth: AuthModel | undefined;
@@ -60,6 +60,13 @@ const AuthProvider: FC<WithChildren> = ({children}) => {
   );
 };
 
+const data: UserModel = {
+  email: 'admin@test.com', first_name: 'admin', last_name: 'admin',
+  id: 1,
+  username: 'admin',
+  password: 'admin'
+}
+
 const AuthInit: FC<WithChildren> = ({children}) => {
   const {auth, logout, setCurrentUser} = useAuth();
   const didRequest = useRef(false);
@@ -69,7 +76,7 @@ const AuthInit: FC<WithChildren> = ({children}) => {
     const requestUser = async (apiToken: string) => {
       try {
         if (!didRequest.current) {
-          const {data} = await getUserByToken(apiToken);
+          const {data} = await getUserByToken();
           if (data) {
             setCurrentUser(data);
           }
@@ -86,8 +93,8 @@ const AuthInit: FC<WithChildren> = ({children}) => {
       return () => (didRequest.current = true);
     };
 
-    if (auth && auth.api_token) {
-      requestUser(auth.api_token);
+    if (auth && auth.access_token) {
+      requestUser(auth.access_token);
     } else {
       logout();
       setShowSplashScreen(false);

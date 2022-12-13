@@ -20,9 +20,9 @@
       "@assets/*": ["./src/assets/*"],
       "@components/*": ["./src/components/*"],
       "@models/*": ["./src/models/*"],
-      "@views/*": ["./src/views/*"],
       "@services/*": ["./src/services/*"],
-      "@_metronic/*": ["./src/_metronic/*"]
+      "@_metronic/*": ["./src/_metronic/*"],
+      "@pages/*": ["./src/app/pages/*"]
     }
   },
   "include": ["src"]

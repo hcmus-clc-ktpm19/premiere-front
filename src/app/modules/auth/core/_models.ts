@@ -1,6 +1,6 @@
 export interface AuthModel {
-  api_token: string;
-  refreshToken?: string;
+  access_token: string;
+  refresh_token?: string;
 }
 
 export interface UserAddressModel {
@@ -50,7 +50,7 @@ export interface UserModel {
   email: string;
   first_name: string;
   last_name: string;
-  fullname?: string;
+  fullName?: string;
   occupation?: string;
   companyName?: string;
   phone?: string;
