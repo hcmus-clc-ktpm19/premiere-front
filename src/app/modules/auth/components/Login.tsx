@@ -1,13 +1,15 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import {useState} from 'react';
+import React, {useState} from 'react';
 import * as Yup from 'yup';
 import clsx from 'clsx';
 import {Link} from 'react-router-dom';
 import {useFormik} from 'formik';
 import {AuthService, getUserByToken} from '../core/_requests';
-import {toAbsoluteUrl} from '@_metronic/helpers';
 import {useAuth} from '../core/Auth';
 import {UserModel} from '@/app/modules/auth';
+import ReCAPTCHA from "react-google-recaptcha";
+
+const RECAPTCHA_SITE_KEY: string = process.env.GOOGLE_RECAPTCHA_SITE_KEY!!;
 
 const loginSchema = Yup.object().shape({
   // TODO: Ignore for testing
@@ -54,13 +56,16 @@ export function Login() {
     initialValues,
     validationSchema: loginSchema,
     onSubmit: async (values, {setStatus, setSubmitting}) => {
+      if (recaptchaRef.current?.getValue()?.length === 0) {
+        setStatus('Please verify that you are not a robot.');
+        return;
+      }
+
       setLoading(true);
       try {
         const {data: auth} = await AuthService.loginKeycloak(values.email, values.password);
         saveAuth(auth);
-        console.log('auth', auth);
         const {data: user} = await getUserByToken();
-        console.log('user', user);
         setCurrentUser(user);
       } catch (error) {
         console.error(error);
@@ -72,6 +77,8 @@ export function Login() {
     },
   });
 
+  const recaptchaRef = React.createRef<ReCAPTCHA>();
+
   return (
     <form
       className='form w-100'
@@ -82,58 +89,12 @@ export function Login() {
       {/* begin::Heading */}
       <div className='text-center mb-11'>
         <h1 className='text-dark fw-bolder mb-3'>Sign In</h1>
-        <div className='text-gray-500 fw-semibold fs-6'>Your Social Campaigns</div>
       </div>
       {/* begin::Heading */}
 
-      {/* begin::Login options */}
-      <div className='row g-3 mb-9'>
-        {/* begin::Col */}
-        <div className='col-md-6'>
-          {/* begin::Google link */}
-          <a
-            href='#'
-            className='btn btn-flex btn-outline btn-text-gray-700 btn-active-color-primary bg-state-light flex-center text-nowrap w-100'
-          >
-            <img
-              alt='Logo'
-              src={toAbsoluteUrl('/media/svg/brand-logos/google-icon.svg')}
-              className='h-15px me-3'
-            />
-            Sign in with Google
-          </a>
-          {/* end::Google link */}
-        </div>
-        {/* end::Col */}
-
-        {/* begin::Col */}
-        <div className='col-md-6'>
-          {/* begin::Google link */}
-          <a
-            href='#'
-            className='btn btn-flex btn-outline btn-text-gray-700 btn-active-color-primary bg-state-light flex-center text-nowrap w-100'
-          >
-            <img
-              alt='Logo'
-              src={toAbsoluteUrl('/media/svg/brand-logos/apple-black.svg')}
-              className='theme-light-show h-15px me-3'
-            />
-            <img
-              alt='Logo'
-              src={toAbsoluteUrl('/media/svg/brand-logos/apple-black-dark.svg')}
-              className='theme-dark-show h-15px me-3'
-            />
-            Sign in with Apple
-          </a>
-          {/* end::Google link */}
-        </div>
-        {/* end::Col */}
-      </div>
-      {/* end::Login options */}
-
       {/* begin::Separator */}
       <div className='separator separator-content my-14'>
-        <span className='w-125px text-gray-500 fw-semibold fs-7'>Or with email</span>
+        <span className='w-150px bold text-gray-500 fw-semibold fs-7'>With Your Phone</span>
       </div>
       {/* end::Separator */}
 
@@ -216,6 +177,7 @@ export function Login() {
 
       {/* begin::Action */}
       <div className='d-grid mb-10'>
+        <ReCAPTCHA ref={recaptchaRef} sitekey={RECAPTCHA_SITE_KEY}/>
         <button
           type='submit'
           id='kt_sign_in_submit'
@@ -232,13 +194,6 @@ export function Login() {
         </button>
       </div>
       {/* end::Action */}
-
-      <div className='text-gray-500 text-center fw-semibold fs-6'>
-        Not a Member yet?{' '}
-        <Link to='/auth/registration' className='link-primary'>
-          Sign up
-        </Link>
-      </div>
     </form>
   );
 }
