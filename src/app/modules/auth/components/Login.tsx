@@ -36,7 +36,7 @@ const initialValues = {
 
 // TODO: Hard code for testing
 const user: UserModel = {
-  email: 'admin@test.com', first_name: 'admin', last_name: 'admin',
+  email: 'admin@test.com', firstName: 'admin', lastName: 'admin',
   id: 1,
   username: 'admin',
   password: 'admin'
@@ -67,6 +67,7 @@ export function Login() {
         saveAuth(auth);
         const {data: user} = await getUserByToken();
         setCurrentUser(user);
+        console.log(user);
       } catch (error) {
         console.error(error);
         saveAuth(undefined);
