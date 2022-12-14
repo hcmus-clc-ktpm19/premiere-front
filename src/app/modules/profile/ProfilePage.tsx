@@ -4,7 +4,7 @@ import {Overview} from './components/Overview';
 import {Projects} from './components/Projects';
 import {Campaigns} from './components/Campaigns';
 import {Documents} from './components/Documents';
-import {Connections} from './components/Connections';
+import {Receivers} from './components/Receivers';
 import {ProfileHeader} from './ProfileHeader';
 
 const profileBreadCrumbs: Array<PageLink> = [
@@ -69,11 +69,11 @@ const ProfilePage = () => (
         }
       />
       <Route
-        path='connections'
+        path='receivers'
         element={
           <>
-            <PageTitle breadcrumbs={profileBreadCrumbs}>Connections</PageTitle>
-            <Connections />
+            <PageTitle breadcrumbs={profileBreadCrumbs}>Receivers</PageTitle>
+            <Receivers />
           </>
         }
       />

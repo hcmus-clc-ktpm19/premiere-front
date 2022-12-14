@@ -37,8 +37,8 @@ export function MenuInner() {
             <MenuItem to='/crafted/pages/profile/campaigns' title='Campaigns' hasBullet={true} />
             <MenuItem to='/crafted/pages/profile/documents' title='Documents' hasBullet={true} />
             <MenuItem
-              to='/crafted/pages/profile/connections'
-              title='Connections'
+              to='/crafted/pages/profile/receivers'
+              title='Receivers'
               hasBullet={true}
             />
           </MenuInnerWithSub>

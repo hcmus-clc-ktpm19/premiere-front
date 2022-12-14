@@ -47,8 +47,8 @@ const SidebarMenuMain = () => {
             hasBullet={true}
           />
           <SidebarMenuItem
-            to='/crafted/pages/profile/connections'
-            title='Connections'
+            to='/crafted/pages/profile/receivers'
+            title='Receivers'
             hasBullet={true}
           />
         </SidebarMenuItemWithSub>
