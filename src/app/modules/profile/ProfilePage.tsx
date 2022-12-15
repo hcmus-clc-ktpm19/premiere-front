@@ -4,13 +4,13 @@ import {Overview} from './components/Overview';
 import {Projects} from './components/Projects';
 import {Campaigns} from './components/Campaigns';
 import {Documents} from './components/Documents';
-import {Connections} from './components/Connections';
+import {Receivers} from './components/Receivers';
 import {ProfileHeader} from './ProfileHeader';
 
 const profileBreadCrumbs: Array<PageLink> = [
   {
     title: 'Profile',
-    path: '/crafted/pages/profile/overview',
+    path: '/crafted/pages/profile/spend_account',
     isSeparator: false,
     isActive: false,
   },
@@ -30,13 +30,12 @@ const ProfilePage = () => (
           <ProfileHeader />
           <Outlet />
         </>
-      }
-    >
+      }>
       <Route
-        path='overview'
+        path='spend_account'
         element={
           <>
-            <PageTitle breadcrumbs={profileBreadCrumbs}>Overview</PageTitle>
+            <PageTitle breadcrumbs={profileBreadCrumbs}>Spend Account</PageTitle>
             <Overview />
           </>
         }
@@ -69,15 +68,15 @@ const ProfilePage = () => (
         }
       />
       <Route
-        path='connections'
+        path='receivers'
         element={
           <>
-            <PageTitle breadcrumbs={profileBreadCrumbs}>Connections</PageTitle>
-            <Connections />
+            <PageTitle breadcrumbs={profileBreadCrumbs}>Receivers</PageTitle>
+            <Receivers />
           </>
         }
       />
-      <Route index element={<Navigate to='/crafted/pages/profile/overview' />} />
+      <Route index element={<Navigate to='/crafted/pages/profile/spend_account' />} />
     </Route>
   </Routes>
 );

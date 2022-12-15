@@ -13,8 +13,7 @@ export function MenuInner() {
         title='Crafted'
         to='/crafted'
         menuPlacement='bottom-start'
-        menuTrigger='click'
-      >
+        menuTrigger='click'>
         {/* PAGES */}
         <MenuInnerWithSub
           title='Pages'
@@ -22,25 +21,23 @@ export function MenuInner() {
           fontIcon='bi-archive'
           hasArrow={true}
           menuPlacement='right-start'
-          menuTrigger={`{default:'click', lg: 'hover'}`}
-        >
+          menuTrigger={`{default:'click', lg: 'hover'}`}>
           <MenuInnerWithSub
             title='Profile'
             to='/crafted/pages/profile'
             hasArrow={true}
             hasBullet={true}
             menuPlacement='right-start'
-            menuTrigger={`{default:'click', lg: 'hover'}`}
-          >
-            <MenuItem to='/crafted/pages/profile/overview' title='Overview' hasBullet={true} />
+            menuTrigger={`{default:'click', lg: 'hover'}`}>
+            <MenuItem
+              to='/crafted/pages/profile/spend_account'
+              title='Spend Account'
+              hasBullet={true}
+            />
             <MenuItem to='/crafted/pages/profile/projects' title='Projects' hasBullet={true} />
             <MenuItem to='/crafted/pages/profile/campaigns' title='Campaigns' hasBullet={true} />
             <MenuItem to='/crafted/pages/profile/documents' title='Documents' hasBullet={true} />
-            <MenuItem
-              to='/crafted/pages/profile/connections'
-              title='Connections'
-              hasBullet={true}
-            />
+            <MenuItem to='/crafted/pages/profile/receivers' title='Receivers' hasBullet={true} />
           </MenuInnerWithSub>
           <MenuInnerWithSub
             title='Wizards'
@@ -48,8 +45,7 @@ export function MenuInner() {
             hasArrow={true}
             hasBullet={true}
             menuPlacement='right-start'
-            menuTrigger={`{default:'click', lg: 'hover'}`}
-          >
+            menuTrigger={`{default:'click', lg: 'hover'}`}>
             <MenuItem to='/crafted/pages/wizards/horizontal' title='Horizontal' hasBullet={true} />
             <MenuItem to='/crafted/pages/wizards/vertical' title='Vertical' hasBullet={true} />
           </MenuInnerWithSub>
@@ -62,8 +58,7 @@ export function MenuInner() {
           fontIcon='bi-person'
           hasArrow={true}
           menuPlacement='right-start'
-          menuTrigger={`{default:'click', lg: 'hover'}`}
-        >
+          menuTrigger={`{default:'click', lg: 'hover'}`}>
           <MenuItem to='/crafted/account/overview' title='Overview' hasBullet={true} />
           <MenuItem to='/crafted/account/settings' title='Settings' hasBullet={true} />
         </MenuInnerWithSub>
@@ -75,8 +70,7 @@ export function MenuInner() {
           fontIcon='bi-sticky'
           hasArrow={true}
           menuPlacement='right-start'
-          menuTrigger={`{default:'click', lg: 'hover'}`}
-        >
+          menuTrigger={`{default:'click', lg: 'hover'}`}>
           <MenuItem to='/error/404' title='Error 404' hasBullet={true} />
           <MenuItem to='/error/500' title='Error 500' hasBullet={true} />
         </MenuInnerWithSub>
@@ -88,8 +82,7 @@ export function MenuInner() {
           fontIcon='bi-layers'
           hasArrow={true}
           menuPlacement='right-start'
-          menuTrigger={`{default:'click', lg: 'hover'}`}
-        >
+          menuTrigger={`{default:'click', lg: 'hover'}`}>
           <MenuItem to='/crafted/widgets/lists' title='Lists' hasBullet={true} />
           <MenuItem to='/crafted/widgets/statistics' title='Statistics' hasBullet={true} />
           <MenuItem to='/crafted/widgets/charts' title='Charts' hasBullet={true} />
@@ -107,8 +100,7 @@ export function MenuInner() {
           icon='/media/icons/duotune/communication/com012.svg'
           hasArrow={true}
           menuPlacement='right-start'
-          menuTrigger={`{default:'click', lg: 'hover'}`}
-        >
+          menuTrigger={`{default:'click', lg: 'hover'}`}>
           <MenuItem to='/apps/chat/private-chat' title='Private Chat' hasBullet={true} />
           <MenuItem to='/apps/chat/group-chat' title='Group Chart' hasBullet={true} />
           <MenuItem to='/apps/chat/drawer-chat' title='Drawer Chart' hasBullet={true} />
@@ -125,8 +117,7 @@ export function MenuInner() {
         title='Mega menu'
         to='/mega-menu'
         menuPlacement='bottom-start'
-        menuTrigger='click'
-      >
+        menuTrigger='click'>
         <MegaMenu />
       </MenuInnerWithSub>
     </>

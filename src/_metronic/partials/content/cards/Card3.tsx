@@ -7,20 +7,16 @@ type Props = {
   avatar?: string;
   online?: boolean;
   name: string;
-  job: string;
-  avgEarnings: string;
-  totalEarnings: string;
+  nickname: string;
 };
 
 const Card3: FC<Props> = ({
-  color = '',
-  avatar = '',
-  online = false,
-  name,
-  job,
-  avgEarnings,
-  totalEarnings,
-}) => {
+                            color = '',
+                            avatar = '',
+                            online = false,
+                            name,
+                            nickname,
+                          }) => {
   return (
     <div className='card'>
       <div className='card-body d-flex flex-center flex-column p-9'>
@@ -43,24 +39,18 @@ const Card3: FC<Props> = ({
           {name}
         </a>
 
-        <div className='fw-bold text-gray-400 mb-6'>{job}</div>
+        <div className='fw-bold text-gray-400 mb-6'>{nickname}</div>
 
-        <div className='d-flex flex-center flex-wrap mb-5'>
-          <div className='border border-gray-300 border-dashed rounded min-w-125px py-3 px-4 mx-3 mb-3'>
-            <div className='fs-6 fw-bolder text-gray-700'>{avgEarnings}</div>
-            <div className='fw-bold text-gray-400'>Avg. Earnings</div>
-          </div>
-
-          <div className='border border-gray-300 border-dashed rounded min-w-125px py-3 mx-3 px-4 mb-3'>
-            <div className='fs-6 fw-bolder text-gray-700'>{totalEarnings}</div>
-            <div className='fw-bold text-gray-400'>Total Sales</div>
-          </div>
+        <div className={'d-flex flex-center flex-wrap mb-5'}>
+          <a href='#' className='btn btn-sm btn-light'>
+            <KTSVG path='/media/icons/duotune/arrows/arr075.svg' className='svg-icon-3' />
+            Edit
+          </a>
+          <a href='#' className='btn btn-sm btn-danger' style={{marginLeft: '10px'}}>
+            <KTSVG path='/media/icons/duotune/arrows/arr075.svg' className='svg-icon-3' />
+            Delete
+          </a>
         </div>
-
-        <a href='#' className='btn btn-sm btn-light'>
-          <KTSVG path='/media/icons/duotune/arrows/arr075.svg' className='svg-icon-3' />
-          Connect
-        </a>
       </div>
     </div>
   );
