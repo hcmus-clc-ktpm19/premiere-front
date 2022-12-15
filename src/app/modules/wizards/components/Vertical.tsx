@@ -1,19 +1,19 @@
 import {useEffect, useRef, useState} from 'react';
-import {KTSVG} from '../../../../_metronic/helpers';
-import {Step1} from './steps/Step1';
+import {KTSVG} from '@_metronic/helpers';
 import {Step2} from './steps/Step2';
 import {Step3} from './steps/Step3';
 import {Step4} from './steps/Step4';
 import {Step5} from './steps/Step5';
-import {StepperComponent} from '../../../../_metronic/assets/ts/components';
-import {Formik, Form, FormikValues} from 'formik';
-import {ICreateAccount, createAccountSchemas, inits} from './CreateAccountWizardHelper';
+import {StepperComponent} from '@_metronic/assets/ts/components';
+import {Form, Formik, FormikValues} from 'formik';
+import {accountsInit, createAccountSchemas, ICreateAccount} from './CreateAccountWizardHelper';
+import {Step1} from '@/app/modules/wizards/components/steps/Step1';
 
 const Vertical = () => {
   const stepperRef = useRef<HTMLDivElement | null>(null);
   const stepper = useRef<StepperComponent | null>(null);
   const [currentSchema, setCurrentSchema] = useState(createAccountSchemas[0]);
-  const [initValues] = useState<ICreateAccount>(inits);
+  const [initValues] = useState<ICreateAccount>(accountsInit);
 
   const loadStepper = () => {
     stepper.current = StepperComponent.createInsance(stepperRef.current as HTMLDivElement);
@@ -36,7 +36,7 @@ const Vertical = () => {
 
     setCurrentSchema(createAccountSchemas[stepper.current.currentStepIndex]);
 
-    if (stepper.current.currentStepIndex !== stepper.current.totatStepsNumber) {
+    if (stepper.current.currentStepIndex !== stepper.current?.totalStepsNumber) {
       stepper.current.goNext();
     } else {
       stepper.current.goto(1);
@@ -56,8 +56,7 @@ const Vertical = () => {
     <div
       ref={stepperRef}
       className='stepper stepper-pills stepper-column d-flex flex-column flex-xl-row flex-row-fluid'
-      id='kt_create_account_stepper'
-    >
+      id='kt_create_account_stepper'>
       {/* begin::Aside*/}
       <div className='card d-flex justify-content-center justify-content-xl-start flex-row-auto w-100 w-xl-300px w-xxl-400px me-9'>
         {/* begin::Wrapper*/}
@@ -227,8 +226,7 @@ const Vertical = () => {
                     onClick={prevStep}
                     type='button'
                     className='btn btn-lg btn-light-primary me-3'
-                    data-kt-stepper-action='previous'
-                  >
+                    data-kt-stepper-action='previous'>
                     <KTSVG
                       path='/media/icons/duotune/arrows/arr063.svg'
                       className='svg-icon-4 me-1'
@@ -241,9 +239,9 @@ const Vertical = () => {
                   <button type='submit' className='btn btn-lg btn-primary me-3'>
                     <span className='indicator-label'>
                       {stepper.current?.currentStepIndex !==
-                        stepper.current?.totatStepsNumber! - 1 && 'Continue'}
+                        stepper.current?.totalStepsNumber! - 1 && 'Continue'}
                       {stepper.current?.currentStepIndex ===
-                        stepper.current?.totatStepsNumber! - 1 && 'Submit'}
+                        stepper.current?.totalStepsNumber! - 1 && 'Submit'}
                       <KTSVG
                         path='/media/icons/duotune/arrows/arr064.svg'
                         className='svg-icon-3 ms-2 me-0'

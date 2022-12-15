@@ -32,7 +32,7 @@ class StepperComponent {
   btnNext: HTMLElement | null;
   btnPrev: HTMLElement | null;
   btnSubmit: HTMLElement | null;
-  totatStepsNumber: number = 0;
+  totalStepsNumber: number = 0;
   passedStepIndex: number = 0;
   currentStepIndex: number = 1;
 
@@ -48,7 +48,7 @@ class StepperComponent {
     this.btnSubmit = this.element.querySelector('[data-kt-stepper-action="submit"]');
 
     // Variables
-    this.totatStepsNumber = this.steps?.length | 0;
+    this.totalStepsNumber = this.steps?.length | 0;
     this.passedStepIndex = 0;
     this.currentStepIndex = 1;
 
@@ -67,7 +67,7 @@ class StepperComponent {
   private _goTo = (index: number) => {
     EventHandlerUtil.trigger(this.element, 'kt.stepper.change');
     // Skip if this step is already shown
-    if (index === this.currentStepIndex || index > this.totatStepsNumber || index < 0) {
+    if (index === this.currentStepIndex || index > this.totalStepsNumber || index < 0) {
       return;
     }
 
@@ -131,11 +131,11 @@ class StepperComponent {
   };
 
   private getLastStepIndex = () => {
-    return this.totatStepsNumber;
+    return this.totalStepsNumber;
   };
 
   private getTotalStepsNumber = () => {
-    return this.totatStepsNumber;
+    return this.totalStepsNumber;
   };
 
   private refreshUI = () => {
@@ -199,7 +199,7 @@ class StepperComponent {
   };
 
   private isLastStep = () => {
-    return this.currentStepIndex === this.totatStepsNumber;
+    return this.currentStepIndex === this.totalStepsNumber;
   };
 
   private isFirstStep = () => {
@@ -240,10 +240,10 @@ class StepperComponent {
   };
 
   public getNextStepIndex = () => {
-    if (this.totatStepsNumber >= this.currentStepIndex + 1) {
+    if (this.totalStepsNumber >= this.currentStepIndex + 1) {
       return this.currentStepIndex + 1;
     } else {
-      return this.totatStepsNumber;
+      return this.totalStepsNumber;
     }
   };
 

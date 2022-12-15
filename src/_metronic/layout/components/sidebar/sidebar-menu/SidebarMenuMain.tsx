@@ -60,6 +60,7 @@ const SidebarMenuMain = () => {
             hasBullet={true}
           />
           <SidebarMenuItem to='/crafted/pages/wizards/vertical' title='Vertical' hasBullet={true} />
+          <SidebarMenuItem to='/loan-management/create-loan-reminder' title='Loan Management' hasBullet={true} />
         </SidebarMenuItemWithSub>
       </SidebarMenuItemWithSub>
       <SidebarMenuItemWithSub
