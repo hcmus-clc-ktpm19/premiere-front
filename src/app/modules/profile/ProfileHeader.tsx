@@ -1,14 +1,27 @@
-/* eslint-disable jsx-a11y/anchor-is-valid */
-import React from 'react';
+import React, {useEffect} from 'react';
 import {KTSVG, toAbsoluteUrl} from '../../../_metronic/helpers';
 import {Link} from 'react-router-dom';
 import {Dropdown1} from '../../../_metronic/partials';
 import {useLocation} from 'react-router-dom';
-import {useAuth} from "@/app/modules/auth";
+import {useAuth} from '@/app/modules/auth';
+import {CreditCardDto} from '@/app/modules/profile/core/_dtos';
+import {ProfileService as profileService} from '@/app/modules/profile/core/_requests';
 
 const ProfileHeader: React.FC = () => {
   const location = useLocation();
   const {currentUser, logout} = useAuth();
+  const [creditCard, setCreditCard] = React.useState<CreditCardDto>();
+  useEffect(() => {
+    profileService
+      .getCreditCardByUserId(currentUser?.id)
+      .then((data: CreditCardDto) => {
+        setCreditCard(data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }, []);
+
   return (
     <div className='card mb-5 mb-xl-10'>
       <div className='card-body pt-9 pb-0'>
@@ -24,7 +37,7 @@ const ProfileHeader: React.FC = () => {
             <div className='d-flex justify-content-between align-items-start flex-wrap mb-2'>
               <div className='d-flex flex-column'>
                 <div className='d-flex align-items-center mb-2'>
-                  <a href='#' className='text-gray-800 text-hover-primary fs-2 fw-bolder me-1'>
+                  <a className='text-gray-800 text-hover-primary fs-2 fw-bolder me-1'>
                     {currentUser?.firstName} {currentUser?.lastName}
                   </a>
                   <a href='#'>
@@ -38,8 +51,7 @@ const ProfileHeader: React.FC = () => {
                 <div className='d-flex flex-wrap fw-bold fs-6 mb-4 pe-2'>
                   <a
                     href='#'
-                    className='d-flex align-items-center text-gray-400 text-hover-primary me-5 mb-2'
-                  >
+                    className='d-flex align-items-center text-gray-400 text-hover-primary me-5 mb-2'>
                     <KTSVG
                       path='/media/icons/duotune/communication/com006.svg'
                       className='svg-icon-4 me-1'
@@ -48,8 +60,7 @@ const ProfileHeader: React.FC = () => {
                   </a>
                   <a
                     href='#'
-                    className='d-flex align-items-center text-gray-400 text-hover-primary me-5 mb-2'
-                  >
+                    className='d-flex align-items-center text-gray-400 text-hover-primary me-5 mb-2'>
                     <KTSVG
                       path='/media/icons/duotune/general/gen018.svg'
                       className='svg-icon-4 me-1'
@@ -58,8 +69,7 @@ const ProfileHeader: React.FC = () => {
                   </a>
                   <a
                     href='#'
-                    className='d-flex align-items-center text-gray-400 text-hover-primary mb-2'
-                  >
+                    className='d-flex align-items-center text-gray-400 text-hover-primary mb-2'>
                     <KTSVG
                       path='/media/icons/duotune/communication/com011.svg'
                       className='svg-icon-4 me-1'
@@ -86,8 +96,7 @@ const ProfileHeader: React.FC = () => {
                   href='#'
                   className='btn btn-sm btn-primary me-3'
                   data-bs-toggle='modal'
-                  data-bs-target='#kt_modal_offer_a_deal'
-                >
+                  data-bs-target='#kt_modal_offer_a_deal'>
                   Hire Me
                 </a>
                 <div className='me-0'>
@@ -95,8 +104,7 @@ const ProfileHeader: React.FC = () => {
                     className='btn btn-sm btn-icon btn-bg-light btn-active-color-primary'
                     data-kt-menu-trigger='click'
                     data-kt-menu-placement='bottom-end'
-                    data-kt-menu-flip='top-end'
-                  >
+                    data-kt-menu-flip='top-end'>
                     <i className='bi bi-three-dots fs-3'></i>
                   </button>
                   <Dropdown1 />
@@ -109,38 +117,24 @@ const ProfileHeader: React.FC = () => {
                 <div className='d-flex flex-wrap'>
                   <div className='border border-gray-300 border-dashed rounded min-w-125px py-3 px-4 me-6 mb-3'>
                     <div className='d-flex align-items-center'>
-                      <KTSVG
-                        path='/media/icons/duotune/arrows/arr066.svg'
-                        className='svg-icon-3 svg-icon-success me-2'
-                      />
-                      <div className='fs-2 fw-bolder'>4500$</div>
+                      <span className='fw-bold fs-6 text-gray-400' style={{paddingRight: 5}}>
+                        Available Balance:{' '}
+                      </span>
+                      <div className='fs-2 fw-bolder'>
+                        {creditCard?.balance.toLocaleString('it-IT', {
+                          style: 'currency',
+                          currency: 'VND',
+                        })}
+                      </div>
                     </div>
-
-                    <div className='fw-bold fs-6 text-gray-400'>Earnings</div>
-                  </div>
-
-                  <div className='border border-gray-300 border-dashed rounded min-w-125px py-3 px-4 me-6 mb-3'>
                     <div className='d-flex align-items-center'>
-                      <KTSVG
-                        path='/media/icons/duotune/arrows/arr065.svg'
-                        className='svg-icon-3 svg-icon-danger me-2'
-                      />
-                      <div className='fs-2 fw-bolder'>75</div>
+                      <span className='fw-bold fs-6 text-gray-400' style={{paddingRight: 5}}>
+                        Account Number:{' '}
+                      </span>
+                      <div className='text-gray-600 text-hover-primary fs-2 fw-bolder me-1'>
+                        {creditCard?.cardNumber}
+                      </div>
                     </div>
-
-                    <div className='fw-bold fs-6 text-gray-400'>Projects</div>
-                  </div>
-
-                  <div className='border border-gray-300 border-dashed rounded min-w-125px py-3 px-4 me-6 mb-3'>
-                    <div className='d-flex align-items-center'>
-                      <KTSVG
-                        path='/media/icons/duotune/arrows/arr066.svg'
-                        className='svg-icon-3 svg-icon-success me-2'
-                      />
-                      <div className='fs-2 fw-bolder'>60%</div>
-                    </div>
-
-                    <div className='fw-bold fs-6 text-gray-400'>Success Rate</div>
                   </div>
                 </div>
               </div>
@@ -154,8 +148,7 @@ const ProfileHeader: React.FC = () => {
                   <div
                     className='bg-success rounded h-5px'
                     role='progressbar'
-                    style={{width: '50%'}}
-                  ></div>
+                    style={{width: '50%'}}></div>
                 </div>
               </div>
             </div>
@@ -168,11 +161,10 @@ const ProfileHeader: React.FC = () => {
               <Link
                 className={
                   `nav-link text-active-primary me-6 ` +
-                  (location.pathname === '/crafted/pages/profile/overview' && 'active')
+                  (location.pathname === '/crafted/pages/profile/spend_account' && 'active')
                 }
-                to='/crafted/pages/profile/overview'
-              >
-                Overview
+                to='/crafted/pages/profile/spend_account'>
+                Spend Account
               </Link>
             </li>
             <li className='nav-item'>
@@ -181,8 +173,7 @@ const ProfileHeader: React.FC = () => {
                   `nav-link text-active-primary me-6 ` +
                   (location.pathname === '/crafted/pages/profile/projects' && 'active')
                 }
-                to='/crafted/pages/profile/projects'
-              >
+                to='/crafted/pages/profile/projects'>
                 Projects
               </Link>
             </li>
@@ -192,8 +183,7 @@ const ProfileHeader: React.FC = () => {
                   `nav-link text-active-primary me-6 ` +
                   (location.pathname === '/crafted/pages/profile/campaigns' && 'active')
                 }
-                to='/crafted/pages/profile/campaigns'
-              >
+                to='/crafted/pages/profile/campaigns'>
                 Campaigns
               </Link>
             </li>
@@ -203,8 +193,7 @@ const ProfileHeader: React.FC = () => {
                   `nav-link text-active-primary me-6 ` +
                   (location.pathname === '/crafted/pages/profile/documents' && 'active')
                 }
-                to='/crafted/pages/profile/documents'
-              >
+                to='/crafted/pages/profile/documents'>
                 Documents
               </Link>
             </li>
@@ -214,8 +203,7 @@ const ProfileHeader: React.FC = () => {
                   `nav-link text-active-primary me-6 ` +
                   (location.pathname === '/crafted/pages/profile/receivers' && 'active')
                 }
-                to='/crafted/pages/profile/receivers'
-              >
+                to='/crafted/pages/profile/receivers'>
                 Receivers
               </Link>
             </li>

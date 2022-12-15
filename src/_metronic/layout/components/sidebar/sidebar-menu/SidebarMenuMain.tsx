@@ -31,10 +31,13 @@ const SidebarMenuMain = () => {
         to='/crafted/pages'
         title='Pages'
         fontIcon='bi-archive'
-        icon='/media/icons/duotune/general/gen022.svg'
-      >
+        icon='/media/icons/duotune/general/gen022.svg'>
         <SidebarMenuItemWithSub to='/crafted/pages/profile' title='Profile' hasBullet={true}>
-          <SidebarMenuItem to='/crafted/pages/profile/overview' title='Overview' hasBullet={true} />
+          <SidebarMenuItem
+            to='/crafted/pages/profile/spend_account'
+            title='Spend Account'
+            hasBullet={true}
+          />
           <SidebarMenuItem to='/crafted/pages/profile/projects' title='Projects' hasBullet={true} />
           <SidebarMenuItem
             to='/crafted/pages/profile/campaigns'
@@ -66,8 +69,7 @@ const SidebarMenuMain = () => {
         to='/crafted/accounts'
         title='Accounts'
         icon='/media/icons/duotune/communication/com006.svg'
-        fontIcon='bi-person'
-      >
+        fontIcon='bi-person'>
         <SidebarMenuItem to='/crafted/account/overview' title='Overview' hasBullet={true} />
         <SidebarMenuItem to='/crafted/account/settings' title='Settings' hasBullet={true} />
       </SidebarMenuItemWithSub>
@@ -75,8 +77,7 @@ const SidebarMenuMain = () => {
         to='/error'
         title='Errors'
         fontIcon='bi-sticky'
-        icon='/media/icons/duotune/general/gen040.svg'
-      >
+        icon='/media/icons/duotune/general/gen040.svg'>
         <SidebarMenuItem to='/error/404' title='Error 404' hasBullet={true} />
         <SidebarMenuItem to='/error/500' title='Error 500' hasBullet={true} />
       </SidebarMenuItemWithSub>
@@ -84,8 +85,7 @@ const SidebarMenuMain = () => {
         to='/crafted/widgets'
         title='Widgets'
         icon='/media/icons/duotune/general/gen025.svg'
-        fontIcon='bi-layers'
-      >
+        fontIcon='bi-layers'>
         <SidebarMenuItem to='/crafted/widgets/lists' title='Lists' hasBullet={true} />
         <SidebarMenuItem to='/crafted/widgets/statistics' title='Statistics' hasBullet={true} />
         <SidebarMenuItem to='/crafted/widgets/charts' title='Charts' hasBullet={true} />
@@ -102,8 +102,7 @@ const SidebarMenuMain = () => {
         to='/apps/chat'
         title='Chat'
         fontIcon='bi-chat-left'
-        icon='/media/icons/duotune/communication/com012.svg'
-      >
+        icon='/media/icons/duotune/communication/com012.svg'>
         <SidebarMenuItem to='/apps/chat/private-chat' title='Private Chat' hasBullet={true} />
         <SidebarMenuItem to='/apps/chat/group-chat' title='Group Chart' hasBullet={true} />
         <SidebarMenuItem to='/apps/chat/drawer-chat' title='Drawer Chart' hasBullet={true} />
@@ -118,8 +117,7 @@ const SidebarMenuMain = () => {
         <a
           target='_blank'
           className='menu-link'
-          href={process.env.REACT_APP_PREVIEW_DOCS_URL + '/docs/changelog'}
-        >
+          href={process.env.REACT_APP_PREVIEW_DOCS_URL + '/docs/changelog'}>
           <span className='menu-icon'>
             <KTSVG path='/media/icons/duotune/general/gen005.svg' className='svg-icon-2' />
           </span>

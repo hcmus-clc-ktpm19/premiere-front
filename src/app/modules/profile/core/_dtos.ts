@@ -6,3 +6,8 @@ export interface ReceiverDto {
   userId: number;
   bankName: string;
 }
+
+export interface CreditCardDto {
+  balance: number;
+  cardNumber: string;
+}
