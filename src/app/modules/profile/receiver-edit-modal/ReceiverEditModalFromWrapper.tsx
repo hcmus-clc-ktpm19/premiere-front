@@ -1,12 +1,13 @@
 import {ReceiverEditModalForm} from './ReceiverEditModalForm';
-import {ReceiverDto} from "@/app/modules/profile/core/_dtos";
 import {ProfileService as profileService} from "@/app/modules/profile/core/_requests";
 import {isNotEmpty, QUERIES} from "@_metronic/helpers";
 import {useQuery} from "react-query";
-import {useState} from "react";
+import {useContext} from "react";
+import {ReceiverModalContext} from "@/app/modules/profile/components/Receivers";
 
 const ReceiverEditModalFormWrapper = () => {
-  const [receiverToUpdate, setReceiverToUpdate] = useState<ReceiverDto>();
+  // @ts-ignore
+  const {receiverToUpdate, setReceiverToUpdate} = useContext(ReceiverModalContext);
   const enabledQuery: boolean = isNotEmpty(receiverToUpdate);
   const {
     isLoading,
@@ -26,7 +27,6 @@ const ReceiverEditModalFormWrapper = () => {
         },
       }
   );
-
   if (!receiverToUpdate) {
     return <ReceiverEditModalForm isReceiverLoading={isLoading} receiver={{
       id: null,

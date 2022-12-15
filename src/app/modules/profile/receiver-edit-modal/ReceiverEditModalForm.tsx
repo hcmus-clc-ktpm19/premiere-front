@@ -4,11 +4,11 @@ import {useFormik} from 'formik';
 import {isNotEmpty, toAbsoluteUrl} from '../../../../_metronic/helpers';
 import {ReceiverDto} from "@/app/modules/profile/core/_dtos";
 import clsx from 'clsx';
-import {useListView} from '../../apps/user-management/users-list/core/ListViewProvider';
 import {ReceiversListLoading} from "@/app/modules/profile/loading/ReceiversListLoading";
 import {ProfileService as profileService} from '../core/_requests';
-import {ReceiverModalContext} from "@/app/modules/profile/receiver-edit-modal/ReceiverEditModal";
 import {useAuth} from "@/app/modules/auth";
+import {ReceiverModalContext} from "@/app/modules/profile/components/Receivers";
+
 type Props = {
   receiver: ReceiverDto;
   isReceiverLoading: boolean;
@@ -21,22 +21,23 @@ const insertReceiverSchema = Yup.object().shape({
   .required('Card number is required'),
   nickname: Yup.string()
   .min(3, 'Minimum 3 symbols')
+  .max(50, 'Maximum 50 symbols'),
+  bankName: Yup.string()
+  .min(3, 'Minimum 3 symbols')
   .max(50, 'Maximum 50 symbols')
+  .required('Bank name is required'),
 });
 
 const ReceiverEditModalForm: FC<Props> = ({receiver, isReceiverLoading}) => {
-  const onClose = useContext(ReceiverModalContext);
+  // @ts-ignore
+  const {openAddReceiverModal} = useContext(ReceiverModalContext);
   const {currentUser} = useAuth();
 
-  const [receiverToInsert] = useState<ReceiverDto>({
-    ...receiver,
-    cardNumber: '',
-    nickname: '',
-    bankName: ''
-  });
+
+  const [receiverToInsert] = useState<ReceiverDto>(receiver);
 
   const cancel = (withRefresh?: boolean) => {
-    onClose();
+    openAddReceiverModal();
   };
 
   const blankImg = toAbsoluteUrl('/media/svg/avatars/blank.svg');
@@ -48,10 +49,13 @@ const ReceiverEditModalForm: FC<Props> = ({receiver, isReceiverLoading}) => {
     onSubmit: async (values, {setSubmitting}) => {
       setSubmitting(true);
       values.userId = currentUser?.id || -1;
+      console.log(values);
       try {
         if (isNotEmpty(values.id)) {
+          console.log('update receiver');
           await profileService.updateReceiver(values);
         } else {
+          console.log('insert receiver');
           await profileService.insertReceiver(values);
         }
       } catch (ex) {

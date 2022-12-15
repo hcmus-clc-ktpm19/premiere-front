@@ -1,8 +1,14 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import {FC} from 'react';
+import React, {FC, useContext, useEffect} from 'react';
 import {toAbsoluteUrl, KTSVG} from '../../../helpers';
+import {ReceiverModalContext} from "@/app/modules/profile/components/Receivers";
+import {ProfileService as profileService} from "@/app/modules/profile/core/_requests";
+import {InviteUsers} from "@_metronic/partials";
+import {ConfirmModal} from "@_metronic/partials/modals/confirm/ConfirmModal";
 
 type Props = {
+  id: number | null,
+  userId: number,
   color?: string;
   avatar?: string;
   online?: boolean;
@@ -13,6 +19,8 @@ type Props = {
 };
 
 const Card3: FC<Props> = ({
+                            id,
+                            userId,
                             color = '',
                             avatar = '',
                             online = false,
@@ -21,6 +29,22 @@ const Card3: FC<Props> = ({
                             cardNumber,
                             bankName
                           }) => {
+  // @ts-ignore
+  const {openAddReceiverModal, setReceiverToUpdate, handleDeleteReceiver} = useContext(ReceiverModalContext);
+  const [modal, setModal] = React.useState(false);
+  const handleEditBtn = () => {
+    setReceiverToUpdate({
+      id,
+      userId,
+      cardNumber,
+      bankName,
+      nickname,
+      fullName: name
+    });
+    openAddReceiverModal();
+  };
+
+
   return (
       <div className='card'>
         <div className='card-body d-flex flex-center flex-column p-9'>
@@ -47,16 +71,23 @@ const Card3: FC<Props> = ({
           <div className='fw-bold text-gray-400 mb-6'>{nickname}</div>
           <div className='fw-bold text-gray-400 mb-6'>{cardNumber} - {bankName}</div>
           <div className={'d-flex flex-center flex-wrap mb-5'}>
-            <a href='#' className='btn btn-sm btn-light'>
-              <KTSVG path='/media/icons/duotune/arrows/arr075.svg' className='svg-icon-3'/>
+            <button type='button' className='btn btn-sm btn-primary' onClick={handleEditBtn}>
+              <KTSVG path='/media/icons/duotune/arrows/arr075.svg' className='svg-icon-2'/>
               Edit
-            </a>
-            <a href='#' className='btn btn-sm btn-danger' style={{marginLeft: '10px'}}>
-              <KTSVG path='/media/icons/duotune/arrows/arr075.svg' className='svg-icon-3'/>
+            </button>
+            <button type='button' className='btn btn-sm btn-danger' style={{marginLeft: '10px'}}
+                    onClick={() => setModal(!modal)}>
+              <KTSVG path='/media/icons/duotune/arrows/arr075.svg' className='svg-icon-2'/>
               Delete
-            </a>
+            </button>
           </div>
         </div>
+        <ConfirmModal isShow={modal} header={"Receiver Delete Confirmation"}
+                      content={"Are you sure want to delete this receiver?"}
+                      onCancel={setModal}
+                      onConfirm={handleDeleteReceiver}
+                      value={cardNumber}
+        />
       </div>
   );
 };
