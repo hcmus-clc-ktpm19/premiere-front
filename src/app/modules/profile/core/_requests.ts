@@ -10,7 +10,7 @@ const getAllReceiversByUserId = async (userId: number | undefined) : Promise<Rec
   ).data;
 };
 
-const getReceiverByCreditCardNumber = async (creditCardNumber: string) : Promise<ReceiverDto> => {
+const getReceiverByCreditCardNumber = async (creditCardNumber: string | undefined) : Promise<ReceiverDto> => {
   return (
     await axios.get<ReceiverDto>(`${PREMIERE_API_URL}/receivers/${creditCardNumber}`)
   ).data;

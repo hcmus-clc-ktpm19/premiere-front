@@ -8,6 +8,8 @@ type Props = {
   online?: boolean;
   name: string;
   nickname: string;
+  cardNumber: string;
+  bankName: string
 };
 
 const Card3: FC<Props> = ({
@@ -16,43 +18,46 @@ const Card3: FC<Props> = ({
                             online = false,
                             name,
                             nickname,
+                            cardNumber,
+                            bankName
                           }) => {
   return (
-    <div className='card'>
-      <div className='card-body d-flex flex-center flex-column p-9'>
-        <div className='mb-5'>
-          <div className='symbol symbol-75px symbol-circle'>
-            {color ? (
-              <span className={`symbol-label bg-light-${color} text-${color} fs-5 fw-bolder`}>
+      <div className='card'>
+        <div className='card-body d-flex flex-center flex-column p-9'>
+          <div className='mb-5'>
+            <div className='symbol symbol-75px symbol-circle'>
+              {color ? (
+                  <span className={`symbol-label bg-light-${color} text-${color} fs-5 fw-bolder`}>
                 {name.charAt(0)}
               </span>
-            ) : (
-              <img alt='Pic' src={toAbsoluteUrl(avatar)} />
-            )}
-            {online && (
-              <div className='symbol-badge bg-success start-100 top-100 border-4 h-15px w-15px ms-n3 mt-n3'></div>
-            )}
+              ) : (
+                  <img alt='Pic' src={toAbsoluteUrl(avatar)}/>
+              )}
+              {online && (
+                  <div
+                      className='symbol-badge bg-success start-100 top-100 border-4 h-15px w-15px ms-n3 mt-n3'></div>
+              )}
+            </div>
+          </div>
+
+          <a href='#' className='fs-4 text-gray-800 text-hover-primary fw-bolder mb-0'>
+            {name}
+          </a>
+
+          <div className='fw-bold text-gray-400 mb-6'>{nickname}</div>
+          <div className='fw-bold text-gray-400 mb-6'>{cardNumber} - {bankName}</div>
+          <div className={'d-flex flex-center flex-wrap mb-5'}>
+            <a href='#' className='btn btn-sm btn-light'>
+              <KTSVG path='/media/icons/duotune/arrows/arr075.svg' className='svg-icon-3'/>
+              Edit
+            </a>
+            <a href='#' className='btn btn-sm btn-danger' style={{marginLeft: '10px'}}>
+              <KTSVG path='/media/icons/duotune/arrows/arr075.svg' className='svg-icon-3'/>
+              Delete
+            </a>
           </div>
         </div>
-
-        <a href='#' className='fs-4 text-gray-800 text-hover-primary fw-bolder mb-0'>
-          {name}
-        </a>
-
-        <div className='fw-bold text-gray-400 mb-6'>{nickname}</div>
-
-        <div className={'d-flex flex-center flex-wrap mb-5'}>
-          <a href='#' className='btn btn-sm btn-light'>
-            <KTSVG path='/media/icons/duotune/arrows/arr075.svg' className='svg-icon-3' />
-            Edit
-          </a>
-          <a href='#' className='btn btn-sm btn-danger' style={{marginLeft: '10px'}}>
-            <KTSVG path='/media/icons/duotune/arrows/arr075.svg' className='svg-icon-3' />
-            Delete
-          </a>
-        </div>
       </div>
-    </div>
   );
 };
 

@@ -1,14 +1,17 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import React, {useEffect} from 'react';
+import React, {useCallback, useEffect} from 'react';
 import {Card3} from '../../../../_metronic/partials/content/cards/Card3';
 import {ProfileService as profileService} from '@/app/modules/profile/core/_requests';
 import {ReceiverDto} from '@/app/modules/profile/core/_dtos';
 import {useAuth} from '@/app/modules/auth';
 import {KTSVG} from '@_metronic/helpers';
+import {useListView} from "@/app/modules/apps/user-management/users-list/core/ListViewProvider";
+import {ReceiverEditModal} from "@/app/modules/profile/receiver-edit-modal/ReceiverEditModal";
 
 
 export function Receivers() {
-  const {currentUser} = useAuth();
+  const {currentUser} = useAuth()
+  const [modal, setModal] = React.useState(false);
   const [receivers, setReceivers] = React.useState<ReceiverDto[]>([]);
   useEffect(() => {
     profileService.getAllReceiversByUserId(currentUser?.id).then((data: ReceiverDto[]) => {
@@ -17,6 +20,15 @@ export function Receivers() {
       console.log(error);
     });
   }, []);
+
+  const openAddReceiverModal = () => {
+    setModal(!modal);
+    profileService.getAllReceiversByUserId(currentUser?.id).then((data: ReceiverDto[]) => {
+      setReceivers(data);
+    }).catch((error) => {
+      console.log(error);
+    });
+  };
 
   return (
     <>
@@ -41,10 +53,10 @@ export function Receivers() {
               <option value='Accepted'>Accepted</option>
             </select>
           </div>
-          <a href='#' className='btn btn-sm btn-primary' style={{marginLeft: '10px'}}>
-            <KTSVG path='/media/icons/duotune/arrows/arr075.svg' className='svg-icon-3' />
-            Add New Receiver
-          </a>
+          <button type='button' className='btn btn-sm btn-primary' style={{marginLeft: '10px'}} onClick={openAddReceiverModal}>
+            <KTSVG path='/media/icons/duotune/arrows/arr075.svg' className='svg-icon-2' />
+            Add Receiver
+          </button>
         </div>
       </div>
 
@@ -58,6 +70,8 @@ export function Receivers() {
                   name={receiver.fullName}
                   nickname={receiver.nickname}
                   online={true}
+                  cardNumber={receiver.cardNumber}
+                  bankName={receiver.bankName}
                 />
               </div>
             );
@@ -118,6 +132,7 @@ export function Receivers() {
           </li>
         </ul>
       </div>
+      <ReceiverEditModal isShow={modal} onClose={openAddReceiverModal}/>
     </>
   );
 }
