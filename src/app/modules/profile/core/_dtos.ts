@@ -1,5 +1,5 @@
 export interface ReceiverDto {
-  id: number;
+  id: number | null;
   cardNumber: string;
   nickname: string;
   fullName: string;
