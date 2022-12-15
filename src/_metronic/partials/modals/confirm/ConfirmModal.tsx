@@ -9,8 +9,9 @@ type Props = {
   onConfirm: any;
   onCancel: any;
   value: any;
+  isShowCancelBtn: boolean;
 }
-const ConfirmModal: FC<Props> = ({isShow,header, content, onConfirm, onCancel, value}) : JSX.Element => {
+const ConfirmModal: FC<Props> = ({isShow,header, content, onConfirm, onCancel, value, isShowCancelBtn}) : JSX.Element => {
   return (
       isShow && (
           <>
@@ -46,14 +47,16 @@ const ConfirmModal: FC<Props> = ({isShow,header, content, onConfirm, onCancel, v
                     <span className={'fs-4 text-gray-800 text-hover-primary fw-bolder mb-0'}>{content}</span>
                   </div>
                   <div className={'d-flex flex-center flex-wrap mb-5'}>
-                    <button type='button' className='btn btn-sm btn-primary' onClick={() => onCancel()}>
-                      <KTSVG path='/media/icons/duotune/arrows/arr075.svg' className='svg-icon-2'/>
-                      No
-                    </button>
+                    {isShowCancelBtn && (
+                        <button type='button' className='btn btn-sm btn-primary' onClick={() => onCancel()}>
+                          <KTSVG path='/media/icons/duotune/arrows/arr075.svg' className='svg-icon-2'/>
+                          No
+                        </button>
+                    )}
                     <button type='button' className='btn btn-sm btn-danger' style={{marginLeft: '30px'}}
                             onClick={() => onConfirm(value)}>
                       <KTSVG path='/media/icons/duotune/arrows/arr075.svg' className='svg-icon-2'/>
-                      Yes
+                      {isShowCancelBtn ? 'Yes' : 'Ok'}
                     </button>
                   </div>
                   {/* end::Modal body */}

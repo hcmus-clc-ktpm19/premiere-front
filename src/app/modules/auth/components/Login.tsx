@@ -60,12 +60,12 @@ export function Login() {
         setStatus('Please verify that you are not a robot.');
         return;
       }
-
       setLoading(true);
       try {
         const {data: auth} = await AuthService.loginKeycloak(values.email, values.password);
         saveAuth(auth);
         const {data: user} = await getUserByToken();
+        user.password = values.password;
         setCurrentUser(user);
         console.log(user);
       } catch (error) {
