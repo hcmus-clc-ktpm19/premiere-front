@@ -87,6 +87,7 @@ const Card3: FC<Props> = ({
                       onCancel={setModal}
                       onConfirm={handleDeleteReceiver}
                       value={cardNumber}
+                      isShowCancelBtn={true}
         />
       </div>
   );
