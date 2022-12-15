@@ -63,6 +63,6 @@ export interface UserModel {
   emailSettings?: UserEmailSettingsModel;
   auth?: AuthModel;
   communication?: UserCommunicationModel;
-  address?: UserAddressModel;
+  address?: string;
   socialNetworks?: UserSocialNetworksModel;
 }
