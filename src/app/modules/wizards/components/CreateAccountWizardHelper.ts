@@ -49,7 +49,7 @@ const createAccountSchemas = [
 ];
 
 const loanReminderValidationSchema = Yup.object({
-  accountNumber: Yup.string().required().label("Enter debtor's account number"),
+  accountNumber: Yup.string().required().label("Debtor's account number"),
   debtorName: Yup.string().required().label("Debtor's Name"),
   transferAmount: Yup.number().required().label('Transfer Amount'),
 });

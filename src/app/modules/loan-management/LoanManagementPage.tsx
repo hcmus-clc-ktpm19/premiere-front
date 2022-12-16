@@ -2,7 +2,7 @@ import {Navigate, Outlet, Route, Routes} from 'react-router-dom';
 import {PageLink, PageTitle} from '@_metronic/layout/core';
 import {CreateLoanReminder} from '@/app/modules/loan-management/components/CreateLoanReminder';
 
-const wizardsBreadCrumbs: Array<PageLink> = [
+const loanBreadCrumbs: Array<PageLink> = [
   {
     title: 'Loan Management',
     path: '/loan-management/create-loan-reminder',
@@ -24,7 +24,7 @@ const WizardsPage = () => (
             path='/create-loan-reminder'
             element={
               <>
-                <PageTitle breadcrumbs={wizardsBreadCrumbs}>Create Loan Reminder</PageTitle>
+                <PageTitle breadcrumbs={loanBreadCrumbs}>Create Loan Reminder</PageTitle>
                 <CreateLoanReminder />
               </>
             }

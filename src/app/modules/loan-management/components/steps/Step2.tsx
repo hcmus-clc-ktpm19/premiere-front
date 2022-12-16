@@ -1,7 +1,21 @@
-import React, {FC} from 'react';
+import React, { FC, useEffect, useState } from "react";
 import {Field, ErrorMessage} from 'formik';
 
-const LoanReminderForm: FC = () => {
+const Step2: FC = () => {
+  const [accountNumber, setAccountNumber] = useState<string>('');
+
+  useEffect(() => {
+    if (accountNumber.length == 0) {
+      return;
+    }
+
+    console.log('accountNumber', accountNumber);
+  }, [accountNumber])
+
+  const handleOnChange = (e: React.ChangeEvent<any>) => {
+    setAccountNumber(e.target?.value);
+  }
+
   return (
     <div className='w-100'>
       <div className='pb-10 pb-lg-12'>
@@ -20,7 +34,7 @@ const LoanReminderForm: FC = () => {
       <div className='fv-row mb-10'>
         <label className='form-label required'>Enter debtor's account number</label>
 
-        <Field name='accountNumber' className='form-control form-control-lg form-control-solid' />
+        <input name='accountNumber' className='form-control form-control-lg form-control-solid' onChange={handleOnChange} />
         <div className='text-danger mt-2'>
           <ErrorMessage name='accountNumber' />
         </div>
@@ -76,4 +90,4 @@ const LoanReminderForm: FC = () => {
   );
 };
 
-export {LoanReminderForm};
+export {Step2};

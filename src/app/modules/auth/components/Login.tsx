@@ -1,46 +1,30 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import React, {useState} from 'react';
-import * as Yup from 'yup';
-import clsx from 'clsx';
-import {Link} from 'react-router-dom';
-import {useFormik} from 'formik';
-import {AuthService, getUserByToken} from '../core/_requests';
-import {useAuth} from '../core/Auth';
-import {UserModel} from '@/app/modules/auth';
+import React, { useState } from "react";
+import * as Yup from "yup";
+import clsx from "clsx";
+import { Link } from "react-router-dom";
+import { useFormik } from "formik";
+import { AuthService, getUserByToken } from "../core/_requests";
+import { useAuth } from "../core/Auth";
 import ReCAPTCHA from "react-google-recaptcha";
 
 const RECAPTCHA_SITE_KEY: string = process.env.GOOGLE_RECAPTCHA_SITE_KEY!!;
 
+// const phoneRegExp = /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/
+
 const loginSchema = Yup.object().shape({
   // TODO: Ignore for testing
-  // email: Yup.string()
-  //   .email('Wrong email format')
-  //   .min(3, 'Minimum 3 symbols')
-  //   .max(50, 'Maximum 50 symbols')
-  //   .required('Email is required'),
+  // phone: Yup.string().matches(phoneRegExp, 'Phone number is not valid'),
   // password: Yup.string()
   //   .min(3, 'Minimum 3 symbols')
   //   .max(50, 'Maximum 50 symbols')
   //   .required('Password is required'),
 });
 
-// const initialValues = {
-//   email: 'admin@demo.com',
-//   password: 'demo',
-// };
-
 const initialValues = {
-  email: 'admin',
+  phone: 'admin',
   password: 'admin',
 };
-
-// TODO: Hard code for testing
-const user: UserModel = {
-  email: 'admin@test.com', first_name: 'admin', last_name: 'admin',
-  id: 1,
-  username: 'admin',
-  password: 'admin'
-}
 
 /*
   Formik+YUP+Typescript:
@@ -63,7 +47,7 @@ export function Login() {
 
       setLoading(true);
       try {
-        const {data: auth} = await AuthService.loginKeycloak(values.email, values.password);
+        const {data: auth} = await AuthService.loginKeycloak(values.phone, values.password);
         saveAuth(auth);
         const {data: user} = await getUserByToken();
         setCurrentUser(user);
@@ -84,8 +68,7 @@ export function Login() {
       className='form w-100'
       onSubmit={formik.handleSubmit}
       noValidate
-      id='kt_login_signin_form'
-    >
+      id='kt_login_signin_form'>
       {/* begin::Heading */}
       <div className='text-center mb-11'>
         <h1 className='text-dark fw-bolder mb-3'>Sign In</h1>
@@ -105,8 +88,8 @@ export function Login() {
       ) : (
         <div className='mb-10 bg-light-info p-8 rounded'>
           <div className='text-info'>
-            Use account <strong>admin@demo.com</strong> and password <strong>demo</strong> to
-            continue.
+            Use account <strong>{initialValues.phone}</strong> and password <strong>{initialValues.password}</strong>{' '}
+            to continue.
           </div>
         </div>
       )}
@@ -116,21 +99,21 @@ export function Login() {
         <label className='form-label fs-6 fw-bolder text-dark'>Phone number</label>
         <input
           placeholder='Phone number'
-          {...formik.getFieldProps('email')}
+          {...formik.getFieldProps('phone')}
           className={clsx(
             'form-control bg-transparent',
-            {'is-invalid': formik.touched.email && formik.errors.email},
+            {'is-invalid': formik.touched.phone && formik.errors.phone},
             {
-              'is-valid': formik.touched.email && !formik.errors.email,
+              'is-valid': formik.touched.phone && !formik.errors.phone,
             }
           )}
-          type='email'
-          name='email'
+          type='phone'
+          name='phone'
           autoComplete='off'
         />
-        {formik.touched.email && formik.errors.email && (
+        {formik.touched.phone && formik.errors.phone && (
           <div className='fv-plugins-message-container'>
-            <span role='alert'>{formik.errors.email}</span>
+            <span role='alert'>{formik.errors.phone}</span>
           </div>
         )}
       </div>
@@ -177,13 +160,12 @@ export function Login() {
 
       {/* begin::Action */}
       <div className='d-grid mb-10'>
-        <ReCAPTCHA ref={recaptchaRef} sitekey={RECAPTCHA_SITE_KEY}/>
+        <ReCAPTCHA ref={recaptchaRef} sitekey={RECAPTCHA_SITE_KEY} />
         <button
           type='submit'
           id='kt_sign_in_submit'
           className='btn btn-primary'
-          disabled={formik.isSubmitting || !formik.isValid}
-        >
+          disabled={formik.isSubmitting || !formik.isValid}>
           {!loading && <span className='indicator-label'>Continue</span>}
           {loading && (
             <span className='indicator-progress' style={{display: 'block'}}>
