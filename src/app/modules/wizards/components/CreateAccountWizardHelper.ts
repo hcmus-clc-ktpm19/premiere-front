@@ -18,14 +18,6 @@ export interface ICreateAccount {
   saveCard: string;
 }
 
-export interface LoanReminderDto {
-  accountNumber: string,
-  debtorName: string,
-  transferAmount: number,
-  content?: string,
-  debtorPhone?: string,
-}
-
 const createAccountSchemas = [
   Yup.object({
     accountType: Yup.string().required().label('Account Type'),
@@ -72,10 +64,4 @@ const accountsInit: ICreateAccount = {
   saveCard: '1',
 };
 
-const loanReminderInit: LoanReminderDto = {
-  accountNumber: '',
-  debtorName: '',
-  transferAmount: 0,
-}
-
-export {createAccountSchemas, loanReminderValidationSchema, accountsInit, loanReminderInit};
+export {createAccountSchemas, loanReminderValidationSchema, accountsInit};

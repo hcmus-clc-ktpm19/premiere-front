@@ -3,13 +3,12 @@ import {KTSVG} from '@_metronic/helpers';
 import {Form, Formik, FormikValues} from 'formik';
 import {Step1} from '@/app/modules/loan-management/components/steps/Step1';
 import {
-  LoanReminderDto,
-  loanReminderInit,
   loanReminderValidationSchema,
 } from '@/app/modules/wizards/components/CreateAccountWizardHelper';
 import {Step2} from '@/app/modules/loan-management/components/steps/Step2';
 import {StepperComponent} from '@_metronic/assets/ts/components';
 import StepperItem from '@/app/modules/loan-management/components/shared/StepperItem';
+import {LoanReminderDto, loanReminderInit} from '@/app/modules/loan-management/core/_models';
 
 const CreateLoanReminder: React.FC = () => {
   const stepperRef = useRef<HTMLDivElement | null>(null);

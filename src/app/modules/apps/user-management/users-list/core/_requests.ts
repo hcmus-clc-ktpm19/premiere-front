@@ -20,12 +20,6 @@ const getUserById = (id: ID): Promise<User | undefined> => {
     .then((response: Response<User>) => response.data);
 };
 
-const getDebtors = (query: string): Promise<UsersQueryResponse> => {
-  return axios
-    .get(`${GET_USERS_URL}?${query}`)
-    .then((d: AxiosResponse<UsersQueryResponse>) => d.data);
-}
-
 const createUser = (user: User): Promise<User | undefined> => {
   return axios
     .put(USER_URL, user)

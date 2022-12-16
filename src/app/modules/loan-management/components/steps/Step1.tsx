@@ -1,6 +1,7 @@
 import React, {FC, useEffect, useState} from 'react';
 import {ErrorMessage, Field, FormikProps} from 'formik';
-import {LoanReminderDto} from '@/app/modules/wizards/components/CreateAccountWizardHelper';
+import {LoanReminderService} from '@/app/modules/loan-management/core/_request';
+import {LoanReminderDto} from '@/app/modules/loan-management/core/_models';
 
 interface Props {
   formikProps: FormikProps<any>;
@@ -27,12 +28,14 @@ const Step1: FC<Props> = (props: Props) => {
       return;
     }
 
-    const intervalId = setInterval(() => {
+    const intervalId = setInterval(async () => {
+      const response = await LoanReminderService.getUserByCardNumber(accountNumber);
+      console.log(response);
       setLoanReminder({
         accountNumber,
-        debtorName: 'Nguyen Van A',
+        debtorName: `${response.firstName} ${response.lastName}`,
         transferAmount: 1000000,
-        debtorPhone: '0123456789',
+        debtorPhone: response.phoneNumber,
       });
       formikProps.setFieldValue('accountNumber', accountNumber);
       formikProps.setFieldValue('debtorName', 'Nguyen Van A');
@@ -79,7 +82,11 @@ const Step1: FC<Props> = (props: Props) => {
           <span className='required'>Debtor's Name</span>
         </label>
 
-        <Field value={loanReminder.debtorName} name='debtorName' className='form-control form-control-lg form-control-solid' />
+        <Field
+          value={loanReminder.debtorName}
+          name='debtorName'
+          className='form-control form-control-lg form-control-solid'
+        />
         <div className='text-danger mt-2'>
           <ErrorMessage name='debtorName' />
         </div>
@@ -90,7 +97,11 @@ const Step1: FC<Props> = (props: Props) => {
       <div className='fv-row mb-10'>
         <label className='form-label required'>Transfer Amount</label>
 
-        <Field value={loanReminder.transferAmount} name='transferAmount' className='form-control form-control-lg form-control-solid' />
+        <Field
+          value={loanReminder.transferAmount}
+          name='transferAmount'
+          className='form-control form-control-lg form-control-solid'
+        />
         <div className='text-danger mt-2'>
           <ErrorMessage name='transferAmount' />
         </div>
@@ -109,7 +120,11 @@ const Step1: FC<Props> = (props: Props) => {
       <div className='fv-row mb-0'>
         <label className='fs-6 fw-bold form-label'>Debtor's phone number</label>
 
-        <Field value={loanReminder.debtorPhone} name='debtorPhone' className='form-control form-control-lg form-control-solid' />
+        <Field
+          value={loanReminder.debtorPhone}
+          name='debtorPhone'
+          className='form-control form-control-lg form-control-solid'
+        />
         <div className='text-danger mt-2'>
           <ErrorMessage name='debtorPhone' />
         </div>
