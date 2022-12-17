@@ -1,6 +1,6 @@
 import {useQuery} from 'react-query';
 import {UserEditModalForm} from './UserEditModalForm';
-import {isNotEmpty, QUERIES} from '../../../../../../_metronic/helpers';
+import {isNotEmpty, QUERIES} from '@_metronic/helpers';
 import {useListView} from '../core/ListViewProvider';
 import {getUserById} from '../core/_requests';
 
@@ -27,7 +27,25 @@ const UserEditModalFormWrapper = () => {
   );
 
   if (!itemIdForUpdate) {
-    return <UserEditModalForm isUserLoading={isLoading} user={{id: undefined}} />;
+    return (
+      <UserEditModalForm
+        isUserLoading={isLoading}
+        user={{
+          id: undefined,
+          username: '',
+          avatar: '',
+          email: '',
+          firstName: '',
+          lastName: '',
+          phone: '',
+          gender: '',
+          panNumber: '',
+          address: '',
+          password: '',
+          role: '',
+        }}
+      />
+    );
   }
 
   if (!isLoading && !error && user) {

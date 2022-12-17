@@ -6,6 +6,7 @@ const API_URL = process.env.REACT_APP_API_URL;
 const KEYCLOAK_ACCESS_TOKEN_URL: string = process.env.KEYCLOAK_ACCESS_TOKEN_URL!!;
 const KEYCLOAK_SCOPE: string = process.env.KEYCLOAK_SCOPE!!;
 const KEYCLOAK_CLIENT_ID: string = process.env.KEYCLOAK_CLIENT_ID!!;
+const KEYCLOAK_CLIENT_SECRET: string = process.env.KEYCLOAK_CLIENT_SECRET!!;
 const KEYCLOAK_GRANT_TYPE: string = process.env.KEYCLOAK_GRANT_TYPE!!;
 const PREMIERE_API_URL: string = process.env.PREMIERE_API_URL!!;
 
@@ -13,6 +14,7 @@ const keycloakAuthRequestAttributes = {
   grant_type: KEYCLOAK_GRANT_TYPE,
   scope: KEYCLOAK_SCOPE,
   client_id: KEYCLOAK_CLIENT_ID,
+  client_secret: KEYCLOAK_CLIENT_SECRET,
 };
 
 const keycloakConfig = {
@@ -23,7 +25,7 @@ const keycloakConfig = {
 
 export const GET_USER_BY_ACCESSTOKEN_URL = `${API_URL}/verify_token`;
 export const LOGIN_URL = `${API_URL}/login`;
-export const REGISTER_URL = `${API_URL}/register`;
+export const REGISTER_URL = `${PREMIERE_API_URL}/auth/register`;
 export const REQUEST_PASSWORD_URL = `${API_URL}/forgot_password`;
 export const GET_CURR_USER_API = `${PREMIERE_API_URL}/auth/token/user`;
 

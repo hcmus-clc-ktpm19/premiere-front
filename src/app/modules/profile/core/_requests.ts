@@ -25,7 +25,7 @@ const updateReceiver = async (receiver: ReceiverDto): Promise<ReceiverDto> => {
 };
 
 const getCreditCardByUserId = async (userId: number | undefined): Promise<CreditCardDto> => {
-  return (await axios.get<CreditCardDto>(`${PREMIERE_API_URL}/credit_card/${userId}`)).data;
+  return (await axios.get<CreditCardDto>(`${PREMIERE_API_URL}/credit-card/${userId}`)).data;
 };
 
 export const ProfileService = {
