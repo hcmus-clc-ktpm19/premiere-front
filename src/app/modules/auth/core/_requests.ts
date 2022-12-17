@@ -1,5 +1,5 @@
 import axios from 'axios';
-import {AuthModel, UserModel} from './_models';
+import {AuthModel, OTPModel, PasswordResetModel, UserModel} from './_models';
 import qs from 'qs';
 
 const API_URL = process.env.REACT_APP_API_URL;
@@ -28,6 +28,7 @@ export const LOGIN_URL = `${API_URL}/login`;
 export const REGISTER_URL = `${PREMIERE_API_URL}/auth/register`;
 export const REQUEST_PASSWORD_URL = `${API_URL}/forgot_password`;
 export const GET_CURR_USER_API = `${PREMIERE_API_URL}/auth/token/user`;
+export const BASE_AUTH_URL = `${PREMIERE_API_URL}/auth`;
 
 // Server should return AuthModel
 export function login(email: string, password: string) {
@@ -39,11 +40,11 @@ export function login(email: string, password: string) {
 
 // Server should return AuthModel
 export function register(
-  email: string,
-  firstname: string,
-  lastname: string,
-  password: string,
-  password_confirmation: string
+    email: string,
+    firstname: string,
+    lastname: string,
+    password: string,
+    password_confirmation: string
 ) {
   return axios.post(REGISTER_URL, {
     email,
@@ -56,13 +57,25 @@ export function register(
 
 // Server should return object => { result: boolean } (Is Email in DB)
 export function requestPassword(email: string) {
-  return axios.post<{result: boolean}>(REQUEST_PASSWORD_URL, {
+  return axios.post<{ result: boolean }>(REQUEST_PASSWORD_URL, {
     email,
   });
 }
 
 export function getUserByToken() {
   return axios.get<UserModel>(GET_CURR_USER_API);
+}
+
+export function requestOTP(otp: OTPModel) {
+  return axios.post(`${BASE_AUTH_URL}/request-otp`, otp);
+}
+
+export function verifyOTP(otp: OTPModel) {
+  return axios.post(`${BASE_AUTH_URL}/verify-otp`, otp);
+}
+
+export function resetPassword(passwordResetModel: PasswordResetModel) {
+  return axios.put(`${BASE_AUTH_URL}/reset-password`, passwordResetModel);
 }
 
 export const AuthService = {
@@ -76,13 +89,13 @@ export const AuthService = {
 
   loginKeycloak(username: string, password: string) {
     return axios.post<AuthModel>(
-      KEYCLOAK_ACCESS_TOKEN_URL,
-      qs.stringify({
-        ...keycloakAuthRequestAttributes,
-        username,
-        password,
-      }),
-      keycloakConfig
+        KEYCLOAK_ACCESS_TOKEN_URL,
+        qs.stringify({
+          ...keycloakAuthRequestAttributes,
+          username,
+          password,
+        }),
+        keycloakConfig
     );
   },
 };
