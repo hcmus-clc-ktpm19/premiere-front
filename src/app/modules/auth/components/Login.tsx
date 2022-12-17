@@ -2,7 +2,7 @@
 import React, {useState} from 'react';
 import * as Yup from 'yup';
 import clsx from 'clsx';
-import {Link} from 'react-router-dom';
+import {Link, useSearchParams} from 'react-router-dom';
 import {useFormik} from 'formik';
 import {AuthService, getUserByToken} from '../core/_requests';
 import {useAuth} from '../core/Auth';

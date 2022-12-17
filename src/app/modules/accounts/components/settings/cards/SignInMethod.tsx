@@ -7,6 +7,7 @@ import {IUpdatePassword, IUpdateEmail, updatePassword, updateEmail} from '../Set
 import {useAuth} from "@/app/modules/auth";
 import {changePassword} from "@/app/modules/accounts/core/_requests";
 import {ConfirmModal} from "@_metronic/partials/modals/confirm/ConfirmModal";
+import {actions} from "react-table";
 
 const emailFormValidationSchema = Yup.object().shape({
   newEmail: Yup.string()
@@ -41,6 +42,7 @@ const SignInMethod: React.FC = () => {
   const [emailUpdateData, setEmailUpdateData] = useState<IUpdateEmail>(updateEmail);
   const [passwordUpdateData, setPasswordUpdateData] = useState<IUpdatePassword>(updatePassword);
   const [success, setSuccess] = React.useState(false);
+  const [error, setError] = React.useState(false);
 
   const [showEmailForm, setShowEmailForm] = useState<boolean>(false);
   const [showPasswordForm, setPasswordForm] = useState<boolean>(false);
@@ -69,24 +71,26 @@ const SignInMethod: React.FC = () => {
       ...passwordUpdateData,
     },
     validationSchema: passwordFormValidationSchema,
-    onSubmit: async (values) => {
+    onSubmit: (values) => {
       setLoading2(true);
-      setTimeout((values) => {
-        setPasswordUpdateData(values);
-        setLoading2(false);
-        setPasswordForm(false);
-      }, 1000);
-      try {
-        await changePassword({
-          currentPassword: values.currentPassword,
-          newPassword: values.newPassword,
-          username: currentUser?.username || '',
+      setTimeout(() => {
+        changePassword({
+            currentPassword: values.currentPassword,
+            newPassword: values.newPassword,
+            username: currentUser?.username || '',
+          }).then((res) => {
+          setPasswordUpdateData(values);
+          setLoading2(false);
+          setPasswordForm(false);
+          console.log('Password changed successfully');
+          setSuccess(true);
+          setError(false);
+        }).catch((err) => {
+          setError(true);
+          setLoading2(false);
+          console.log('Password change error: ', err);
         });
-        console.log('Password changed successfully');
-        setSuccess(true);
-      } catch (error) {
-        console.log(error);
-      }
+      }, 1000);
     },
   });
 
@@ -148,7 +152,7 @@ const SignInMethod: React.FC = () => {
                               htmlFor='confirmemailpassword'
                               className='form-label fs-6 fw-bolder mb-3'
                           >
-                            Confirm Password
+                            Confirm Email
                           </label>
                           <input
                               type='password'
@@ -219,6 +223,13 @@ const SignInMethod: React.FC = () => {
                     id='kt_signin_password_edit'
                     className={'flex-row-fluid ' + (!showPasswordForm && 'd-none')}
                 >
+                  {
+                    error && (
+                        <div className='alert alert-danger'>
+                          <div className='alert-text'>Password change error. Please check your current password again</div>
+                        </div>
+                      )
+                  }
                   <form
                       onSubmit={formik2.handleSubmit}
                       id='kt_signin_change_password'

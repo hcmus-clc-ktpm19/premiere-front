@@ -66,3 +66,16 @@ export interface UserModel {
   address?: string;
   socialNetworks?: UserSocialNetworksModel;
 }
+
+export interface OTPModel {
+  otp?: string;
+  email?: string;
+  createdAt?: string;
+}
+
+export interface PasswordResetModel {
+  email?: string;
+  username?: string;
+  currentPassword?: string;
+  newPassword?: string;
+}
