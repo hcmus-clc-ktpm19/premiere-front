@@ -17,8 +17,7 @@ const UserEditModal = () => {
         id='kt_modal_add_user'
         role='dialog'
         tabIndex={-1}
-        aria-modal='true'
-      >
+        aria-modal='true'>
         {/* begin::Modal dialog */}
         <div className='modal-dialog modal-dialog-centered mw-650px'>
           {/* begin::Modal content */}
