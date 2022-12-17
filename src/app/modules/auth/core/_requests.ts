@@ -38,21 +38,21 @@ export function login(email: string, password: string) {
 }
 
 // Server should return AuthModel
-// export function register(
-//   email: string,
-//   firstname: string,
-//   lastname: string,
-//   password: string,
-//   password_confirmation: string
-// ) {
-//   return axios.post(REGISTER_URL, {
-//     email,
-//     first_name: firstname,
-//     last_name: lastname,
-//     password,
-//     password_confirmation,
-//   });
-// }
+export function register(
+  email: string,
+  firstname: string,
+  lastname: string,
+  password: string,
+  password_confirmation: string
+) {
+  return axios.post(REGISTER_URL, {
+    email,
+    first_name: firstname,
+    last_name: lastname,
+    password,
+    password_confirmation,
+  });
+}
 
 // Server should return object => { result: boolean } (Is Email in DB)
 export function requestPassword(email: string) {
@@ -68,7 +68,7 @@ export function getUserByToken() {
 export const AuthService = {
   login,
 
-  // register,
+  register,
 
   requestPassword,
 
