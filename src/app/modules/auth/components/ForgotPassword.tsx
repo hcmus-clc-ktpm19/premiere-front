@@ -1,9 +1,9 @@
 import {useState} from 'react';
 import * as Yup from 'yup';
 import clsx from 'clsx';
-import {Link} from 'react-router-dom';
+import {Link, useNavigate} from 'react-router-dom';
 import {useFormik} from 'formik';
-import {requestPassword} from '../core/_requests';
+import {requestOTP} from '../core/_requests';
 
 const initialValues = {
   email: 'admin@demo.com',
@@ -18,6 +18,7 @@ const forgotPasswordSchema = Yup.object().shape({
 });
 
 export function ForgotPassword() {
+  const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
   const [hasErrors, setHasErrors] = useState<boolean | undefined>(undefined);
   const formik = useFormik({
@@ -27,10 +28,15 @@ export function ForgotPassword() {
       setLoading(true);
       setHasErrors(undefined);
       setTimeout(() => {
-        requestPassword(values.email)
+        requestOTP({email: values.email})
           .then(({data: {result}}) => {
             setHasErrors(false);
             setLoading(false);
+            // redirect to otp page
+            navigate({
+              pathname: '/auth/verify-otp',
+              search: `?email=${values.email}`,
+            });
           })
           .catch(() => {
             setHasErrors(true);
@@ -56,7 +62,7 @@ export function ForgotPassword() {
 
         {/* begin::Link */}
         <div className='text-gray-500 fw-semibold fs-6'>
-          Enter your email to reset your password.
+          Enter your email to get OTP.
         </div>
         {/* end::Link */}
       </div>
@@ -72,7 +78,7 @@ export function ForgotPassword() {
 
       {hasErrors === false && (
         <div className='mb-10 bg-light-info p-8 rounded'>
-          <div className='text-info'>Sent password reset. Please check your email</div>
+          <div className='text-info'>Sent OTP. Please check your email</div>
         </div>
       )}
       {/* end::Title */}
