@@ -1,6 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import {useState, useEffect} from 'react';
-import {initialQueryState, KTSVG, useDebounce} from "@_metronic/helpers";
+import {initialQueryState, KTSVG, useDebounce} from '@_metronic/helpers';
 import {useQueryRequest} from '../../core/QueryRequestProvider';
 
 const UsersListSearchComponent = () => {

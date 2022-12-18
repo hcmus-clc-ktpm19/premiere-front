@@ -1,7 +1,7 @@
 /* eslint-disable react/jsx-no-target-blank */
 import React from 'react';
 import {useIntl} from 'react-intl';
-import {KTSVG} from "@_metronic/helpers";
+import {KTSVG} from '@_metronic/helpers';
 import {SidebarMenuItemWithSub} from './SidebarMenuItemWithSub';
 import {SidebarMenuItem} from './SidebarMenuItem';
 
@@ -34,7 +34,11 @@ const SidebarMenuMain = () => {
         fontIcon='bi-archive'
         icon='/media/icons/duotune/abstract/abs027.svg'
       >
-        <SidebarMenuItem to='/loan-management/create-loan-reminder' title='Create Loan Reminder' hasBullet={true} />
+        <SidebarMenuItem
+          to='/loan-management/create-loan-reminder'
+          title='Create Loan Reminder'
+          hasBullet={true}
+        />
       </SidebarMenuItemWithSub>
 
       <SidebarMenuItemWithSub

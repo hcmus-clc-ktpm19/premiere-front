@@ -61,11 +61,13 @@ const AuthProvider: FC<WithChildren> = ({children}) => {
 };
 
 const data: UserModel = {
-  email: 'admin@test.com', first_name: 'admin', last_name: 'admin',
+  email: 'admin@test.com',
+  first_name: 'admin',
+  last_name: 'admin',
   id: 1,
   username: 'admin',
-  password: 'admin'
-}
+  password: 'admin',
+};
 
 const AuthInit: FC<WithChildren> = ({children}) => {
   const {auth, logout, setCurrentUser} = useAuth();

@@ -56,7 +56,8 @@ const Vertical = () => {
     <div
       ref={stepperRef}
       className='stepper stepper-pills stepper-column d-flex flex-column flex-xl-row flex-row-fluid'
-      id='kt_create_account_stepper'>
+      id='kt_create_account_stepper'
+    >
       {/* begin::Aside*/}
       <div className='card d-flex justify-content-center justify-content-xl-start flex-row-auto w-100 w-xl-300px w-xxl-400px me-9'>
         {/* begin::Wrapper*/}
@@ -226,7 +227,8 @@ const Vertical = () => {
                     onClick={prevStep}
                     type='button'
                     className='btn btn-lg btn-light-primary me-3'
-                    data-kt-stepper-action='previous'>
+                    data-kt-stepper-action='previous'
+                  >
                     <KTSVG
                       path='/media/icons/duotune/arrows/arr063.svg'
                       className='svg-icon-4 me-1'

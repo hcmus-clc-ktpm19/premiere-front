@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 
 interface Props {
   current?: boolean;
@@ -8,8 +8,8 @@ interface Props {
 }
 
 const StepperItem: React.FC<Props> = (props: Props) => {
-  const { current, stepperNumber, stepperTitle, stepperDescription } = props;
-  
+  const {current, stepperNumber, stepperTitle, stepperDescription} = props;
+
   return (
     <div className={`stepper-item ${current && 'current'}`} data-kt-stepper-element='nav'>
       {/* begin::Wrapper*/}
@@ -32,6 +32,6 @@ const StepperItem: React.FC<Props> = (props: Props) => {
       {/* end::Wrapper*/}
     </div>
   );
-}
+};
 
 export default StepperItem;

@@ -1,17 +1,13 @@
-export interface LoanReminderDto {
-  accountNumber: string,
-  debtorName: string,
-  transferAmount: number,
-  content?: string,
-  debtorPhone?: string,
-}
+import {CreateLoanReminderDto} from '@/app/models/model';
 
-const loanReminderInit: LoanReminderDto = {
-  accountNumber: '',
+const loanReminderInit: CreateLoanReminderDto = {
+  creditorCreditCardNumber: '',
+  creditorCreditCardId: '',
+  debtorCreditCardNumber: '',
   debtorName: '',
   transferAmount: 0,
-}
+  loanRemark: '',
+  debtorPhone: '',
+};
 
-export {
-  loanReminderInit
-}
+export {loanReminderInit};

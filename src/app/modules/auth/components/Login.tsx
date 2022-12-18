@@ -1,12 +1,12 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import React, { useState } from "react";
-import * as Yup from "yup";
-import clsx from "clsx";
-import { Link } from "react-router-dom";
-import { useFormik } from "formik";
-import { AuthService, getUserByToken } from "../core/_requests";
-import { useAuth } from "../core/Auth";
-import ReCAPTCHA from "react-google-recaptcha";
+import React, {useState} from 'react';
+import * as Yup from 'yup';
+import clsx from 'clsx';
+import {Link} from 'react-router-dom';
+import {useFormik} from 'formik';
+import {AuthService, getUserByToken} from '../core/_requests';
+import {useAuth} from '../core/Auth';
+import ReCAPTCHA from 'react-google-recaptcha';
 
 const RECAPTCHA_SITE_KEY: string = process.env.GOOGLE_RECAPTCHA_SITE_KEY!!;
 
@@ -68,7 +68,8 @@ export function Login() {
       className='form w-100'
       onSubmit={formik.handleSubmit}
       noValidate
-      id='kt_login_signin_form'>
+      id='kt_login_signin_form'
+    >
       {/* begin::Heading */}
       <div className='text-center mb-11'>
         <h1 className='text-dark fw-bolder mb-3'>Sign In</h1>
@@ -88,8 +89,8 @@ export function Login() {
       ) : (
         <div className='mb-10 bg-light-info p-8 rounded'>
           <div className='text-info'>
-            Use account <strong>{initialValues.phone}</strong> and password <strong>{initialValues.password}</strong>{' '}
-            to continue.
+            Use account <strong>{initialValues.phone}</strong> and password{' '}
+            <strong>{initialValues.password}</strong> to continue.
           </div>
         </div>
       )}
@@ -165,7 +166,8 @@ export function Login() {
           type='submit'
           id='kt_sign_in_submit'
           className='btn btn-primary'
-          disabled={formik.isSubmitting || !formik.isValid}>
+          disabled={formik.isSubmitting || !formik.isValid}
+        >
           {!loading && <span className='indicator-label'>Continue</span>}
           {loading && (
             <span className='indicator-progress' style={{display: 'block'}}>

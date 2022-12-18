@@ -18,20 +18,20 @@ const loanBreadCrumbs: Array<PageLink> = [
 ];
 
 const WizardsPage = () => (
-    <Routes>
-      <Route element={<Outlet />}>
-        <Route
-            path='/create-loan-reminder'
-            element={
-              <>
-                <PageTitle breadcrumbs={loanBreadCrumbs}>Create Loan Reminder</PageTitle>
-                <CreateLoanReminder />
-              </>
-            }
-        />
-        <Route index element={<Navigate to='/loan-management/create-loan-reminder' />} />
-      </Route>
-    </Routes>
+  <Routes>
+    <Route element={<Outlet />}>
+      <Route
+        path='/create-loan-reminder'
+        element={
+          <>
+            <PageTitle breadcrumbs={loanBreadCrumbs}>Create Loan Reminder</PageTitle>
+            <CreateLoanReminder />
+          </>
+        }
+      />
+      <Route index element={<Navigate to='/loan-management/create-loan-reminder' />} />
+    </Route>
+  </Routes>
 );
 
 export default WizardsPage;

@@ -1,19 +1,25 @@
-import React, {useEffect, useRef, useState} from 'react';
-import {KTSVG} from '@_metronic/helpers';
-import {Form, Formik, FormikValues} from 'formik';
-import {Step1} from '@/app/modules/loan-management/components/steps/Step1';
+import React, { useEffect, useRef, useState } from "react";
+import { KTSVG } from "@_metronic/helpers";
+import { Form, Formik, FormikProps, FormikValues } from "formik";
 import {
-  loanReminderValidationSchema,
-} from '@/app/modules/wizards/components/CreateAccountWizardHelper';
-import {Step2} from '@/app/modules/loan-management/components/steps/Step2';
-import {StepperComponent} from '@_metronic/assets/ts/components';
-import StepperItem from '@/app/modules/loan-management/components/shared/StepperItem';
-import {LoanReminderDto, loanReminderInit} from '@/app/modules/loan-management/core/_models';
+  CreateLoanReminderStep1
+} from "@/app/modules/loan-management/components/steps/CreateLoanReminderStep1";
+import {
+  CreateLoanReminderStep2
+} from "@/app/modules/loan-management/components/steps/CreateLoanReminderStep2";
+import { StepperComponent } from "@_metronic/assets/ts/components";
+import StepperItem from "@/app/modules/loan-management/components/shared/StepperItem";
+import { loanReminderInit } from "@/app/modules/loan-management/core/_models";
+import { services } from "@/app/modules/loan-management/core/services";
+import { CreateLoanReminderDto } from "@/app/models/model";
+import { NavigateFunction, useNavigate } from "react-router-dom";
 
 const CreateLoanReminder: React.FC = () => {
+  const navigate: NavigateFunction = useNavigate();
   const stepperRef = useRef<HTMLDivElement | null>(null);
   const stepper = useRef<StepperComponent | null>(null);
-  const [initValues] = useState<LoanReminderDto>(loanReminderInit);
+  const [currentSchema, setCurrentSchema] = useState(services.loanReminderValidationSchemas[0]);
+  const [initValues] = useState<CreateLoanReminderDto>(loanReminderInit);
 
   const loadStepper = () => {
     stepper.current = StepperComponent.createInsance(stepperRef.current as HTMLDivElement);
@@ -26,24 +32,22 @@ const CreateLoanReminder: React.FC = () => {
 
     stepper.current.goPrev();
 
-    // setCurrentSchema(createAccountSchemas[stepper.current.currentStepIndex - 1]);
+    setCurrentSchema(services.loanReminderValidationSchemas[stepper.current.currentStepIndex - 1]);
   };
 
-  const submitStep = (values: LoanReminderDto, actions: FormikValues) => {
-    console.log('values', values);
-    console.log('actions', actions);
-    console.log(stepper.current?.totalStepsNumber);
-    console.log(stepper.current?.currentStepIndex);
-
+  const submitStep = async (values: CreateLoanReminderDto, actions: FormikValues) => {
     if (!stepper.current) {
       return;
     }
 
+    setCurrentSchema(services.loanReminderValidationSchemas[stepper.current.currentStepIndex]);
+
     if (stepper.current.currentStepIndex !== stepper.current?.totalStepsNumber) {
       stepper.current.goNext();
     } else {
-      stepper.current.goto(1);
-      actions.resetForm();
+      await services.saveLoanReminder(values);
+      // TODO: Implement navigate to loan reminder list here
+      navigate('/dashboard')
     }
   };
 
@@ -51,6 +55,10 @@ const CreateLoanReminder: React.FC = () => {
     if (!stepperRef.current) {
       return;
     }
+
+    console.log(stepper.current?.currentStepIndex);
+    console.log(stepper.current?.totalStepsNumber! - 1);
+    console.log(stepper.current?.currentStepIndex !== stepper.current?.totalStepsNumber!);
 
     loadStepper();
   }, [stepperRef]);
@@ -93,28 +101,42 @@ const CreateLoanReminder: React.FC = () => {
       {/* begin::Aside*/}
 
       <div className='d-flex flex-row-fluid flex-center bg-body rounded'>
-        <Formik
-          validationSchema={loanReminderValidationSchema}
-          onSubmit={submitStep}
-          initialValues={initValues}>
-          {(props) => (
+        <Formik validationSchema={currentSchema} onSubmit={submitStep} initialValues={initValues} validateOnChange={false}>
+          {(props: FormikProps<any>) => (
             <Form className='py-20 w-100 w-xl-700px px-9' noValidate id='kt_create_account_form'>
               <div className='current' data-kt-stepper-element='content'>
-                <Step1 formikProps={props} />
+                <CreateLoanReminderStep1 formikProps={props} />
               </div>
 
               <div data-kt-stepper-element='content'>
-                <Step2 />
+                <CreateLoanReminderStep2 formikProps={props} />
               </div>
 
               <div className='d-flex flex-stack pt-10'>
+                <div className='mr-2'>
+                  <button
+                    onClick={prevStep}
+                    type='button'
+                    className='btn btn-lg btn-light-primary me-3'
+                    data-kt-stepper-action='previous'>
+                    <KTSVG
+                      path='/media/icons/duotune/arrows/arr063.svg'
+                      className='svg-icon-4 me-1'
+                    />
+                    Back
+                  </button>
+                </div>
+
                 <div>
-                  <button type='submit' className='btn btn-lg btn-primary me-3'>
+                  <button
+                    type='submit'
+                    disabled={!props.isValid || Object.keys(props.errors).length !== 0}
+                    className='btn btn-lg btn-primary me-3'>
                     <span className='indicator-label'>
                       {stepper.current?.currentStepIndex !==
                         stepper.current?.totalStepsNumber! - 1 && 'Continue'}
                       {stepper.current?.currentStepIndex ===
-                        stepper.current?.totalStepsNumber! - 1 && 'Submit'}
+                        stepper.current?.totalStepsNumber! - 1 && 'Create'}
                       <KTSVG
                         path='/media/icons/duotune/arrows/arr064.svg'
                         className='svg-icon-3 ms-2 me-0'
