@@ -36,6 +36,10 @@ export function ForgotPassword() {
             navigate({
               pathname: '/auth/verify-otp',
               search: `?email=${values.email}`,
+            }, {
+              state: {
+                isOTPRequested: true,
+              }
             });
           })
           .catch(() => {

@@ -1,9 +1,10 @@
-import {Link, useNavigate, useSearchParams} from "react-router-dom";
+import {Link, Navigate, useLocation, useNavigate, useSearchParams} from "react-router-dom";
 import {useState} from "react";
 import {useFormik} from "formik";
 import {resetPassword, verifyOTP} from "@/app/modules/auth/core/_requests";
 import clsx from "clsx";
 import * as Yup from "yup";
+import {OTPModel} from "@/app/modules/auth";
 
 const initialValues = {
   password: '',
@@ -24,10 +25,27 @@ const forgotPasswordSchema = Yup.object().shape({
 
 export function ResetPassword() {
   const navigate = useNavigate();
+  const location = useLocation();
   const [loading, setLoading] = useState(false);
   const [hasErrors, setHasErrors] = useState<boolean | undefined>(undefined);
   const [searchParams] = useSearchParams();
   const email = searchParams.get('email');
+  // if doesn't have email, redirect to forgot password page
+  if (!email) {
+    console.log('no email, redirect to forgot password page');
+    // return to forgot password page
+    return (
+        <Navigate to={'/auth/forgot-password'}/>
+    )
+  }
+  // if not verified return to verify otp page
+  // @ts-ignore
+  if (!location.state?.isOTPVerified) {
+    console.log('not verified OTP, redirect to verify OTP page');
+    return (
+        <Navigate to={`/auth/verify-otp?email=${email}`}/>
+    )
+  }
   const formik = useFormik({
     initialValues,
     validationSchema: forgotPasswordSchema,
