@@ -1,8 +1,8 @@
-import axios, {AxiosResponse} from 'axios';
+import axios, {AxiosError, AxiosResponse} from 'axios';
 import {ID, Response} from '../../../../../../_metronic/helpers';
 import {User, UsersQueryResponse} from './_models';
-import {UserDto} from '@/app/modules/apps/user-management/users-list/core/dtos';
-import {REGISTER_URL} from '@/app/modules/auth/core/_requests';
+import {ResponseDto, UserDto} from '@/app/modules/apps/user-management/users-list/core/dtos';
+import {REGISTER_CUSTOMER_URL, REGISTER_EMPLOYEE_URL} from '@/app/modules/auth/core/_requests';
 
 const PREMIERE_API_URL = process.env.PREMIERE_API_URL!;
 const API_URL = process.env.REACT_APP_THEME_API_URL;
@@ -22,11 +22,16 @@ const getUserById = (id: ID): Promise<UserDto | undefined> => {
     .then((response: Response<UserDto>) => response.data);
 };
 
-const createUser = (user: UserDto): Promise<string | undefined> => {
-  return axios
-    .post(REGISTER_URL, user)
-    .then((response: AxiosResponse<Response<string>>) => response.data)
-    .then((response: Response<string>) => response.data);
+const createUser = (user: UserDto): Promise<ResponseDto> => {
+  if (user.role === 'CUSTOMER') {
+    return axios
+      .post(REGISTER_CUSTOMER_URL, user)
+      .then((response: AxiosResponse<ResponseDto>) => response.data);
+  } else {
+    return axios
+      .post(REGISTER_EMPLOYEE_URL, user)
+      .then((response: AxiosResponse<ResponseDto>) => response.data);
+  }
 };
 
 const updateUser = (user: User): Promise<User | undefined> => {

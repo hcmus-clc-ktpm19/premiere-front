@@ -14,3 +14,8 @@ export interface UserDto {
   password?: string;
   role?: string;
 }
+
+export interface ResponseDto {
+  code: string;
+  message: string;
+}
