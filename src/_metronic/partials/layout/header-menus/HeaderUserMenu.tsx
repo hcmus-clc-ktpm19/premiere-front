@@ -1,4 +1,3 @@
-/* eslint-disable jsx-a11y/anchor-is-valid */
 import {FC} from 'react';
 import {Link} from 'react-router-dom';
 import {useAuth} from '../../../../app/modules/auth';
@@ -10,8 +9,7 @@ const HeaderUserMenu: FC = () => {
   return (
     <div
       className='menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-600 menu-state-bg menu-state-primary fw-bold py-4 fs-6 w-275px'
-      data-kt-menu='true'
-    >
+      data-kt-menu='true'>
       <div className='menu-item px-3'>
         <div className='menu-content d-flex align-items-center px-3'>
           <div className='symbol symbol-50px me-5'>
@@ -20,7 +18,7 @@ const HeaderUserMenu: FC = () => {
 
           <div className='d-flex flex-column'>
             <div className='fw-bolder d-flex align-items-center fs-5'>
-              {currentUser?.first_name} {currentUser?.first_name}
+              {currentUser?.firstName} {currentUser?.lastName}
               <span className='badge badge-light-success fw-bolder fs-8 px-2 py-1 ms-2'>Pro</span>
             </div>
             <a href='#' className='fw-bold text-muted text-hover-primary fs-7'>
@@ -51,8 +49,7 @@ const HeaderUserMenu: FC = () => {
         className='menu-item px-5'
         data-kt-menu-trigger='hover'
         data-kt-menu-placement='left-start'
-        data-kt-menu-flip='bottom'
-      >
+        data-kt-menu-flip='bottom'>
         <a href='#' className='menu-link px-5'>
           <span className='menu-title'>My Subscription</span>
           <span className='menu-arrow'></span>
@@ -83,8 +80,7 @@ const HeaderUserMenu: FC = () => {
               <i
                 className='fas fa-exclamation-circle ms-2 fs-7'
                 data-bs-toggle='tooltip'
-                title='View your statements'
-              ></i>
+                title='View your statements'></i>
             </a>
           </div>
 

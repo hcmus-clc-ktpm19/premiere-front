@@ -1,12 +1,12 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import React, {useState} from 'react';
-import * as Yup from 'yup';
-import clsx from 'clsx';
-import {Link} from 'react-router-dom';
-import {useFormik} from 'formik';
-import {AuthService, getUserByToken} from '../core/_requests';
-import {useAuth} from '../core/Auth';
-import ReCAPTCHA from 'react-google-recaptcha';
+import React, { useState } from "react";
+import * as Yup from "yup";
+import clsx from "clsx";
+import { Link } from "react-router-dom";
+import { useFormik } from "formik";
+import { AuthService, getUserByToken } from "../core/_requests";
+import { useAuth } from "../core/Auth";
+import ReCAPTCHA from "react-google-recaptcha";
 
 const RECAPTCHA_SITE_KEY: string = process.env.GOOGLE_RECAPTCHA_SITE_KEY!!;
 
@@ -26,6 +26,14 @@ const initialValues = {
   password: 'admin',
 };
 
+// TODO: Hard code for testing
+const user: UserModel = {
+  email: 'admin@test.com', firstName: 'admin', lastName: 'admin',
+  id: 1,
+  username: 'admin',
+  password: 'admin'
+}
+
 /*
   Formik+YUP+Typescript:
   https://jaredpalmer.com/formik/docs/tutorial#getfieldprops
@@ -44,12 +52,12 @@ export function Login() {
         setStatus('Please verify that you are not a robot.');
         return;
       }
-
       setLoading(true);
       try {
         const {data: auth} = await AuthService.loginKeycloak(values.phone, values.password);
         saveAuth(auth);
         const {data: user} = await getUserByToken();
+        user.password = values.password;
         setCurrentUser(user);
       } catch (error) {
         console.error(error);

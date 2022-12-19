@@ -27,7 +27,25 @@ const UserEditModalFormWrapper = () => {
   );
 
   if (!itemIdForUpdate) {
-    return <UserEditModalForm isUserLoading={isLoading} user={{id: undefined}} />;
+    return (
+      <UserEditModalForm
+        isUserLoading={isLoading}
+        user={{
+          id: undefined,
+          username: '',
+          avatar: '',
+          email: '',
+          firstName: '',
+          lastName: '',
+          phone: '',
+          gender: '',
+          panNumber: '',
+          address: '',
+          password: '',
+          role: '',
+        }}
+      />
+    );
   }
 
   if (!isLoading && !error && user) {
