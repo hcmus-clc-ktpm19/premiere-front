@@ -10,7 +10,7 @@ const initialValues = {
 };
 
 const forgotPasswordSchema = Yup.object().shape({
-  email: Yup.string()
+  phone: Yup.string()
     .email('Wrong email format')
     .min(3, 'Minimum 3 symbols')
     .max(50, 'Maximum 50 symbols')

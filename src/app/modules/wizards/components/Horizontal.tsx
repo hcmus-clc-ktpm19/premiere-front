@@ -4,16 +4,16 @@ import {Step2} from './steps/Step2';
 import {Step3} from './steps/Step3';
 import {Step4} from './steps/Step4';
 import {Step5} from './steps/Step5';
-import {KTSVG} from '../../../../_metronic/helpers';
-import {StepperComponent} from '../../../../_metronic/assets/ts/components';
+import {KTSVG} from '@_metronic/helpers';
+import {StepperComponent} from '@_metronic/assets/ts/components';
 import {Formik, Form, FormikValues} from 'formik';
-import {createAccountSchemas, ICreateAccount, inits} from './CreateAccountWizardHelper';
+import {createAccountSchemas, ICreateAccount, accountsInit} from './CreateAccountWizardHelper';
 
 const Horizontal: FC = () => {
   const stepperRef = useRef<HTMLDivElement | null>(null);
   const stepper = useRef<StepperComponent | null>(null);
   const [currentSchema, setCurrentSchema] = useState(createAccountSchemas[0]);
-  const [initValues] = useState<ICreateAccount>(inits);
+  const [initValues] = useState<ICreateAccount>(accountsInit);
   const [isSubmitButton, setSubmitButton] = useState(false);
 
   const loadStepper = () => {
@@ -25,7 +25,7 @@ const Horizontal: FC = () => {
       return;
     }
 
-    setSubmitButton(stepper.current.currentStepIndex === stepper.current.totatStepsNumber! - 1);
+    setSubmitButton(stepper.current.currentStepIndex === stepper.current?.totalStepsNumber! - 1);
 
     stepper.current.goPrev();
 
@@ -37,11 +37,11 @@ const Horizontal: FC = () => {
       return;
     }
 
-    setSubmitButton(stepper.current.currentStepIndex === stepper.current.totatStepsNumber! - 1);
+    setSubmitButton(stepper.current.currentStepIndex === stepper.current?.totalStepsNumber! - 1);
 
     setCurrentSchema(createAccountSchemas[stepper.current.currentStepIndex]);
 
-    if (stepper.current.currentStepIndex !== stepper.current.totatStepsNumber) {
+    if (stepper.current.currentStepIndex !== stepper.current?.totalStepsNumber) {
       stepper.current.goNext();
     } else {
       stepper.current.goto(1);

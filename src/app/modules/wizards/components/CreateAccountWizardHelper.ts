@@ -40,7 +40,7 @@ const createAccountSchemas = [
   }),
 ];
 
-const inits: ICreateAccount = {
+const accountsInit: ICreateAccount = {
   accountType: 'personal',
   accountTeamSize: '50+',
   accountName: '',
@@ -58,4 +58,4 @@ const inits: ICreateAccount = {
   saveCard: '1',
 };
 
-export {createAccountSchemas, inits};
+export {createAccountSchemas, accountsInit};

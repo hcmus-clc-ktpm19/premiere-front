@@ -29,6 +29,20 @@ const SidebarMenuMain = () => {
           <span className='menu-section text-muted text-uppercase fs-8 ls-1'>Crafted</span>
         </div>
       </div>
+
+      <SidebarMenuItemWithSub
+        to='/loan-management'
+        title='Loan Management'
+        fontIcon='bi-archive'
+        icon='/media/icons/duotune/abstract/abs027.svg'
+      >
+        <SidebarMenuItem
+          to='/loan-management/create-loan-reminder'
+          title='Create Loan Reminder'
+          hasBullet={true}
+        />
+      </SidebarMenuItemWithSub>
+
       <SidebarMenuItemWithSub
         to='/crafted/pages'
         title='Pages'
