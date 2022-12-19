@@ -9,6 +9,7 @@ import {WithChildren} from '@_metronic/helpers';
 import BuilderPageWrapper from '../pages/layout-builder/BuilderPageWrapper';
 import LoanManagementPage from '@/app/modules/loan-management/LoanManagementPage';
 import {useAuth} from '@/app/modules/auth';
+import {PremiereRole} from '@_metronic/layout/core/PremiereRole';
 
 const PrivateRoutes = () => {
   const ProfilePage = lazy(() => import('../modules/profile/ProfilePage'));
@@ -75,7 +76,8 @@ const PrivateRoutes = () => {
             <ProtectedRoute
               redirectPath='/dashboard'
               isAllowed={
-                currentUser?.role === 'PREMIERE_ADMIN' || currentUser?.role === 'EMPLOYEE'
+                currentUser?.role === PremiereRole.PREMIERE_ADMIN.toString() ||
+                currentUser?.role === PremiereRole.EMPLOYEE.toString()
               }>
               <SuspensedView>
                 <UsersPage />
@@ -116,7 +118,11 @@ interface ProtectedRouteProps {
   redirectPath: string;
   children: JSX.Element;
 }
-const ProtectedRoute = ({isAllowed, redirectPath = '/dashboard', children}: ProtectedRouteProps) => {
+const ProtectedRoute = ({
+  isAllowed,
+  redirectPath = '/dashboard',
+  children,
+}: ProtectedRouteProps) => {
   if (!isAllowed) {
     return <Navigate to={redirectPath} replace />;
   }

@@ -5,6 +5,7 @@ import {KTSVG} from '@_metronic/helpers';
 import {SidebarMenuItemWithSub} from './SidebarMenuItemWithSub';
 import {SidebarMenuItem} from './SidebarMenuItem';
 import {useAuth} from '@/app/modules/auth';
+import {PremiereRole} from '@_metronic/layout/core/PremiereRole';
 
 const SidebarMenuMain = () => {
   const intl = useIntl();
@@ -34,8 +35,7 @@ const SidebarMenuMain = () => {
         to='/loan-management'
         title='Loan Management'
         fontIcon='bi-archive'
-        icon='/media/icons/duotune/abstract/abs027.svg'
-      >
+        icon='/media/icons/duotune/abstract/abs027.svg'>
         <SidebarMenuItem
           to='/loan-management/create-loan-reminder'
           title='Create Loan Reminder'
@@ -114,7 +114,8 @@ const SidebarMenuMain = () => {
           <span className='menu-section text-muted text-uppercase fs-8 ls-1'>Apps</span>
         </div>
       </div>
-      {(currentUser?.role === 'PREMIERE_ADMIN' || currentUser?.role === 'EMPLOYEE') && (
+      {(currentUser?.role === PremiereRole.PREMIERE_ADMIN.toString() ||
+        currentUser?.role === PremiereRole.EMPLOYEE.toString()) && (
         <SidebarMenuItemWithSub
           to='/apps/chat'
           title='Chat'
@@ -125,7 +126,8 @@ const SidebarMenuMain = () => {
           <SidebarMenuItem to='/apps/chat/drawer-chat' title='Drawer Chart' hasBullet={true} />
         </SidebarMenuItemWithSub>
       )}
-      {(currentUser?.role === 'PREMIERE_ADMIN' || currentUser?.role === 'EMPLOYEE') && (
+      {(currentUser?.role === PremiereRole.PREMIERE_ADMIN.toString() ||
+        currentUser?.role === PremiereRole.EMPLOYEE.toString()) && (
         <SidebarMenuItem
           to='/apps/user-management/users'
           icon='/media/icons/duotune/general/gen051.svg'

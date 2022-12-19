@@ -3,6 +3,7 @@ import {MenuItem} from './MenuItem';
 import {MenuInnerWithSub} from './MenuInnerWithSub';
 import {MegaMenu} from './MegaMenu';
 import {useAuth} from '@/app/modules/auth';
+import {PremiereRole} from '@_metronic/layout/core/PremiereRole';
 
 export function MenuInner() {
   const intl = useIntl();
@@ -94,7 +95,8 @@ export function MenuInner() {
         </MenuInnerWithSub>
       </MenuInnerWithSub>
 
-      {(currentUser?.role === 'PREMIERE_ADMIN' || currentUser?.role === 'EMPLOYEE') && (
+      {(currentUser?.role === PremiereRole.PREMIERE_ADMIN.toString() ||
+        currentUser?.role === PremiereRole.EMPLOYEE.toString()) && (
         <MenuInnerWithSub title='Apps' to='/apps' menuPlacement='bottom-start' menuTrigger='click'>
           {/* PAGES */}
           <MenuInnerWithSub
