@@ -9,6 +9,7 @@ import {createUser, updateUser} from '../core/_requests';
 import {useQueryResponse} from '../core/QueryResponseProvider';
 import {UserDto} from '@/app/modules/apps/user-management/users-list/core/dtos';
 import {useAuth} from '@/app/modules/auth';
+import {PremiereRole} from '@_metronic/layout/core/PremiereRole';
 
 type Props = {
   isUserLoading: boolean;
@@ -476,10 +477,10 @@ const UserEditModalForm: FC<Props> = ({user, isUserLoading}) => {
             </div>
             {/* end::Input row */}
             {/* begin::Input row */}
-            {currentUser?.role === 'PREMIERE_ADMIN' && (
+            {currentUser?.role === PremiereRole.PREMIERE_ADMIN.toString() && (
               <div className='separator separator-dashed my-5'></div>
             )}
-            {currentUser?.role === 'PREMIERE_ADMIN' && (
+            {currentUser?.role === PremiereRole.PREMIERE_ADMIN.toString() && (
               <div className='d-flex fv-row'>
                 {/* begin::Radio */}
                 <div className='form-check form-check-custom form-check-solid'>

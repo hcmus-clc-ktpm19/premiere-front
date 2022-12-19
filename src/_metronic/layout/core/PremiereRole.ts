@@ -1,0 +1,5 @@
+export enum PremiereRole {
+  CUSTOMER = 'CUSTOMER',
+  EMPLOYEE = 'EMPLOYEE',
+  PREMIERE_ADMIN = 'PREMIERE_ADMIN',
+}
