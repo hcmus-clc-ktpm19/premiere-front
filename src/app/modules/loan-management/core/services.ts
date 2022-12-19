@@ -4,7 +4,7 @@ import * as Yup from 'yup';
 
 const API_URL: string = process.env.PREMIERE_API_URL!!;
 const LOAN_REMINDER_API: string = `${API_URL}/loan-management`;
-const CREDIT_CARD_API: string = `${API_URL}/credit_card`;
+const CREDIT_CARD_API: string = `${API_URL}/credit-card`;
 
 const loanReminderValidationSchemas = [
   Yup.object({

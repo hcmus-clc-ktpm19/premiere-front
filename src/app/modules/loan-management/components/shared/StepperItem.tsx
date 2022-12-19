@@ -1,17 +1,17 @@
 import React from 'react';
 
 interface Props {
-  current?: boolean;
+  className?: string;
   stepperNumber: number;
   stepperTitle: string;
   stepperDescription: string;
 }
 
 const StepperItem: React.FC<Props> = (props: Props) => {
-  const {current, stepperNumber, stepperTitle, stepperDescription} = props;
+  const {className, stepperNumber, stepperTitle, stepperDescription} = props;
 
   return (
-    <div className={`stepper-item ${current && 'current'}`} data-kt-stepper-element='nav'>
+    <div className={`stepper-item ${className}`} data-kt-stepper-element='nav'>
       {/* begin::Wrapper*/}
       <div className='stepper-wrapper'>
         {/* begin::Icon*/}

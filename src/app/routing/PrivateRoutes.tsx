@@ -2,8 +2,8 @@ import {lazy, FC, Suspense} from 'react';
 import {Route, Routes, Navigate, Outlet} from 'react-router-dom';
 import {MasterLayout} from '@_metronic/layout/MasterLayout';
 import TopBarProgress from 'react-topbar-progress-indicator';
-import {DashboardWrapper} from '../pages/dashboard/DashboardWrapper';
-import {MenuTestPage} from '../pages/MenuTestPage';
+import {DashboardWrapper} from '@pages/dashboard/DashboardWrapper';
+import {MenuTestPage} from '@pages/MenuTestPage';
 import {getCSSVariableValue} from '@_metronic/assets/ts/_utils';
 import {WithChildren} from '@_metronic/helpers';
 import BuilderPageWrapper from '../pages/layout-builder/BuilderPageWrapper';
@@ -111,11 +111,17 @@ const SuspensedView: FC<WithChildren> = ({children}) => {
 };
 
 // eslint-disable-next-line react/prop-types
-const ProtectedRoute = ({isAllowed, redirectPath = '/dashboard', children}) => {
+interface ProtectedRouteProps {
+  isAllowed: boolean;
+  redirectPath: string;
+  children: JSX.Element;
+}
+const ProtectedRoute = ({isAllowed, redirectPath = '/dashboard', children}: ProtectedRouteProps) => {
   if (!isAllowed) {
     return <Navigate to={redirectPath} replace />;
   }
-  return children ? children : <Outlet />;
+
+  return children || <Outlet />;
 };
 
 export {PrivateRoutes};

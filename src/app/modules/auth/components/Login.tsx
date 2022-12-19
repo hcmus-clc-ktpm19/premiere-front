@@ -7,6 +7,7 @@ import { useFormik } from "formik";
 import { AuthService, getUserByToken } from "../core/_requests";
 import { useAuth } from "../core/Auth";
 import ReCAPTCHA from "react-google-recaptcha";
+import { UserModel } from "@/app/modules/auth";
 
 const RECAPTCHA_SITE_KEY: string = process.env.GOOGLE_RECAPTCHA_SITE_KEY!!;
 
