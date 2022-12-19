@@ -67,7 +67,6 @@ export function Login() {
         const {data: user} = await getUserByToken();
         user.password = values.password;
         setCurrentUser(user);
-        console.log(user);
       } catch (error) {
         console.error(error);
         saveAuth(undefined);

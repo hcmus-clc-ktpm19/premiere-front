@@ -1,12 +1,14 @@
 /* eslint-disable react/jsx-no-target-blank */
 import React from 'react';
 import {useIntl} from 'react-intl';
-import {KTSVG} from '../../../../helpers';
+import {KTSVG} from '@_metronic/helpers';
 import {SidebarMenuItemWithSub} from './SidebarMenuItemWithSub';
 import {SidebarMenuItem} from './SidebarMenuItem';
+import {useAuth} from '@/app/modules/auth';
 
 const SidebarMenuMain = () => {
   const intl = useIntl();
+  const {currentUser} = useAuth();
 
   return (
     <>
@@ -98,21 +100,25 @@ const SidebarMenuMain = () => {
           <span className='menu-section text-muted text-uppercase fs-8 ls-1'>Apps</span>
         </div>
       </div>
-      <SidebarMenuItemWithSub
-        to='/apps/chat'
-        title='Chat'
-        fontIcon='bi-chat-left'
-        icon='/media/icons/duotune/communication/com012.svg'>
-        <SidebarMenuItem to='/apps/chat/private-chat' title='Private Chat' hasBullet={true} />
-        <SidebarMenuItem to='/apps/chat/group-chat' title='Group Chart' hasBullet={true} />
-        <SidebarMenuItem to='/apps/chat/drawer-chat' title='Drawer Chart' hasBullet={true} />
-      </SidebarMenuItemWithSub>
-      <SidebarMenuItem
-        to='/apps/user-management/users'
-        icon='/media/icons/duotune/general/gen051.svg'
-        title='User management'
-        fontIcon='bi-layers'
-      />
+      {(currentUser?.role === 'PREMIERE_ADMIN' || currentUser?.role === 'EMPLOYEE') && (
+        <SidebarMenuItemWithSub
+          to='/apps/chat'
+          title='Chat'
+          fontIcon='bi-chat-left'
+          icon='/media/icons/duotune/communication/com012.svg'>
+          <SidebarMenuItem to='/apps/chat/private-chat' title='Private Chat' hasBullet={true} />
+          <SidebarMenuItem to='/apps/chat/group-chat' title='Group Chart' hasBullet={true} />
+          <SidebarMenuItem to='/apps/chat/drawer-chat' title='Drawer Chart' hasBullet={true} />
+        </SidebarMenuItemWithSub>
+      )}
+      {(currentUser?.role === 'PREMIERE_ADMIN' || currentUser?.role === 'EMPLOYEE') && (
+        <SidebarMenuItem
+          to='/apps/user-management/users'
+          icon='/media/icons/duotune/general/gen051.svg'
+          title='User management'
+          fontIcon='bi-layers'
+        />
+      )}
       <div className='menu-item'>
         <a
           target='_blank'

@@ -25,7 +25,9 @@ const keycloakConfig = {
 
 export const GET_USER_BY_ACCESSTOKEN_URL = `${API_URL}/verify_token`;
 export const LOGIN_URL = `${API_URL}/login`;
-export const REGISTER_URL = `${PREMIERE_API_URL}/auth/register`;
+export const REGISTER_URL = `${API_URL}/register`;
+export const REGISTER_CUSTOMER_URL = `${PREMIERE_API_URL}/auth/register-customer`;
+export const REGISTER_EMPLOYEE_URL = `${PREMIERE_API_URL}/auth/register-employee`;
 export const REQUEST_PASSWORD_URL = `${API_URL}/forgot_password`;
 export const GET_CURR_USER_API = `${PREMIERE_API_URL}/auth/token/user`;
 export const BASE_AUTH_URL = `${PREMIERE_API_URL}/auth`;
@@ -40,11 +42,11 @@ export function login(email: string, password: string) {
 
 // Server should return AuthModel
 export function register(
-    email: string,
-    firstname: string,
-    lastname: string,
-    password: string,
-    password_confirmation: string
+  email: string,
+  firstname: string,
+  lastname: string,
+  password: string,
+  password_confirmation: string
 ) {
   return axios.post(REGISTER_URL, {
     email,
@@ -57,7 +59,7 @@ export function register(
 
 // Server should return object => { result: boolean } (Is Email in DB)
 export function requestPassword(email: string) {
-  return axios.post<{ result: boolean }>(REQUEST_PASSWORD_URL, {
+  return axios.post<{result: boolean}>(REQUEST_PASSWORD_URL, {
     email,
   });
 }
@@ -89,13 +91,13 @@ export const AuthService = {
 
   loginKeycloak(username: string, password: string) {
     return axios.post<AuthModel>(
-        KEYCLOAK_ACCESS_TOKEN_URL,
-        qs.stringify({
-          ...keycloakAuthRequestAttributes,
-          username,
-          password,
-        }),
-        keycloakConfig
+      KEYCLOAK_ACCESS_TOKEN_URL,
+      qs.stringify({
+        ...keycloakAuthRequestAttributes,
+        username,
+        password,
+      }),
+      keycloakConfig
     );
   },
 };

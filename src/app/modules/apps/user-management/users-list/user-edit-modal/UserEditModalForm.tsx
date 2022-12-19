@@ -8,6 +8,7 @@ import {UsersListLoading} from '../components/loading/UsersListLoading';
 import {createUser, updateUser} from '../core/_requests';
 import {useQueryResponse} from '../core/QueryResponseProvider';
 import {UserDto} from '@/app/modules/apps/user-management/users-list/core/dtos';
+import {useAuth} from '@/app/modules/auth';
 
 type Props = {
   isUserLoading: boolean;
@@ -39,7 +40,7 @@ const editUserSchema = Yup.object().shape({
 const UserEditModalForm: FC<Props> = ({user, isUserLoading}) => {
   const {setItemIdForUpdate} = useListView();
   const {refetch} = useQueryResponse();
-
+  const {currentUser} = useAuth();
   const [userForEdit] = useState<UserDto>(user);
 
   const cancel = (withRefresh?: boolean) => {
@@ -49,8 +50,8 @@ const UserEditModalForm: FC<Props> = ({user, isUserLoading}) => {
     setItemIdForUpdate(undefined);
   };
 
-  const blankImg = toAbsoluteUrl('/media/svg/avatars/blank.svg');
-  const userAvatarImg = toAbsoluteUrl(`/media/${userForEdit.avatar}`);
+  // const blankImg = toAbsoluteUrl('/media/svg/avatars/blank.svg');
+  // const userAvatarImg = toAbsoluteUrl(`/media/${userForEdit.avatar}`);
 
   const formik = useFormik({
     initialValues: userForEdit,
@@ -61,7 +62,7 @@ const UserEditModalForm: FC<Props> = ({user, isUserLoading}) => {
         if (isNotEmpty(values.id)) {
           await updateUser(values);
         } else {
-          await createUser(values);
+          console.log(await createUser(values));
         }
       } catch (ex) {
         console.error(ex);
@@ -474,31 +475,35 @@ const UserEditModalForm: FC<Props> = ({user, isUserLoading}) => {
               {/* end::Radio */}
             </div>
             {/* end::Input row */}
-            <div className='separator separator-dashed my-5'></div>
             {/* begin::Input row */}
-            <div className='d-flex fv-row'>
-              {/* begin::Radio */}
-              <div className='form-check form-check-custom form-check-solid'>
-                {/* begin::Input */}
-                <input
-                  className='form-check-input me-3'
-                  {...formik.getFieldProps('role')}
-                  name='role'
-                  type='radio'
-                  value='EMPLOYEE'
-                  id='kt_modal_update_role_option_1'
-                  checked={formik.values.role === 'EMPLOYEE'}
-                  disabled={formik.isSubmitting || isUserLoading}
-                />
-                {/* end::Input */}
-                {/* begin::Label */}
-                <label className='form-check-label' htmlFor='kt_modal_update_role_option_1'>
-                  <div className='fw-bolder text-gray-800'>Employee</div>
-                </label>
-                {/* end::Label */}
+            {currentUser?.role === 'PREMIERE_ADMIN' && (
+              <div className='separator separator-dashed my-5'></div>
+            )}
+            {currentUser?.role === 'PREMIERE_ADMIN' && (
+              <div className='d-flex fv-row'>
+                {/* begin::Radio */}
+                <div className='form-check form-check-custom form-check-solid'>
+                  {/* begin::Input */}
+                  <input
+                    className='form-check-input me-3'
+                    {...formik.getFieldProps('role')}
+                    name='role'
+                    type='radio'
+                    value='EMPLOYEE'
+                    id='kt_modal_update_role_option_1'
+                    checked={formik.values.role === 'EMPLOYEE'}
+                    disabled={formik.isSubmitting || isUserLoading}
+                  />
+                  {/* end::Input */}
+                  {/* begin::Label */}
+                  <label className='form-check-label' htmlFor='kt_modal_update_role_option_1'>
+                    <div className='fw-bolder text-gray-800'>Employee</div>
+                  </label>
+                  {/* end::Label */}
+                </div>
+                {/* end::Radio */}
               </div>
-              {/* end::Radio */}
-            </div>
+            )}
             {/* end::Input row */}
             {/* end::Roles */}
           </div>
@@ -521,8 +526,7 @@ const UserEditModalForm: FC<Props> = ({user, isUserLoading}) => {
             type='submit'
             className='btn btn-primary'
             data-kt-users-modal-action='submit'
-            // disabled={isUserLoading || formik.isSubmitting || !formik.isValid || !formik.touched}
-          >
+            disabled={isUserLoading || formik.isSubmitting || !formik.isValid || !formik.touched}>
             <span className='indicator-label'>Submit</span>
             {(formik.isSubmitting || isUserLoading) && (
               <span className='indicator-progress'>
