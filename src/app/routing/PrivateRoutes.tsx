@@ -1,12 +1,14 @@
 import {lazy, FC, Suspense} from 'react';
-import {Route, Routes, Navigate} from 'react-router-dom';
+import {Route, Routes, Navigate, Outlet} from 'react-router-dom';
 import {MasterLayout} from '@_metronic/layout/MasterLayout';
 import TopBarProgress from 'react-topbar-progress-indicator';
-import {DashboardWrapper} from '../pages/dashboard/DashboardWrapper';
-import {MenuTestPage} from '../pages/MenuTestPage';
+import {DashboardWrapper} from '@pages/dashboard/DashboardWrapper';
+import {MenuTestPage} from '@pages/MenuTestPage';
 import {getCSSVariableValue} from '@_metronic/assets/ts/_utils';
 import {WithChildren} from '@_metronic/helpers';
 import BuilderPageWrapper from '../pages/layout-builder/BuilderPageWrapper';
+import LoanManagementPage from '@/app/modules/loan-management/LoanManagementPage';
+import {useAuth} from '@/app/modules/auth';
 
 const PrivateRoutes = () => {
   const ProfilePage = lazy(() => import('../modules/profile/ProfilePage'));
@@ -15,6 +17,7 @@ const PrivateRoutes = () => {
   const WidgetsPage = lazy(() => import('../modules/widgets/WidgetsPage'));
   const ChatPage = lazy(() => import('../modules/apps/chat/ChatPage'));
   const UsersPage = lazy(() => import('../modules/apps/user-management/UsersPage'));
+  const {currentUser} = useAuth();
 
   return (
     <Routes>
@@ -69,8 +72,22 @@ const PrivateRoutes = () => {
         <Route
           path='apps/user-management/*'
           element={
+            <ProtectedRoute
+              redirectPath='/dashboard'
+              isAllowed={
+                currentUser?.role === 'PREMIERE_ADMIN' || currentUser?.role === 'EMPLOYEE'
+              }>
+              <SuspensedView>
+                <UsersPage />
+              </SuspensedView>
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path='/loan-management/*'
+          element={
             <SuspensedView>
-              <UsersPage />
+              <LoanManagementPage />
             </SuspensedView>
           }
         />
@@ -91,6 +108,20 @@ const SuspensedView: FC<WithChildren> = ({children}) => {
     shadowBlur: 5,
   });
   return <Suspense fallback={<TopBarProgress />}>{children}</Suspense>;
+};
+
+// eslint-disable-next-line react/prop-types
+interface ProtectedRouteProps {
+  isAllowed: boolean;
+  redirectPath: string;
+  children: JSX.Element;
+}
+const ProtectedRoute = ({isAllowed, redirectPath = '/dashboard', children}: ProtectedRouteProps) => {
+  if (!isAllowed) {
+    return <Navigate to={redirectPath} replace />;
+  }
+
+  return children || <Outlet />;
 };
 
 export {PrivateRoutes};

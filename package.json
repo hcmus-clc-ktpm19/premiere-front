@@ -5,9 +5,12 @@
   "type": "module",
   "homepage": "/metronic8/react/demo1",
   "dependencies": {
+    "@emotion/react": "^11.10.5",
+    "@emotion/styled": "^11.10.5",
     "@formatjs/intl-pluralrules": "4.3.3",
     "@formatjs/intl-relativetimeformat": "10.0.1",
     "@fortawesome/fontawesome-free": "6.1.1",
+    "@mui/material": "^5.11.0",
     "@popperjs/core": "2.11.6",
     "animate.css": "4.1.1",
     "apexcharts": "3.35.0",

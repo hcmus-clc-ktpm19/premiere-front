@@ -4,7 +4,7 @@ import {QueryResponseProvider} from './core/QueryResponseProvider';
 import {UsersListHeader} from './components/header/UsersListHeader';
 import {UsersTable} from './table/UsersTable';
 import {UserEditModal} from './user-edit-modal/UserEditModal';
-import {KTCard} from '../../../../../_metronic/helpers';
+import {KTCard} from '@_metronic/helpers';
 
 const UsersList = () => {
   const {itemIdForUpdate} = useListView();
