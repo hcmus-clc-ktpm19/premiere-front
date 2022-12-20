@@ -226,7 +226,7 @@ const SignInMethod: React.FC = () => {
                   {
                     error && (
                         <div className='alert alert-danger'>
-                          <div className='alert-text'>Password change error. Please check your current password again</div>
+                          <div className='alert-text'>Password change error. Please check your password again</div>
                         </div>
                       )
                   }

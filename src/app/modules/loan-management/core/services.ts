@@ -1,3 +1,4 @@
+// @ts-ignore
 import { CreateLoanReminderDto, CreditCardDto, ErrorDto, UserDto } from "@/app/models/model";
 import axios, {AxiosResponse} from 'axios';
 import * as Yup from 'yup';

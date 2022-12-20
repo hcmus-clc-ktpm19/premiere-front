@@ -1,3 +1,4 @@
+// @ts-ignore
 import {CreateLoanReminderDto} from '@/app/models/model';
 
 const loanReminderInit: CreateLoanReminderDto = {
