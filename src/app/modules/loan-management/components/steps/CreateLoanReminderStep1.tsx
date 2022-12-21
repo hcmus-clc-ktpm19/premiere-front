@@ -1,6 +1,7 @@
 import React, {FC, useEffect, useState} from 'react';
 import {ErrorMessage, Field, FormikProps} from 'formik';
 import {services} from '@/app/modules/loan-management/core/services';
+// @ts-ignore
 import {ErrorDto, UserDto} from '@/app/models/model';
 import {NavLink} from 'react-router-dom';
 import { useIntl } from "react-intl";

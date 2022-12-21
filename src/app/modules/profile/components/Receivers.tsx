@@ -12,9 +12,10 @@ import {InviteUsers} from "@_metronic/partials";
 export const ReceiverModalContext = React.createContext({});
 
 export function Receivers() {
-  const {currentUser} = useAuth()
+  const {currentUser} = useAuth();
   const [modal, setModal] = React.useState(false);
   const [receivers, setReceivers] = React.useState<ReceiverDto[]>([]);
+  const [bank, setBank] = React.useState<string>('');
   const [receiverToUpdate, setReceiverToUpdate] = React.useState<ReceiverDto>();
   useEffect(() => {
     profileService.getAllReceiversByUserId(currentUser?.id).then((data: ReceiverDto[]) => {
@@ -53,23 +54,24 @@ export function Receivers() {
             value={{openAddReceiverModal, modal, receiverToUpdate, setReceiverToUpdate, handleDeleteReceiver}}>
           <div className='d-flex flex-wrap flex-stack mb-6'>
             <h3 className='fw-bolder my-2'>
-              My Contacts
-              <span className='fs-6 text-gray-400 fw-bold ms-1'>(59)</span>
+              My Receivers
+              <span className='fs-6 text-gray-400 fw-bold ms-1'>({receivers.filter((receiver) => receiver.bankName === bank || bank === '').length})</span>
             </h3>
 
             <div className={'d-flex flex-center flex-wrap mb-5'}>
               <div className='d-flex my-2'>
                 <select
-                    name='status'
+                    name='bank'
                     data-control='select2'
                     data-hide-search='true'
                     className='form-select form-select-white form-select-sm w-125px'
-                    defaultValue='Online'
+                    defaultValue='Select a bank...'
+                    onChange={(e) => setBank(e.target.value)}
                 >
-                  <option value='Online'>Online</option>
-                  <option value='Pending'>Pending</option>
-                  <option value='Declined'>Declined</option>
-                  <option value='Accepted'>Accepted</option>
+                  <option value=''>Select a bank...</option>
+                  <option value='Vietcombank'>Vietcombank</option>
+                  <option value='Vietinbank'>Vietinbank</option>
+                  <option value='Techcombank'>Techcombank</option>
                 </select>
               </div>
               <button type='button' className='btn btn-sm btn-primary' style={{marginLeft: '10px'}}
@@ -82,7 +84,7 @@ export function Receivers() {
 
           <div className='row g-6 g-xl-9'>
             {
-              receivers.map((receiver: ReceiverDto) => {
+              receivers.filter((receiver) => receiver.bankName === bank || bank === '').map((receiver: ReceiverDto) => {
                 return (
                     <div className='col-md-6 col-xxl-4' key={receiver.id}>
                       <Card3

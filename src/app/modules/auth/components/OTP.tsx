@@ -2,7 +2,7 @@ import {useState} from "react";
 import {useFormik} from "formik";
 import {requestOTP, verifyOTP} from "@/app/modules/auth/core/_requests";
 import clsx from "clsx";
-import {Link, useNavigate, useSearchParams} from "react-router-dom";
+import {Link, Navigate, useLocation, useNavigate, useSearchParams} from "react-router-dom";
 import * as Yup from "yup";
 
 const initialValues = {
@@ -17,10 +17,26 @@ const forgotPasswordSchema = Yup.object().shape({
 
 export function OTP() {
   const navigate = useNavigate();
+  const location = useLocation();
   const [loading, setLoading] = useState(false);
   const [hasErrors, setHasErrors] = useState<boolean | undefined>(undefined);
   const [searchParams] = useSearchParams();
   const email = searchParams.get('email');
+  // if doesn't have email, redirect to forgot password page
+  if (!email) {
+    console.log('no email, redirect to forgot password page');
+    // return to forgot password page
+    return (
+        <Navigate to={'/auth/forgot-password'}/>
+    )
+  }
+  // @ts-ignore
+  if (!location.state?.isOTPRequested) {
+    console.log('not requested OTP yet, redirect to forgot password page');
+    return (
+        <Navigate to={'/auth/forgot-password'}/>
+    )
+  }
   const formik = useFormik({
     initialValues,
     validationSchema: forgotPasswordSchema,
@@ -38,7 +54,7 @@ export function OTP() {
             navigate({
               pathname: '/auth/reset-password',
               search: `?email=${email}`,
-            });
+            }, {state: {isOTPVerified: true}});
           } else {
             setSubmitting(false);
             setStatus('The OTP is incorrect');

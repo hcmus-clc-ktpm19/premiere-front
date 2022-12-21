@@ -121,7 +121,7 @@ const ProfileHeader: React.FC = () => {
                         Available Balance:{' '}
                       </span>
                       <div className='fs-2 fw-bolder'>
-                        {creditCard?.balance.toLocaleString('it-IT', {
+                        {creditCard?.balance?.toLocaleString('it-IT', {
                           style: 'currency',
                           currency: 'VND',
                         })}

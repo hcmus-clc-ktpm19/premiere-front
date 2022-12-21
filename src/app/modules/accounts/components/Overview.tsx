@@ -53,7 +53,7 @@ export function Overview() {
             </label>
 
             <div className='col-lg-8 d-flex align-items-center'>
-              <span className='fw-bolder fs-6 me-2'>044 3276 454 935</span>
+              <span className='fw-bolder fs-6 me-2'>{currentUser?.phone}</span>
 
               <span className='badge badge-success'>Verified</span>
             </div>
@@ -80,7 +80,7 @@ export function Overview() {
             </label>
 
             <div className='col-lg-8'>
-              <span className='fw-bolder fs-6 text-dark'>Germany</span>
+              <span className='fw-bolder fs-6 text-dark'>Viet Nam</span>
             </div>
           </div>
 

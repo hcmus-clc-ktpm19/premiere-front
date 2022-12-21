@@ -41,6 +41,11 @@ const SidebarMenuMain = () => {
           title='Create Loan Reminder'
           hasBullet={true}
         />
+        <SidebarMenuItem
+            to='/loan-management/list-of-loan-reminders'
+            title='List of Loan Reminders'
+            hasBullet={true}
+        />
       </SidebarMenuItemWithSub>
 
       <SidebarMenuItemWithSub
