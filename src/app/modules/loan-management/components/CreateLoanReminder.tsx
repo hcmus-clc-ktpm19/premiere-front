@@ -43,8 +43,7 @@ const CreateLoanReminder: React.FC = () => {
       stepper.current.goNext();
     } else {
       await services.saveLoanReminder(values);
-      // TODO: Implement navigate to loan reminder list here
-      navigate('/dashboard');
+      navigate('/loan-management/loan-reminders');
     }
   };
 

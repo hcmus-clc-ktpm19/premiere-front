@@ -9,4 +9,7 @@ export interface LoanReminderDto {
   senderName: string;
   receiverName: string;
   receiverCreditCardNumber: string;
+  senderCreditCardId: number;
+  receiverCreditCardId: number;
+  cancelReason: string;
 }

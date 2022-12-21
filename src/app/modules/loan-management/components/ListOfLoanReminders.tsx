@@ -1,20 +1,23 @@
 import React, {useEffect} from 'react';
 import {KTSVG} from "@_metronic/helpers";
-import {CreditCardDto, ReceiverDto} from "@/app/modules/profile/core/_dtos";
-import {Card3} from "@_metronic/partials/content/cards/Card3";
-import {ReceiverEditModal} from "@/app/modules/profile/receiver-edit-modal/ReceiverEditModal";
-import {ReceiverModalContext} from "@/app/modules/profile/components/Receivers";
+import {CreditCardDto} from "@/app/modules/profile/core/_dtos";
 import {useNavigate} from "react-router-dom";
 import {ProfileService as profileService} from "@/app/modules/profile/core/_requests";
 import {useAuth} from "@/app/modules/auth";
 import {services} from '@/app/modules/loan-management/core/services';
 import {LoanReminderDto} from "@/app/modules/loan-management/core/_dtos";
+import {
+  ReminderDeleteModal
+} from "@/app/modules/loan-management/loan-reminder-modal/ReminderDeleteModal";
 
+export const LoanReminderContext = React.createContext({});
 const ListOfLoanReminders = () => {
   const navigate = useNavigate();
   const {currentUser} = useAuth();
   const [loanReminders, setLoanReminders] = React.useState<LoanReminderDto[]>([]);
   const [status, setStatus] = React.useState<string>('');
+  const [reminderToDelete, setReminderToDelete] = React.useState<LoanReminderDto>();
+  const [modal, setModal] = React.useState(false);
   useEffect(() => {
     profileService
     .getCreditCardByUserId(currentUser?.id)
@@ -29,15 +32,26 @@ const ListOfLoanReminders = () => {
       console.log(error);
     });
   }, []);
-  const addLoanReminderHandler = () =>{
+  const openReminderDeleteModal = () => {
+    setModal(!modal);
+  }
+  const addLoanReminderHandler = () => {
     navigate('/loan-management/create-loan-reminder');
+  }
+  const deleteLoanReminderHandler = (reminder: LoanReminderDto) => {
+    console.log('deleteLoanReminderHandler');
+    setReminderToDelete(reminder)
+    openReminderDeleteModal();
   }
   return (
       <>
+        <LoanReminderContext.Provider
+            value={{modal, reminderToDelete, setReminderToDelete, openReminderDeleteModal}}>
           <div className='d-flex flex-wrap flex-stack mb-6'>
             <h3 className='fw-bolder my-2'>
               Total Reminders
-              <span className='fs-6 text-gray-400 fw-bold ms-1'>({loanReminders.filter(loanReminder => loanReminder.status === status || status === '').length})</span>
+              <span
+                  className='fs-6 text-gray-400 fw-bold ms-1'>({loanReminders.filter(loanReminder => loanReminder.status === status || status === '').length})</span>
             </h3>
 
             <div className={'d-flex flex-center flex-wrap mb-5'}>
@@ -64,111 +78,109 @@ const ListOfLoanReminders = () => {
             </div>
           </div>
 
-        <div className={'card mb-5 mb-xl-8'}>
-          {/* begin::Body */}
-          <div className='card-body py-3'>
-            {/* begin::Table container */}
-            <div className='table-responsive'>
-              {/* begin::Table */}
-              <table className='table table-row-bordered table-row-gray-100 align-middle gs-0 gy-3'>
-                {/* begin::Table head */}
-                <thead>
-                <tr className='fw-bold text-muted'>
-                  <th className='min-w-30px'>Id</th>
-                  <th className='min-w-140px'>Version</th>
-                  <th className='min-w-120px'>Sender</th>
-                  <th className='min-w-120px'>Receiver</th>
-                  <th className='min-w-120px'>Transfer Amount</th>
-                  <th className='min-w-120px'>Status</th>
-                  <th className='min-w-120px'>Date</th>
-                  <th className='min-w-100px text-end'>Actions</th>
-                </tr>
-                </thead>
-                {/* end::Table head */}
-                {/* begin::Table body */}
-                <tbody>
-                {
-                  loanReminders.filter((reminder) => reminder.status === status || status === '').map((reminder: LoanReminderDto) => (
-                      <tr key={reminder.id}>
-                        <td>
-                          <a href='#' className='text-dark fw-bold text-hover-primary fs-6'>
-                            {reminder.id}
-                          </a>
-                        </td>
-                        <td>
-                          <a href='#' className='text-dark fw-bold text-hover-primary fs-6'>
-                            {reminder.version}
-                          </a>
-                        </td>
-                        <td>
-                          <a href='#'
-                             className='text-dark fw-bold text-hover-primary d-block mb-1 fs-6'>
-                            {reminder.senderCreditCardNumber}
-                          </a>
-                          <span className='text-muted fw-semibold text-muted d-block fs-7'>{reminder.senderName}</span>
-                        </td>
-                        <td>
-                          <a href='#'
-                             className='text-dark fw-bold text-hover-primary d-block mb-1 fs-6'>
-                            {reminder.receiverCreditCardNumber}
-                          </a>
-                          <span className='text-muted fw-semibold text-muted d-block fs-7'>{reminder.receiverName}</span>
-                        </td>
-                        <td className='text-dark fw-bold text-hover-primary fs-6'>${reminder.transferAmount}</td>
-                        <td>
-                          {
-                            reminder.status === 'PENDING' ? (
-                                <span className='badge badge-light-primary'>PENDING</span>
-                            ) : reminder.status === 'APPROVED' ? (
-                                <span className='badge badge-light-success'>APPROVED</span>
-                            ) : (
-                                <span className='badge badge-light-danger'>REJECTED</span>
-                            )
-                          }
-                        </td>
-                        <td>
-                          <a href='#'
-                             className='text-dark fw-bold text-hover-primary d-block mb-1 fs-6'>
-                            {new Date(reminder.time).toLocaleDateString()}
-                          </a>
-                          <span className='text-muted fw-semibold text-muted d-block fs-7'>
+          <div className={'card mb-5 mb-xl-8'}>
+            {/* begin::Body */}
+            <div className='card-body py-3'>
+              {/* begin::Table container */}
+              <div className='table-responsive'>
+                {/* begin::Table */}
+                <table
+                    className='table table-row-bordered table-row-gray-100 align-middle gs-0 gy-3'>
+                  {/* begin::Table head */}
+                  <thead>
+                  <tr className='fw-bold text-muted'>
+                    <th className='min-w-30px'>Id</th>
+                    <th className='min-w-20px'>Version</th>
+                    <th className='min-w-120px'>Sender</th>
+                    <th className='min-w-120px'>Receiver</th>
+                    <th className='min-w-120px'>Transfer Amount</th>
+                    <th className='min-w-120px'>Status</th>
+                    <th className='min-w-120px'>Date</th>
+                    <th className='min-w-100px text-end'>Actions</th>
+                  </tr>
+                  </thead>
+                  {/* end::Table head */}
+                  {/* begin::Table body */}
+                  <tbody>
+                  {
+                    loanReminders.filter((reminder) => reminder.status === status || status === '').map((reminder: LoanReminderDto) => (
+                        <tr key={reminder.id}>
+                          <td>
+                            <a href='#' className='text-dark fw-bold text-hover-primary fs-6'>
+                              {reminder.id}
+                            </a>
+                          </td>
+                          <td>
+                            <a href='#' className='text-dark fw-bold text-hover-primary fs-6'>
+                              {reminder.version}
+                            </a>
+                          </td>
+                          <td>
+                            <a href='#'
+                               className='text-dark fw-bold text-hover-primary d-block mb-1 fs-6'>
+                              {reminder.senderCreditCardNumber}
+                            </a>
+                            <span
+                                className='text-muted fw-semibold text-muted d-block fs-7'>{reminder.senderName}</span>
+                          </td>
+                          <td>
+                            <a href='#'
+                               className='text-dark fw-bold text-hover-primary d-block mb-1 fs-6'>
+                              {reminder.receiverCreditCardNumber}
+                            </a>
+                            <span
+                                className='text-muted fw-semibold text-muted d-block fs-7'>{reminder.receiverName}</span>
+                          </td>
+                          <td className='text-dark fw-bold text-hover-primary fs-6'>
+                            {reminder.transferAmount.toLocaleString('it-IT', {
+                              style: 'currency',
+                              currency: 'VND',
+                            })
+                            }
+                          </td>
+                          <td>
+                            {
+                              reminder.status === 'PENDING' ? (
+                                  <span className='badge badge-light-primary'>PENDING</span>
+                              ) : reminder.status === 'APPROVED' ? (
+                                  <span className='badge badge-light-success'>APPROVED</span>
+                              ) : (
+                                  <span className='badge badge-light-danger'>REJECTED</span>
+                              )
+                            }
+                          </td>
+                          <td>
+                            <a href='#'
+                               className='text-dark fw-bold text-hover-primary d-block mb-1 fs-6'>
+                              {new Date(reminder.time).toLocaleDateString()}
+                            </a>
+                            <span className='text-muted fw-semibold text-muted d-block fs-7'>
                             {new Date(reminder.time).toLocaleTimeString()}
                           </span>
-                        </td>
+                          </td>
 
-                        <td className='text-end'>
-                          <a
-                              href='#'
-                              className='btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1'
-                          >
-                            <KTSVG path='/media/icons/duotune/general/gen019.svg'
-                                   className='svg-icon-3'/>
-                          </a>
-                          <a
-                              href='#'
-                              className='btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1'
-                          >
-                            <KTSVG path='/media/icons/duotune/art/art005.svg'
-                                   className='svg-icon-3'/>
-                          </a>
-                          <a href='#'
-                             className='btn btn-icon btn-bg-light btn-active-color-primary btn-sm'>
-                            <KTSVG path='/media/icons/duotune/general/gen027.svg'
-                                   className='svg-icon-3'/>
-                          </a>
-                        </td>
-                      </tr>
-                  ))
-                }
-                </tbody>
-                {/* end::Table body */}
-              </table>
-              {/* end::Table */}
+                          <td className='text-end'>
+                            <button type='button'
+                                    onClick={() => {
+                                      deleteLoanReminderHandler(reminder)
+                                    }}
+                                    className='btn btn-icon btn-bg-light btn-active-color-primary btn-sm'>
+                              <KTSVG path='/media/icons/duotune/general/gen027.svg'
+                                     className='svg-icon-3'/>
+                            </button>
+                          </td>
+                        </tr>
+                    ))
+                  }
+                  </tbody>
+                  {/* end::Table body */}
+                </table>
+                {/* end::Table */}
+              </div>
+              {/* end::Table container */}
             </div>
-            {/* end::Table container */}
+            {/* begin::Body */}
           </div>
-          {/* begin::Body */}
-        </div>
 
           <div className='d-flex flex-stack flex-wrap pt-10'>
             <div className='fs-6 fw-bold text-gray-700'>Showing 1 to 10 of 50 entries</div>
@@ -223,6 +235,8 @@ const ListOfLoanReminders = () => {
               </li>
             </ul>
           </div>
+          <ReminderDeleteModal/>
+        </LoanReminderContext.Provider>
       </>
   );
 };
