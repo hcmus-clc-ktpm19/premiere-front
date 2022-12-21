@@ -57,10 +57,16 @@ const getLoanRemindersByUserCreditCardNumber = (cardNumber: string): Promise<Loa
     .then((response: AxiosResponse<LoanReminderDto[]>) => response.data);
 }
 
+const cancelLoanReminder = (loanReminderDto: LoanReminderDto): Promise<String> => {
+  return axios.put(`${LOAN_REMINDER_API}/loan-reminder/cancel`, loanReminderDto)
+    .then((response: AxiosResponse<String>) => response.data);
+}
+
 export const services = {
   loanReminderValidationSchemas,
   getUserByCardNumber,
   getCreditCardByCardNumber,
   saveLoanReminder,
   getLoanRemindersByUserCreditCardNumber,
+  cancelLoanReminder,
 };

@@ -18,10 +18,12 @@ const ListOfLoanReminders = () => {
   const [status, setStatus] = React.useState<string>('');
   const [reminderToDelete, setReminderToDelete] = React.useState<LoanReminderDto>();
   const [modal, setModal] = React.useState(false);
+  const [creditCard, setCreditCard] = React.useState<CreditCardDto>();
   useEffect(() => {
     profileService
     .getCreditCardByUserId(currentUser?.id)
     .then((data: CreditCardDto) => {
+      setCreditCard(data);
       services.getLoanRemindersByUserCreditCardNumber(data.cardNumber).then((data: LoanReminderDto[]) => {
         setLoanReminders(data);
       }).catch((error) => {
@@ -34,6 +36,12 @@ const ListOfLoanReminders = () => {
   }, []);
   const openReminderDeleteModal = () => {
     setModal(!modal);
+    services.getLoanRemindersByUserCreditCardNumber(creditCard!.cardNumber)
+    .then((data: LoanReminderDto[]) => {
+      setLoanReminders(data);
+    }).catch((error) => {
+      console.log('Load loan reminder failed', error);
+    });
   }
   const addLoanReminderHandler = () => {
     navigate('/loan-management/create-loan-reminder');
@@ -46,7 +54,7 @@ const ListOfLoanReminders = () => {
   return (
       <>
         <LoanReminderContext.Provider
-            value={{modal, reminderToDelete, setReminderToDelete, openReminderDeleteModal}}>
+            value={{modal, reminderToDelete, openReminderDeleteModal}}>
           <div className='d-flex flex-wrap flex-stack mb-6'>
             <h3 className='fw-bolder my-2'>
               Total Reminders
@@ -144,8 +152,10 @@ const ListOfLoanReminders = () => {
                                   <span className='badge badge-light-primary'>PENDING</span>
                               ) : reminder.status === 'APPROVED' ? (
                                   <span className='badge badge-light-success'>APPROVED</span>
+                              ) : reminder.status === 'REJECTED' ? (
+                                  <span className='badge badge-light-warning'>REJECTED</span>
                               ) : (
-                                  <span className='badge badge-light-danger'>REJECTED</span>
+                                  <span className='badge badge-light-danger'>CANCELLED</span>
                               )
                             }
                           </td>

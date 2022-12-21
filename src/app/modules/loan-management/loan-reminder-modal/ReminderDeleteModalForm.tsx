@@ -1,11 +1,12 @@
 import {LoanReminderDto} from "@/app/modules/loan-management/core/_dtos";
 import React, {FC, useContext} from "react";
-import {KTSVG, toAbsoluteUrl} from "@_metronic/helpers";
+import {KTSVG} from "@_metronic/helpers";
 import {useFormik} from "formik";
 import clsx from "clsx";
 import {ReceiversListLoading} from "@/app/modules/profile/loading/ReceiversListLoading";
 import * as Yup from "yup";
 import {LoanReminderContext} from "@/app/modules/loan-management/components/ListOfLoanReminders";
+import {services} from "@/app/modules/loan-management/core/services";
 
 type Props = {
   reminder: LoanReminderDto;
@@ -26,8 +27,6 @@ const ReminderDeleteModalForm: FC<Props> = ({reminder, isReminderLoading}) => {
     openReminderDeleteModal();
   };
 
-  const blankImg = toAbsoluteUrl('/media/svg/avatars/blank.svg');
-  const userAvatarImg = toAbsoluteUrl('/media/avatars/300-6.jpg');
 
   const formik = useFormik({
     initialValues: initialValues,
@@ -36,8 +35,12 @@ const ReminderDeleteModalForm: FC<Props> = ({reminder, isReminderLoading}) => {
       setSubmitting(true);
       console.log(values);
       try {
-        // delete here
-        console.log('deleted');
+        const loanReminderToCancel: LoanReminderDto = {
+          ...reminder,
+          cancelReason: values.cancelReason,
+        }
+        console.log(loanReminderToCancel);
+        await services.cancelLoanReminder(loanReminderToCancel);
       } catch (ex) {
         console.error(ex);
       } finally {
@@ -155,8 +158,10 @@ const ReminderDeleteModalForm: FC<Props> = ({reminder, isReminderLoading}) => {
                           <span className='badge badge-light-primary'>PENDING</span>
                       ) : reminder.status === 'APPROVED' ? (
                           <span className='badge badge-light-success'>APPROVED</span>
+                      ) : reminder.status === 'REJECTED' ? (
+                          <span className='badge badge-light-warning'>REJECTED</span>
                       ) : (
-                          <span className='badge badge-light-danger'>REJECTED</span>
+                          <span className='badge badge-light-danger'>CANCELLED</span>
                       )
                     }
                   </div>
