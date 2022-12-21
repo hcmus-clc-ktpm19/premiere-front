@@ -11,7 +11,7 @@ const initialValues = {
   confirmPassword: '',
 };
 
-const forgotPasswordSchema = Yup.object().shape({
+const resetPasswordSchema = Yup.object().shape({
   password: Yup.string()
   .min(3, 'Minimum 3 symbols')
   .max(50, 'Maximum 50 symbols')
@@ -48,7 +48,7 @@ export function ResetPassword() {
   }
   const formik = useFormik({
     initialValues,
-    validationSchema: forgotPasswordSchema,
+    validationSchema: resetPasswordSchema,
     onSubmit: (values, {setStatus, setSubmitting}) => {
       setLoading(true);
       setHasErrors(undefined);

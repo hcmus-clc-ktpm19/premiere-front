@@ -10,7 +10,7 @@ const initialValues = {
 };
 
 const forgotPasswordSchema = Yup.object().shape({
-  phone: Yup.string()
+  email: Yup.string()
     .email('Wrong email format')
     .min(3, 'Minimum 3 symbols')
     .max(50, 'Maximum 50 symbols')
@@ -25,6 +25,7 @@ export function ForgotPassword() {
     initialValues,
     validationSchema: forgotPasswordSchema,
     onSubmit: (values, {setStatus, setSubmitting}) => {
+      console.log('click')
       setLoading(true);
       setHasErrors(undefined);
       setTimeout(() => {

@@ -11,4 +11,5 @@ const loanReminderInit: CreateLoanReminderDto = {
   debtorPhone: '',
 };
 
+
 export {loanReminderInit};
