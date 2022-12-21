@@ -1,4 +1,4 @@
-import {LoanReminderDto} from "@/app/modules/loan-management/core/_dtos";
+import {LoanReminderDto, LoanReminderMessageDto} from "@/app/modules/loan-management/core/_dtos";
 import React, {FC, useContext} from "react";
 import {KTSVG} from "@_metronic/helpers";
 import {useFormik} from "formik";
@@ -7,6 +7,7 @@ import {ReceiversListLoading} from "@/app/modules/profile/loading/ReceiversListL
 import * as Yup from "yup";
 import {LoanReminderContext} from "@/app/modules/loan-management/components/ListOfLoanReminders";
 import {services} from "@/app/modules/loan-management/core/services";
+import {useAuth} from "@/app/modules/auth";
 
 type Props = {
   reminder: LoanReminderDto;
@@ -23,6 +24,7 @@ const loanReminderSchema = Yup.object().shape({
 const ReminderDeleteModalForm: FC<Props> = ({reminder, isReminderLoading}) => {
   // @ts-ignore
   const {openReminderDeleteModal} = useContext(LoanReminderContext);
+  const {currentUser} = useAuth();
   const cancel = (withRefresh?: boolean) => {
     openReminderDeleteModal();
   };
@@ -41,6 +43,26 @@ const ReminderDeleteModalForm: FC<Props> = ({reminder, isReminderLoading}) => {
         }
         console.log(loanReminderToCancel);
         await services.cancelLoanReminder(loanReminderToCancel);
+        // after canceled loan reminder, send a notification to the receiver and redirect to the list of loan reminders
+        let loanReminderMessageDto: LoanReminderMessageDto;
+        if (currentUser?.id === reminder.senderId) {
+          loanReminderMessageDto = {
+            senderId: reminder.senderId,
+            senderName: reminder.senderName,
+            receiverId: reminder.receiverId,
+            receiverName: reminder.receiverName,
+            message: `You have a cancelled loan reminder message from ${reminder.senderName}`,
+          }
+        } else {
+          loanReminderMessageDto = {
+            senderId: reminder.receiverId,
+            senderName: reminder.receiverName,
+            receiverId: reminder.senderId,
+            receiverName: reminder.senderName,
+            message: `You have a cancelled loan reminder message from ${reminder.receiverName}`,
+          }
+        }
+        await services.pushMessageToMessageQueue(loanReminderMessageDto);
       } catch (ex) {
         console.error(ex);
       } finally {

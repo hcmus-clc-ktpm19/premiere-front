@@ -10,6 +10,9 @@ import {services} from '@/app/modules/loan-management/core/services';
 // @ts-ignore
 import {CreateLoanReminderDto} from '@/app/models/model';
 import {NavigateFunction, useNavigate} from 'react-router-dom';
+import {LoanReminderMessageDto} from "@/app/modules/loan-management/core/_dtos";
+import {useAuth} from "@/app/modules/auth";
+import {UserDto} from "@/app/modules/apps/user-management/users-list/core/dtos";
 
 const CreateLoanReminder: React.FC = () => {
   const navigate: NavigateFunction = useNavigate();
@@ -17,6 +20,7 @@ const CreateLoanReminder: React.FC = () => {
   const stepper = useRef<StepperComponent | null>(null);
   const [currentSchema, setCurrentSchema] = useState(services.loanReminderValidationSchemas[0]);
   const [initValues] = useState<CreateLoanReminderDto>(loanReminderInit);
+  const {currentUser} = useAuth();
 
   const loadStepper = () => {
     stepper.current = StepperComponent.createInsance(stepperRef.current as HTMLDivElement);
@@ -43,7 +47,18 @@ const CreateLoanReminder: React.FC = () => {
       stepper.current.goNext();
     } else {
       await services.saveLoanReminder(values);
-      navigate('/loan-management/loan-reminders');
+      // after created loan reminder, send a notification to the receiver and redirect to the list of loan reminders
+      console.log("value to create loan reminder", values);
+      const res: UserDto = await services.getUserByCardNumber(values.debtorCreditCardNumber) as UserDto;
+      const loanReminderMessageDto: LoanReminderMessageDto = {
+        senderName: currentUser?.lastName + ' ' + currentUser?.firstName,
+        receiverName: res.lastName + ' ' + res.firstName,
+        senderId: currentUser!.id,
+        receiverId: res.id as number,
+        message: "You have a new loan reminder from " + currentUser?.lastName + ' ' + currentUser?.firstName,
+      }
+      await services.pushMessageToMessageQueue(loanReminderMessageDto);
+      navigate('/loan-management/list-of-loan-reminders');
     }
   };
 
