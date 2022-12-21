@@ -1,11 +1,12 @@
-import {Navigate, Routes, Route, Outlet} from 'react-router-dom';
-import {PageLink, PageTitle} from '../../../_metronic/layout/core';
+import {Navigate, Outlet, Route, Routes} from 'react-router-dom';
+import {PageLink, PageTitle} from '@_metronic/layout/core';
 import {Overview} from './components/Overview';
 import {Projects} from './components/Projects';
 import {Campaigns} from './components/Campaigns';
 import {Documents} from './components/Documents';
 import {Receivers} from './components/Receivers';
 import {ProfileHeader} from './ProfileHeader';
+import {Transactions} from '@/app/modules/profile/components/Transactions';
 
 const profileBreadCrumbs: Array<PageLink> = [
   {
@@ -30,7 +31,8 @@ const ProfilePage = () => (
           <ProfileHeader />
           <Outlet />
         </>
-      }>
+      }
+    >
       <Route
         path='spend_account'
         element={
@@ -55,6 +57,15 @@ const ProfilePage = () => (
           <>
             <PageTitle breadcrumbs={profileBreadCrumbs}>Campaigns</PageTitle>
             <Campaigns />
+          </>
+        }
+      />
+      <Route
+        path='transactions'
+        element={
+          <>
+            <PageTitle breadcrumbs={profileBreadCrumbs}>Transactions</PageTitle>
+            <Transactions />
           </>
         }
       />

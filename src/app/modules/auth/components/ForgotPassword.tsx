@@ -61,9 +61,7 @@ export function ForgotPassword() {
         {/* end::Title */}
 
         {/* begin::Link */}
-        <div className='text-gray-500 fw-semibold fs-6'>
-          Enter your email to get OTP.
-        </div>
+        <div className='text-gray-500 fw-semibold fs-6'>Enter your email to get OTP.</div>
         {/* end::Link */}
       </div>
 

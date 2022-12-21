@@ -1,4 +1,4 @@
-import { CreateLoanReminderDto, CreditCardDto, ErrorDto, UserDto } from "@/app/models/model";
+import {CreateLoanReminderDto, CreditCardDto, ErrorDto, UserDto} from '@/app/models/model';
 import axios, {AxiosResponse} from 'axios';
 import * as Yup from 'yup';
 
@@ -13,7 +13,7 @@ const loanReminderValidationSchemas = [
     transferAmount: Yup.number().required().min(100_000).label('Transfer amount'),
   }),
   Yup.object({
-    creditorCreditCardNumber: Yup.string().required().label("Your credit card number"),
+    creditorCreditCardNumber: Yup.string().required().label('Your credit card number'),
   }),
 ];
 
@@ -45,9 +45,9 @@ const getCreditCardByCardNumber = (cardNumber: string): Promise<CreditCardDto | 
 
 const saveLoanReminder = (loanReminder: CreateLoanReminderDto): Promise<number> => {
   return axios
-  .post(LOAN_REMINDER_API, loanReminder)
-  .then((response: AxiosResponse<number>) => response.data)
-}
+    .post(LOAN_REMINDER_API, loanReminder)
+    .then((response: AxiosResponse<number>) => response.data);
+};
 
 export const services = {
   loanReminderValidationSchemas,
