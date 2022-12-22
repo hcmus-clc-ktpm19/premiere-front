@@ -1,7 +1,8 @@
-import React, {MouseEventHandler} from 'react';
+import React, {MouseEventHandler, useState} from 'react';
 import {ProfileService} from '@/app/modules/profile/core/_requests';
 import {PaginationDto, PremierePaginationReponseDto, TransactionDto} from '@/app/models/model';
 import {Card6} from '@_metronic/partials/content/cards/Card6';
+import {useAuth} from '@/app/modules/auth';
 
 const badgeColors = {
   COMPLETED: 'success',
@@ -14,15 +15,24 @@ const tiles = {
 };
 
 export function Transactions() {
+  const {currentUser} = useAuth();
   const [data, setData] = React.useState<TransactionDto[]>([]);
-  const [pagination, setPagination] = React.useState<PaginationDto>(ProfileService.paginationInit);
+  const [paginationData, setPaginationData] = React.useState<PaginationDto>(
+    ProfileService.paginationInit
+  );
+  const [paginationArray, setPaginationArray] = useState(Array.from({length: 3}, (_, i) => i + 1));
 
   const handleOnRefreshClick: MouseEventHandler<HTMLButtonElement> = async () => {
     const res: PremierePaginationReponseDto<TransactionDto> =
-      await ProfileService.getTransactionByCustomerId(2, {});
+      await ProfileService.getTransactionByCustomerId(currentUser?.id as number, {});
     console.log(res);
     setData(res.payload);
-    setPagination(res.meta.pagination);
+    setPaginationData(res.meta.pagination);
+    setPaginationArray(Array.from({length: 3}, (_, i) => i + res.meta.pagination.currPage + 1));
+  };
+
+  const handleOnPageClick = async (e: React.MouseEvent<HTMLLIElement>) => {
+    console.log(e.currentTarget.value);
   };
 
   return (
@@ -40,8 +50,7 @@ export function Transactions() {
               data-control='select2'
               data-hide-search='true'
               className='form-select form-select-white form-select-sm'
-              defaultValue='0'
-            >
+              defaultValue='0'>
               <option value='0'></option>
               <option value='1'>Receive</option>
               <option value='2'>Send</option>
@@ -52,8 +61,7 @@ export function Transactions() {
             onClick={handleOnRefreshClick}
             className='btn btn-primary btn-sm'
             data-bs-toggle='tooltip'
-            title='refresh'
-          >
+            title='refresh'>
             Refresh
           </button>
         </div>
@@ -77,55 +85,30 @@ export function Transactions() {
       </div>
 
       <div className='d-flex flex-stack flex-wrap pt-10'>
-        <div className='fs-6 fw-bold text-gray-700'>{`Showing 1 to ${pagination.currPageTotalElements} of ${pagination.totalElements} entries`}</div>
+        <div className='fs-6 fw-bold text-gray-700'>{`Showing 1 to ${paginationData.currPageTotalElements} of ${paginationData.totalElements} entries`}</div>
 
         <ul className='pagination'>
           <li className='page-item previous'>
-            <a href='premiere-front/src/app/modules/profile#' className='page-link'>
+            <div className={`page-link ${paginationData.first || 'pe-auto'}`}>
               <i className='previous'></i>
-            </a>
+            </div>
           </li>
 
-          <li className='page-item active'>
-            <a href='premiere-front/src/app/modules/profile#' className='page-link'>
-              1
-            </a>
-          </li>
-
-          <li className='page-item'>
-            <a href='premiere-front/src/app/modules/profile#' className='page-link'>
-              2
-            </a>
-          </li>
-
-          <li className='page-item'>
-            <a href='premiere-front/src/app/modules/profile#' className='page-link'>
-              3
-            </a>
-          </li>
-
-          <li className='page-item'>
-            <a href='premiere-front/src/app/modules/profile#' className='page-link'>
-              4
-            </a>
-          </li>
-
-          <li className='page-item'>
-            <a href='premiere-front/src/app/modules/profile#' className='page-link'>
-              5
-            </a>
-          </li>
-
-          <li className='page-item'>
-            <a href='premiere-front/src/app/modules/profile#' className='page-link'>
-              6
-            </a>
-          </li>
-
+          {paginationArray.map((item) => {
+            return (
+              <li
+                key={item}
+                onClick={handleOnPageClick}
+                value={item}
+                className={`page-item ${paginationData.currPage === item - 1 && 'active'}`}>
+                <div className='page-link'>{item}</div>
+              </li>
+            );
+          })}
           <li className='page-item next'>
-            <a href='premiere-front/src/app/modules/profile#' className='page-link'>
+            <div className={`page-link ${paginationData.last && 'disabled'}`}>
               <i className='next'></i>
-            </a>
+            </div>
           </li>
         </ul>
       </div>
