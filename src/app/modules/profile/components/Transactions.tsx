@@ -9,7 +9,6 @@ import {
 import { Card6 } from '@_metronic/partials/content/cards/Card6';
 import { useAuth } from '@/app/modules/auth';
 import { useQuery } from 'react-query';
-import { TransactionTypeEnum } from "@/app/utils/enums/TransactionTypeEnum";
 
 const badgeColors = {
   COMPLETED: 'success',
@@ -82,8 +81,8 @@ export function Transactions() {
               className='form-select form-select-white form-select-sm'
               defaultValue='none'>
               <option value='none'></option>
-              <option value={TransactionTypeEnum.MONEY_TRANSFER}>Money Transfer</option>
-              <option value={TransactionTypeEnum.LOAN}>Loan</option>
+              <option value={TransactionType.MONEY_TRANSFER}>Money Transfer</option>
+              <option value={TransactionType.LOAN}>Loan</option>
             </select>
           </div>
           <button
