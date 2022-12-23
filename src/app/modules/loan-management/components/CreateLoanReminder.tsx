@@ -7,6 +7,7 @@ import {StepperComponent} from '@_metronic/assets/ts/components';
 import StepperItem from '@/app/modules/loan-management/components/shared/StepperItem';
 import {loanReminderInit} from '@/app/modules/loan-management/core/_models';
 import {services} from '@/app/modules/loan-management/core/services';
+// @ts-ignore
 import {CreateLoanReminderDto} from '@/app/models/model';
 import {NavigateFunction, useNavigate} from 'react-router-dom';
 
