@@ -40,7 +40,9 @@ const ListsWidget8: React.FC<Props> = ({className}) => {
           <div className='symbol symbol-60px symbol-2by3 me-4'>
             <div
               className='symbol-label'
-              style={{backgroundImage: `url(${toAbsoluteUrl('/media/stock/600x400/img-17.jpg')})`}}
+              style={{
+                backgroundImage: `url(${toAbsoluteUrl('/media/stock/600x400/img-17.jpg')})`,
+              }}
             ></div>
           </div>
           {/* end::Symbol */}
@@ -78,7 +80,9 @@ const ListsWidget8: React.FC<Props> = ({className}) => {
           <div className='symbol symbol-60px symbol-2by3 me-4'>
             <div
               className='symbol-label'
-              style={{backgroundImage: `url(${toAbsoluteUrl('/media/stock/600x400/img-10.jpg')})`}}
+              style={{
+                backgroundImage: `url(${toAbsoluteUrl('/media/stock/600x400/img-10.jpg')})`,
+              }}
             ></div>
           </div>
           {/* end::Symbol */}

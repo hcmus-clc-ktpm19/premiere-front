@@ -61,7 +61,9 @@ const AuthProvider: FC<WithChildren> = ({children}) => {
 };
 
 const data: UserModel = {
-  email: 'admin@test.com', firstName: 'admin', lastName: 'admin',
+  email: 'admin@test.com',
+  firstName: 'admin',
+  lastName: 'admin',
   id: 1,
   username: 'admin',
   password: 'admin',

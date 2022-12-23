@@ -74,9 +74,8 @@ const PrivateRoutes = () => {
           element={
             <ProtectedRoute
               redirectPath='/dashboard'
-              isAllowed={
-                currentUser?.role === 'PREMIERE_ADMIN' || currentUser?.role === 'EMPLOYEE'
-              }>
+              isAllowed={currentUser?.role === 'PREMIERE_ADMIN' || currentUser?.role === 'EMPLOYEE'}
+            >
               <SuspensedView>
                 <UsersPage />
               </SuspensedView>
@@ -116,7 +115,11 @@ interface ProtectedRouteProps {
   redirectPath: string;
   children: JSX.Element;
 }
-const ProtectedRoute = ({isAllowed, redirectPath = '/dashboard', children}: ProtectedRouteProps) => {
+const ProtectedRoute = ({
+  isAllowed,
+  redirectPath = '/dashboard',
+  children,
+}: ProtectedRouteProps) => {
   if (!isAllowed) {
     return <Navigate to={redirectPath} replace />;
   }

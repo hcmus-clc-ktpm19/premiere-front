@@ -1,6 +1,13 @@
 import axios from 'axios';
 import {CreditCardDto, ReceiverDto} from '@/app/modules/profile/core/_dtos';
+import {
+  PaginationDto,
+  PremierePaginationReponseDto,
+  TransactionCriteriaDto,
+  TransactionDto,
+} from '@/app/models/model';
 
+// eslint-disable-next-line @typescript-eslint/no-non-null-assertion
 const PREMIERE_API_URL: string = process.env.PREMIERE_API_URL!;
 
 const getAllReceiversByUserId = async (userId: number | undefined): Promise<ReceiverDto[]> => {
@@ -28,6 +35,28 @@ const getCreditCardByUserId = async (userId: number | undefined): Promise<Credit
   return (await axios.get<CreditCardDto>(`${PREMIERE_API_URL}/credit-card/${userId}`)).data;
 };
 
+const getTransactionByCustomerId = async (
+  customerId: number,
+  transactionCriteria: TransactionCriteriaDto
+): Promise<PremierePaginationReponseDto<TransactionDto>> => {
+  return (
+    await axios.post<PremierePaginationReponseDto<TransactionDto>>(
+      `${PREMIERE_API_URL}/transactions/users/${customerId}/get-transactions`,
+      transactionCriteria
+    )
+  ).data;
+};
+
+const paginationInits: PaginationDto = {
+  currPage: 0,
+  currPageTotalElements: 0,
+  first: false,
+  last: false,
+  sizePerPage: 0,
+  totalElements: 0,
+  totalPages: 0,
+};
+
 export const ProfileService = {
   getAllReceiversByUserId,
   getReceiverByCreditCardNumber,
@@ -35,4 +64,6 @@ export const ProfileService = {
   deleteReceiver,
   updateReceiver,
   getCreditCardByUserId,
+  getTransactionByCustomerId,
+  paginationInit: paginationInits,
 };

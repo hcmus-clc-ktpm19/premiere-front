@@ -8,7 +8,7 @@ import {
   ListsWidget5,
   TablesWidget5,
 } from '../../../../_metronic/partials/widgets';
-import {useAuth} from "@/app/modules/auth";
+import {useAuth} from '@/app/modules/auth';
 
 export function Overview() {
   const {currentUser, logout} = useAuth();
@@ -30,7 +30,9 @@ export function Overview() {
             <label className='col-lg-4 fw-bold text-muted'>Full Name</label>
 
             <div className='col-lg-8'>
-              <span className='fw-bolder fs-6 text-dark'>{currentUser?.firstName} {currentUser?.lastName}</span>
+              <span className='fw-bolder fs-6 text-dark'>
+                {currentUser?.firstName} {currentUser?.lastName}
+              </span>
             </div>
           </div>
 

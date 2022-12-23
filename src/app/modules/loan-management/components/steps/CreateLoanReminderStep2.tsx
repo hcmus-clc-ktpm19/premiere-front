@@ -4,7 +4,7 @@ import {NavLink} from 'react-router-dom';
 // @ts-ignore
 import {CreditCardDto, ErrorDto} from '@/app/models/model';
 import {services} from '@/app/modules/loan-management/core/services';
-import { useIntl } from "react-intl";
+import {useIntl} from 'react-intl';
 
 interface Props {
   formikProps: FormikProps<any>;
@@ -77,7 +77,7 @@ const CreateLoanReminderStep2: FC<Props> = (props: Props) => {
 
         {error && (
           <div className='form-text text-danger'>
-            {intl.formatMessage({ id: error.i18nPlaceHolder })}
+            {intl.formatMessage({id: error.i18nPlaceHolder})}
           </div>
         )}
       </div>
