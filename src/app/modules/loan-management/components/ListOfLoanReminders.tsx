@@ -19,6 +19,7 @@ const ListOfLoanReminders = () => {
   const [reminderToDelete, setReminderToDelete] = React.useState<LoanReminderDto>();
   const [modal, setModal] = React.useState(false);
   const [creditCard, setCreditCard] = React.useState<CreditCardDto>();
+
   useEffect(() => {
     profileService
     .getCreditCardByUserId(currentUser?.id)
@@ -51,6 +52,11 @@ const ListOfLoanReminders = () => {
     setReminderToDelete(reminder)
     openReminderDeleteModal();
   }
+
+  // const onClose = () => {
+  //   setIsShow(!isShow);
+  // }
+
   return (
       <>
         <LoanReminderContext.Provider
@@ -76,6 +82,7 @@ const ListOfLoanReminders = () => {
                   <option value='PENDING'>PENDING</option>
                   <option value='APPROVED'>APPROVED</option>
                   <option value='REJECTED'>REJECTED</option>
+                  <option value='CANCELLED'>CANCELLED</option>
                 </select>
               </div>
               <button type='button' className='btn btn-sm btn-primary' style={{marginLeft: '10px'}}

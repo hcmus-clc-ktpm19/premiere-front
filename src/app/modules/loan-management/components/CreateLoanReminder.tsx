@@ -51,12 +51,13 @@ const CreateLoanReminder: React.FC = () => {
       console.log("value to create loan reminder", values);
       const res: UserDto = await services.getUserByCardNumber(values.debtorCreditCardNumber) as UserDto;
       const loanReminderMessageDto: LoanReminderMessageDto = {
-        senderName: currentUser?.lastName + ' ' + currentUser?.firstName,
-        receiverName: res.lastName + ' ' + res.firstName,
         senderId: currentUser!.id,
+        senderName: currentUser?.lastName + ' ' + currentUser?.firstName,
         receiverId: res.id as number,
+        receiverName: res.lastName + ' ' + res.firstName,
         message: "You have a new loan reminder from " + currentUser?.lastName + ' ' + currentUser?.firstName,
       }
+      // push notification to RabbitMQ
       await services.pushMessageToMessageQueue(loanReminderMessageDto);
       navigate('/loan-management/list-of-loan-reminders');
     }

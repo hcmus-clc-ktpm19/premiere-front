@@ -62,6 +62,7 @@ const ReminderDeleteModalForm: FC<Props> = ({reminder, isReminderLoading}) => {
             message: `You have a cancelled loan reminder message from ${reminder.receiverName}`,
           }
         }
+        // push message to RabbitMQ
         await services.pushMessageToMessageQueue(loanReminderMessageDto);
       } catch (ex) {
         console.error(ex);

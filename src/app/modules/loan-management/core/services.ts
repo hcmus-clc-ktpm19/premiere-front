@@ -7,6 +7,7 @@ import {LoanReminderDto, LoanReminderMessageDto} from "@/app/modules/loan-manage
 const API_URL: string = process.env.PREMIERE_API_URL!!;
 const LOAN_REMINDER_API: string = `${API_URL}/loan-management`;
 const CREDIT_CARD_API: string = `${API_URL}/credit-card`;
+const LOAN_REMINDER_SOCKET_API: string = `${API_URL}/notification`;
 
 const loanReminderValidationSchemas = [
   Yup.object({
@@ -63,7 +64,7 @@ const cancelLoanReminder = (loanReminderDto: LoanReminderDto): Promise<String> =
 }
 
 const pushMessageToMessageQueue = (loanReminderMessageDto: LoanReminderMessageDto): Promise<void> => {
-  return axios.post(`${LOAN_REMINDER_API}/loan-reminder/message`, loanReminderMessageDto)
+  return axios.post(`${LOAN_REMINDER_SOCKET_API}/loan-reminder/message`, loanReminderMessageDto)
     .then((response: AxiosResponse<void>) => response.data);
 }
 
