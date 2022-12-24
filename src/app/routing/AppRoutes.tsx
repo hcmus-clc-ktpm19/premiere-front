@@ -5,12 +5,13 @@
  * components (e.g: `src/app/modules/Auth/pages/AuthPage`, `src/app/BasePage`).
  */
 
-import {FC} from 'react';
+import {FC, Fragment} from 'react';
 import {Routes, Route, BrowserRouter, Navigate} from 'react-router-dom';
 import {PrivateRoutes} from './PrivateRoutes';
 import {ErrorsPage} from '../modules/errors/ErrorsPage';
 import {Logout, AuthPage, useAuth} from '../modules/auth';
 import {App} from '../App';
+import Notification from "@/app/modules/notifications/Notification";
 
 /**
  * Base URL of the website.
@@ -29,7 +30,12 @@ const AppRoutes: FC = () => {
           <Route path='logout' element={<Logout />} />
           {currentUser ? (
             <>
-              <Route path='/*' element={<PrivateRoutes />} />
+              <Route path='/*' element={
+                <Fragment>
+                  <PrivateRoutes/>
+                  <Notification/>
+                </Fragment>
+              } />
               <Route index element={<Navigate to='/dashboard' />} />
             </>
           ) : (

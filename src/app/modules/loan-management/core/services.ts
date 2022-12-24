@@ -2,11 +2,12 @@
 import { CreateLoanReminderDto, CreditCardDto, ErrorDto, UserDto } from "@/app/models/model";
 import axios, {AxiosResponse} from 'axios';
 import * as Yup from 'yup';
-import {LoanReminderDto} from "@/app/modules/loan-management/core/_dtos";
+import {LoanReminderDto, LoanReminderMessageDto} from "@/app/modules/loan-management/core/_dtos";
 
 const API_URL: string = process.env.PREMIERE_API_URL!!;
 const LOAN_REMINDER_API: string = `${API_URL}/loan-management`;
 const CREDIT_CARD_API: string = `${API_URL}/credit-card`;
+const LOAN_REMINDER_SOCKET_API: string = `${API_URL}/notification`;
 
 const loanReminderValidationSchemas = [
   Yup.object({
@@ -57,10 +58,22 @@ const getLoanRemindersByUserCreditCardNumber = (cardNumber: string): Promise<Loa
     .then((response: AxiosResponse<LoanReminderDto[]>) => response.data);
 }
 
+const cancelLoanReminder = (loanReminderDto: LoanReminderDto): Promise<String> => {
+  return axios.put(`${LOAN_REMINDER_API}/loan-reminder/cancel`, loanReminderDto)
+    .then((response: AxiosResponse<String>) => response.data);
+}
+
+const pushMessageToMessageQueue = (loanReminderMessageDto: LoanReminderMessageDto): Promise<void> => {
+  return axios.post(`${LOAN_REMINDER_SOCKET_API}/loan-reminder/message`, loanReminderMessageDto)
+    .then((response: AxiosResponse<void>) => response.data);
+}
+
 export const services = {
   loanReminderValidationSchemas,
   getUserByCardNumber,
   getCreditCardByCardNumber,
   saveLoanReminder,
   getLoanRemindersByUserCreditCardNumber,
+  cancelLoanReminder,
+  pushMessageToMessageQueue,
 };

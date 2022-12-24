@@ -1,7 +1,7 @@
 import React, {FC, useContext, useState} from 'react';
 import * as Yup from 'yup';
 import {useFormik} from 'formik';
-import {isNotEmpty, toAbsoluteUrl} from '../../../../_metronic/helpers';
+import {isNotEmpty, toAbsoluteUrl} from '@_metronic/helpers';
 import {ReceiverDto} from '@/app/modules/profile/core/_dtos';
 import clsx from 'clsx';
 import {ReceiversListLoading} from '@/app/modules/profile/loading/ReceiversListLoading';
@@ -19,7 +19,9 @@ const insertReceiverSchema = Yup.object().shape({
     .min(3, 'Minimum 3 symbols')
     .max(50, 'Maximum 50 symbols')
     .required('Card number is required'),
-  nickname: Yup.string().min(3, 'Minimum 3 symbols').max(50, 'Maximum 50 symbols'),
+  nickname: Yup.string()
+    .min(3, 'Minimum 3 symbols')
+    .max(50, 'Maximum 50 symbols'),
   bankName: Yup.string()
     .min(3, 'Minimum 3 symbols')
     .max(50, 'Maximum 50 symbols')
@@ -46,7 +48,7 @@ const ReceiverEditModalForm: FC<Props> = ({receiver, isReceiverLoading}) => {
     onSubmit: async (values, {setSubmitting}) => {
       setSubmitting(true);
       values.userId = currentUser?.id || -1;
-      console.log(values);
+      console.log("value from receiver edit modal form", values);
       try {
         if (isNotEmpty(values.id)) {
           console.log('update receiver');

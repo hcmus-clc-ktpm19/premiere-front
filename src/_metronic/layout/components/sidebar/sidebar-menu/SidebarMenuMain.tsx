@@ -1,14 +1,38 @@
 /* eslint-disable react/jsx-no-target-blank */
-import React from 'react';
+import React, {useEffect} from 'react';
 import {useIntl} from 'react-intl';
 import {KTSVG} from '@_metronic/helpers';
 import {SidebarMenuItemWithSub} from './SidebarMenuItemWithSub';
 import {SidebarMenuItem} from './SidebarMenuItem';
 import {useAuth} from '@/app/modules/auth';
+import {AlertColor} from "@mui/material";
+import useNotification from "@/app/modules/notifications/useNotification";
+import {useSubscription} from "react-stomp-hooks";
 
 const SidebarMenuMain = () => {
   const intl = useIntl();
   const {currentUser} = useAuth();
+
+  // listen and handle notification, we need to put it here because we need to listen to the topic in the whole application
+  const type: AlertColor = 'info';
+  const [lastMessage, setLastMessage] = React.useState<string>("No message received yet");
+  const {setNotification} = useNotification();
+  useSubscription("/topic/messages", (message) => setLastMessage(message.body));
+
+  const onClose = () => {
+    setLastMessage("No message received yet"); // reset the message to receive the next one
+  }
+  useEffect(() => {
+    console.log("last message", lastMessage);
+    setLastMessage(lastMessage);
+    if (lastMessage !== "No message received yet") {
+      const messageToParse = JSON.parse(lastMessage);
+      // check if we have a message and if it's for the current user
+      if (currentUser?.id === messageToParse.receiverId) {
+        setNotification(true, messageToParse.message, type, onClose);
+      }
+    }
+  }, [lastMessage]);
 
   return (
     <>
