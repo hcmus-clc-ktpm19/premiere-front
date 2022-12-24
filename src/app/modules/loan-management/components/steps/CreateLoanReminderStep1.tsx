@@ -1,9 +1,10 @@
 import React, {FC, useEffect, useState} from 'react';
 import {ErrorMessage, Field, FormikProps} from 'formik';
 import {services} from '@/app/modules/loan-management/core/services';
+// @ts-ignore
 import {ErrorDto, UserDto} from '@/app/models/model';
 import {NavLink} from 'react-router-dom';
-import { useIntl } from "react-intl";
+import {useIntl} from 'react-intl';
 
 interface Props {
   formikProps: FormikProps<any>;
@@ -28,7 +29,7 @@ const CreateLoanReminderStep1: FC<Props> = (props: Props) => {
 
     const intervalId = setInterval(async () => {
       try {
-        const res: UserDto = await services.getUserByCardNumber(accountNumber) as UserDto;
+        const res: UserDto = (await services.getUserByCardNumber(accountNumber)) as UserDto;
         formikProps.setFieldValue('debtorCreditCardNumber', accountNumber);
         formikProps.setFieldValue('debtorName', `${res.firstName} ${res.lastName}`);
         formikProps.setFieldValue('debtorPhone', res.phone);
@@ -37,7 +38,7 @@ const CreateLoanReminderStep1: FC<Props> = (props: Props) => {
         formikProps.setFieldValue('debtorCreditCardNumber', accountNumber);
         formikProps.setFieldValue('debtorName', '');
         formikProps.setFieldValue('debtorPhone', '');
-        formikProps.setErrors(e)
+        formikProps.setErrors(e);
 
         setError(e);
       } finally {
@@ -77,7 +78,7 @@ const CreateLoanReminderStep1: FC<Props> = (props: Props) => {
 
         {error && (
           <div className='form-text text-danger'>
-            {intl.formatMessage({ id: error.i18nPlaceHolder })}
+            {intl.formatMessage({id: error.i18nPlaceHolder})}
           </div>
         )}
       </div>
@@ -115,7 +116,8 @@ const CreateLoanReminderStep1: FC<Props> = (props: Props) => {
           as='textarea'
           name='loanRemark'
           className='form-control form-control-lg form-control-solid'
-          rows={3}></Field>
+          rows={3}
+        ></Field>
       </div>
 
       <div className='fv-row mb-0'>

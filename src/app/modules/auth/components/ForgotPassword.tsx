@@ -10,7 +10,7 @@ const initialValues = {
 };
 
 const forgotPasswordSchema = Yup.object().shape({
-  phone: Yup.string()
+  email: Yup.string()
     .email('Wrong email format')
     .min(3, 'Minimum 3 symbols')
     .max(50, 'Maximum 50 symbols')
@@ -25,6 +25,7 @@ export function ForgotPassword() {
     initialValues,
     validationSchema: forgotPasswordSchema,
     onSubmit: (values, {setStatus, setSubmitting}) => {
+      console.log('click')
       setLoading(true);
       setHasErrors(undefined);
       setTimeout(() => {
@@ -36,6 +37,10 @@ export function ForgotPassword() {
             navigate({
               pathname: '/auth/verify-otp',
               search: `?email=${values.email}`,
+            }, {
+              state: {
+                isOTPRequested: true,
+              }
             });
           })
           .catch(() => {
@@ -61,9 +66,7 @@ export function ForgotPassword() {
         {/* end::Title */}
 
         {/* begin::Link */}
-        <div className='text-gray-500 fw-semibold fs-6'>
-          Enter your email to get OTP.
-        </div>
+        <div className='text-gray-500 fw-semibold fs-6'>Enter your email to get OTP.</div>
         {/* end::Link */}
       </div>
 

@@ -1,3 +1,4 @@
+// @ts-ignore
 import {CreateLoanReminderDto} from '@/app/models/model';
 
 const loanReminderInit: CreateLoanReminderDto = {
@@ -9,5 +10,6 @@ const loanReminderInit: CreateLoanReminderDto = {
   loanRemark: '',
   debtorPhone: '',
 };
+
 
 export {loanReminderInit};

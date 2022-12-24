@@ -40,7 +40,9 @@ const ListsWidget7: React.FC<Props> = ({className}) => {
           <div className='symbol symbol-60px symbol-2by3 me-4'>
             <div
               className='symbol-label'
-              style={{backgroundImage: `url(${toAbsoluteUrl('/media/stock/600x400/img-20.jpg')})`}}
+              style={{
+                backgroundImage: `url(${toAbsoluteUrl('/media/stock/600x400/img-20.jpg')})`,
+              }}
             ></div>
           </div>
           {/* end::Symbol */}
@@ -63,7 +65,9 @@ const ListsWidget7: React.FC<Props> = ({className}) => {
           <div className='symbol symbol-60px symbol-2by3 me-4'>
             <div
               className='symbol-label'
-              style={{backgroundImage: `url(${toAbsoluteUrl('/media/stock/600x400/img-19.jpg')})`}}
+              style={{
+                backgroundImage: `url(${toAbsoluteUrl('/media/stock/600x400/img-19.jpg')})`,
+              }}
             ></div>
           </div>
           {/* end::Symbol */}
@@ -86,7 +90,9 @@ const ListsWidget7: React.FC<Props> = ({className}) => {
           <div className='symbol symbol-60px symbol-2by3 me-4'>
             <div
               className='symbol-label'
-              style={{backgroundImage: `url(${toAbsoluteUrl('/media/stock/600x400/img-25.jpg')})`}}
+              style={{
+                backgroundImage: `url(${toAbsoluteUrl('/media/stock/600x400/img-25.jpg')})`,
+              }}
             ></div>
           </div>
           {/* end::Symbol */}

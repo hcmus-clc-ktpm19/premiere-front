@@ -8,7 +8,7 @@ import {
   ListsWidget5,
   TablesWidget5,
 } from '../../../../_metronic/partials/widgets';
-import {useAuth} from "@/app/modules/auth";
+import {useAuth} from '@/app/modules/auth';
 
 export function Overview() {
   const {currentUser, logout} = useAuth();
@@ -30,7 +30,9 @@ export function Overview() {
             <label className='col-lg-4 fw-bold text-muted'>Full Name</label>
 
             <div className='col-lg-8'>
-              <span className='fw-bolder fs-6 text-dark'>{currentUser?.firstName} {currentUser?.lastName}</span>
+              <span className='fw-bolder fs-6 text-dark'>
+                {currentUser?.firstName} {currentUser?.lastName}
+              </span>
             </div>
           </div>
 
@@ -53,7 +55,7 @@ export function Overview() {
             </label>
 
             <div className='col-lg-8 d-flex align-items-center'>
-              <span className='fw-bolder fs-6 me-2'>044 3276 454 935</span>
+              <span className='fw-bolder fs-6 me-2'>{currentUser?.phone}</span>
 
               <span className='badge badge-success'>Verified</span>
             </div>
@@ -80,7 +82,7 @@ export function Overview() {
             </label>
 
             <div className='col-lg-8'>
-              <span className='fw-bolder fs-6 text-dark'>Germany</span>
+              <span className='fw-bolder fs-6 text-dark'>Viet Nam</span>
             </div>
           </div>
 
