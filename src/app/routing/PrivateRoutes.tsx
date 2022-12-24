@@ -9,7 +9,7 @@ import {WithChildren} from '@_metronic/helpers';
 import BuilderPageWrapper from '../pages/layout-builder/BuilderPageWrapper';
 import LoanManagementPage from '@/app/modules/loan-management/LoanManagementPage';
 import {useAuth} from '@/app/modules/auth';
-import {PremiereRole} from '@_metronic/layout/core/PremiereRole';
+import {PremiereRole} from '@/app/models/model';
 
 const PrivateRoutes = () => {
   const ProfilePage = lazy(() => import('../modules/profile/ProfilePage'));
