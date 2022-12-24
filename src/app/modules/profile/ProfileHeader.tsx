@@ -51,7 +51,8 @@ const ProfileHeader: React.FC = () => {
                 <div className='d-flex flex-wrap fw-bold fs-6 mb-4 pe-2'>
                   <a
                     href='#'
-                    className='d-flex align-items-center text-gray-400 text-hover-primary me-5 mb-2'>
+                    className='d-flex align-items-center text-gray-400 text-hover-primary me-5 mb-2'
+                  >
                     <KTSVG
                       path='/media/icons/duotune/communication/com006.svg'
                       className='svg-icon-4 me-1'
@@ -60,7 +61,8 @@ const ProfileHeader: React.FC = () => {
                   </a>
                   <a
                     href='#'
-                    className='d-flex align-items-center text-gray-400 text-hover-primary me-5 mb-2'>
+                    className='d-flex align-items-center text-gray-400 text-hover-primary me-5 mb-2'
+                  >
                     <KTSVG
                       path='/media/icons/duotune/general/gen018.svg'
                       className='svg-icon-4 me-1'
@@ -69,7 +71,8 @@ const ProfileHeader: React.FC = () => {
                   </a>
                   <a
                     href='#'
-                    className='d-flex align-items-center text-gray-400 text-hover-primary mb-2'>
+                    className='d-flex align-items-center text-gray-400 text-hover-primary mb-2'
+                  >
                     <KTSVG
                       path='/media/icons/duotune/communication/com011.svg'
                       className='svg-icon-4 me-1'
@@ -96,7 +99,8 @@ const ProfileHeader: React.FC = () => {
                   href='#'
                   className='btn btn-sm btn-primary me-3'
                   data-bs-toggle='modal'
-                  data-bs-target='#kt_modal_offer_a_deal'>
+                  data-bs-target='#kt_modal_offer_a_deal'
+                >
                   Hire Me
                 </a>
                 <div className='me-0'>
@@ -104,7 +108,8 @@ const ProfileHeader: React.FC = () => {
                     className='btn btn-sm btn-icon btn-bg-light btn-active-color-primary'
                     data-kt-menu-trigger='click'
                     data-kt-menu-placement='bottom-end'
-                    data-kt-menu-flip='top-end'>
+                    data-kt-menu-flip='top-end'
+                  >
                     <i className='bi bi-three-dots fs-3'></i>
                   </button>
                   <Dropdown1 />
@@ -148,7 +153,8 @@ const ProfileHeader: React.FC = () => {
                   <div
                     className='bg-success rounded h-5px'
                     role='progressbar'
-                    style={{width: '50%'}}></div>
+                    style={{width: '50%'}}
+                  ></div>
                 </div>
               </div>
             </div>
@@ -163,7 +169,8 @@ const ProfileHeader: React.FC = () => {
                   `nav-link text-active-primary me-6 ` +
                   (location.pathname === '/crafted/pages/profile/spend_account' && 'active')
                 }
-                to='/crafted/pages/profile/spend_account'>
+                to='/crafted/pages/profile/spend_account'
+              >
                 Spend Account
               </Link>
             </li>
@@ -173,7 +180,8 @@ const ProfileHeader: React.FC = () => {
                   `nav-link text-active-primary me-6 ` +
                   (location.pathname === '/crafted/pages/profile/projects' && 'active')
                 }
-                to='/crafted/pages/profile/projects'>
+                to='/crafted/pages/profile/projects'
+              >
                 Projects
               </Link>
             </li>
@@ -183,8 +191,20 @@ const ProfileHeader: React.FC = () => {
                   `nav-link text-active-primary me-6 ` +
                   (location.pathname === '/crafted/pages/profile/campaigns' && 'active')
                 }
-                to='/crafted/pages/profile/campaigns'>
+                to='/crafted/pages/profile/campaigns'
+              >
                 Campaigns
+              </Link>
+            </li>
+            <li className='nav-item'>
+              <Link
+                className={
+                  `nav-link text-active-primary me-6 ` +
+                  (location.pathname === '/crafted/pages/profile/transactions' && 'active')
+                }
+                to='/crafted/pages/profile/transactions'
+              >
+                Transactions
               </Link>
             </li>
             <li className='nav-item'>
@@ -193,7 +213,8 @@ const ProfileHeader: React.FC = () => {
                   `nav-link text-active-primary me-6 ` +
                   (location.pathname === '/crafted/pages/profile/documents' && 'active')
                 }
-                to='/crafted/pages/profile/documents'>
+                to='/crafted/pages/profile/documents'
+              >
                 Documents
               </Link>
             </li>
@@ -203,7 +224,8 @@ const ProfileHeader: React.FC = () => {
                   `nav-link text-active-primary me-6 ` +
                   (location.pathname === '/crafted/pages/profile/receivers' && 'active')
                 }
-                to='/crafted/pages/profile/receivers'>
+                to='/crafted/pages/profile/receivers'
+              >
                 Receivers
               </Link>
             </li>
