@@ -11,5 +11,8 @@ const loanReminderInit: CreateLoanReminderDto = {
   debtorPhone: '',
 };
 
+const cancelReminderInit: object = {
+  cancelReason: 'I no longer need this loan reminder',
+}
 
-export {loanReminderInit};
+export {loanReminderInit, cancelReminderInit};
