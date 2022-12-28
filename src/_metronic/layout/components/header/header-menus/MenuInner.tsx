@@ -4,6 +4,7 @@ import {MenuInnerWithSub} from './MenuInnerWithSub';
 import {MegaMenu} from './MegaMenu';
 import {useAuth} from '@/app/modules/auth';
 import {PremiereRole} from '@/app/models/model';
+import React from "react";
 
 export function MenuInner() {
   const intl = useIntl();
@@ -39,11 +40,24 @@ export function MenuInner() {
             />
             <MenuItem to='/crafted/pages/profile/projects' title='Projects' hasBullet={true} />
             <MenuItem to='/crafted/pages/profile/campaigns' title='Campaigns' hasBullet={true} />
-            <MenuItem
-              to='/crafted/pages/profile/transactions'
-              title='Transactions'
-              hasBullet={true}
-            />
+            <MenuInnerWithSub
+                to='/crafted/pages/profile/transactions'
+                title='Transactions'
+                hasBullet={true}
+                hasArrow={true}
+                menuPlacement='right-start'
+                menuTrigger={`{default:'click', lg: 'hover'}`}>
+              <MenuItem
+                  to='/crafted/pages/profile/transactions'
+                  title='Transactions History'
+                  hasBullet={true}
+              />
+              <MenuItem
+                  to='/crafted/pages/profile/create-transaction'
+                  title='Create Transaction'
+                  hasBullet={true}
+              />
+            </MenuInnerWithSub>
             <MenuItem to='/crafted/pages/profile/documents' title='Documents' hasBullet={true} />
             <MenuItem to='/crafted/pages/profile/receivers' title='Receivers' hasBullet={true} />
           </MenuInnerWithSub>

@@ -89,11 +89,18 @@ const SidebarMenuMain = () => {
             title='Campaigns'
             hasBullet={true}
           />
-          <SidebarMenuItem
-            to='/crafted/pages/profile/transactions'
-            title='Transactions'
-            hasBullet={true}
-          />
+          <SidebarMenuItemWithSub to='/crafted/pages/profile/transactions' title='Transactions' hasBullet={true}>
+            <SidebarMenuItem
+              to='/crafted/pages/profile/transactions'
+              title='Transactions History'
+              hasBullet={true}
+            />
+            <SidebarMenuItem
+                to='/crafted/pages/profile/create-transaction'
+                title='Create Transaction'
+                hasBullet={true}
+            />
+          </SidebarMenuItemWithSub>
           <SidebarMenuItem
             to='/crafted/pages/profile/documents'
             title='Documents'
