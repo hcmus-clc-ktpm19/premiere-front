@@ -4,11 +4,23 @@ import {
   PaginationDto,
   PremierePaginationReponseDto,
   TransactionCriteriaDto,
-  TransactionDto,
+  TransactionDto, TransactionRequestDto, TransferMoneyRequestDto,
 } from '@/app/models/model';
+import * as Yup from "yup";
 
 // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
 const PREMIERE_API_URL: string = process.env.PREMIERE_API_URL!;
+
+const transactionValidationSchemas = [
+  Yup.object({
+    isCardSelected: Yup.boolean().required(),
+  }),
+  Yup.object({
+    debtorCreditCardNumber: Yup.string().required().label("Debtor's credit card number"),
+    debtorName: Yup.string().required().label("Debtor's Name"),
+    transferAmount: Yup.number().required().min(100_000).label('Transfer amount'),
+  }),
+];
 
 const getAllReceiversByUserId = async (userId: number | undefined): Promise<ReceiverDto[]> => {
   return (await axios.get<ReceiverDto[]>(`${PREMIERE_API_URL}/receivers?userId=${userId}`)).data;
@@ -57,6 +69,14 @@ const paginationInits: PaginationDto = {
   totalPages: 0,
 };
 
+const validateTransferMoney = async (transactionRequestDto: TransactionRequestDto): Promise<any> => {
+  return (await axios.post(`${PREMIERE_API_URL}/transactions/money-transfer/validate`, transactionRequestDto)).data;
+}
+
+const transferMoney = async (transferMoneyRequestDto: TransferMoneyRequestDto): Promise<any> => {
+  return (await axios.post(`${PREMIERE_API_URL}/transactions/money-transfer`, transferMoneyRequestDto)).data;
+}
+
 export const ProfileService = {
   getAllReceiversByUserId,
   getReceiverByCreditCardNumber,
@@ -66,4 +86,7 @@ export const ProfileService = {
   getCreditCardByUserId,
   getTransactionByCustomerId,
   paginationInit: paginationInits,
+  validateTransferMoney,
+  transferMoney,
+  transactionValidationSchemas
 };

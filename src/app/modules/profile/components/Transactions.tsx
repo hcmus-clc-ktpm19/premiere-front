@@ -112,6 +112,7 @@ export function Transactions() {
 
       <div className='row g-6 g-xl-9'>
         {res?.payload.map<JSX.Element>((item: TransactionDto) => {
+          console.log({ item });
           return (
             <div key={item.id} className='col-md-6 col-xl-4'>
               <Card6
@@ -120,7 +121,10 @@ export function Transactions() {
                 transactionType={tiles[item.type]}
                 description={item.transactionRemark}
                 date={item.createdAt.toString()}
-                budget={item.totalBalance.toString()}
+                budget={item.amount.toLocaleString('it-IT', {
+                  style: 'currency',
+                  currency: 'VND',
+                })}
               />
             </div>
           );
