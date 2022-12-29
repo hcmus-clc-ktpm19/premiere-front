@@ -37,6 +37,8 @@ const CreateTransactionStep1: FC<Props> = (props: Props) => {
     profileService.getCreditCardByUserId(currentUser?.id)
     .then((data: CreditCardDto) => {
       setCreditCard(data);
+      formikProps.setFieldValue('senderCardNumber', data.cardNumber);
+      formikProps.setFieldValue('senderBankName', 'Premierebank');
     })
     .catch((error) => {
       console.log(error);
@@ -75,7 +77,7 @@ const CreateTransactionStep1: FC<Props> = (props: Props) => {
                            name={'isCardSelected'}
                     />
                     <div className='text-danger mt-2'>
-                      <ErrorMessage name='creditorCreditCardNumber' />
+                      <ErrorMessage name='isCardSelected' />
                     </div>
 
                     {error && (

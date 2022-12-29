@@ -18,7 +18,7 @@ const App = () => {
                 url={PREMIERE_SOCKET_ENDPOINT}
                 onConnect={() => console.log("Connected to socket")}
                 onDisconnect={() => console.log("Disconnected from socket")}
-                debug={(stomp) => console.log(stomp)}
+                // debug={(stomp) => console.log(stomp)}
                 onWebSocketError={(e) => console.log("error: ", e)}
             >
               <NotificationContextProvider>

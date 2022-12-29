@@ -1,16 +1,16 @@
 import React, {useEffect, useRef, useState} from 'react';
 import {KTSVG} from '@_metronic/helpers';
-import {Form, Formik, FormikProps} from 'formik';
+import {ErrorMessage, Field, Form, Formik, FormikProps} from 'formik';
 import {StepperComponent} from '@_metronic/assets/ts/components';
 import StepperItem from '@/app/modules/loan-management/components/shared/StepperItem';
-import {loanReminderInit} from '@/app/modules/loan-management/core/_models';
-import {services} from '@/app/modules/loan-management/core/services';
 // @ts-ignore
-import {CreateLoanReminderDto} from '@/app/models/model';
+import {
+  CreateLoanReminderDto,
+  TransactionRequestDto,
+  TransactionType,
+  TransferMoneyRequestDto
+} from '@/app/models/model';
 import {NavigateFunction, useNavigate} from 'react-router-dom';
-import {LoanReminderMessageDto} from "@/app/modules/loan-management/core/_dtos";
-import {useAuth} from "@/app/modules/auth";
-import {UserDto} from "@/app/modules/apps/user-management/users-list/core/dtos";
 import {
   CreateTransactionStep1
 } from "@/app/modules/profile/components/steps/CreateTransactionStep1";
@@ -26,9 +26,10 @@ const CreateTransaction: React.FC = () => {
   const stepper = useRef<StepperComponent | null>(null);
   const [currentSchema, setCurrentSchema] = useState(profileService.transactionValidationSchemas[0]);
   const [initValues] = useState<any>(transactionInit);
-  const {currentUser} = useAuth();
-
-  console.log("step", stepper, currentSchema);
+  const [checking, setChecking] = useState(false);
+  const [success, setSuccess] = useState(false);
+  const [checkingTransactionId, setCheckingTransactionId] = useState<number>(-1);
+  const [otp, setOtp] = useState<string>('');
 
   const loadStepper = () => {
     stepper.current = StepperComponent.createInsance(stepperRef.current as HTMLDivElement);
@@ -44,7 +45,7 @@ const CreateTransaction: React.FC = () => {
     setCurrentSchema(profileService.transactionValidationSchemas[stepper.current.currentStepIndex - 1]);
   };
 
-  const submitStep = async (values: CreateLoanReminderDto) => {
+  const submitStep = async (values: TransactionRequestDto) => {
     console.log("click submit", values);
     if (!stepper.current) {
       return;
@@ -55,20 +56,47 @@ const CreateTransaction: React.FC = () => {
     if (stepper.current.currentStepIndex !== stepper.current?.totalStepsNumber - 1) {
       stepper.current.goNext();
     } else {
-      await services.saveLoanReminder(values);
-      // after created loan reminder, send a notification to the receiver and redirect to the list of loan reminders
-      console.log("value to create loan reminder", values);
-      const res: UserDto = await services.getUserByCardNumber(values.debtorCreditCardNumber) as UserDto;
-      const loanReminderMessageDto: LoanReminderMessageDto = {
-        senderId: currentUser!.id,
-        senderName: currentUser?.lastName + ' ' + currentUser?.firstName,
-        receiverId: res.id as number,
-        receiverName: res.lastName + ' ' + res.firstName,
-        message: "You have a new loan reminder from " + currentUser?.lastName + ' ' + currentUser?.firstName,
+      if (!checking) {
+        console.log("verify transaction");
+        console.log("step", stepper, currentSchema);
+        const transactionRequestDto: TransactionRequestDto = {
+          senderCardNumber: values.senderCardNumber,
+          receiverCardNumber: values.receiverCardNumber,
+          amount: values.amount,
+          type: TransactionType.MONEY_TRANSFER,
+          isInternal: values.senderBankName === values.receiverBankName,
+          isSelfPaymentFee: values.isSelfPaymentFee || false,
+          remark: values.remark,
+          senderBankName: values.senderBankName,
+          receiverBankName: values.receiverBankName,
+          otp: ''
+        }
+        console.log("transactionRequestDto", transactionRequestDto);
+        try {
+          const res = await profileService.validateTransferMoney(transactionRequestDto);
+          console.log("res", res);
+          setCheckingTransactionId(res.checkingTransactionId);
+          setChecking(!checking);
+        } catch (e) {
+          console.log("error", e);
+        }
+      } else {
+        console.log("actual transaction");
+        const transferMoneyRequestDto: TransferMoneyRequestDto = {
+          checkingTransactionId,
+          otp
+        }
+        try {
+          await profileService.transferMoney(transferMoneyRequestDto);
+          setSuccess(true);
+          // wait 3s then navigate to dashboard
+          setTimeout(() => {
+            navigate('/crafted/pages/profile/transactions');
+          }, 3000);
+        } catch (e) {
+          console.log("error", e);
+        }
       }
-      // push notification to RabbitMQ
-      await services.pushMessageToMessageQueue(loanReminderMessageDto);
-      navigate('/loan-management/list-of-loan-reminders');
     }
   };
 
@@ -79,6 +107,11 @@ const CreateTransaction: React.FC = () => {
 
     loadStepper();
   }, [stepperRef]);
+
+  const onOTPChange = (otp: string) => {
+    console.log("otp", otp);
+    setOtp(otp);
+  }
 
   return (
       <div
@@ -136,6 +169,26 @@ const CreateTransaction: React.FC = () => {
                   <div data-kt-stepper-element='content'>
                     <CreateTransactionStep2 formikProps={props} />
                   </div>
+
+                  {
+                    checking && (
+                          <div className='fv-row'>
+                            <label className='form-label required'>OTP</label>
+
+                            <Field name='otp'
+                                   className='form-control form-control-lg form-control-solid'
+                                   onChange={(e: any) => onOTPChange(e.target.value)}
+                            />
+                            {
+                                success && (
+                                    <div className='mb-lg-15 alert alert-success mt-2'>
+                                      <div className='alert-text font-weight-bold'>Verify OTP Successfully!!!</div>
+                                    </div>
+                                )
+                            }
+                          </div>
+                      )
+                  }
 
                   <div className='d-flex flex-stack pt-10'>
                     <div className='mr-2'>

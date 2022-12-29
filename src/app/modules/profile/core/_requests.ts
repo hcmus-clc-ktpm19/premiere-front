@@ -16,9 +16,16 @@ const transactionValidationSchemas = [
     isCardSelected: Yup.boolean().required(),
   }),
   Yup.object({
-    debtorCreditCardNumber: Yup.string().required().label("Debtor's credit card number"),
-    debtorName: Yup.string().required().label("Debtor's Name"),
-    transferAmount: Yup.number().required().min(100_000).label('Transfer amount'),
+    senderCardNumber: Yup.string(),
+    type: Yup.string(),
+    isInternal: Yup.boolean(),
+    senderBankName: Yup.string(),
+    receiverBankName: Yup.string(),
+    receiverCardNumber: Yup.string().required().label("Recipient's credit card number"),
+    receiverName: Yup.string().required().label("Recipient's Name"),
+    amount: Yup.number().required().min(100_000).label('Transfer amount'),
+    remark: Yup.string().required().label('Remark'),
+    isSelfPaymentFee: Yup.boolean(),
   }),
 ];
 
