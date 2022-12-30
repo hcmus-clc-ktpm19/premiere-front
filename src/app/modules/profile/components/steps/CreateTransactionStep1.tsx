@@ -19,8 +19,6 @@ const CreateTransactionStep1: FC<Props> = (props: Props) => {
   const {formikProps} = props;
   const {currentUser} = useAuth();
   const {mode} = useThemeMode();
-  console.log('mode', mode);
-  console.log(currentUser);
   const [creditCard, setCreditCard] = useState<CreditCardDto>();
   const intl = useIntl();
   const [error, setError] = useState<ErrorDto | null>(null);

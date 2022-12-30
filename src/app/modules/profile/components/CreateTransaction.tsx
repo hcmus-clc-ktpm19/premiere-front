@@ -19,6 +19,7 @@ import {
 } from "@/app/modules/profile/components/steps/CreateTransactionStep2";
 import {ProfileService as profileService} from "@/app/modules/profile/core/_requests";
 import {transactionInit} from "@/app/modules/profile/core/_models";
+import {bool} from "yup";
 
 const CreateTransaction: React.FC = () => {
   const navigate: NavigateFunction = useNavigate();
@@ -26,10 +27,11 @@ const CreateTransaction: React.FC = () => {
   const stepper = useRef<StepperComponent | null>(null);
   const [currentSchema, setCurrentSchema] = useState(profileService.transactionValidationSchemas[0]);
   const [initValues] = useState<any>(transactionInit);
-  const [checking, setChecking] = useState(false);
-  const [success, setSuccess] = useState(false);
+  const [checking, setChecking] = useState<boolean>(false);
   const [checkingTransactionId, setCheckingTransactionId] = useState<number>(-1);
   const [otp, setOtp] = useState<string>('');
+  const [success, setSuccess] = useState<boolean>(false);
+  const [error, setError] = useState<boolean>(false);
 
   const loadStepper = () => {
     stepper.current = StepperComponent.createInsance(stepperRef.current as HTMLDivElement);
@@ -83,18 +85,22 @@ const CreateTransaction: React.FC = () => {
       } else {
         console.log("actual transaction");
         const transferMoneyRequestDto: TransferMoneyRequestDto = {
-          checkingTransactionId,
+          requestID: checkingTransactionId,
           otp
         }
+        console.log("transferMoneyRequestDto", transferMoneyRequestDto);
         try {
           await profileService.transferMoney(transferMoneyRequestDto);
           setSuccess(true);
+          setError(false);
           // wait 3s then navigate to dashboard
           setTimeout(() => {
             navigate('/crafted/pages/profile/transactions');
           }, 3000);
         } catch (e) {
           console.log("error", e);
+          setError(true);
+          setSuccess(false);
         }
       }
     }
@@ -184,6 +190,12 @@ const CreateTransaction: React.FC = () => {
                                     <div className='mb-lg-15 alert alert-success mt-2'>
                                       <div className='alert-text font-weight-bold'>Verify OTP Successfully!!!</div>
                                     </div>
+                                ) || error && (
+                                    (
+                                        <div className='mb-lg-15 alert alert-danger mt-2'>
+                                          <div className='alert-text font-weight-bold'>Verify OTP Failed!!!</div>
+                                        </div>
+                                    )
                                 )
                             }
                           </div>

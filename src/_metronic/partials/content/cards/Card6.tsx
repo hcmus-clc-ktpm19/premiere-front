@@ -38,14 +38,20 @@ const Card6: FC<Props> = ({badgeColor, status, transactionType, description, dat
         <p className='text-gray-400 fw-bold fs-5 mt-1 mb-7'>{description}</p>
 
         <div className='d-flex flex-wrap justify-content-between mb-5'>
-          <div className='border border-gray-300 border-dashed rounded min-w-125px py-3 px-4 me-7 mb-3'>
+          <div className='border border-gray-300 border-dashed rounded min-w-125px py-3 px-4 me-7 mb-3' style={{flex: '1'}}>
             <div className='fs-6 text-gray-800 fw-bolder'>Created At</div>
-            <div className='fw-bold text-gray-400'>{moment(date).utc().format('lll')}</div>
+            <div className='fw-bold text-gray-400'>
+              {moment(date).local().format('ll')}
+              <br/>
+              {moment(date).local().format('h:mm:ss A')}
+            </div>
           </div>
 
-          <div className='border border-gray-300 border-dashed rounded min-w-125px py-3 px-4 mb-3'>
+          <div className='border border-gray-300 border-dashed rounded min-w-125px py-3 px-4 mb-3' style={{flex: '1'}}>
             <div className='fs-6 text-gray-800 fw-bolder'>Total Amount</div>
-            <div className='fw-bold text-gray-400'>{budget}</div>
+            <div className='fw-bold text-gray-400'>
+              {budget}
+            </div>
           </div>
         </div>
       </div>

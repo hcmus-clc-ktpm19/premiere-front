@@ -6,6 +6,7 @@ import {ErrorDto, UserDto} from '@/app/models/model';
 import {NavLink} from 'react-router-dom';
 import {useIntl} from 'react-intl';
 import {useAuth} from "@/app/modules/auth";
+import {KTSVG} from "@_metronic/helpers";
 
 interface Props {
   formikProps: FormikProps<any>;
@@ -83,6 +84,13 @@ const CreateTransactionStep2: FC<Props> = (props: Props) => {
                 {intl.formatMessage({id: error.i18nPlaceHolder})}
               </div>
           )}
+          <button
+              className='btn btn-danger btn-sm'
+              data-bs-toggle='tooltip'
+              title='create new transaction'>
+            <KTSVG path='/media/icons/duotune/arrows/arr075.svg' className='svg-icon-2'/>
+            Choose from contacts
+          </button>
         </div>
 
         <div className='fv-row mb-10'>
@@ -130,7 +138,6 @@ const CreateTransactionStep2: FC<Props> = (props: Props) => {
               name='remark'
               className='form-control form-control-lg form-control-solid'
               rows={3}
-              // value={`${currentUser!.lastName} ${currentUser!.firstName} sent you ${formikProps.values.transferAmount} VND`}
           ></Field>
         </div>
 
