@@ -112,7 +112,6 @@ export function Transactions() {
 
       <div className='row g-6 g-xl-9'>
         {res?.payload.map<JSX.Element>((item: TransactionDto) => {
-          console.log({ item });
           return (
             <div key={item.id} className='col-md-6 col-xl-4'>
               <Card6

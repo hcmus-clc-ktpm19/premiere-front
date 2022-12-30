@@ -1,12 +1,12 @@
 import React, {FC, useEffect, useState} from 'react';
 import {ErrorMessage, Field, FormikProps} from 'formik';
 import {services} from '@/app/modules/loan-management/core/services';
-// @ts-ignore
 import {ErrorDto, UserDto} from '@/app/models/model';
 import {NavLink} from 'react-router-dom';
 import {useIntl} from 'react-intl';
-import {useAuth} from "@/app/modules/auth";
 import {KTSVG} from "@_metronic/helpers";
+import ReceiverListModal from "@/app/modules/profile/receiver-list-modal/ReceiverListModal";
+import {ReceiverDto} from "@/app/modules/profile/core/_dtos";
 
 interface Props {
   formikProps: FormikProps<any>;
@@ -14,15 +14,27 @@ interface Props {
 
 const CreateTransactionStep2: FC<Props> = (props: Props) => {
   const {formikProps} = props;
-  const {currentUser} = useAuth();
+
   const [accountNumber, setAccountNumber] = useState<string>('');
   const [error, setError] = useState<ErrorDto | null>(null);
+  const [isShowModal, setIsShowModal] = useState<boolean>(false);
+  const [receiver, setReceiver] = useState<ReceiverDto | null>(null);
   const intl = useIntl();
 
   const handleOnChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setAccountNumber(e.target.value);
+    setReceiver(null);
     formikProps.handleChange(e);
   };
+
+  const handleOnConfirmBtn = (selectedReceiver: ReceiverDto | null) => {
+    console.log("selectedReceiver", selectedReceiver);
+    setAccountNumber(selectedReceiver!.cardNumber);
+    setReceiver(selectedReceiver);
+    setIsShowModal(false);
+  }
+
+
 
   useEffect(() => {
     setError(null);
@@ -31,25 +43,33 @@ const CreateTransactionStep2: FC<Props> = (props: Props) => {
     }
 
     const intervalId = setInterval(async () => {
-      try {
-        const res: UserDto = (await services.getUserByCardNumber(accountNumber)) as UserDto;
-        formikProps.setFieldValue('receiverCardNumber', accountNumber);
-        formikProps.setFieldValue('receiverName', `${res.firstName} ${res.lastName}`);
-        formikProps.setFieldValue('receiverBankName', 'Premierebank');
+      if (receiver) {
+        formikProps.setFieldValue('receiverCardNumber', receiver.cardNumber);
+        formikProps.setFieldValue('receiverName', receiver.fullName);
+        formikProps.setFieldValue('receiverBankName', receiver.bankName);
         formikProps.setErrors({});
-      } catch (e: ErrorDto | any) {
-        formikProps.setFieldValue('receiverCardNumber', accountNumber);
-        formikProps.setFieldValue('receiverName', '');
-        formikProps.setFieldValue('receiverBankName', 'Premierebank');
-        formikProps.setErrors(e);
+      } else {
+        try {
+          const res: UserDto = (await services.getUserByCardNumber(accountNumber)) as UserDto;
+          formikProps.setFieldValue('receiverCardNumber', accountNumber);
+          formikProps.setFieldValue('receiverName', `${res.firstName} ${res.lastName}`);
+          formikProps.setFieldValue('receiverBankName', 'Premierebank');
+          formikProps.setErrors({});
+        } catch (e: ErrorDto | any) {
+          formikProps.setFieldValue('receiverCardNumber', accountNumber);
+          formikProps.setFieldValue('receiverName', '');
+          formikProps.setFieldValue('receiverBankName', 'Premierebank');
+          formikProps.setErrors(e);
 
-        setError(e);
-      } finally {
-        clearInterval(intervalId);
+          setError(e);
+        } finally {
+          clearInterval(intervalId);
+        }
       }
     }, 1000);
 
     return () => clearInterval(intervalId);
+
   }, [accountNumber]);
 
   return (
@@ -64,7 +84,18 @@ const CreateTransactionStep2: FC<Props> = (props: Props) => {
               Help Page
             </NavLink>
             .
+
           </div>
+          <button
+              className='btn btn-danger btn-sm float-end'
+              data-bs-toggle='tooltip'
+              title='Choose from your receiver list'
+              type={'button'}
+              onClick={() => setIsShowModal(true)}
+          >
+            <KTSVG path='/media/icons/duotune/arrows/arr075.svg' className='svg-icon-2'/>
+            Contacts
+          </button>
         </div>
 
         <div className='fv-row mb-10'>
@@ -84,13 +115,6 @@ const CreateTransactionStep2: FC<Props> = (props: Props) => {
                 {intl.formatMessage({id: error.i18nPlaceHolder})}
               </div>
           )}
-          <button
-              className='btn btn-danger btn-sm'
-              data-bs-toggle='tooltip'
-              title='create new transaction'>
-            <KTSVG path='/media/icons/duotune/arrows/arr075.svg' className='svg-icon-2'/>
-            Choose from contacts
-          </button>
         </div>
 
         <div className='fv-row mb-10'>
@@ -153,7 +177,10 @@ const CreateTransactionStep2: FC<Props> = (props: Props) => {
             Self Payment
           </label>
         </div>
-
+        <ReceiverListModal isShow={isShowModal}
+                           setIsShowModal={setIsShowModal}
+                           handleOnConfirmBtn={handleOnConfirmBtn}
+        />
       </div>
   );
 };

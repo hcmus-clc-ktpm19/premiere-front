@@ -41,9 +41,9 @@ const Card6: FC<Props> = ({badgeColor, status, transactionType, description, dat
           <div className='border border-gray-300 border-dashed rounded min-w-125px py-3 px-4 me-7 mb-3' style={{flex: '1'}}>
             <div className='fs-6 text-gray-800 fw-bolder'>Created At</div>
             <div className='fw-bold text-gray-400'>
-              {moment(date).local().format('ll')}
-              <br/>
               {moment(date).local().format('h:mm:ss A')}
+              <br/>
+              {moment(date).local().format('ll')}
             </div>
           </div>
 

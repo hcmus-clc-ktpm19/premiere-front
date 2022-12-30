@@ -1,7 +1,6 @@
 import React, {FC, useEffect, useState} from 'react';
 import {ErrorMessage, FormikProps} from 'formik';
 import {NavLink} from 'react-router-dom';
-// @ts-ignore
 import {ErrorDto} from '@/app/models/model';
 import {CreditCardDto} from '@/app/modules/profile/core/_dtos';
 // @ts-ignore

@@ -1,15 +1,9 @@
 import React, {useEffect, useRef, useState} from 'react';
 import {KTSVG} from '@_metronic/helpers';
-import {ErrorMessage, Field, Form, Formik, FormikProps} from 'formik';
+import {Field, Form, Formik, FormikProps} from 'formik';
 import {StepperComponent} from '@_metronic/assets/ts/components';
 import StepperItem from '@/app/modules/loan-management/components/shared/StepperItem';
-// @ts-ignore
-import {
-  CreateLoanReminderDto,
-  TransactionRequestDto,
-  TransactionType,
-  TransferMoneyRequestDto
-} from '@/app/models/model';
+import {TransactionRequestDto, TransactionType, TransferMoneyRequestDto} from '@/app/models/model';
 import {NavigateFunction, useNavigate} from 'react-router-dom';
 import {
   CreateTransactionStep1
@@ -19,7 +13,8 @@ import {
 } from "@/app/modules/profile/components/steps/CreateTransactionStep2";
 import {ProfileService as profileService} from "@/app/modules/profile/core/_requests";
 import {transactionInit} from "@/app/modules/profile/core/_models";
-import {bool} from "yup";
+import {useAuth} from "@/app/modules/auth";
+import {ReceiverDto} from "@/app/modules/profile/core/_dtos";
 
 const CreateTransaction: React.FC = () => {
   const navigate: NavigateFunction = useNavigate();
@@ -32,6 +27,16 @@ const CreateTransaction: React.FC = () => {
   const [otp, setOtp] = useState<string>('');
   const [success, setSuccess] = useState<boolean>(false);
   const [error, setError] = useState<boolean>(false);
+  const {currentUser} = useAuth();
+  const [receivers, setReceivers] = React.useState<ReceiverDto[]>([]);
+
+  useEffect(() => {
+    profileService.getAllReceiversByUserId(currentUser?.id).then((data: ReceiverDto[]) => {
+      setReceivers(data);
+    }).catch((error) => {
+      console.log(error);
+    });
+  }, []);
 
   const loadStepper = () => {
     stepper.current = StepperComponent.createInsance(stepperRef.current as HTMLDivElement);
@@ -93,6 +98,11 @@ const CreateTransaction: React.FC = () => {
           await profileService.transferMoney(transferMoneyRequestDto);
           setSuccess(true);
           setError(false);
+          // if the receiver is not in the list, ask user to add it
+          if (!receivers.find((receiver) => receiver.cardNumber === values.receiverCardNumber)) {
+            // TODO: open modal to ask user to add receiver
+            console.log("receiver not in list. WE SHOULD ASK USER TO ADD IT");
+          }
           // wait 3s then navigate to dashboard
           setTimeout(() => {
             navigate('/crafted/pages/profile/transactions');
