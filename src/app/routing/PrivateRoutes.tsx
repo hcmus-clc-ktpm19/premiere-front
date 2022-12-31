@@ -9,7 +9,7 @@ import {WithChildren} from '@_metronic/helpers';
 import BuilderPageWrapper from '../pages/layout-builder/BuilderPageWrapper';
 import LoanManagementPage from '@/app/modules/loan-management/LoanManagementPage';
 import {useAuth} from '@/app/modules/auth';
-import {DepositMoney} from '@/app/modules/apps/deposit-management/DepositMoney';
+import {DepositMoneyPage} from '@/app/modules/apps/deposit-management/DepositMoneyPage';
 
 const PrivateRoutes = () => {
   const ProfilePage = lazy(() => import('../modules/profile/ProfilePage'));
@@ -91,7 +91,7 @@ const PrivateRoutes = () => {
                   isAllowed={currentUser?.role === 'PREMIERE_ADMIN' || currentUser?.role === 'EMPLOYEE'}
               >
                 <SuspensedView>
-                  <DepositMoney />
+                  <DepositMoneyPage />
                 </SuspensedView>
               </ProtectedRoute>
             }

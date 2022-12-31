@@ -14,13 +14,7 @@ const App = () => {
       <I18nProvider>
         <LayoutProvider>
           <AuthInit>
-            <StompSessionProvider
-                url={PREMIERE_SOCKET_ENDPOINT}
-                onConnect={() => console.log("Connected to socket")}
-                onDisconnect={() => console.log("Disconnected from socket")}
-                debug={(stomp) => console.log(stomp)}
-                onWebSocketError={(e) => console.log("error: ", e)}
-            >
+            <StompSessionProvider url={PREMIERE_SOCKET_ENDPOINT}>
               <NotificationContextProvider>
                 <Outlet/>
                 <MasterInit/>

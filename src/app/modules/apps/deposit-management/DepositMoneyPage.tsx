@@ -2,21 +2,29 @@ import React, { useState } from 'react';
 import { KTSVG } from '@_metronic/helpers';
 import { Form, Formik, FormikProps } from 'formik';
 import { DepositMoneyRequestDto } from '@/app/models/model';
-import { useAuth } from '@/app/modules/auth';
 import { DepositForm } from '@/app/modules/apps/deposit-management/components/DepositForm';
 import { depositMoneyService } from '@/app/modules/apps/deposit-management/core/services';
+import { useNavigate } from 'react-router-dom';
+import CreditCardNotFoundException from '@/app/models/exceptions/CreditCardNotFoundException';
 
-const DepositMoney: React.FC = () => {
-  const [initValues] = useState<DepositMoneyRequestDto>({
-    amount: 0,
-    creditCardNumber: '',
-    username: '',
-  });
+const DepositMoneyPage: React.FC = () => {
+  const navigate = useNavigate();
+  const [initValues] = useState<DepositMoneyRequestDto>(
+    depositMoneyService.initDepositMoneyRequest
+  );
+  const [error, setError] = useState<string | undefined>();
 
-  const { currentUser } = useAuth();
-
-  const submitStep = async (values: DepositMoneyRequestDto) => {
-    /* TODO document why this async arrow function is empty */
+  const handleOnSubmit = async (values: DepositMoneyRequestDto) => {
+    try {
+      await depositMoneyService.depositMoney(values);
+      navigate('/dashboard');
+    } catch (e: CreditCardNotFoundException | any) {
+      if (e instanceof CreditCardNotFoundException) {
+        setError(e.errorObject?.i18nPlaceHolder);
+      } else {
+        navigate('/error/500');
+      }
+    }
   };
 
   return (
@@ -26,7 +34,7 @@ const DepositMoney: React.FC = () => {
       <div className='d-flex flex-row-fluid flex-center bg-body rounded'>
         <Formik
           validationSchema={depositMoneyService.depositMoneyValidationSchemas}
-          onSubmit={submitStep}
+          onSubmit={handleOnSubmit}
           initialValues={initValues}
           validateOnChange={false}>
           {(props: FormikProps<any>) => (
@@ -35,11 +43,12 @@ const DepositMoney: React.FC = () => {
                 <DepositForm formikProps={props} />
               </div>
 
+              {error}
               <div className='d-flex flex-stack pt-10'>
                 <div>
                   <button
                     type='submit'
-                    disabled={!props.isValid || Object.keys(props.errors).length !== 0}
+                    disabled={!props.isValid}
                     className='btn btn-lg btn-primary me-3'>
                     <span className='indicator-label'>
                       Submit
@@ -59,4 +68,4 @@ const DepositMoney: React.FC = () => {
   );
 };
 
-export { DepositMoney };
+export { DepositMoneyPage };

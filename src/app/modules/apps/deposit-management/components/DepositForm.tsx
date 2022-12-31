@@ -1,52 +1,13 @@
-import React, { FC, useEffect, useState } from 'react';
-import { ErrorMessage, Field, FormikProps } from 'formik';
-import { services } from '@/app/modules/loan-management/core/services';
-import { ErrorDto, UserDto } from '@/app/models/model';
+import React, {useState} from 'react';
+import {ErrorMessage, Field, FormikProps} from 'formik';
 import { NavLink } from 'react-router-dom';
-import { useIntl } from 'react-intl';
 
 interface Props {
-  formikProps: FormikProps<any>;
+  formikProps: FormikProps<any>
 }
 
-const DepositForm: FC<Props> = (props: Props) => {
-  const { formikProps } = props;
-  const [accountNumber, setAccountNumber] = useState<string>('');
-  const [error, setError] = useState<ErrorDto | null>(null);
-  const intl = useIntl();
-
-  const handleOnChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setAccountNumber(e.target.value);
-    formikProps.handleChange(e);
-  };
-
-  useEffect(() => {
-    setError(null);
-    if (accountNumber.length === 0) {
-      return;
-    }
-
-    const intervalId = setInterval(async () => {
-      try {
-        const res: UserDto = (await services.getUserByCardNumber(accountNumber)) as UserDto;
-        formikProps.setFieldValue('depositWith', accountNumber);
-        formikProps.setFieldValue('debtorName', `${res.firstName} ${res.lastName}`);
-        formikProps.setFieldValue('debtorPhone', res.phone);
-        formikProps.setErrors({});
-      } catch (e: ErrorDto | any) {
-        formikProps.setFieldValue('depositWith', accountNumber);
-        formikProps.setFieldValue('debtorName', '');
-        formikProps.setFieldValue('debtorPhone', '');
-        formikProps.setErrors(e);
-
-        setError(e);
-      } finally {
-        clearInterval(intervalId);
-      }
-    }, 1000);
-
-    return () => clearInterval(intervalId);
-  }, [accountNumber]);
+const DepositForm: React.FC<Props> = ({ formikProps }) => {
+  const [depositWithPhone, setDepositWithPhone] = useState(true);
 
   return (
     <div className='w-100'>
@@ -69,22 +30,30 @@ const DepositForm: FC<Props> = (props: Props) => {
         </label>
 
         <div className='btn-group' role='group' aria-label='Basic radio toggle button group'>
-          <Field
+          <input
+            onChange={() => {
+              setDepositWithPhone(true);
+              formikProps.setFieldValue('creditCardNumber', '');
+            }}
             type='radio'
             className='btn-check'
-            name='depositWithPhone'
+            name='depositWith'
             id='phoneNumber'
             autoComplete='off'
-            checked
+            defaultChecked={true}
           />
           <label className='btn btn-outline-primary' htmlFor='phoneNumber'>
             Phone Number
           </label>
 
-          <Field
+          <input
+            onChange={() => {
+              setDepositWithPhone(false);
+              formikProps.setFieldValue('username', '');
+            }}
             type='radio'
             className='btn-check'
-            name='depositWithPhone'
+            name='depositWith'
             id='creditCardNumber'
             autoComplete='off'
           />
@@ -92,43 +61,43 @@ const DepositForm: FC<Props> = (props: Props) => {
             Credit Card Number
           </label>
         </div>
-        <div className='text-danger mt-2'>
-          <ErrorMessage name='depositWith' />
-        </div>
+      </div>
 
-        {error && (
-          <div className='form-text text-danger'>
-            {intl.formatMessage({ id: error.i18nPlaceHolder })}
+      {depositWithPhone && (
+        <div className='fv-row mb-10'>
+          <label className='d-flex align-items-center form-label'>
+            <span className='required'>Phone Number</span>
+          </label>
+
+          <Field name='username' className='form-control form-control-lg form-control-solid' />
+          <div className='text-danger mt-2'>
+            <ErrorMessage name='username' />
           </div>
-        )}
-      </div>
-
-      <div className='fv-row mb-10'>
-        <label className='d-flex align-items-center form-label'>
-          <span className='required'>Phone Number</span>
-        </label>
-
-        <Field name='debtorName' className='form-control form-control-lg form-control-solid' />
-        <div className='text-danger mt-2'>
-          <ErrorMessage name='debtorName' />
         </div>
-      </div>
+      )}
 
-      <div className='fv-row mb-0'>
-        <label className='fs-6 fw-bold form-label'>Credit Card Number</label>
+      {!depositWithPhone && (
+        <div className='fv-row mb-10'>
+          <label className='d-flex align-items-center form-label'>
+            <span className='required'>Credit Card Number</span>
+          </label>
 
-        <Field name='debtorPhone' className='form-control form-control-lg form-control-solid' />
-        <div className='text-danger mt-2'>
-          <ErrorMessage name='debtorPhone' />
+          <Field
+            name='creditCardNumber'
+            className='form-control form-control-lg form-control-solid'
+          />
+          <div className='text-danger mt-2'>
+            <ErrorMessage name='creditCardNumber' />
+          </div>
         </div>
-      </div>
+      )}
 
       <div className='fv-row mb-10'>
         <label className='form-label required'>Transfer Amount</label>
 
-        <Field name='transferAmount' className='form-control form-control-lg form-control-solid' />
+        <Field name='amount' className='form-control form-control-lg form-control-solid' />
         <div className='text-danger mt-2'>
-          <ErrorMessage name='transferAmount' />
+          <ErrorMessage name='amount' />
         </div>
 
         <div className='form-text'>Minimum transfer amount is 100,000 VND.</div>

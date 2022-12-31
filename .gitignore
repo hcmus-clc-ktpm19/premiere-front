@@ -10,7 +10,7 @@
 
 # production
 /build
-/src/app/models
+/src/app/models/model.ts
 
 # misc
 .DS_Store
