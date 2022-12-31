@@ -177,7 +177,7 @@ const ReceiverEditModalForm: FC<Props> = ({receiver, isReceiverLoading}) => {
           {/* begin::Input group */}
           <div className='fv-row mb-7'>
             {/* begin::Label */}
-            <label className='required fw-bold fs-6 mb-2'>Nickname</label>
+            <label className='fw-bold fs-6 mb-2'>Nickname</label>
             {/* end::Label */}
 
             {/* begin::Input */}
