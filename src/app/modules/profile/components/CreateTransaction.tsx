@@ -16,6 +16,8 @@ import {transactionInit} from "@/app/modules/profile/core/_models";
 import {useAuth} from "@/app/modules/auth";
 import {ReceiverDto} from "@/app/modules/profile/core/_dtos";
 import {ConfirmModal} from "@_metronic/partials/modals/confirm/ConfirmModal";
+import useNotification from "@/app/modules/notifications/useNotification";
+import {AlertColor} from "@mui/material";
 
 const CreateTransaction: React.FC = () => {
   const navigate: NavigateFunction = useNavigate();
@@ -32,6 +34,7 @@ const CreateTransaction: React.FC = () => {
   const [receivers, setReceivers] = React.useState<ReceiverDto[]>([]);
   const [receiver, setReceiver] = React.useState<ReceiverDto | null>(null);
   const [modalShow, setModalShow] = React.useState<boolean>(false);
+  const {setNotification} = useNotification();
 
   useEffect(() => {
     profileService.getAllReceiversByUserId(currentUser?.id).then((data: ReceiverDto[]) => {
@@ -87,8 +90,14 @@ const CreateTransaction: React.FC = () => {
           console.log("res", res);
           setCheckingTransactionId(res.checkingTransactionId);
           setChecking(!checking);
-        } catch (e) {
-          console.log("error", e);
+        } catch (e: any) {
+          console.log("error", {e});
+          // transaction validate can have some error like invalid card number, credit card not enough money, ...
+          // so we need to show error message to user
+          const notificationType: AlertColor = "error";
+          const errorMessage: string = e.response.data['Error: '] || "Something went wrong!";
+          console.log("errorMessage", errorMessage);
+          setNotification(true, errorMessage, notificationType, () => {})
         }
       } else {
         console.log("actual transaction");
@@ -114,6 +123,11 @@ const CreateTransaction: React.FC = () => {
               userId: currentUser?.id || -1,
               bankName: values.receiverBankName
             });
+          } else {
+            // wait 3s then navigate to transactions page
+            setTimeout(() => {
+              navigate('/crafted/pages/profile/transactions');
+            }, 3000);
           }
         } catch (e) {
           console.log("error", e);
@@ -141,13 +155,21 @@ const CreateTransaction: React.FC = () => {
     setModalShow(false);
     profileService.insertReceiver(receiver).then((data: ReceiverDto) => {
       console.log("receiver added", data);
-      // wait 3s then navigate to dashboard
+      // wait 3s then navigate to transactions page
       setTimeout(() => {
         navigate('/crafted/pages/profile/transactions');
       }, 3000);
     }).catch((error) => {
       console.log(error);
     });
+  }
+
+  const onAddReceiverCancel = () => {
+    setModalShow(false);
+    // wait 3s then navigate to transactions page
+    setTimeout(() => {
+      navigate('/crafted/pages/profile/transactions');
+    }, 3000);
   }
 
   return (
@@ -275,7 +297,7 @@ const CreateTransaction: React.FC = () => {
                         header={"Add New Receiver"}
                         content={"This receiver is not in your receiver list. Do you want to add it?"}
                         onConfirm={onAddReceiver}
-                        onCancel={() => setModalShow(false)}
+                        onCancel={onAddReceiverCancel}
                         value={receiver}
                         isShowCancelBtn={true}
           />
