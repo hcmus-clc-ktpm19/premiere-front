@@ -16,7 +16,6 @@ import {transactionInit} from "@/app/modules/profile/core/_models";
 import {useAuth} from "@/app/modules/auth";
 import {ReceiverDto} from "@/app/modules/profile/core/_dtos";
 import {ConfirmModal} from "@_metronic/partials/modals/confirm/ConfirmModal";
-import {AddReceiverConfirmModal} from "@_metronic/partials/modals/confirm/AddReceiverConfirmModal";
 
 const CreateTransaction: React.FC = () => {
   const navigate: NavigateFunction = useNavigate();
@@ -32,7 +31,7 @@ const CreateTransaction: React.FC = () => {
   const {currentUser} = useAuth();
   const [receivers, setReceivers] = React.useState<ReceiverDto[]>([]);
   const [receiver, setReceiver] = React.useState<ReceiverDto | null>(null);
-  const [modalShow, setModalShow] = React.useState<boolean>(true);
+  const [modalShow, setModalShow] = React.useState<boolean>(false);
 
   useEffect(() => {
     profileService.getAllReceiversByUserId(currentUser?.id).then((data: ReceiverDto[]) => {
@@ -110,7 +109,7 @@ const CreateTransaction: React.FC = () => {
             setReceiver({
               id: null,
               cardNumber: values.receiverCardNumber,
-              nickname: '',
+              nickname: '', // we leave blank here because user can change it later in Receivers Page
               fullName: '',
               userId: currentUser?.id || -1,
               bankName: values.receiverBankName
@@ -272,14 +271,13 @@ const CreateTransaction: React.FC = () => {
                 </Form>
             )}
           </Formik>
-          <AddReceiverConfirmModal isShow={modalShow}
-                                   header={"Add New Receiver"}
-                                   content={"This receiver is not in your receiver list. Do you want to add it?"}
-                                   onConfirm={onAddReceiver}
-                                   onCancel={() => setModalShow(false)}
-                                   value={receiver}
-                                   isShowCancelBtn={true}
-                                   setReceiver={setReceiver}
+          <ConfirmModal isShow={modalShow}
+                        header={"Add New Receiver"}
+                        content={"This receiver is not in your receiver list. Do you want to add it?"}
+                        onConfirm={onAddReceiver}
+                        onCancel={() => setModalShow(false)}
+                        value={receiver}
+                        isShowCancelBtn={true}
           />
         </div>
       </div>
