@@ -8,6 +8,7 @@ import {useAuth} from '@/app/modules/auth';
 import {AlertColor} from "@mui/material";
 import useNotification from "@/app/modules/notifications/useNotification";
 import {useSubscription} from "react-stomp-hooks";
+import {PremiereRole} from '@/app/models/model';
 
 const SidebarMenuMain = () => {
   const intl = useIntl();
@@ -147,43 +148,26 @@ const SidebarMenuMain = () => {
         <SidebarMenuItem to='/crafted/widgets/tables' title='Tables' hasBullet={true} />
         <SidebarMenuItem to='/crafted/widgets/feeds' title='Feeds' hasBullet={true} />
       </SidebarMenuItemWithSub>
-      <div className='menu-item'>
-        <div className='menu-content pt-8 pb-2'>
-          <span className='menu-section text-muted text-uppercase fs-8 ls-1'>Apps</span>
-        </div>
-      </div>
-      {(currentUser?.role === 'PREMIERE_ADMIN' || currentUser?.role === 'EMPLOYEE') && (
-        <SidebarMenuItemWithSub
-          to='/apps/chat'
-          title='Chat'
-          fontIcon='bi-chat-left'
-          icon='/media/icons/duotune/communication/com012.svg'
-        >
-          <SidebarMenuItem to='/apps/chat/private-chat' title='Private Chat' hasBullet={true} />
-          <SidebarMenuItem to='/apps/chat/group-chat' title='Group Chart' hasBullet={true} />
-          <SidebarMenuItem to='/apps/chat/drawer-chat' title='Drawer Chart' hasBullet={true} />
-        </SidebarMenuItemWithSub>
-      )}
-      {(currentUser?.role === 'PREMIERE_ADMIN' || currentUser?.role === 'EMPLOYEE') && (
-        <SidebarMenuItem
-          to='/apps/user-management/users'
-          icon='/media/icons/duotune/general/gen051.svg'
-          title='User management'
-          fontIcon='bi-layers'
-        />
-      )}
-      <div className='menu-item'>
-        <a
-          target='_blank'
-          className='menu-link'
-          href={process.env.REACT_APP_PREVIEW_DOCS_URL + '/docs/changelog'}
-        >
-          <span className='menu-icon'>
-            <KTSVG path='/media/icons/duotune/general/gen005.svg' className='svg-icon-2' />
-          </span>
-          <span className='menu-title'>Changelog {process.env.REACT_APP_VERSION}</span>
-        </a>
-      </div>
+      {(currentUser?.role === PremiereRole.PREMIERE_ADMIN || currentUser?.role === PremiereRole.EMPLOYEE)
+          && (<>
+            <div className="menu-item">
+              <div className="menu-content pt-8 pb-2">
+                <span className="menu-section text-muted text-uppercase fs-8 ls-1">Employee</span>
+              </div>
+            </div>
+            <SidebarMenuItem
+                to="/apps/user-management/users"
+                icon="/media/icons/duotune/general/gen051.svg"
+                title="User management"
+                fontIcon="bi-layers"
+            />
+            <SidebarMenuItem
+                to="/apps/deposit-management/deposit-money"
+                icon="/media/icons/duotune/finance/fin010.svg"
+                title="Deposit money"
+                fontIcon="bi-layers"
+            />
+          </>)}
     </>
   );
 };
