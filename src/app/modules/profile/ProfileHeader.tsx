@@ -1,26 +1,29 @@
-import React, {useEffect} from 'react';
-import {KTSVG, toAbsoluteUrl} from '../../../_metronic/helpers';
-import {Link} from 'react-router-dom';
-import {Dropdown1} from '../../../_metronic/partials';
-import {useLocation} from 'react-router-dom';
+import React from 'react';
+import {KTSVG, toAbsoluteUrl} from '@_metronic/helpers';
+import {Link, useLocation} from 'react-router-dom';
+import {Dropdown1} from '@_metronic/partials';
 import {useAuth} from '@/app/modules/auth';
 import {CreditCardDto} from '@/app/modules/profile/core/_dtos';
 import {ProfileService as profileService} from '@/app/modules/profile/core/_requests';
+import {useQuery} from "react-query";
 
 const ProfileHeader: React.FC = () => {
   const location = useLocation();
-  const {currentUser, logout} = useAuth();
+  const {currentUser} = useAuth();
   const [creditCard, setCreditCard] = React.useState<CreditCardDto>();
-  useEffect(() => {
-    profileService
-      .getCreditCardByUserId(currentUser?.id)
-      .then((data: CreditCardDto) => {
-        setCreditCard(data);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  }, []);
+  const {data} = useQuery('creditCard', async () => {
+        try {
+          const response = await profileService.getCreditCardByUserId(currentUser?.id);
+          setCreditCard(response);
+          return response;
+        } catch (error) {
+          console.log(error);
+        }
+      },
+      {
+        refetchOnWindowFocus: true
+      }
+  );
 
   return (
     <div className='card mb-5 mb-xl-10'>

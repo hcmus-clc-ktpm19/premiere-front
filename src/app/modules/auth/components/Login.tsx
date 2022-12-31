@@ -172,7 +172,7 @@ export function Login() {
 
       {/* begin::Action */}
       <div className='d-grid mb-10'>
-        <ReCAPTCHA ref={recaptchaRef} sitekey={RECAPTCHA_SITE_KEY} />
+        <ReCAPTCHA ref={recaptchaRef} sitekey={RECAPTCHA_SITE_KEY} className={'recaptcha'}/>
         <button
           type='submit'
           id='kt_sign_in_submit'

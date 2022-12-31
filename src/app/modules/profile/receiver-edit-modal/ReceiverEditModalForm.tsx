@@ -177,7 +177,7 @@ const ReceiverEditModalForm: FC<Props> = ({receiver, isReceiverLoading}) => {
           {/* begin::Input group */}
           <div className='fv-row mb-7'>
             {/* begin::Label */}
-            <label className='required fw-bold fs-6 mb-2'>Nickname</label>
+            <label className='fw-bold fs-6 mb-2'>Nickname</label>
             {/* end::Label */}
 
             {/* begin::Input */}
@@ -220,6 +220,7 @@ const ReceiverEditModalForm: FC<Props> = ({receiver, isReceiverLoading}) => {
               {...formik.getFieldProps('bankName')}
             >
               <option value=''>Select a bank...</option>
+              <option value='Premierebank'>Premierebank</option>
               <option value='Vietcombank'>Vietcombank</option>
               <option value='Vietinbank'>Vietinbank</option>
               <option value='Techcombank'>Techcombank</option>

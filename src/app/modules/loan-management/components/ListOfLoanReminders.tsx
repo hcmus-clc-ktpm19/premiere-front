@@ -181,6 +181,14 @@ const ListOfLoanReminders = () => {
                                     onClick={() => {
                                       deleteLoanReminderHandler(reminder)
                                     }}
+                                    className='btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1'>
+                              <KTSVG path='/media/icons/duotune/general/gen024.svg' className='svg-icon-1' />
+                              {/*<KTSVG path='/media/icons/duotune/general/gen019.svg' className='svg-icon-3' />*/}
+                            </button>
+                            <button type='button'
+                                    onClick={() => {
+                                      deleteLoanReminderHandler(reminder)
+                                    }}
                                     className='btn btn-icon btn-bg-light btn-active-color-primary btn-sm'>
                               <KTSVG path='/media/icons/duotune/general/gen027.svg'
                                      className='svg-icon-3'/>
