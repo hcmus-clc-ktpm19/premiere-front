@@ -19,6 +19,7 @@ const DepositMoneyPage: React.FC = () => {
   const handleOnSubmit = async (values: DepositMoneyRequestDto): Promise<void> => {
     try {
       await depositMoneyService.depositMoney(values);
+      await depositMoneyService.pushDepositSuccessNotification(values)
       navigate('/dashboard');
     } catch (e: CreditCardNotFoundException | any) {
       if (e instanceof CreditCardNotFoundException) {

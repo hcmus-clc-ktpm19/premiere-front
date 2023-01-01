@@ -7,7 +7,7 @@ import { useAuth } from '@/app/modules/auth';
 import { AlertColor } from '@mui/material';
 import useNotification from '@/app/modules/notifications/useNotification';
 import { useSubscription } from 'react-stomp-hooks';
-import { PremiereRole } from '@/app/models/model';
+import { PremiereRole, WebSocketAction } from '@/app/models/model';
 
 const SidebarMenuMain = () => {
   const intl = useIntl();
@@ -15,20 +15,23 @@ const SidebarMenuMain = () => {
 
   // listen and handle notification, we need to put it here because we need to listen to the topic in the whole application
   const type: AlertColor = 'info';
-  const [lastMessage, setLastMessage] = React.useState<string>("No message received yet");
-  const {setNotification} = useNotification();
-  useSubscription("/topic/messages", (message) => setLastMessage(message.body));
+  const [lastMessage, setLastMessage] = React.useState<string>('No message received yet');
+  const { setNotification } = useNotification();
+  useSubscription('/topic/messages', (message) => setLastMessage(message.body));
 
   const onClose = () => {
     setLastMessage("No message received yet"); // reset the message to receive the next one
   }
+
   useEffect(() => {
-    console.log("last message", lastMessage);
     setLastMessage(lastMessage);
     if (lastMessage !== "No message received yet") {
       const messageToParse = JSON.parse(lastMessage);
       // check if we have a message and if it's for the current user
       if (currentUser?.id === messageToParse.receiverId) {
+        setNotification(true, messageToParse.message, type, onClose);
+      }
+      if (messageToParse.action === WebSocketAction.DEPOSIT_MONEY) {
         setNotification(true, messageToParse.message, type, onClose);
       }
     }

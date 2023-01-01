@@ -6,6 +6,7 @@ import CreditCardNotFoundException from '@/app/models/exceptions/CreditCardNotFo
 // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
 const API_URL: string = process.env.PREMIERE_API_URL!;
 const CREDIT_CARD_API = `${API_URL}/credit-card`;
+const WEB_SOCKET_API = `${API_URL}/notification`;
 
 const depositMoneyValidationSchemas = Yup.object().shape({
   username: Yup.string()
@@ -45,8 +46,15 @@ const depositMoney = (
     });
 };
 
+const pushDepositSuccessNotification = (depositMoneyRequestDto: DepositMoneyRequestDto): Promise<void> => {
+  return axios
+    .post(`${WEB_SOCKET_API}/deposit-money/message`, depositMoneyRequestDto)
+    .then((response: AxiosResponse<void>) => response.data);
+}
+
 export const depositMoneyService = {
   depositMoneyValidationSchemas,
   initDepositMoneyRequest,
   depositMoney,
+  pushDepositSuccessNotification,
 };
