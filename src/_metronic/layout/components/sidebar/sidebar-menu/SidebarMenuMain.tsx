@@ -1,14 +1,13 @@
 /* eslint-disable react/jsx-no-target-blank */
-import React, {useEffect} from 'react';
-import {useIntl} from 'react-intl';
-import {KTSVG} from '@_metronic/helpers';
-import {SidebarMenuItemWithSub} from './SidebarMenuItemWithSub';
-import {SidebarMenuItem} from './SidebarMenuItem';
-import {useAuth} from '@/app/modules/auth';
-import {AlertColor} from "@mui/material";
-import useNotification from "@/app/modules/notifications/useNotification";
-import {useSubscription} from "react-stomp-hooks";
-import {PremiereRole} from '@/app/models/model';
+import React, { useEffect } from 'react';
+import { useIntl } from 'react-intl';
+import { SidebarMenuItemWithSub } from './SidebarMenuItemWithSub';
+import { SidebarMenuItem } from './SidebarMenuItem';
+import { useAuth } from '@/app/modules/auth';
+import { AlertColor } from '@mui/material';
+import useNotification from '@/app/modules/notifications/useNotification';
+import { useSubscription } from 'react-stomp-hooks';
+import { PremiereRole, WebSocketAction } from '@/app/models/model';
 
 const SidebarMenuMain = () => {
   const intl = useIntl();
@@ -16,20 +15,23 @@ const SidebarMenuMain = () => {
 
   // listen and handle notification, we need to put it here because we need to listen to the topic in the whole application
   const type: AlertColor = 'info';
-  const [lastMessage, setLastMessage] = React.useState<string>("No message received yet");
-  const {setNotification} = useNotification();
-  useSubscription("/topic/messages", (message) => setLastMessage(message.body));
+  const [lastMessage, setLastMessage] = React.useState<string>('No message received yet');
+  const { setNotification } = useNotification();
+  useSubscription('/topic/messages', (message) => setLastMessage(message.body));
 
   const onClose = () => {
     setLastMessage("No message received yet"); // reset the message to receive the next one
   }
+
   useEffect(() => {
-    console.log("last message", lastMessage);
     setLastMessage(lastMessage);
     if (lastMessage !== "No message received yet") {
       const messageToParse = JSON.parse(lastMessage);
       // check if we have a message and if it's for the current user
       if (currentUser?.id === messageToParse.receiverId) {
+        setNotification(true, messageToParse.message, type, onClose);
+      }
+      if (messageToParse.action === WebSocketAction.DEPOSIT_MONEY) {
         setNotification(true, messageToParse.message, type, onClose);
       }
     }
@@ -40,7 +42,7 @@ const SidebarMenuMain = () => {
       <SidebarMenuItem
         to='/dashboard'
         icon='/media/icons/duotune/art/art002.svg'
-        title={intl.formatMessage({id: 'MENU.DASHBOARD'})}
+        title={intl.formatMessage({ id: 'MENU.DASHBOARD' })}
         fontIcon='bi-app-indicator'
       />
       <SidebarMenuItem
@@ -89,16 +91,19 @@ const SidebarMenuMain = () => {
             title='Campaigns'
             hasBullet={true}
           />
-          <SidebarMenuItemWithSub to='/crafted/pages/profile/transactions' title='Transactions' hasBullet={true}>
+          <SidebarMenuItemWithSub
+            to='/crafted/pages/profile/transactions'
+            title='Transactions'
+            hasBullet={true}>
             <SidebarMenuItem
               to='/crafted/pages/profile/transactions'
               title='Transactions History'
               hasBullet={true}
             />
             <SidebarMenuItem
-                to='/crafted/pages/profile/create-transaction'
-                title='Create Transaction'
-                hasBullet={true}
+              to='/crafted/pages/profile/create-transaction'
+              title='Create Transaction'
+              hasBullet={true}
             />
           </SidebarMenuItemWithSub>
           <SidebarMenuItem
@@ -150,43 +155,28 @@ const SidebarMenuMain = () => {
         <SidebarMenuItem to='/crafted/widgets/tables' title='Tables' hasBullet={true} />
         <SidebarMenuItem to='/crafted/widgets/feeds' title='Feeds' hasBullet={true} />
       </SidebarMenuItemWithSub>
-      <div className='menu-item'>
-        <div className='menu-content pt-8 pb-2'>
-          <span className='menu-section text-muted text-uppercase fs-8 ls-1'>Apps</span>
-        </div>
-      </div>
-      {(currentUser?.role === PremiereRole.PREMIERE_ADMIN.toString() ||
-        currentUser?.role === PremiereRole.EMPLOYEE.toString()) && (
-        <SidebarMenuItemWithSub
-          to='/apps/chat'
-          title='Chat'
-          fontIcon='bi-chat-left'
-          icon='/media/icons/duotune/communication/com012.svg'>
-          <SidebarMenuItem to='/apps/chat/private-chat' title='Private Chat' hasBullet={true} />
-          <SidebarMenuItem to='/apps/chat/group-chat' title='Group Chart' hasBullet={true} />
-          <SidebarMenuItem to='/apps/chat/drawer-chat' title='Drawer Chart' hasBullet={true} />
-        </SidebarMenuItemWithSub>
+      {(currentUser?.role === PremiereRole.PREMIERE_ADMIN ||
+        currentUser?.role === PremiereRole.EMPLOYEE) && (
+        <>
+          <div className='menu-item'>
+            <div className='menu-content pt-8 pb-2'>
+              <span className='menu-section text-muted text-uppercase fs-8 ls-1'>Employee</span>
+            </div>
+          </div>
+          <SidebarMenuItem
+            to='/apps/user-management/users'
+            icon='/media/icons/duotune/general/gen051.svg'
+            title='User management'
+            fontIcon='bi-layers'
+          />
+          <SidebarMenuItem
+            to='/apps/deposit-management/deposit-money'
+            icon='/media/icons/duotune/finance/fin010.svg'
+            title='Deposit money'
+            fontIcon='bi-layers'
+          />
+        </>
       )}
-      {(currentUser?.role === PremiereRole.PREMIERE_ADMIN.toString() ||
-        currentUser?.role === PremiereRole.EMPLOYEE.toString()) && (
-        <SidebarMenuItem
-          to='/apps/user-management/users'
-          icon='/media/icons/duotune/general/gen051.svg'
-          title='User management'
-          fontIcon='bi-layers'
-        />
-      )}
-      <div className='menu-item'>
-        <a
-          target='_blank'
-          className='menu-link'
-          href={process.env.REACT_APP_PREVIEW_DOCS_URL + '/docs/changelog'}>
-          <span className='menu-icon'>
-            <KTSVG path='/media/icons/duotune/general/gen005.svg' className='svg-icon-2' />
-          </span>
-          <span className='menu-title'>Changelog {process.env.REACT_APP_VERSION}</span>
-        </a>
-      </div>
     </>
   );
 };
