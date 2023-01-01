@@ -24,7 +24,6 @@ const SidebarMenuMain = () => {
     setLastMessage("No message received yet"); // reset the message to receive the next one
   }
   useEffect(() => {
-    console.log("last message", lastMessage);
     setLastMessage(lastMessage);
     if (lastMessage !== "No message received yet") {
       const messageToParse = JSON.parse(lastMessage);

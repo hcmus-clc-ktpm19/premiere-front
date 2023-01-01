@@ -1,6 +1,7 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import React from 'react';
 import {toAbsoluteUrl} from '../../../helpers';
+import {Link} from "react-router-dom";
 
 type Props = {
   className: string;
@@ -8,9 +9,10 @@ type Props = {
   title: string;
   time: string;
   description: string;
+  destination?: string
 };
 
-const StatisticsWidget1: React.FC<Props> = ({className, image, title, time, description}) => {
+const StatisticsWidget1: React.FC<Props> = ({className, image, title, time, description, destination='#'}) => {
   return (
     <div
       className={`card bgi-no-repeat ${className}`}
@@ -22,9 +24,9 @@ const StatisticsWidget1: React.FC<Props> = ({className, image, title, time, desc
     >
       {/* begin::Body */}
       <div className='card-body'>
-        <a href='#' className='card-title fw-bold text-muted text-hover-primary fs-4'>
+        <Link to={destination} className='card-title fw-bold text-muted text-hover-primary fs-4'>
           {title}
-        </a>
+        </Link>
 
         <div className='fw-bold text-primary my-6'>{time}</div>
 
