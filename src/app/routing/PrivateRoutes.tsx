@@ -10,6 +10,7 @@ import BuilderPageWrapper from '../pages/layout-builder/BuilderPageWrapper';
 import LoanManagementPage from '@/app/modules/loan-management/LoanManagementPage';
 import {useAuth} from '@/app/modules/auth';
 import {DepositMoneyPage} from '@/app/modules/apps/deposit-management/DepositMoneyPage';
+import {PremiereRole} from '@/app/models/model';
 
 const PrivateRoutes = () => {
   const ProfilePage = lazy(() => import('../modules/profile/ProfilePage'));
@@ -75,8 +76,10 @@ const PrivateRoutes = () => {
           element={
             <ProtectedRoute
               redirectPath='/dashboard'
-              isAllowed={currentUser?.role === 'PREMIERE_ADMIN' || currentUser?.role === 'EMPLOYEE'}
-            >
+              isAllowed={
+                currentUser?.role === PremiereRole.PREMIERE_ADMIN.toString() ||
+                currentUser?.role === PremiereRole.EMPLOYEE.toString()
+              }>
               <SuspensedView>
                 <UsersPage />
               </SuspensedView>
@@ -84,17 +87,19 @@ const PrivateRoutes = () => {
           }
         />
         <Route
-            path='apps/deposit-management/*'
-            element={
-              <ProtectedRoute
-                  redirectPath='/dashboard'
-                  isAllowed={currentUser?.role === 'PREMIERE_ADMIN' || currentUser?.role === 'EMPLOYEE'}
-              >
-                <SuspensedView>
-                  <DepositMoneyPage />
-                </SuspensedView>
-              </ProtectedRoute>
-            }
+          path='apps/deposit-management/*'
+          element={
+            <ProtectedRoute
+              redirectPath='/dashboard'
+              isAllowed={
+                currentUser?.role === PremiereRole.PREMIERE_ADMIN ||
+                currentUser?.role === PremiereRole.EMPLOYEE
+              }>
+              <SuspensedView>
+                <DepositMoneyPage />
+              </SuspensedView>
+            </ProtectedRoute>
+          }
         />
         <Route
           path='/loan-management/*'

@@ -9,6 +9,8 @@ import {
 import { Card6 } from '@_metronic/partials/content/cards/Card6';
 import { useAuth } from '@/app/modules/auth';
 import { useQuery } from 'react-query';
+import {useNavigate} from "react-router-dom";
+import {KTSVG} from "@_metronic/helpers";
 
 const badgeColors = {
   COMPLETED: 'success',
@@ -22,6 +24,7 @@ const tiles = {
 
 export function Transactions() {
   const { currentUser } = useAuth();
+  const navigate = useNavigate();
 
   const [paginationData, setPaginationData] = React.useState<PaginationDto>(
     ProfileService.paginationInit
@@ -44,6 +47,10 @@ export function Transactions() {
         typeRef.current?.value === 'none' ? undefined : (typeRef.current?.value as TransactionType),
     });
   };
+
+  const handleOnCreateTransactionClick: MouseEventHandler<HTMLButtonElement> = () => {
+    navigate("/crafted/pages/profile/create-transaction")
+  }
 
   const handleOnPageClick = async (e: React.MouseEvent<HTMLLIElement>) => {
     setTransactionCriteria({
@@ -87,10 +94,18 @@ export function Transactions() {
           </div>
           <button
             onClick={handleOnRefreshClick}
-            className='btn btn-primary btn-sm'
+            className='btn btn-primary btn-sm me-2'
             data-bs-toggle='tooltip'
             title='refresh'>
             Refetch
+          </button>
+          <button
+              onClick={handleOnCreateTransactionClick}
+              className='btn btn-danger btn-sm'
+              data-bs-toggle='tooltip'
+              title='create new transaction'>
+            <KTSVG path='/media/icons/duotune/arrows/arr075.svg' className='svg-icon-2'/>
+            Create Transaction
           </button>
         </div>
       </div>
@@ -105,7 +120,10 @@ export function Transactions() {
                 transactionType={tiles[item.type]}
                 description={item.transactionRemark}
                 date={item.createdAt.toString()}
-                budget={item.totalBalance.toString()}
+                budget={item.amount.toLocaleString('it-IT', {
+                  style: 'currency',
+                  currency: 'VND',
+                })}
               />
             </div>
           );

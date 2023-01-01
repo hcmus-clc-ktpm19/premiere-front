@@ -69,6 +69,7 @@ export function Receivers() {
                     onChange={(e) => setBank(e.target.value)}
                 >
                   <option value=''>Select a bank...</option>
+                  <option value='Premierebank'>Premierebank</option>
                   <option value='Vietcombank'>Vietcombank</option>
                   <option value='Vietinbank'>Vietinbank</option>
                   <option value='Techcombank'>Techcombank</option>

@@ -59,17 +59,16 @@ const SidebarMenuMain = () => {
         to='/loan-management'
         title='Loan Management'
         fontIcon='bi-archive'
-        icon='/media/icons/duotune/abstract/abs027.svg'
-      >
+        icon='/media/icons/duotune/abstract/abs027.svg'>
         <SidebarMenuItem
           to='/loan-management/create-loan-reminder'
           title='Create Loan Reminder'
           hasBullet={true}
         />
         <SidebarMenuItem
-            to='/loan-management/list-of-loan-reminders'
-            title='List of Loan Reminders'
-            hasBullet={true}
+          to='/loan-management/list-of-loan-reminders'
+          title='List of Loan Reminders'
+          hasBullet={true}
         />
       </SidebarMenuItemWithSub>
 
@@ -77,8 +76,7 @@ const SidebarMenuMain = () => {
         to='/crafted/pages'
         title='Pages'
         fontIcon='bi-archive'
-        icon='/media/icons/duotune/general/gen022.svg'
-      >
+        icon='/media/icons/duotune/general/gen022.svg'>
         <SidebarMenuItemWithSub to='/crafted/pages/profile' title='Profile' hasBullet={true}>
           <SidebarMenuItem
             to='/crafted/pages/profile/spend_account'
@@ -91,11 +89,18 @@ const SidebarMenuMain = () => {
             title='Campaigns'
             hasBullet={true}
           />
-          <SidebarMenuItem
-            to='/crafted/pages/profile/transactions'
-            title='Transactions'
-            hasBullet={true}
-          />
+          <SidebarMenuItemWithSub to='/crafted/pages/profile/transactions' title='Transactions' hasBullet={true}>
+            <SidebarMenuItem
+              to='/crafted/pages/profile/transactions'
+              title='Transactions History'
+              hasBullet={true}
+            />
+            <SidebarMenuItem
+                to='/crafted/pages/profile/create-transaction'
+                title='Create Transaction'
+                hasBullet={true}
+            />
+          </SidebarMenuItemWithSub>
           <SidebarMenuItem
             to='/crafted/pages/profile/documents'
             title='Documents'
@@ -121,8 +126,7 @@ const SidebarMenuMain = () => {
         to='/crafted/accounts'
         title='Accounts'
         icon='/media/icons/duotune/communication/com006.svg'
-        fontIcon='bi-person'
-      >
+        fontIcon='bi-person'>
         <SidebarMenuItem to='/crafted/account/overview' title='Overview' hasBullet={true} />
         <SidebarMenuItem to='/crafted/account/settings' title='Settings' hasBullet={true} />
       </SidebarMenuItemWithSub>
@@ -130,8 +134,7 @@ const SidebarMenuMain = () => {
         to='/error'
         title='Errors'
         fontIcon='bi-sticky'
-        icon='/media/icons/duotune/general/gen040.svg'
-      >
+        icon='/media/icons/duotune/general/gen040.svg'>
         <SidebarMenuItem to='/error/404' title='Error 404' hasBullet={true} />
         <SidebarMenuItem to='/error/500' title='Error 500' hasBullet={true} />
       </SidebarMenuItemWithSub>
@@ -139,8 +142,7 @@ const SidebarMenuMain = () => {
         to='/crafted/widgets'
         title='Widgets'
         icon='/media/icons/duotune/general/gen025.svg'
-        fontIcon='bi-layers'
-      >
+        fontIcon='bi-layers'>
         <SidebarMenuItem to='/crafted/widgets/lists' title='Lists' hasBullet={true} />
         <SidebarMenuItem to='/crafted/widgets/statistics' title='Statistics' hasBullet={true} />
         <SidebarMenuItem to='/crafted/widgets/charts' title='Charts' hasBullet={true} />

@@ -1,4 +1,4 @@
-import {KTSVG} from '../../../../_metronic/helpers';
+import {KTSVG} from '@_metronic/helpers';
 import {useContext} from 'react';
 import {ReceiverModalContext} from '@/app/modules/profile/components/Receivers';
 
@@ -8,7 +8,7 @@ const ReceiverEditModalHeader = () => {
   return (
     <div className='modal-header'>
       {/* begin::Modal title */}
-      <h2 className='fw-bolder'>Add Receiver</h2>
+      <h2 className='fw-bolder'>Receiver Details</h2>
       {/* end::Modal title */}
 
       {/* begin::Close */}

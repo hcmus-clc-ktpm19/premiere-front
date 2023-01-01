@@ -50,7 +50,7 @@ const ConfirmModal: FC<Props> = ({
               {/* end::Close */}
             </div>
             {/* begin::Modal body */}
-            <div className='modal-body scroll-y mx-5 mx-xl-15 my-7'>
+            <div className='modal-body scroll-y mx-5'>
               <span className={'fs-4 text-gray-800 text-hover-primary fw-bolder mb-0'}>
                 {content}
               </span>
@@ -58,7 +58,7 @@ const ConfirmModal: FC<Props> = ({
             <div className={'d-flex flex-center flex-wrap mb-5'}>
               {isShowCancelBtn && (
                 <button type='button' className='btn btn-sm btn-primary' onClick={() => onCancel()}>
-                  <KTSVG path='/media/icons/duotune/arrows/arr075.svg' className='svg-icon-2' />
+                  <KTSVG path='/media/icons/duotune/arrows/arr061.svg' className='svg-icon-1' />
                   No
                 </button>
               )}
@@ -69,7 +69,7 @@ const ConfirmModal: FC<Props> = ({
                 onClick={() => onConfirm(value)}
               >
                 <KTSVG path='/media/icons/duotune/arrows/arr075.svg' className='svg-icon-2' />
-                {isShowCancelBtn ? 'Yes' : 'Ok'}
+                {isShowCancelBtn ? 'Yes' : 'OK'}
               </button>
             </div>
             {/* end::Modal body */}

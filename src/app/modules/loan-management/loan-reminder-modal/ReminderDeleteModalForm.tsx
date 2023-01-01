@@ -15,9 +15,12 @@ type Props = {
 }
 const initialValues = {
   cancelReason: 'I no longer need this loan reminder',
+  loanRemark: '',
 }
 const loanReminderSchema = Yup.object().shape({
   cancelReason: Yup.string()
+  .min(3, 'Minimum 3 symbols'),
+  loanRemark: Yup.string()
   .min(3, 'Minimum 3 symbols')
 });
 
@@ -28,7 +31,7 @@ const ReminderDeleteModalForm: FC<Props> = ({reminder, isReminderLoading}) => {
   const cancel = (withRefresh?: boolean) => {
     openReminderDeleteModal();
   };
-
+  console.log({reminder});
 
   const formik = useFormik({
     initialValues: initialValues,
@@ -252,6 +255,38 @@ const ReminderDeleteModalForm: FC<Props> = ({reminder, isReminderLoading}) => {
             {/* begin::Input group */}
             <div className='fv-row mb-7'>
               {/* begin::Label */}
+              <label className='required fw-bold fs-6 mb-2'>Loan Remark</label>
+              {/* end::Label */}
+
+              {/* begin::Input */}
+              <textarea
+                  placeholder='Input your loan remark'
+                  {...formik.getFieldProps('loanRemark')}
+                  className={clsx(
+                      'form-control form-control-solid mb-3 mb-lg-0',
+                      {'is-invalid': formik.touched.loanRemark && formik.errors.loanRemark},
+                      {
+                        'is-valid': formik.touched.loanRemark && !formik.errors.loanRemark,
+                      }
+                  )}
+                  name='loanRemark'
+                  autoComplete='off'
+                  disabled={true}
+                  rows={5}
+                  value={reminder.loanRemark}
+              />
+              {/* end::Input */}
+              {formik.touched.loanRemark && formik.errors.loanRemark && (
+                  <div className='fv-plugins-message-container'>
+                    <span role='alert'>{formik.errors.loanRemark}</span>
+                  </div>
+              )}
+            </div>
+            {/* end::Input group */}
+
+            {/* begin::Input group */}
+            <div className='fv-row mb-7'>
+              {/* begin::Label */}
               <label className='required fw-bold fs-6 mb-2'>Cancel Reason</label>
               {/* end::Label */}
 
@@ -268,8 +303,9 @@ const ReminderDeleteModalForm: FC<Props> = ({reminder, isReminderLoading}) => {
                   )}
                   name='cancelReason'
                   autoComplete='off'
-                  disabled={formik.isSubmitting || isReminderLoading}
+                  disabled={formik.isSubmitting || isReminderLoading || reminder.status === 'CANCELLED'}
                   rows={5}
+                  value={reminder.cancelReason}
               />
               {/* end::Input */}
               {formik.touched.cancelReason && formik.errors.cancelReason && (
@@ -297,7 +333,7 @@ const ReminderDeleteModalForm: FC<Props> = ({reminder, isReminderLoading}) => {
                 type='submit'
                 className='btn btn-primary'
                 data-kt-users-modal-action='submit'
-                disabled={isReminderLoading || formik.isSubmitting || !formik.isValid || !formik.touched}
+                disabled={isReminderLoading || formik.isSubmitting || !formik.isValid || !formik.touched || reminder.status === 'CANCELLED'}
             >
               <span className='indicator-label'>Confirm</span>
               {(formik.isSubmitting || isReminderLoading) && (

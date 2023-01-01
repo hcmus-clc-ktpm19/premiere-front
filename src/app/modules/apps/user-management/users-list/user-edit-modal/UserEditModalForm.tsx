@@ -9,6 +9,7 @@ import {createUser, updateUser} from '../core/_requests';
 import {useQueryResponse} from '../core/QueryResponseProvider';
 import {UserDto} from '@/app/modules/apps/user-management/users-list/core/dtos';
 import {useAuth} from '@/app/modules/auth';
+import {PremiereRole} from '@/app/models/model';
 
 type Props = {
   isUserLoading: boolean;
@@ -85,8 +86,7 @@ const UserEditModalForm: FC<Props> = ({user, isUserLoading}) => {
           data-kt-scroll-max-height='auto'
           data-kt-scroll-dependencies='#kt_modal_add_user_header'
           data-kt-scroll-wrappers='#kt_modal_add_user_scroll'
-          data-kt-scroll-offset='300px'
-        >
+          data-kt-scroll-offset='300px'>
           {/*/!* begin::Input group *!/*/}
           {/*<div className='fv-row mb-7'>*/}
           {/*  /!* begin::Label *!/*/}
@@ -427,8 +427,7 @@ const UserEditModalForm: FC<Props> = ({user, isUserLoading}) => {
               autoComplete='off'
               disabled={formik.isSubmitting || isUserLoading}
               {...formik.getFieldProps('gender')}
-              name='gender'
-            >
+              name='gender'>
               <option value=''>Select gender...</option>
               <option value='MALE'>Male</option>
               <option value='FEMALE'>Female</option>
@@ -478,10 +477,10 @@ const UserEditModalForm: FC<Props> = ({user, isUserLoading}) => {
             </div>
             {/* end::Input row */}
             {/* begin::Input row */}
-            {currentUser?.role === 'PREMIERE_ADMIN' && (
+            {currentUser?.role === PremiereRole.PREMIERE_ADMIN.toString() && (
               <div className='separator separator-dashed my-5'></div>
             )}
-            {currentUser?.role === 'PREMIERE_ADMIN' && (
+            {currentUser?.role === PremiereRole.PREMIERE_ADMIN.toString() && (
               <div className='d-flex fv-row'>
                 {/* begin::Radio */}
                 <div className='form-check form-check-custom form-check-solid'>
@@ -520,8 +519,7 @@ const UserEditModalForm: FC<Props> = ({user, isUserLoading}) => {
             onClick={() => cancel()}
             className='btn btn-light me-3'
             data-kt-users-modal-action='cancel'
-            disabled={formik.isSubmitting || isUserLoading}
-          >
+            disabled={formik.isSubmitting || isUserLoading}>
             Discard
           </button>
 
@@ -529,8 +527,7 @@ const UserEditModalForm: FC<Props> = ({user, isUserLoading}) => {
             type='submit'
             className='btn btn-primary'
             data-kt-users-modal-action='submit'
-            disabled={isUserLoading || formik.isSubmitting || !formik.isValid || !formik.touched}
-          >
+            disabled={isUserLoading || formik.isSubmitting || !formik.isValid || !formik.touched}>
             <span className='indicator-label'>Submit</span>
             {(formik.isSubmitting || isUserLoading) && (
               <span className='indicator-progress'>
