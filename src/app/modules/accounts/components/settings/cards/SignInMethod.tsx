@@ -1,13 +1,12 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import React, {useState} from 'react';
-import {KTSVG} from '../../../../../../_metronic/helpers';
+import {KTSVG} from '@_metronic/helpers';
 import * as Yup from 'yup';
 import {useFormik} from 'formik';
 import {IUpdatePassword, IUpdateEmail, updatePassword, updateEmail} from '../SettingsModel';
 import {useAuth} from "@/app/modules/auth";
 import {changePassword} from "@/app/modules/accounts/core/_requests";
 import {ConfirmModal} from "@_metronic/partials/modals/confirm/ConfirmModal";
-import {actions} from "react-table";
 
 const emailFormValidationSchema = Yup.object().shape({
   newEmail: Yup.string()

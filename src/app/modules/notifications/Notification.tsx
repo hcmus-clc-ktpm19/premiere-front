@@ -5,7 +5,6 @@ import useNotification from "../notifications/useNotification";
 
 const Notification = (): JSX.Element => {
   const {isShow, content, type, onClose} = useNotification();
-  console.log("notification", isShow, content, type, onClose);
   if (!isShow) {
     return <></>;
   }

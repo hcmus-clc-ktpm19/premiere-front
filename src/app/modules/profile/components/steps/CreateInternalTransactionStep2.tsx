@@ -12,7 +12,7 @@ interface Props {
   formikProps: FormikProps<any>;
 }
 
-const CreateTransactionStep2: FC<Props> = (props: Props) => {
+const CreateInternalTransactionStep2: FC<Props> = (props: Props) => {
   const {formikProps} = props;
 
   const [accountNumber, setAccountNumber] = useState<string>('');
@@ -180,9 +180,10 @@ const CreateTransactionStep2: FC<Props> = (props: Props) => {
         <ReceiverListModal isShow={isShowModal}
                            setIsShowModal={setIsShowModal}
                            handleOnConfirmBtn={handleOnConfirmBtn}
+                           isInternal={true}
         />
       </div>
   );
 };
 
-export {CreateTransactionStep2};
+export {CreateInternalTransactionStep2};

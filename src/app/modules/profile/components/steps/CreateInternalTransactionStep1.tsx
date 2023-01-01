@@ -14,7 +14,7 @@ interface Props {
   formikProps: FormikProps<any>;
 }
 
-const CreateTransactionStep1: FC<Props> = (props: Props) => {
+const CreateInternalTransactionStep1: FC<Props> = (props: Props) => {
   const {formikProps} = props;
   const {currentUser} = useAuth();
   const {mode} = useThemeMode();
@@ -108,4 +108,4 @@ const CreateTransactionStep1: FC<Props> = (props: Props) => {
   );
 };
 
-export {CreateTransactionStep1};
+export {CreateInternalTransactionStep1};
