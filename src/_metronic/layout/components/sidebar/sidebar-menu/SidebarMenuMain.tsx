@@ -1,14 +1,13 @@
 /* eslint-disable react/jsx-no-target-blank */
-import React, {useEffect} from 'react';
-import {useIntl} from 'react-intl';
-import {KTSVG} from '@_metronic/helpers';
-import {SidebarMenuItemWithSub} from './SidebarMenuItemWithSub';
-import {SidebarMenuItem} from './SidebarMenuItem';
-import {useAuth} from '@/app/modules/auth';
-import {AlertColor} from "@mui/material";
-import useNotification from "@/app/modules/notifications/useNotification";
-import {useSubscription} from "react-stomp-hooks";
-import {PremiereRole} from '@/app/models/model';
+import React, { useEffect } from 'react';
+import { useIntl } from 'react-intl';
+import { SidebarMenuItemWithSub } from './SidebarMenuItemWithSub';
+import { SidebarMenuItem } from './SidebarMenuItem';
+import { useAuth } from '@/app/modules/auth';
+import { AlertColor } from '@mui/material';
+import useNotification from '@/app/modules/notifications/useNotification';
+import { useSubscription } from 'react-stomp-hooks';
+import { PremiereRole } from '@/app/models/model';
 
 const SidebarMenuMain = () => {
   const intl = useIntl();
@@ -40,7 +39,7 @@ const SidebarMenuMain = () => {
       <SidebarMenuItem
         to='/dashboard'
         icon='/media/icons/duotune/art/art002.svg'
-        title={intl.formatMessage({id: 'MENU.DASHBOARD'})}
+        title={intl.formatMessage({ id: 'MENU.DASHBOARD' })}
         fontIcon='bi-app-indicator'
       />
       <SidebarMenuItem
@@ -89,16 +88,19 @@ const SidebarMenuMain = () => {
             title='Campaigns'
             hasBullet={true}
           />
-          <SidebarMenuItemWithSub to='/crafted/pages/profile/transactions' title='Transactions' hasBullet={true}>
+          <SidebarMenuItemWithSub
+            to='/crafted/pages/profile/transactions'
+            title='Transactions'
+            hasBullet={true}>
             <SidebarMenuItem
               to='/crafted/pages/profile/transactions'
               title='Transactions History'
               hasBullet={true}
             />
             <SidebarMenuItem
-                to='/crafted/pages/profile/create-transaction'
-                title='Create Transaction'
-                hasBullet={true}
+              to='/crafted/pages/profile/create-transaction'
+              title='Create Transaction'
+              hasBullet={true}
             />
           </SidebarMenuItemWithSub>
           <SidebarMenuItem
@@ -150,26 +152,28 @@ const SidebarMenuMain = () => {
         <SidebarMenuItem to='/crafted/widgets/tables' title='Tables' hasBullet={true} />
         <SidebarMenuItem to='/crafted/widgets/feeds' title='Feeds' hasBullet={true} />
       </SidebarMenuItemWithSub>
-      {(currentUser?.role === PremiereRole.PREMIERE_ADMIN || currentUser?.role === PremiereRole.EMPLOYEE)
-          && (<>
-            <div className="menu-item">
-              <div className="menu-content pt-8 pb-2">
-                <span className="menu-section text-muted text-uppercase fs-8 ls-1">Employee</span>
-              </div>
+      {(currentUser?.role === PremiereRole.PREMIERE_ADMIN ||
+        currentUser?.role === PremiereRole.EMPLOYEE) && (
+        <>
+          <div className='menu-item'>
+            <div className='menu-content pt-8 pb-2'>
+              <span className='menu-section text-muted text-uppercase fs-8 ls-1'>Employee</span>
             </div>
-            <SidebarMenuItem
-                to="/apps/user-management/users"
-                icon="/media/icons/duotune/general/gen051.svg"
-                title="User management"
-                fontIcon="bi-layers"
-            />
-            <SidebarMenuItem
-                to="/apps/deposit-management/deposit-money"
-                icon="/media/icons/duotune/finance/fin010.svg"
-                title="Deposit money"
-                fontIcon="bi-layers"
-            />
-          </>)}
+          </div>
+          <SidebarMenuItem
+            to='/apps/user-management/users'
+            icon='/media/icons/duotune/general/gen051.svg'
+            title='User management'
+            fontIcon='bi-layers'
+          />
+          <SidebarMenuItem
+            to='/apps/deposit-management/deposit-money'
+            icon='/media/icons/duotune/finance/fin010.svg'
+            title='Deposit money'
+            fontIcon='bi-layers'
+          />
+        </>
+      )}
     </>
   );
 };
