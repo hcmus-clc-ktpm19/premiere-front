@@ -2,11 +2,11 @@ import {ErrorDto} from '@/app/models/model';
 
 class CreditCardNotFoundException extends Error {
 
-  public errorObject?: ErrorDto;
+  public errorDto?: ErrorDto;
 
   constructor(message: string, errorObject?: ErrorDto) {
     super(message);
-    this.errorObject = errorObject;
+    this.errorDto = errorObject;
     this.name = 'CreditCardNotFoundException';
   }
 }

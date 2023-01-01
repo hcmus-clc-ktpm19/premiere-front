@@ -6,6 +6,7 @@ import { DepositForm } from '@/app/modules/apps/deposit-management/components/De
 import { depositMoneyService } from '@/app/modules/apps/deposit-management/core/services';
 import { useNavigate } from 'react-router-dom';
 import CreditCardNotFoundException from '@/app/models/exceptions/CreditCardNotFoundException';
+import { useIntl } from 'react-intl';
 
 const DepositMoneyPage: React.FC = () => {
   const navigate = useNavigate();
@@ -13,14 +14,15 @@ const DepositMoneyPage: React.FC = () => {
     depositMoneyService.initDepositMoneyRequest
   );
   const [error, setError] = useState<string | undefined>();
+  const intl = useIntl();
 
-  const handleOnSubmit = async (values: DepositMoneyRequestDto) => {
+  const handleOnSubmit = async (values: DepositMoneyRequestDto): Promise<void> => {
     try {
       await depositMoneyService.depositMoney(values);
       navigate('/dashboard');
     } catch (e: CreditCardNotFoundException | any) {
       if (e instanceof CreditCardNotFoundException) {
-        setError(e.errorObject?.i18nPlaceHolder);
+        setError(e.errorDto?.i18nPlaceHolder);
       } else {
         navigate('/error/500');
       }
@@ -43,7 +45,10 @@ const DepositMoneyPage: React.FC = () => {
                 <DepositForm formikProps={props} />
               </div>
 
-              {error}
+              {error && (
+                <h4 className='fw-bolder text-danger'>{intl.formatMessage({ id: error })}</h4>
+              )}
+
               <div className='d-flex flex-stack pt-10'>
                 <div>
                   <button
