@@ -31,7 +31,6 @@ const ReminderDeleteModalForm: FC<Props> = ({reminder, isReminderLoading}) => {
   const cancel = (withRefresh?: boolean) => {
     openReminderDeleteModal();
   };
-  console.log({reminder});
 
   const formik = useFormik({
     initialValues: initialValues,
