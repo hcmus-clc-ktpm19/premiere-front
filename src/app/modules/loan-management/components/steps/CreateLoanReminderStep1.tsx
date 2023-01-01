@@ -1,10 +1,12 @@
 import React, {FC, useEffect, useState} from 'react';
 import {ErrorMessage, Field, FormikProps} from 'formik';
 import {services} from '@/app/modules/loan-management/core/services';
-// @ts-ignore
 import {ErrorDto, UserDto} from '@/app/models/model';
 import {NavLink} from 'react-router-dom';
 import {useIntl} from 'react-intl';
+import {KTSVG} from "@_metronic/helpers";
+import ReceiverListModal from "@/app/modules/profile/receiver-list-modal/ReceiverListModal";
+import {ReceiverDto} from "@/app/modules/profile/core/_dtos";
 
 interface Props {
   formikProps: FormikProps<any>;
@@ -14,12 +16,19 @@ const CreateLoanReminderStep1: FC<Props> = (props: Props) => {
   const {formikProps} = props;
   const [accountNumber, setAccountNumber] = useState<string>('');
   const [error, setError] = useState<ErrorDto | null>(null);
+  const [isShowModal, setIsShowModal] = useState<boolean>(false);
   const intl = useIntl();
 
   const handleOnChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setAccountNumber(e.target.value);
     formikProps.handleChange(e);
   };
+
+  const handleOnConfirmBtn = (selectedReceiver: ReceiverDto | null) => {
+    console.log("selectedReceiver", selectedReceiver);
+    setAccountNumber(selectedReceiver!.cardNumber);
+    setIsShowModal(false);
+  }
 
   useEffect(() => {
     setError(null);
@@ -62,6 +71,17 @@ const CreateLoanReminderStep1: FC<Props> = (props: Props) => {
           </NavLink>
           .
         </div>
+
+        <button
+            className='btn btn-danger btn-sm float-end'
+            data-bs-toggle='tooltip'
+            title='Choose from your receiver list'
+            type={'button'}
+            onClick={() => setIsShowModal(true)}
+        >
+          <KTSVG path='/media/icons/duotune/arrows/arr075.svg' className='svg-icon-2'/>
+          Contacts
+        </button>
       </div>
 
       <div className='fv-row mb-10'>
@@ -128,6 +148,11 @@ const CreateLoanReminderStep1: FC<Props> = (props: Props) => {
           <ErrorMessage name='debtorPhone' />
         </div>
       </div>
+      <ReceiverListModal isShow={isShowModal}
+                         setIsShowModal={setIsShowModal}
+                         handleOnConfirmBtn={handleOnConfirmBtn}
+                         isInternal={true}
+      />
     </div>
   );
 };

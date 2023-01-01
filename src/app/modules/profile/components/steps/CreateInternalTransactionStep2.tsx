@@ -84,8 +84,8 @@ const CreateInternalTransactionStep2: FC<Props> = (props: Props) => {
               Help Page
             </NavLink>
             .
-
           </div>
+
           <button
               className='btn btn-danger btn-sm float-end'
               data-bs-toggle='tooltip'
