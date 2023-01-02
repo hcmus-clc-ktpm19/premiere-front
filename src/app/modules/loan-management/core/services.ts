@@ -1,4 +1,10 @@
-import { CreateLoanReminderDto, CreditCardDto, ErrorDto, UserDto } from '@/app/models/model';
+import {
+  CreateLoanReminderDto,
+  CreditCardDto,
+  ErrorDto,
+  TransferMoneyRequestDto,
+  UserDto
+} from '@/app/models/model';
 import axios, { AxiosResponse } from 'axios';
 import * as Yup from 'yup';
 import { LoanReminderDto, LoanReminderMessageDto } from '@/app/modules/loan-management/core/_dtos';
@@ -71,6 +77,18 @@ const pushMessageToMessageQueue = (
     .then((response: AxiosResponse<void>) => response.data);
 };
 
+const validateLoanReminder = (id: number): Promise<any> => {
+  return axios
+  .post(`${LOAN_REMINDER_API}/loan-reminder/validate/${id}`)
+  .then((response: AxiosResponse<any>) => response.data);
+}
+
+const payLoanReminder = (loanReminderPayDto: TransferMoneyRequestDto): Promise<any> => {
+  return axios
+  .post(`${LOAN_REMINDER_API}/loan-reminder/pay`, loanReminderPayDto)
+  .then((response: AxiosResponse<any>) => response.data);
+}
+
 export const services = {
   loanReminderValidationSchemas,
   getUserByCardNumber,
@@ -79,4 +97,6 @@ export const services = {
   getLoanRemindersByUserCreditCardNumber,
   cancelLoanReminder,
   pushMessageToMessageQueue,
+  validateLoanReminder,
+  payLoanReminder
 };
