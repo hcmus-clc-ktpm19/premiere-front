@@ -41,7 +41,7 @@ const ReminderDeleteModalForm: FC<Props> = ({reminder, isReminderLoading}) => {
       try {
         const loanReminderToCancel: LoanReminderDto = {
           ...reminder,
-          cancelReason: values.cancelReason,
+          cancelReason: values.cancelReason || initialValues.cancelReason,
         }
         console.log(loanReminderToCancel);
         await services.cancelLoanReminder(loanReminderToCancel);

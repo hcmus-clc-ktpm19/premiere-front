@@ -9,6 +9,11 @@ import {LoanReminderDto} from "@/app/modules/loan-management/core/_dtos";
 import {
   ReminderDeleteModal
 } from "@/app/modules/loan-management/loan-reminder-modal/ReminderDeleteModal";
+import {ConfirmModal} from "@_metronic/partials/modals/confirm/ConfirmModal";
+import useNotification from "@/app/modules/notifications/useNotification";
+import ReminderPaymentModal
+  from "@/app/modules/loan-management/loan-reminder-modal/ReminderPaymentModal";
+import {AlertColor} from "@mui/material";
 
 export const LoanReminderContext = React.createContext({});
 const ListOfLoanReminders = () => {
@@ -16,11 +21,18 @@ const ListOfLoanReminders = () => {
   const {currentUser} = useAuth();
   const [loanReminders, setLoanReminders] = React.useState<LoanReminderDto[]>([]);
   const [status, setStatus] = React.useState<string>('');
+  const [cancelModal, setCancelModal] = React.useState<boolean>(false);
   const [reminderToDelete, setReminderToDelete] = React.useState<LoanReminderDto>();
-  const [modal, setModal] = React.useState(false);
+
+  const [paymentModal, setPaymentModal] = React.useState<boolean>(false);
+  const [reminderToPay, setReminderToPay] = React.useState<LoanReminderDto>();
+  const [otpModal, setOtpModal] = React.useState<boolean>(false);
   const [creditCard, setCreditCard] = React.useState<CreditCardDto>();
+  const [paymentSuccess, setPaymentSuccess] = React.useState<boolean>(false);
+  const {setNotification} = useNotification();
 
   useEffect(() => {
+    setPaymentSuccess(false); // reset payment success
     profileService
     .getCreditCardByUserId(currentUser?.id)
     .then((data: CreditCardDto) => {
@@ -34,9 +46,10 @@ const ListOfLoanReminders = () => {
     .catch((error) => {
       console.log(error);
     });
-  }, []);
+  }, [paymentSuccess]);
+
   const openReminderDeleteModal = () => {
-    setModal(!modal);
+    setCancelModal(!cancelModal);
     services.getLoanRemindersByUserCreditCardNumber(creditCard!.cardNumber)
     .then((data: LoanReminderDto[]) => {
       setLoanReminders(data);
@@ -44,23 +57,54 @@ const ListOfLoanReminders = () => {
       console.log('Load loan reminder failed', error);
     });
   }
+
   const addLoanReminderHandler = () => {
     navigate('/loan-management/create-loan-reminder');
   }
+
   const deleteLoanReminderHandler = (reminder: LoanReminderDto) => {
     console.log('deleteLoanReminderHandler');
-    setReminderToDelete(reminder)
+    setReminderToDelete(reminder);
     openReminderDeleteModal();
   }
 
-  // const onClose = () => {
-  //   setIsShow(!isShow);
-  // }
+  const onPayReminderHandler = (reminder: LoanReminderDto) => {
+    console.log('onPayReminderHandler');
+    if (reminder.status === 'PAID') {
+      setNotification(true, 'This reminder has been paid.', 'error', () => {});
+    } else if (reminder.status === 'CANCELLED') {
+      setNotification(true, 'This reminder has been cancelled.', 'error', () => {});
+    } else {
+      if (reminder.receiverId !== currentUser?.id) {
+        setNotification(true, 'You are not allowed to pay this reminder', 'error', () => {});
+      } else {
+        setReminderToPay(reminder);
+        setPaymentModal(!paymentModal);
+      }
+    }
+  }
+
+  const onAgreePaymentHandler = (reminder: LoanReminderDto) => {
+    // check if user is really a receiver of this loan reminder
+    console.log('onAgreePaymentHandler');
+    setPaymentModal(!paymentModal);
+    // we will validate and send OTP from this step
+    services.validateLoanReminder(reminder.id).then((data: string) => {
+      // open OTP modal to verify OTP
+      setOtpModal(!otpModal);
+    }).catch((e) => {
+      console.log('Validate loan reminder failed', e);
+      const notificationType: AlertColor = "error";
+      const errorMessage: string = e.response.data['Error: '] || "Something went wrong!";
+      console.log("errorMessage", errorMessage);
+      setNotification(true, errorMessage, notificationType, () => {});
+    });
+  }
 
   return (
       <>
         <LoanReminderContext.Provider
-            value={{modal, reminderToDelete, openReminderDeleteModal}}>
+            value={{modal: cancelModal, reminderToDelete, openReminderDeleteModal}}>
           <div className='d-flex flex-wrap flex-stack mb-6'>
             <h3 className='fw-bolder my-2'>
               Total Reminders
@@ -80,8 +124,7 @@ const ListOfLoanReminders = () => {
                 >
                   <option value=''>Status...</option>
                   <option value='PENDING'>PENDING</option>
-                  <option value='APPROVED'>APPROVED</option>
-                  <option value='REJECTED'>REJECTED</option>
+                  <option value='PAID'>PAID</option>
                   <option value='CANCELLED'>CANCELLED</option>
                 </select>
               </div>
@@ -110,7 +153,8 @@ const ListOfLoanReminders = () => {
                     <th className='min-w-120px'>Receiver</th>
                     <th className='min-w-120px'>Transfer Amount</th>
                     <th className='min-w-120px'>Status</th>
-                    <th className='min-w-120px'>Date</th>
+                    <th className='min-w-120px'>Created Date</th>
+                    <th className='min-w-120px'>Updated Date</th>
                     <th className='min-w-100px text-end'>Actions</th>
                   </tr>
                   </thead>
@@ -157,10 +201,8 @@ const ListOfLoanReminders = () => {
                             {
                               reminder.status === 'PENDING' ? (
                                   <span className='badge badge-light-primary'>PENDING</span>
-                              ) : reminder.status === 'APPROVED' ? (
-                                  <span className='badge badge-light-success'>APPROVED</span>
-                              ) : reminder.status === 'REJECTED' ? (
-                                  <span className='badge badge-light-warning'>REJECTED</span>
+                              ) : reminder.status === 'PAID' ? (
+                                  <span className='badge badge-light-success'>PAID</span>
                               ) : (
                                   <span className='badge badge-light-danger'>CANCELLED</span>
                               )
@@ -176,14 +218,23 @@ const ListOfLoanReminders = () => {
                           </span>
                           </td>
 
+                          <td>
+                            <a href='#'
+                               className='text-dark fw-bold text-hover-primary d-block mb-1 fs-6'>
+                              {new Date(reminder.updatedTime).toLocaleDateString()}
+                            </a>
+                            <span className='text-muted fw-semibold text-muted d-block fs-7'>
+                            {new Date(reminder.updatedTime).toLocaleTimeString()}
+                          </span>
+                          </td>
+
                           <td className='text-end'>
                             <button type='button'
                                     onClick={() => {
-                                      deleteLoanReminderHandler(reminder)
+                                      onPayReminderHandler(reminder)
                                     }}
                                     className='btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1'>
                               <KTSVG path='/media/icons/duotune/general/gen024.svg' className='svg-icon-1' />
-                              {/*<KTSVG path='/media/icons/duotune/general/gen019.svg' className='svg-icon-3' />*/}
                             </button>
                             <button type='button'
                                     onClick={() => {
@@ -262,6 +313,20 @@ const ListOfLoanReminders = () => {
           </div>
           <ReminderDeleteModal/>
         </LoanReminderContext.Provider>
+        <ConfirmModal isShow={paymentModal}
+                      header={'Payment Confirmation'}
+                      content={'Are you sure you want to pay off this debt?'}
+                      onConfirm={onAgreePaymentHandler}
+                      onCancel={() => setPaymentModal(false)}
+                      value={reminderToPay}
+                      isShowCancelBtn={true}
+        />
+
+        <ReminderPaymentModal isShow={otpModal}
+                              reminder={reminderToPay as LoanReminderDto}
+                              setIsShowModal={setOtpModal}
+                              setPaymentSuccess={setPaymentSuccess}
+        />
       </>
   );
 };

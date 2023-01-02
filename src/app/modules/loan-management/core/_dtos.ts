@@ -4,6 +4,7 @@ export interface LoanReminderDto {
   transferAmount: number;
   loanRemark: string;
   time: string;
+  updatedTime: string;
   status: string;
   senderCreditCardNumber: string;
   senderName: string;
