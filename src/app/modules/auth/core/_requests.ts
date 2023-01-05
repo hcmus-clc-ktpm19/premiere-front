@@ -1,14 +1,14 @@
 import axios from 'axios';
-import {AuthModel, OTPModel, PasswordResetModel, UserModel} from './_models';
+import { AuthModel, OTPModel, PasswordResetModel, UserModel } from './_models';
 import qs from 'qs';
 
 const API_URL = process.env.REACT_APP_API_URL;
-const KEYCLOAK_ACCESS_TOKEN_URL: string = process.env.KEYCLOAK_ACCESS_TOKEN_URL!!;
-const KEYCLOAK_SCOPE: string = process.env.KEYCLOAK_SCOPE!!;
-const KEYCLOAK_CLIENT_ID: string = process.env.KEYCLOAK_CLIENT_ID!!;
-const KEYCLOAK_CLIENT_SECRET: string = process.env.KEYCLOAK_CLIENT_SECRET!!;
-const KEYCLOAK_GRANT_TYPE: string = process.env.KEYCLOAK_GRANT_TYPE!!;
-const PREMIERE_API_URL: string = process.env.PREMIERE_API_URL!!;
+const KEYCLOAK_ACCESS_TOKEN_URL: string = process.env.KEYCLOAK_ACCESS_TOKEN_URL!;
+const KEYCLOAK_SCOPE: string = process.env.KEYCLOAK_SCOPE!;
+const KEYCLOAK_CLIENT_ID: string = process.env.KEYCLOAK_CLIENT_ID!;
+const KEYCLOAK_CLIENT_SECRET: string = process.env.KEYCLOAK_CLIENT_SECRET!;
+const KEYCLOAK_GRANT_TYPE: string = process.env.KEYCLOAK_GRANT_TYPE!;
+const PREMIERE_API_URL: string = process.env.PREMIERE_API_URL!;
 
 const keycloakAuthRequestAttributes = {
   grant_type: KEYCLOAK_GRANT_TYPE,
@@ -59,7 +59,7 @@ export function register(
 
 // Server should return object => { result: boolean } (Is Email in DB)
 export function requestPassword(email: string) {
-  return axios.post<{result: boolean}>(REQUEST_PASSWORD_URL, {
+  return axios.post<{ result: boolean }>(REQUEST_PASSWORD_URL, {
     email,
   });
 }
@@ -97,6 +97,15 @@ export const AuthService = {
         username,
         password,
       }),
+      keycloakConfig
+    );
+  },
+
+  getToken(refreshToken: string) {
+    keycloakAuthRequestAttributes.grant_type = 'refresh_token';
+    return axios.post<AuthModel>(
+      KEYCLOAK_ACCESS_TOKEN_URL,
+      qs.stringify({ ...keycloakAuthRequestAttributes, refresh_token: refreshToken }),
       keycloakConfig
     );
   },

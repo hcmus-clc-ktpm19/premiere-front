@@ -1,15 +1,15 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import * as Yup from 'yup';
 import clsx from 'clsx';
-import {Link} from 'react-router-dom';
-import {useFormik} from 'formik';
-import {AuthService, getUserByToken} from '../core/_requests';
-import {useAuth} from '../core/Auth';
+import { Link } from 'react-router-dom';
+import { useFormik } from 'formik';
+import { AuthService, getUserByToken } from '../core/_requests';
+import { useAuth } from '../core/Auth';
 import ReCAPTCHA from 'react-google-recaptcha';
-import {UserModel} from '@/app/modules/auth';
+import { UserModel } from '@/app/modules/auth';
 
-const RECAPTCHA_SITE_KEY: string = process.env.GOOGLE_RECAPTCHA_SITE_KEY!!;
+const RECAPTCHA_SITE_KEY: string = process.env.GOOGLE_RECAPTCHA_SITE_KEY!;
 
 // const phoneRegExp = /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/
 
@@ -45,21 +45,21 @@ const user: UserModel = {
 
 export function Login() {
   const [loading, setLoading] = useState<boolean>(false);
-  const {saveAuth, setCurrentUser} = useAuth();
+  const { saveAuth, setCurrentUser } = useAuth();
 
   const formik = useFormik({
     initialValues,
     validationSchema: loginSchema,
-    onSubmit: async (values, {setStatus, setSubmitting}) => {
+    onSubmit: async (values, { setStatus, setSubmitting }) => {
       if (recaptchaRef.current?.getValue()?.length === 0) {
         setStatus('Please verify that you are not a robot.');
         return;
       }
       setLoading(true);
       try {
-        const {data: auth} = await AuthService.loginKeycloak(values.phone, values.password);
+        const { data: auth } = await AuthService.loginKeycloak(values.phone, values.password);
         saveAuth(auth);
-        const {data: user} = await getUserByToken();
+        const { data: user } = await getUserByToken();
         user.password = values.password;
         setCurrentUser(user);
       } catch (error) {
@@ -79,8 +79,7 @@ export function Login() {
       className='form w-100'
       onSubmit={formik.handleSubmit}
       noValidate
-      id='kt_login_signin_form'
-    >
+      id='kt_login_signin_form'>
       {/* begin::Heading */}
       <div className='text-center mb-11'>
         <h1 className='text-dark fw-bolder mb-3'>Sign In</h1>
@@ -114,7 +113,7 @@ export function Login() {
           {...formik.getFieldProps('phone')}
           className={clsx(
             'form-control bg-transparent',
-            {'is-invalid': formik.touched.phone && formik.errors.phone},
+            { 'is-invalid': formik.touched.phone && formik.errors.phone },
             {
               'is-valid': formik.touched.phone && !formik.errors.phone,
             }
@@ -172,16 +171,15 @@ export function Login() {
 
       {/* begin::Action */}
       <div className='d-grid mb-10'>
-        <ReCAPTCHA ref={recaptchaRef} sitekey={RECAPTCHA_SITE_KEY} className={'recaptcha'}/>
+        <ReCAPTCHA ref={recaptchaRef} sitekey={RECAPTCHA_SITE_KEY} className={'recaptcha'} />
         <button
           type='submit'
           id='kt_sign_in_submit'
           className='btn btn-primary'
-          disabled={formik.isSubmitting || !formik.isValid}
-        >
+          disabled={formik.isSubmitting || !formik.isValid}>
           {!loading && <span className='indicator-label'>Continue</span>}
           {loading && (
-            <span className='indicator-progress' style={{display: 'block'}}>
+            <span className='indicator-progress' style={{ display: 'block' }}>
               Please wait...
               <span className='spinner-border spinner-border-sm align-middle ms-2'></span>
             </span>
