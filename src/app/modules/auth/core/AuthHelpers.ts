@@ -1,4 +1,6 @@
-import {AuthModel} from './_models';
+import { AuthModel } from './_models';
+import { AuthService } from '@/app/modules/auth/core/_requests';
+import { AxiosError, AxiosResponse } from 'axios';
 
 const AUTH_LOCAL_STORAGE_KEY = 'kt-auth-react-v';
 const getAuth = (): AuthModel | undefined => {
@@ -50,7 +52,7 @@ const removeAuth = () => {
 export function setupAxios(axios: any) {
   axios.defaults.headers.Accept = 'application/json';
   axios.interceptors.request.use(
-    (config: {headers: {Authorization: string}}) => {
+    (config: { headers: { Authorization: string } }) => {
       const auth = getAuth();
       if (auth && auth.access_token) {
         config.headers.Authorization = `Bearer ${auth.access_token}`;
@@ -60,6 +62,22 @@ export function setupAxios(axios: any) {
     },
     (err: any) => Promise.reject(err)
   );
+  axios.interceptors.response.use(
+    (response: AxiosResponse) => response,
+    async (error: AxiosError) => {
+      try {
+        const refreshToken = getAuth()?.refresh_token;
+        if (refreshToken) {
+          const { data: auth } = await AuthService.getToken(refreshToken);
+          setAuth(auth);
+        } else {
+          return Promise.reject(error);
+        }
+      } catch (e) {
+        return Promise.reject(error);
+      }
+    }
+  );
 }
 
-export {getAuth, setAuth, removeAuth, AUTH_LOCAL_STORAGE_KEY};
+export { getAuth, setAuth, removeAuth, AUTH_LOCAL_STORAGE_KEY };
