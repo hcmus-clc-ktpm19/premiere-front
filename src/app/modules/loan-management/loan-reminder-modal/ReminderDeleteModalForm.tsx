@@ -54,6 +54,7 @@ const ReminderDeleteModalForm: FC<Props> = ({reminder, isReminderLoading}) => {
             receiverId: reminder.receiverId,
             receiverName: reminder.receiverName,
             message: `You have a cancelled loan reminder message from ${reminder.senderName}`,
+            destination: '/loan-management/list-of-loan-reminders'
           }
         } else {
           loanReminderMessageDto = {
@@ -62,6 +63,7 @@ const ReminderDeleteModalForm: FC<Props> = ({reminder, isReminderLoading}) => {
             receiverId: reminder.senderId,
             receiverName: reminder.senderName,
             message: `You have a cancelled loan reminder message from ${reminder.receiverName}`,
+            destination: '/loan-management/list-of-loan-reminders'
           }
         }
         // push message to RabbitMQ

@@ -56,6 +56,7 @@ const CreateLoanReminder: React.FC = () => {
         receiverId: res.id as number,
         receiverName: res.lastName + ' ' + res.firstName,
         message: "You have a new loan reminder from " + currentUser?.lastName + ' ' + currentUser?.firstName,
+        destination: '/loan-management/list-of-loan-reminders'
       }
       // push notification to RabbitMQ
       await services.pushMessageToMessageQueue(loanReminderMessageDto);

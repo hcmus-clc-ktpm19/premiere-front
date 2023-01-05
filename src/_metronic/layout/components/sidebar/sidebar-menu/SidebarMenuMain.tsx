@@ -29,7 +29,7 @@ const SidebarMenuMain = () => {
       const messageToParse = JSON.parse(lastMessage);
       // check if we have a message and if it's for the current user
       if (currentUser?.id === messageToParse.receiverId) {
-        setNotification(true, messageToParse.message, type, onClose);
+        setNotification(true, messageToParse.message, type, onClose, messageToParse.destination);
       }
       if (messageToParse.action === WebSocketAction.DEPOSIT_MONEY) {
         setNotification(true, messageToParse.message, type, onClose);
