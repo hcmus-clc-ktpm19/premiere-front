@@ -1,14 +1,15 @@
-import {ReceiverEditModalForm} from './ReceiverEditModalForm';
-import {ProfileService as profileService} from '@/app/modules/profile/core/_requests';
-import {isNotEmpty, QUERIES} from '@_metronic/helpers';
-import {useQuery} from 'react-query';
-import {useContext} from 'react';
-import {ReceiverModalContext} from '@/app/modules/profile/components/Receivers';
+import { ReceiverEditModalForm } from './ReceiverEditModalForm';
+import { ProfileService as profileService } from '@/app/modules/profile/core/_requests';
+import { isNotEmpty, QUERIES } from '@_metronic/helpers';
+import { useQuery } from 'react-query';
+import { useContext } from 'react';
+import { ReceiverModalContext } from '@/app/modules/profile/components/Receivers';
+import { useAuth } from '@/app/modules/auth';
 
 const ReceiverEditModalFormWrapper = () => {
-  // @ts-ignore
-  const {receiverToUpdate, setReceiverToUpdate} = useContext(ReceiverModalContext);
+  const { receiverToUpdate, setReceiverToUpdate } = useContext(ReceiverModalContext);
   const enabledQuery: boolean = isNotEmpty(receiverToUpdate);
+  const { currentUser } = useAuth();
   const {
     isLoading,
     data: receiver,
@@ -16,7 +17,10 @@ const ReceiverEditModalFormWrapper = () => {
   } = useQuery(
     `${QUERIES.RECEIVERS_LIST}-receiver-${receiverToUpdate}`,
     () => {
-      return profileService.getReceiverByCreditCardNumber(receiverToUpdate?.cardNumber);
+      return profileService.getReceiverByCreditCardNumber(
+        currentUser?.id,
+        receiverToUpdate?.cardNumber
+      );
     },
     {
       cacheTime: 0,
@@ -50,4 +54,4 @@ const ReceiverEditModalFormWrapper = () => {
   return null;
 };
 
-export {ReceiverEditModalFormWrapper};
+export { ReceiverEditModalFormWrapper };

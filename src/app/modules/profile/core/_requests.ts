@@ -1,12 +1,14 @@
 import axios from 'axios';
-import {CreditCardDto, ReceiverDto} from '@/app/modules/profile/core/_dtos';
+import { CreditCardDto, ReceiverDto } from '@/app/modules/profile/core/_dtos';
 import {
   PaginationDto,
   PremierePaginationReponseDto,
   TransactionCriteriaDto,
-  TransactionDto, TransactionRequestDto, TransferMoneyRequestDto,
+  TransactionDto,
+  TransactionRequestDto,
+  TransferMoneyRequestDto,
 } from '@/app/models/model';
-import * as Yup from "yup";
+import * as Yup from 'yup';
 
 // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
 const PREMIERE_API_URL: string = process.env.PREMIERE_API_URL!;
@@ -33,8 +35,13 @@ const getAllReceiversByUserId = async (userId: number | undefined): Promise<Rece
   return (await axios.get<ReceiverDto[]>(`${PREMIERE_API_URL}/receivers?userId=${userId}`)).data;
 };
 
-const getReceiverByCreditCardNumber = async (creditCardNumber: string): Promise<ReceiverDto> => {
-  return (await axios.get<ReceiverDto>(`${PREMIERE_API_URL}/receivers/${creditCardNumber}`)).data;
+const getReceiverByCreditCardNumber = async (
+  userId: number | undefined,
+  creditCardNumber: string
+): Promise<ReceiverDto> => {
+  return (
+    await axios.get<ReceiverDto>(`${PREMIERE_API_URL}/receivers/${userId}/${creditCardNumber}`)
+  ).data;
 };
 
 const insertReceiver = async (receiver: ReceiverDto): Promise<ReceiverDto> => {
@@ -76,13 +83,22 @@ const paginationInits: PaginationDto = {
   totalPages: 0,
 };
 
-const validateTransferMoney = async (transactionRequestDto: TransactionRequestDto): Promise<any> => {
-  return (await axios.post(`${PREMIERE_API_URL}/transactions/money-transfer/validate`, transactionRequestDto)).data;
-}
+const validateTransferMoney = async (
+  transactionRequestDto: TransactionRequestDto
+): Promise<any> => {
+  return (
+    await axios.post(
+      `${PREMIERE_API_URL}/transactions/money-transfer/validate`,
+      transactionRequestDto
+    )
+  ).data;
+};
 
 const transferMoney = async (transferMoneyRequestDto: TransferMoneyRequestDto): Promise<any> => {
-  return (await axios.post(`${PREMIERE_API_URL}/transactions/money-transfer`, transferMoneyRequestDto)).data;
-}
+  return (
+    await axios.post(`${PREMIERE_API_URL}/transactions/money-transfer`, transferMoneyRequestDto)
+  ).data;
+};
 
 export const ProfileService = {
   getAllReceiversByUserId,
@@ -95,5 +111,5 @@ export const ProfileService = {
   paginationInit: paginationInits,
   validateTransferMoney,
   transferMoney,
-  transactionValidationSchemas
+  transactionValidationSchemas,
 };
