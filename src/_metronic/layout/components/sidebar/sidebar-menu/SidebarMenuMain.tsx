@@ -166,16 +166,34 @@ const SidebarMenuMain = () => {
           <SidebarMenuItem
             to='/apps/user-management/users'
             icon='/media/icons/duotune/general/gen051.svg'
-            title='User management'
+            title='User Management'
             fontIcon='bi-layers'
           />
           <SidebarMenuItem
             to='/apps/deposit-management/deposit-money'
             icon='/media/icons/duotune/finance/fin010.svg'
-            title='Deposit money'
+            title='Deposit Money'
             fontIcon='bi-layers'
           />
         </>
+      )}
+
+      {currentUser?.role === PremiereRole.PREMIERE_ADMIN && (
+          <>
+            <div className='menu-item'>
+              <div className='menu-content pt-8 pb-2'>
+                <span className='menu-section text-muted text-uppercase fs-8 ls-1'>Admin</span>
+              </div>
+            </div>
+            <SidebarMenuItemWithSub
+                to='/apps/admin-management/employee-management'
+                title='Employee Management'
+                fontIcon='bi-archive'
+                icon='/media/icons/duotune/general/gen040.svg'>
+              <SidebarMenuItem to='/apps/admin-management/employees' title='List of Employees' hasBullet={true} />
+              <SidebarMenuItem to='/apps/admin-management/create-employee' title='Create Employee' hasBullet={true} />
+            </SidebarMenuItemWithSub>
+          </>
       )}
     </>
   );

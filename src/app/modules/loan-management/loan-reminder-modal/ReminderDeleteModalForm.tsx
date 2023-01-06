@@ -183,10 +183,8 @@ const ReminderDeleteModalForm: FC<Props> = ({reminder, isReminderLoading}) => {
                     {
                       reminder.status === 'PENDING' ? (
                           <span className='badge badge-light-primary'>PENDING</span>
-                      ) : reminder.status === 'APPROVED' ? (
-                          <span className='badge badge-light-success'>APPROVED</span>
-                      ) : reminder.status === 'REJECTED' ? (
-                          <span className='badge badge-light-warning'>REJECTED</span>
+                      ) : reminder.status === 'PAID' ? (
+                          <span className='badge badge-light-success'>PAID</span>
                       ) : (
                           <span className='badge badge-light-danger'>CANCELLED</span>
                       )
@@ -304,7 +302,7 @@ const ReminderDeleteModalForm: FC<Props> = ({reminder, isReminderLoading}) => {
                   )}
                   name='cancelReason'
                   autoComplete='off'
-                  disabled={formik.isSubmitting || isReminderLoading || reminder.status === 'CANCELLED'}
+                  disabled={formik.isSubmitting || isReminderLoading || reminder.status === 'CANCELLED' || reminder.status === 'PAID'}
                   rows={5}
                   value={reminder.cancelReason}
               />
@@ -334,7 +332,9 @@ const ReminderDeleteModalForm: FC<Props> = ({reminder, isReminderLoading}) => {
                 type='submit'
                 className='btn btn-primary'
                 data-kt-users-modal-action='submit'
-                disabled={isReminderLoading || formik.isSubmitting || !formik.isValid || !formik.touched || reminder.status === 'CANCELLED'}
+                disabled={isReminderLoading || formik.isSubmitting
+                    || !formik.isValid || !formik.touched
+                    || reminder.status === 'CANCELLED' || reminder.status === 'PAID'}
             >
               <span className='indicator-label'>Confirm</span>
               {(formik.isSubmitting || isReminderLoading) && (
