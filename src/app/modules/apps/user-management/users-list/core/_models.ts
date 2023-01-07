@@ -26,7 +26,7 @@ export type User = {
 };
 
 export type UsersQueryResponse = Response<Array<User>>;
-export type CustomerQueryResponse = Response<Array<FullInfoUserDto>>;
+export type CustomerQueryResponse = FullInfoUserDto[];
 
 export const initialUser: User = {
   avatar: 'avatars/300-6.jpg',

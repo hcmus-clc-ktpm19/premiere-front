@@ -7,10 +7,10 @@ const PREMIERE_API_URL = process.env.PREMIERE_API_URL!;
 const GET_CUSTOMERS_URL = `${PREMIERE_API_URL}/auth/get-customers`;
 const CUSTOMER_URL = `${PREMIERE_API_URL}/auth/save-customer`;
 
-const getCustomers = (): Promise<AxiosResponse<CustomerQueryResponse>> => {
+const getCustomers = (): Promise<CustomerQueryResponse> => {
   return axios
     .get(`${GET_CUSTOMERS_URL}`)
-    .then((response: AxiosResponse<CustomerQueryResponse>) => response);
+    .then((response: AxiosResponse<CustomerQueryResponse>) => response.data);
 };
 
 const getCustomerById = (id: number): Promise<FullInfoUserDto | ErrorDto> => {
