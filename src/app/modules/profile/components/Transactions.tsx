@@ -9,12 +9,13 @@ import {
 import { Card6 } from '@_metronic/partials/content/cards/Card6';
 import { useAuth } from '@/app/modules/auth';
 import { useQuery } from 'react-query';
-import {useNavigate} from "react-router-dom";
-import {KTSVG} from "@_metronic/helpers";
+import { useNavigate } from 'react-router-dom';
+import { KTSVG } from '@_metronic/helpers';
 
 const badgeColors = {
   COMPLETED: 'success',
   CHECKING: 'warning',
+  FAILED: 'danger',
 };
 
 const tiles = {
@@ -49,8 +50,8 @@ export function Transactions() {
   };
 
   const handleOnCreateTransactionClick: MouseEventHandler<HTMLButtonElement> = () => {
-    navigate("/crafted/pages/profile/create-transaction")
-  }
+    navigate('/crafted/pages/profile/create-transaction');
+  };
 
   const handleOnPageClick = async (e: React.MouseEvent<HTMLLIElement>) => {
     setTransactionCriteria({
@@ -100,11 +101,11 @@ export function Transactions() {
             Refetch
           </button>
           <button
-              onClick={handleOnCreateTransactionClick}
-              className='btn btn-danger btn-sm'
-              data-bs-toggle='tooltip'
-              title='create new transaction'>
-            <KTSVG path='/media/icons/duotune/arrows/arr075.svg' className='svg-icon-2'/>
+            onClick={handleOnCreateTransactionClick}
+            className='btn btn-danger btn-sm'
+            data-bs-toggle='tooltip'
+            title='create new transaction'>
+            <KTSVG path='/media/icons/duotune/arrows/arr075.svg' className='svg-icon-2' />
             Create Transaction
           </button>
         </div>

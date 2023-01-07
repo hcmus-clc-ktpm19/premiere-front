@@ -1,6 +1,6 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import React, {FC} from 'react';
-import {KTSVG, toAbsoluteUrl} from '../../../helpers';
+import React, { FC } from 'react';
+import { KTSVG, toAbsoluteUrl } from '../../../helpers';
 
 const InviteUsers: FC = () => {
   const users = [
@@ -9,102 +9,119 @@ const InviteUsers: FC = () => {
       name: 'Emma Smith',
       phone: 'e.smith@kpmg.com.au',
       access: '1',
+      email: '',
     },
     {
       state: 'danger',
       name: 'Melody Macy',
       phone: 'melody@altbox.com',
       access: '1',
+      email: '',
     },
     {
       avatar: '/media/avatars/300-1.jpg',
       name: 'Max Smith',
       phone: 'max@kt.com',
       access: '3',
+      email: '',
     },
     {
       avatar: '/media/avatars/300-1.jpg',
       name: 'Sean Bean',
       phone: 'sean@dellito.com',
       access: '2',
+      email: '',
     },
     {
       avatar: '/media/avatars/300-25.jpg',
       name: 'Brian Cox',
       phone: 'brian@exchange.com',
       access: '3',
+      email: '',
     },
     {
       state: 'warning',
       name: 'Mikaela Collins',
       phone: 'mikaela@pexcom.com',
       access: '2',
+      email: '',
     },
     {
       avatar: '/media/avatars/300-9.jpg',
       name: 'Francis Mitcham',
       phone: 'f.mitcham@kpmg.com.au',
       access: '3',
+      email: '',
     },
     {
       state: 'danger',
       name: 'Olivia Wild',
       phone: 'olivia@corpmail.com',
       access: '2',
+      email: '',
     },
     {
       state: 'info',
       name: 'Neil Owen',
       phone: 'owen.neil@gmail.com',
       access: '1',
+      email: '',
     },
     {
       avatar: '/media/avatars/300-23.jpg',
       name: 'Dan Wilson',
       phone: 'dam@consilting.com',
       access: '3',
+      email: '',
     },
     {
       state: 'danger',
       name: 'Emma Bold',
       phone: 'emma@intenso.com',
       access: '2',
+      email: '',
     },
     {
       avatar: '/media/avatars/300-12.jpg',
       name: 'Ana Crown',
       phone: 'ana.cf@limtel.com',
       access: '1',
+      email: '',
     },
     {
       state: 'primary',
       name: 'Robert Doe',
       phone: 'robert@benko.com',
       access: '3',
+      email: '',
     },
     {
       avatar: '/media/avatars/300-13.jpg',
       name: 'John Miller',
       phone: 'miller@mapple.com',
       access: '3',
+      email: '',
     },
     {
       state: 'success',
       name: 'Lucy Kunic',
       phone: 'lucy.m@fentech.com',
       access: '2',
+      email: '',
     },
     {
       avatar: '/media/avatars/300-21.jpg',
       name: 'Ethan Wilder',
       phone: 'ethan@loop.com.au',
       access: '1',
+      email: '',
     },
     {
       avatar: '/media/avatars/300-12.jpg',
       name: 'Ana Crown',
       phone: 'ana.cf@limtel.com',
       access: '3',
+      email: '',
     },
   ];
 
@@ -148,8 +165,7 @@ const InviteUsers: FC = () => {
             <textarea
               className='form-control form-control-solid mb-8'
               rows={3}
-              placeholder='Type or paste emails here'
-            ></textarea>
+              placeholder='Type or paste emails here'></textarea>
 
             <div className='mb-10'>
               <div className='fs-6 fw-bold mb-2'>Your Invitations</div>
@@ -159,16 +175,14 @@ const InviteUsers: FC = () => {
                   return (
                     <div
                       className='d-flex flex-stack py-4 border-bottom border-gray-300 border-bottom-dashed'
-                      key={i}
-                    >
+                      key={i}>
                       <div className='d-flex align-items-center'>
                         <div className='symbol symbol-35px symbol-circle'>
                           {user.avatar && <img alt='Pic' src={toAbsoluteUrl(user.avatar)} />}
                           {user.state && (
                             <div className='symbol symbol-35px symbol-circle'>
                               <span
-                                className={`symbol-label bg-light-${user.state} text-${user.state} fw-bold`}
-                              >
+                                className={`symbol-label bg-light-${user.state} text-${user.state} fw-bold`}>
                                 {user.name.charAt(0)}
                               </span>
                             </div>
@@ -178,8 +192,7 @@ const InviteUsers: FC = () => {
                         <div className='ms-5'>
                           <a
                             href='#'
-                            className='fs-5 fw-bolder text-gray-900 text-hover-primary mb-2'
-                          >
+                            className='fs-5 fw-bolder text-gray-900 text-hover-primary mb-2'>
                             {user.name}
                           </a>
                           <div className='fw-bold text-muted'>{user.email}</div>
@@ -189,8 +202,7 @@ const InviteUsers: FC = () => {
                       <div className='ms-2 w-100px'>
                         <select
                           defaultValue={'2'}
-                          className='form-select form-select-solid form-select-sm select2-hidden-accessible'
-                        >
+                          className='form-select form-select-solid form-select-sm select2-hidden-accessible'>
                           <option value='1'>Guest</option>
                           <option value='2' data-select2-id='select2-data-12-vz6w'>
                             Owner
@@ -225,4 +237,4 @@ const InviteUsers: FC = () => {
   );
 };
 
-export {InviteUsers};
+export { InviteUsers };
