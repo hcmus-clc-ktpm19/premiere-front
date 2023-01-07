@@ -6,6 +6,7 @@ import {CustomerQueryResponse} from "@/app/modules/apps/user-management/users-li
 const PREMIERE_API_URL = process.env.PREMIERE_API_URL!;
 const GET_CUSTOMERS_URL = `${PREMIERE_API_URL}/auth/get-customers`;
 const CUSTOMER_URL = `${PREMIERE_API_URL}/auth/save-customer`;
+const CREDIT_CARD_URL = `${PREMIERE_API_URL}/credit-card`;
 
 const getCustomers = (): Promise<CustomerQueryResponse> => {
   return axios
@@ -37,8 +38,8 @@ const updateCustomer = (customer: FullInfoUserDto): Promise<number> => {
   .then((response: AxiosResponse<number>) => response.data);
 };
 
-const deleteCustomer = (userId: ID): Promise<void> => {
-  return axios.delete(`${CUSTOMER_URL}/${userId}`).then(() => {});
+const disableCustomerCreditCard = (userCreditCardNumber: string): Promise<void> => {
+  return axios.get(`${CREDIT_CARD_URL}/disable/${userCreditCardNumber}`).then(() => {});
 };
 
 const deleteSelectedUsers = (userIds: Array<ID>): Promise<void> => {
@@ -46,4 +47,11 @@ const deleteSelectedUsers = (userIds: Array<ID>): Promise<void> => {
   return axios.all(requests).then(() => {});
 };
 
-export {getCustomers, deleteCustomer, deleteSelectedUsers, getCustomerById, createCustomer, updateCustomer};
+export {
+  getCustomers,
+  disableCustomerCreditCard,
+  deleteSelectedUsers,
+  getCustomerById,
+  createCustomer,
+  updateCustomer
+};

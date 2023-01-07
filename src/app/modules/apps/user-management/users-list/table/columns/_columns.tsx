@@ -49,7 +49,7 @@ const usersColumns: ReadonlyArray<Column<FullInfoUserDto>> = [
   },
   {
     Header: (props) => (
-        <UserCustomHeader tableProps={props} title='Status' className='min-w-100px' />
+        <UserCustomHeader tableProps={props} title='Account Status' className='min-w-100px' />
     ),
     id: 'enabled',
     Cell: ({...props}) => <UserTwoStepsCell two_steps={props.data[props.row.index].enabled} />,
