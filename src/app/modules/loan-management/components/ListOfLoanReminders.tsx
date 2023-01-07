@@ -131,7 +131,7 @@ const ListOfLoanReminders = () => {
               <button type='button' className='btn btn-sm btn-primary' style={{marginLeft: '10px'}}
                       onClick={addLoanReminderHandler}>
                 <KTSVG path='/media/icons/duotune/arrows/arr075.svg' className='svg-icon-2'/>
-                Add Loan Reminder
+                Create Loan Reminder
               </button>
             </div>
           </div>

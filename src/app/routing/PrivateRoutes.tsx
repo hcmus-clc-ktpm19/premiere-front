@@ -19,6 +19,7 @@ const PrivateRoutes = () => {
   const WidgetsPage = lazy(() => import('../modules/widgets/WidgetsPage'));
   const ChatPage = lazy(() => import('../modules/apps/chat/ChatPage'));
   const UsersPage = lazy(() => import('../modules/apps/user-management/UsersPage'));
+  const AdminPage = lazy(() => import('../modules/apps/admin-management/AdminPage'));
   const {currentUser} = useAuth();
 
   return (
@@ -85,6 +86,20 @@ const PrivateRoutes = () => {
               </SuspensedView>
             </ProtectedRoute>
           }
+        />
+        <Route
+            path='apps/admin-management/*'
+            element={
+              <ProtectedRoute
+                  redirectPath='/dashboard'
+                  isAllowed={
+                      currentUser?.role === PremiereRole.PREMIERE_ADMIN.toString()
+                  }>
+                <SuspensedView>
+                  <AdminPage />
+                </SuspensedView>
+              </ProtectedRoute>
+            }
         />
         <Route
           path='apps/deposit-management/*'

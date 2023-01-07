@@ -3,11 +3,12 @@ import {KTSVG} from "@_metronic/helpers";
 import {useFormik} from "formik";
 import * as Yup from "yup";
 import clsx from "clsx";
-import {LoanReminderDto} from "@/app/modules/loan-management/core/_dtos";
+import {LoanReminderDto, LoanReminderMessageDto} from "@/app/modules/loan-management/core/_dtos";
 import {TransferMoneyRequestDto} from "@/app/models/model";
 import {services} from "@/app/modules/loan-management/core/services";
 import {AlertColor} from "@mui/material";
 import useNotification from "@/app/modules/notifications/useNotification";
+import {useAuth} from "@/app/modules/auth";
 
 type Props = {
 
@@ -28,6 +29,7 @@ const initialValues = {
 const ReminderPaymentModal: FC<Props> = ({isShow, setIsShowModal, reminder, setPaymentSuccess}) => {
 
   const {setNotification} = useNotification();
+  const {currentUser} = useAuth();
 
   const formik = useFormik(
       {
@@ -44,7 +46,19 @@ const ReminderPaymentModal: FC<Props> = ({isShow, setIsShowModal, reminder, setP
             setIsShowModal(false);
             setPaymentSuccess(true); // set payment success to true in order to trigger reload data
             setNotification(true, 'Debt is paid successfully', 'success', () => {});
+            // TODO: send notification to sender user
+            const loanReminderMessageDto: LoanReminderMessageDto = {
+              senderId: currentUser!.id,
+              senderName: currentUser?.lastName + ' ' + currentUser?.firstName,
+              receiverId: reminder.senderId,
+              receiverName: reminder.senderName,
+              message: `${currentUser?.lastName + ' ' + currentUser?.firstName} has paid your debt of ${reminder.transferAmount} VND`,
+              destination: '/loan-management/list-of-loan-reminders'
+            }
+            // push notification to RabbitMQ in order to notify sender user
+            await services.pushMessageToMessageQueue(loanReminderMessageDto);
           } catch (e: any) {
+            console.log(e);
             const notificationType: AlertColor = "error";
             const errorMessage: string = e.response.data['Error: '] || "Something went wrong!";
             console.log("errorMessage", errorMessage);

@@ -2,10 +2,10 @@
 import clsx from 'clsx';
 import {FC} from 'react';
 import {Row} from 'react-table';
-import {User} from '../../core/_models';
+import {FullInfoUserDto} from "@/app/models/model";
 
 type Props = {
-  row: Row<User>;
+  row: Row<FullInfoUserDto>;
 };
 
 const CustomRow: FC<Props> = ({row}) => (

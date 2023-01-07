@@ -1,11 +1,13 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import {FC, useEffect} from 'react';
 import {useMutation, useQueryClient} from 'react-query';
-import {MenuComponent} from '../../../../../../../_metronic/assets/ts/components';
-import {ID, KTSVG, QUERIES} from '../../../../../../../_metronic/helpers';
+import {MenuComponent} from '@_metronic/assets/ts/components';
+import {ID, KTSVG, QUERIES} from '@_metronic/helpers';
 import {useListView} from '../../core/ListViewProvider';
 import {useQueryResponse} from '../../core/QueryResponseProvider';
-import {deleteUser} from '../../core/_requests';
+import {disableCustomerCreditCard} from '../../core/_requests';
+import {ProfileService as profileService} from "@/app/modules/profile/core/_requests";
+import useNotification from "@/app/modules/notifications/useNotification";
 
 type Props = {
   id: ID;
@@ -15,6 +17,7 @@ const UserActionsCell: FC<Props> = ({id}) => {
   const {setItemIdForUpdate} = useListView();
   const {query} = useQueryResponse();
   const queryClient = useQueryClient();
+  const {setNotification} = useNotification();
 
   useEffect(() => {
     MenuComponent.reinitialization();
@@ -24,11 +27,20 @@ const UserActionsCell: FC<Props> = ({id}) => {
     setItemIdForUpdate(id);
   };
 
-  const deleteItem = useMutation(() => deleteUser(id), {
+  const deleteItem = useMutation(() => {
+    console.log('disable', id);
+    const userId = id as number;
+    profileService.getCreditCardByUserId(userId).then((res) => {
+      console.log('res', res);
+      return disableCustomerCreditCard(res.cardNumber);
+    });
+    return Promise.resolve();
+  }, {
     // 💡 response of the mutation is passed to onSuccess
     onSuccess: () => {
       // ✅ update detail view directly
       queryClient.invalidateQueries([`${QUERIES.USERS_LIST}-${query}`]);
+      setNotification(true, 'Disable user credit card successfully.', 'success', () => {});
     },
   });
 
@@ -63,7 +75,7 @@ const UserActionsCell: FC<Props> = ({id}) => {
             data-kt-users-table-filter='delete_row'
             onClick={async () => await deleteItem.mutateAsync()}
           >
-            Delete
+            Disable Card
           </a>
         </div>
         {/* end::Menu item */}

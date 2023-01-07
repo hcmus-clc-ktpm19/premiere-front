@@ -137,6 +137,28 @@ export function MenuInner() {
         </MenuInnerWithSub>
       )}
 
+      {/*{currentUser?.role === PremiereRole.PREMIERE_ADMIN.toString() && (*/}
+      {/*    <MenuInnerWithSub title='Apps4' to='/apps' menuPlacement='bottom-start' menuTrigger='click'>*/}
+      {/*      /!* PAGES *!/*/}
+      {/*      <MenuInnerWithSub*/}
+      {/*          title='Chat'*/}
+      {/*          to='/apps/chat'*/}
+      {/*          icon='/media/icons/duotune/communication/com012.svg'*/}
+      {/*          hasArrow={true}*/}
+      {/*          menuPlacement='right-start'*/}
+      {/*          menuTrigger={`{default:'click', lg: 'hover'}`}>*/}
+      {/*        <MenuItem to='/apps/chat/private-chat' title='Private Chat' hasBullet={true} />*/}
+      {/*        <MenuItem to='/apps/chat/group-chat' title='Group Chart' hasBullet={true} />*/}
+      {/*        <MenuItem to='/apps/chat/drawer-chat' title='Drawer Chart' hasBullet={true} />*/}
+      {/*      </MenuInnerWithSub>*/}
+      {/*      <MenuItem*/}
+      {/*          icon='/media/icons/duotune/general/gen051.svg'*/}
+      {/*          to='/apps/admin-management/employees'*/}
+      {/*          title='Admin Management'*/}
+      {/*      />*/}
+      {/*    </MenuInnerWithSub>*/}
+      {/*)}*/}
+
       <MenuInnerWithSub
         isMega={true}
         title='Mega menu'

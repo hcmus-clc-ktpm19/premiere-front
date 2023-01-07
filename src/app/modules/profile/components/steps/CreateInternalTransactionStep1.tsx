@@ -21,7 +21,7 @@ const CreateInternalTransactionStep1: FC<Props> = (props: Props) => {
   const [creditCard, setCreditCard] = useState<CreditCardDto>();
   const intl = useIntl();
   const [error, setError] = useState<ErrorDto | null>(null);
-  const [isCardSelected, setIsCardSelected] = useState(false);
+  const [isCardSelected, setIsCardSelected] = useState(true);
 
   const handleCardChange = (e: React.ChangeEvent<any>) => {
     setIsCardSelected(!isCardSelected);

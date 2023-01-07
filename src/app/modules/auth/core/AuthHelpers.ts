@@ -65,16 +65,22 @@ export function setupAxios(axios: any) {
   axios.interceptors.response.use(
     (response: AxiosResponse) => response,
     async (error: AxiosError) => {
-      try {
-        const refreshToken = getAuth()?.refresh_token;
-        if (refreshToken) {
-          const { data: auth } = await AuthService.getToken(refreshToken);
-          setAuth(auth);
-        } else {
+      if (error.response && error.response.status === 401) {
+        try {
+          const refreshToken = getAuth()?.refresh_token;
+          if (refreshToken) {
+            const { data: auth } = await AuthService.getToken(refreshToken);
+            setAuth(auth);
+          } else {
+            console.log('No refresh token from else');
+            return Promise.reject(error);
+          }
+        } catch (e) {
+          console.log('No refresh token from catch');
           return Promise.reject(error);
         }
-      } catch (e) {
-        return Promise.reject(error);
+    } else {
+      return Promise.reject(error);
       }
     }
   );

@@ -2,7 +2,7 @@ import axios from 'axios';
 import { CreditCardDto, ReceiverDto } from '@/app/modules/profile/core/_dtos';
 import {
   PaginationDto,
-  PremierePaginationReponseDto,
+  PremierePaginationResponseDto,
   TransactionCriteriaDto,
   TransactionDto,
   TransactionRequestDto,
@@ -44,8 +44,14 @@ const getReceiverByCreditCardNumber = async (
   ).data;
 };
 
-const insertReceiver = async (receiver: ReceiverDto): Promise<ReceiverDto> => {
-  return (await axios.post<ReceiverDto>(`${PREMIERE_API_URL}/receivers`, receiver)).data;
+const insertReceiver = (receiver: ReceiverDto): Promise<ReceiverDto> => {
+  return axios.post<ReceiverDto>(`${PREMIERE_API_URL}/receivers`, receiver).then((res) => {
+    if (res.status === 202) {
+      return Promise.reject(res.data);
+    }
+    return res.data;
+  });
+  // return (await axios.post<ReceiverDto>(`${PREMIERE_API_URL}/receivers`, receiver)).data;
 };
 
 const deleteReceiver = async (creditCardNumber: string): Promise<ReceiverDto> => {
@@ -64,9 +70,9 @@ const getCreditCardByUserId = async (userId: number | undefined): Promise<Credit
 const getTransactionByCustomerId = async (
   customerId: number,
   transactionCriteria: TransactionCriteriaDto
-): Promise<PremierePaginationReponseDto<TransactionDto>> => {
+): Promise<PremierePaginationResponseDto<TransactionDto>> => {
   return (
-    await axios.post<PremierePaginationReponseDto<TransactionDto>>(
+    await axios.post<PremierePaginationResponseDto<TransactionDto>>(
       `${PREMIERE_API_URL}/transactions/users/${customerId}/get-transactions`,
       transactionCriteria
     )
