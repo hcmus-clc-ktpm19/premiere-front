@@ -188,14 +188,12 @@ const SidebarMenuMain = () => {
                 <span className='menu-section text-muted text-uppercase fs-8 ls-1'>Admin</span>
               </div>
             </div>
-            <SidebarMenuItemWithSub
-                to='/apps/admin-management/employee-management'
+            <SidebarMenuItem
+                to='/apps/admin-management/employees'
                 title='Employee Management'
                 fontIcon='bi-archive'
                 icon='/media/icons/duotune/communication/com014.svg'>
-              <SidebarMenuItem to='/apps/admin-management/employees' title='List of Employees' hasBullet={true} />
-              <SidebarMenuItem to='/apps/admin-management/create-employee' title='Create Employee' hasBullet={true} />
-            </SidebarMenuItemWithSub>
+            </SidebarMenuItem>
           </>
       )}
     </>
