@@ -21,11 +21,14 @@ const usersColumns: ReadonlyArray<Column<FullInfoUserDto>> = [
     Cell: ({...props}) => <UserSelectionCell id={props.data[props.row.index].id} />,
   },
   {
+    Header: (props) => <UserCustomHeader tableProps={props} title='Username' className='min-w-100px' />,
+    accessor: 'username',
+  },
+  {
     Header: (props) => <UserCustomHeader tableProps={props} title='Name' className='min-w-125px' />,
     id: 'name',
     Cell: ({...props}) => <UserInfoCell user={props.data[props.row.index]} />,
   },
-
   {
     Header: (props) => <UserCustomHeader tableProps={props} title='Phone Number' className='min-w-125px' />,
     accessor: 'phone',
@@ -39,14 +42,14 @@ const usersColumns: ReadonlyArray<Column<FullInfoUserDto>> = [
   },
   {
     Header: (props) => (
-      <UserCustomHeader tableProps={props} title='Gender' className='min-w-125px' />
+      <UserCustomHeader tableProps={props} title='Gender' className='min-w-100px' />
     ),
     id: 'gender',
     Cell: ({...props}) => <UserGenderCell gender={props.data[props.row.index].gender} />,
   },
   {
     Header: (props) => (
-        <UserCustomHeader tableProps={props} title='Status' className='min-w-125px' />
+        <UserCustomHeader tableProps={props} title='Status' className='min-w-100px' />
     ),
     id: 'enabled',
     Cell: ({...props}) => <UserTwoStepsCell two_steps={props.data[props.row.index].enabled} />,

@@ -72,10 +72,11 @@ export function setupAxios(axios: any) {
             const { data: auth } = await AuthService.getToken(refreshToken);
             setAuth(auth);
           } else {
-            console.log('No refresh token');
+            console.log('No refresh token from else');
             return Promise.reject(error);
           }
         } catch (e) {
+          console.log('No refresh token from catch');
           return Promise.reject(error);
         }
     } else {

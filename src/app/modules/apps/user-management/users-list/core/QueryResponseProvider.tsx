@@ -87,8 +87,10 @@ const filterData = (data: FullInfoUserDto[], state: QueryState) => {
     const columnToSort = state.sort as keyof FullInfoUserDto;
     data = data.sort((a, b) => {
       if (state.order === 'asc') {
+        // @ts-ignore
         return a[columnToSort] < b[columnToSort] ? -1 : 1;
       } else {
+        // @ts-ignore
         return a[columnToSort] < b[columnToSort] ? 1 : - 1;
       }
     });

@@ -31,9 +31,7 @@ const UserEditModalFormWrapper = () => {
       <UserEditModalForm
         isUserLoading={isLoading}
         user={{
-          id: undefined,
           username: '',
-          avatar: '',
           email: '',
           firstName: '',
           lastName: '',
@@ -43,6 +41,8 @@ const UserEditModalFormWrapper = () => {
           address: '',
           password: '',
           role: '',
+          enabled: true,
+          version: 0,
         }}
       />
     );

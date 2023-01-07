@@ -13,7 +13,7 @@ const getCustomers = (): Promise<CustomerQueryResponse> => {
     .then((response: AxiosResponse<CustomerQueryResponse>) => response.data);
 };
 
-const getCustomerById = (id: number): Promise<FullInfoUserDto | ErrorDto> => {
+const getCustomerById = (id: number | null | undefined): Promise<FullInfoUserDto | ErrorDto> => {
   return axios
     .get(`${GET_CUSTOMERS_URL}/${id}`)
     .then((response: AxiosResponse<FullInfoUserDto | ErrorDto>) => {
