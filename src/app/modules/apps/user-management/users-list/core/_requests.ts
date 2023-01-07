@@ -1,15 +1,16 @@
 import axios, {AxiosResponse} from 'axios';
 import {ID} from '@_metronic/helpers';
 import {ErrorDto, FullInfoUserDto} from "@/app/models/model";
+import {CustomerQueryResponse} from "@/app/modules/apps/user-management/users-list/core/_models";
 
 const PREMIERE_API_URL = process.env.PREMIERE_API_URL!;
 const GET_CUSTOMERS_URL = `${PREMIERE_API_URL}/auth/get-customers`;
 const CUSTOMER_URL = `${PREMIERE_API_URL}/auth/save-customer`;
 
-const getCustomers = (): Promise<FullInfoUserDto[]> => {
+const getCustomers = (): Promise<AxiosResponse<CustomerQueryResponse>> => {
   return axios
     .get(`${GET_CUSTOMERS_URL}`)
-    .then((response: AxiosResponse<FullInfoUserDto[]>) => response.data);
+    .then((response: AxiosResponse<CustomerQueryResponse>) => response);
 };
 
 const getCustomerById = (id: number): Promise<FullInfoUserDto | ErrorDto> => {

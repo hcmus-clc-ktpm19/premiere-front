@@ -127,6 +127,7 @@ const SidebarMenuMain = () => {
           <SidebarMenuItem to='/crafted/pages/wizards/vertical' title='Vertical' hasBullet={true} />
         </SidebarMenuItemWithSub>
       </SidebarMenuItemWithSub>
+
       <SidebarMenuItemWithSub
         to='/crafted/accounts'
         title='Accounts'
@@ -135,6 +136,7 @@ const SidebarMenuMain = () => {
         <SidebarMenuItem to='/crafted/account/overview' title='Overview' hasBullet={true} />
         <SidebarMenuItem to='/crafted/account/settings' title='Settings' hasBullet={true} />
       </SidebarMenuItemWithSub>
+
       <SidebarMenuItemWithSub
         to='/error'
         title='Errors'
@@ -143,6 +145,7 @@ const SidebarMenuMain = () => {
         <SidebarMenuItem to='/error/404' title='Error 404' hasBullet={true} />
         <SidebarMenuItem to='/error/500' title='Error 500' hasBullet={true} />
       </SidebarMenuItemWithSub>
+
       <SidebarMenuItemWithSub
         to='/crafted/widgets'
         title='Widgets'

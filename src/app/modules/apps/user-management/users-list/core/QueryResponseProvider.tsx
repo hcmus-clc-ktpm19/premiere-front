@@ -1,5 +1,5 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import {FC, useContext, useState, useEffect, useMemo} from 'react';
+import {FC, useContext, useEffect, useMemo, useState} from 'react';
 import {useQuery} from 'react-query';
 import {
   createResponseContext,
@@ -11,10 +11,10 @@ import {
   WithChildren,
 } from '@_metronic/helpers';
 import {getCustomers} from './_requests';
-import {User} from './_models';
 import {useQueryRequest} from './QueryRequestProvider';
+import {FullInfoUserDto} from "@/app/models/model";
 
-const QueryResponseContext = createResponseContext<User>(initialQueryResponse);
+const QueryResponseContext = createResponseContext<FullInfoUserDto>(initialQueryResponse);
 const QueryResponseProvider: FC<WithChildren> = ({children}) => {
   const {state} = useQueryRequest();
   const [query, setQuery] = useState<string>(stringifyRequestQuery(state));
@@ -33,11 +33,15 @@ const QueryResponseProvider: FC<WithChildren> = ({children}) => {
   } = useQuery(
     `${QUERIES.USERS_LIST}-${query}`,
     () => {
-      return getCustomers();
+      return getCustomers().then((response) => {
+        console.log('response', {response});
+        return response;
+      }).catch((error) => {
+        console.log(error);
+      });
     },
     {cacheTime: 0, keepPreviousData: true, refetchOnWindowFocus: false}
   );
-
   return (
     <QueryResponseContext.Provider value={{isLoading: isFetching, refetch, response, query}}>
       {children}
@@ -49,6 +53,7 @@ const useQueryResponse = () => useContext(QueryResponseContext);
 
 const useQueryResponseData = () => {
   const {response} = useQueryResponse();
+  console.log('response in useQueryResponseData', {response});
   if (!response) {
     return [];
   }

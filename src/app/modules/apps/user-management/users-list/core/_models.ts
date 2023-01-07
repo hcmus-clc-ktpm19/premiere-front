@@ -1,4 +1,5 @@
 import {ID, Response} from '@_metronic/helpers';
+import {FullInfoUserDto} from "@/app/models/model";
 export type User = {
   id?: ID;
   name?: string;
@@ -25,6 +26,7 @@ export type User = {
 };
 
 export type UsersQueryResponse = Response<Array<User>>;
+export type CustomerQueryResponse = Response<Array<FullInfoUserDto>>;
 
 export const initialUser: User = {
   avatar: 'avatars/300-6.jpg',
