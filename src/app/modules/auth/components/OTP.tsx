@@ -1,6 +1,6 @@
 import {useState} from "react";
 import {useFormik} from "formik";
-import {requestOTP, verifyOTP} from "@/app/modules/auth/core/_requests";
+import {verifyOTP} from "@/app/modules/auth/core/_requests";
 import clsx from "clsx";
 import {Link, Navigate, useLocation, useNavigate, useSearchParams} from "react-router-dom";
 import * as Yup from "yup";
@@ -84,7 +84,7 @@ export function OTP() {
 
           {/* begin::Link */}
           <div className='text-gray-500 fw-semibold fs-6'>
-            Enter the otp code sent to {email} for verification.
+            Enter the OTP code sent to {email} for verification.
           </div>
           {/* end::Link */}
         </div>

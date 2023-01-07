@@ -2,7 +2,7 @@ import {useQuery} from 'react-query';
 import {UserEditModalForm} from './UserEditModalForm';
 import {isNotEmpty, QUERIES} from '@_metronic/helpers';
 import {useListView} from '../core/ListViewProvider';
-import {getUserById} from '../core/_requests';
+import {getCustomerById} from '../core/_requests';
 
 const UserEditModalFormWrapper = () => {
   const {itemIdForUpdate, setItemIdForUpdate} = useListView();
@@ -14,7 +14,7 @@ const UserEditModalFormWrapper = () => {
   } = useQuery(
     `${QUERIES.USERS_LIST}-user-${itemIdForUpdate}`,
     () => {
-      return getUserById(itemIdForUpdate);
+      return getCustomerById(itemIdForUpdate);
     },
     {
       cacheTime: 0,

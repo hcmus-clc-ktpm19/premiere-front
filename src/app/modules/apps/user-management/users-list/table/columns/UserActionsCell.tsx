@@ -1,11 +1,11 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import {FC, useEffect} from 'react';
 import {useMutation, useQueryClient} from 'react-query';
-import {MenuComponent} from '../../../../../../../_metronic/assets/ts/components';
-import {ID, KTSVG, QUERIES} from '../../../../../../../_metronic/helpers';
+import {MenuComponent} from '@_metronic/assets/ts/components';
+import {ID, KTSVG, QUERIES} from '@_metronic/helpers';
 import {useListView} from '../../core/ListViewProvider';
 import {useQueryResponse} from '../../core/QueryResponseProvider';
-import {deleteUser} from '../../core/_requests';
+import {deleteCustomer} from '../../core/_requests';
 
 type Props = {
   id: ID;
@@ -24,7 +24,7 @@ const UserActionsCell: FC<Props> = ({id}) => {
     setItemIdForUpdate(id);
   };
 
-  const deleteItem = useMutation(() => deleteUser(id), {
+  const deleteItem = useMutation(() => deleteCustomer(id), {
     // 💡 response of the mutation is passed to onSuccess
     onSuccess: () => {
       // ✅ update detail view directly

@@ -189,7 +189,7 @@ const SidebarMenuMain = () => {
                 to='/apps/admin-management/employee-management'
                 title='Employee Management'
                 fontIcon='bi-archive'
-                icon='/media/icons/duotune/general/gen040.svg'>
+                icon='/media/icons/duotune/communication/com014.svg'>
               <SidebarMenuItem to='/apps/admin-management/employees' title='List of Employees' hasBullet={true} />
               <SidebarMenuItem to='/apps/admin-management/create-employee' title='Create Employee' hasBullet={true} />
             </SidebarMenuItemWithSub>

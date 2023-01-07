@@ -1,11 +1,11 @@
 import React, {FC, useState} from 'react';
 import * as Yup from 'yup';
 import {useFormik} from 'formik';
-import {isNotEmpty, toAbsoluteUrl} from '@_metronic/helpers';
+import {isNotEmpty} from '@_metronic/helpers';
 import clsx from 'clsx';
 import {useListView} from '../core/ListViewProvider';
 import {UsersListLoading} from '../components/loading/UsersListLoading';
-import {createUser, updateUser} from '../core/_requests';
+import {createCustomer, updateCustomer} from '../core/_requests';
 import {useQueryResponse} from '../core/QueryResponseProvider';
 import {UserDto} from '@/app/modules/apps/user-management/users-list/core/dtos';
 import {useAuth} from '@/app/modules/auth';
@@ -61,9 +61,9 @@ const UserEditModalForm: FC<Props> = ({user, isUserLoading}) => {
       setSubmitting(true);
       try {
         if (isNotEmpty(values.id)) {
-          await updateUser(values);
+          await updateCustomer(values);
         } else {
-          console.log(await createUser(values));
+          console.log(await createCustomer(values));
         }
       } catch (ex) {
         console.error(ex);
