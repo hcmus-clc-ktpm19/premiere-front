@@ -73,22 +73,22 @@ const ProfilePage = () => (
         }
       />
       <Route
-          path='create-transaction'
-          element={
-            <>
-              <PageTitle breadcrumbs={profileBreadCrumbs}>Create Transaction</PageTitle>
-              <CreateTransaction />
-            </>
-          }
+        path='create-transaction'
+        element={
+          <>
+            <PageTitle breadcrumbs={profileBreadCrumbs}>Create Transaction</PageTitle>
+            <CreateTransaction />
+          </>
+        }
       />
       <Route
-          path='create-transaction/internal'
-          element={
-            <>
-              <PageTitle breadcrumbs={profileBreadCrumbs}>Internal Transaction</PageTitle>
-              <CreateInternalTransaction />
-            </>
-          }
+        path='create-transaction/internal'
+        element={
+          <>
+            <PageTitle breadcrumbs={profileBreadCrumbs}>Internal Transaction</PageTitle>
+            <CreateInternalTransaction />
+          </>
+        }
       />
       <Route
           path='create-transaction/external'

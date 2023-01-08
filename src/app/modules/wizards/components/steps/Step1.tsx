@@ -1,7 +1,7 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import {FC} from 'react';
-import {KTSVG} from '../../../../../_metronic/helpers';
-import {Field, ErrorMessage} from 'formik';
+import { FC } from 'react';
+import { KTSVG } from '../../../../../_metronic/helpers';
+import { Field, ErrorMessage } from 'formik';
 
 const Step1: FC = () => {
   return (
@@ -86,4 +86,4 @@ const Step1: FC = () => {
   );
 };
 
-export {Step1};
+export { Step1 };

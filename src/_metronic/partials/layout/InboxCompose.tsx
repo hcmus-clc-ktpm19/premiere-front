@@ -1,14 +1,14 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import React, {useState, useRef} from 'react';
-import {Modal} from 'react-bootstrap';
-import {KTSVG} from '../../helpers';
+import React, { useState, useRef } from 'react';
+import { Modal } from 'react-bootstrap';
+import { KTSVG } from '../../helpers';
 
 export type Props = {
   show: boolean;
   handleClose: () => void;
 };
 
-const InboxCompose: React.FC<Props> = ({show, handleClose}) => {
+const InboxCompose: React.FC<Props> = ({ show, handleClose }) => {
   const composeToRef = useRef<HTMLInputElement | null>(null);
   const formRef = useRef<HTMLFormElement | null>(null);
   const [composeCC, setComposeCC] = useState('');
@@ -131,7 +131,7 @@ const InboxCompose: React.FC<Props> = ({show, handleClose}) => {
             {/*begin::Attachments*/}
             <div className='dropzone dropzone-multi px-8 py-4' id='kt_inbox_compose_attachments'>
               <div className='dropzone-items'>
-                <div className='dropzone-item' style={{display: 'none'}}>
+                <div className='dropzone-item' style={{ display: 'none' }}>
                   <div className='dropzone-file'>
                     <div className='dropzone-filename' title='some_image_file_name.jpg'>
                       <span data-dz-name>some_image_file_name.jpg</span>{' '}
@@ -218,4 +218,4 @@ const InboxCompose: React.FC<Props> = ({show, handleClose}) => {
   );
 };
 
-export {InboxCompose};
+export { InboxCompose };

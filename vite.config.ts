@@ -14,10 +14,13 @@ export default () => {
     },
     server: {
       port: 3000,
+      host: true,
     },
-    define: {
-      global: 'window',
+    preview: {
+      port: 3000,
+      host: true,
     },
+    define: { global: 'window' },
     resolve: {
       alias: {
         '~animate.css': 'animate.css',

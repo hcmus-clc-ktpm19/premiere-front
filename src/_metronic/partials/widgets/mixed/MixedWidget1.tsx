@@ -1,14 +1,14 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import React from 'react';
-import {Dropdown1} from '../../content/dropdown/Dropdown1';
-import {KTSVG} from '../../../helpers';
+import { Dropdown1 } from '../../content/dropdown/Dropdown1';
+import { KTSVG } from '../../../helpers';
 
 type Props = {
   className: string;
   color: string;
 };
 
-const MixedWidget1: React.FC<Props> = ({className, color}) => {
+const MixedWidget1: React.FC<Props> = ({ className, color }) => {
   return (
     <div className={`card ${className}`}>
       {/* begin::Body */}
@@ -45,7 +45,7 @@ const MixedWidget1: React.FC<Props> = ({className, color}) => {
         {/* begin::Items */}
         <div
           className='shadow-xs card-rounded mx-9 mb-9 px-6 py-9 position-relative z-index-1 bg-body'
-          style={{marginTop: '-100px'}}
+          style={{ marginTop: '-100px' }}
         >
           {/* begin::Item */}
           <div className='d-flex align-items-center mb-6'>
@@ -183,4 +183,4 @@ const MixedWidget1: React.FC<Props> = ({className, color}) => {
   );
 };
 
-export {MixedWidget1};
+export { MixedWidget1 };

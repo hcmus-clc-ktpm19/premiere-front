@@ -1,4 +1,4 @@
-import React, {FC} from 'react';
+import React, { FC } from 'react';
 import {
   ListsWidget1,
   ListsWidget2,
@@ -55,4 +55,4 @@ const Lists: FC = () => {
   );
 };
 
-export {Lists};
+export { Lists };

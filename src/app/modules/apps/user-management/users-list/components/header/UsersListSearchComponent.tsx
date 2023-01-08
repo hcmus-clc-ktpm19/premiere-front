@@ -1,10 +1,10 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import {useState, useEffect} from 'react';
-import {initialQueryState, KTSVG, useDebounce} from '@_metronic/helpers';
-import {useQueryRequest} from '../../core/QueryRequestProvider';
+import { useState, useEffect } from 'react';
+import { initialQueryState, KTSVG, useDebounce } from '@_metronic/helpers';
+import { useQueryRequest } from '../../core/QueryRequestProvider';
 
 const UsersListSearchComponent = () => {
-  const {updateState} = useQueryRequest();
+  const { updateState } = useQueryRequest();
   const [searchTerm, setSearchTerm] = useState<string>('');
   // Debounce search term so that it only gives us latest value ...
   // ... if searchTerm has not been updated within last 500ms.
@@ -15,7 +15,7 @@ const UsersListSearchComponent = () => {
   useEffect(
     () => {
       if (debouncedSearchTerm !== undefined && searchTerm !== undefined) {
-        updateState({search: debouncedSearchTerm, ...initialQueryState});
+        updateState({ search: debouncedSearchTerm, ...initialQueryState });
       }
     },
     [debouncedSearchTerm] // Only call effect if debounced search term changes
@@ -44,4 +44,4 @@ const UsersListSearchComponent = () => {
   );
 };
 
-export {UsersListSearchComponent};
+export { UsersListSearchComponent };

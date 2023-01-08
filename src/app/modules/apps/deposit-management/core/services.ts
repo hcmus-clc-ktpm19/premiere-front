@@ -46,11 +46,13 @@ const depositMoney = (
     });
 };
 
-const pushDepositSuccessNotification = (depositMoneyRequestDto: DepositMoneyRequestDto): Promise<void> => {
+const pushDepositSuccessNotification = (
+  depositMoneyRequestDto: DepositMoneyRequestDto
+): Promise<void> => {
   return axios
     .post(`${WEB_SOCKET_API}/deposit-money/message`, depositMoneyRequestDto)
     .then((response: AxiosResponse<void>) => response.data);
-}
+};
 
 export const depositMoneyService = {
   depositMoneyValidationSchemas,

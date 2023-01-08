@@ -1,5 +1,5 @@
-import {themeMenuModeLSKey, themeModelSKey} from '../../../partials';
-import {EventHandlerUtil} from '../_utils';
+import { themeMenuModeLSKey, themeModelSKey } from '../../../partials';
+import { EventHandlerUtil } from '../_utils';
 
 type Mode = 'light' | 'dark' | 'system';
 
@@ -193,4 +193,4 @@ class ThemeMode {
 
 const ThemeModeComponent = new ThemeMode();
 // Initialize app on document ready => ThemeModeComponent.init()
-export {ThemeModeComponent};
+export { ThemeModeComponent };

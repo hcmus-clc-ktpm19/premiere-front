@@ -1,6 +1,6 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import React, {FC} from 'react';
-import {KTSVG, toAbsoluteUrl} from '../../../helpers';
+import React, { FC } from 'react';
+import { KTSVG, toAbsoluteUrl } from '../../../helpers';
 
 const InviteUsers: FC = () => {
   const users = [
@@ -9,102 +9,119 @@ const InviteUsers: FC = () => {
       name: 'Emma Smith',
       phone: 'e.smith@kpmg.com.au',
       access: '1',
+      email: '',
     },
     {
       state: 'danger',
       name: 'Melody Macy',
       phone: 'melody@altbox.com',
       access: '1',
+      email: '',
     },
     {
       avatar: '/media/avatars/300-1.jpg',
       name: 'Max Smith',
       phone: 'max@kt.com',
       access: '3',
+      email: '',
     },
     {
       avatar: '/media/avatars/300-1.jpg',
       name: 'Sean Bean',
       phone: 'sean@dellito.com',
       access: '2',
+      email: '',
     },
     {
       avatar: '/media/avatars/300-25.jpg',
       name: 'Brian Cox',
       phone: 'brian@exchange.com',
       access: '3',
+      email: '',
     },
     {
       state: 'warning',
       name: 'Mikaela Collins',
       phone: 'mikaela@pexcom.com',
       access: '2',
+      email: '',
     },
     {
       avatar: '/media/avatars/300-9.jpg',
       name: 'Francis Mitcham',
       phone: 'f.mitcham@kpmg.com.au',
       access: '3',
+      email: '',
     },
     {
       state: 'danger',
       name: 'Olivia Wild',
       phone: 'olivia@corpmail.com',
       access: '2',
+      email: '',
     },
     {
       state: 'info',
       name: 'Neil Owen',
       phone: 'owen.neil@gmail.com',
       access: '1',
+      email: '',
     },
     {
       avatar: '/media/avatars/300-23.jpg',
       name: 'Dan Wilson',
       phone: 'dam@consilting.com',
       access: '3',
+      email: '',
     },
     {
       state: 'danger',
       name: 'Emma Bold',
       phone: 'emma@intenso.com',
       access: '2',
+      email: '',
     },
     {
       avatar: '/media/avatars/300-12.jpg',
       name: 'Ana Crown',
       phone: 'ana.cf@limtel.com',
       access: '1',
+      email: '',
     },
     {
       state: 'primary',
       name: 'Robert Doe',
       phone: 'robert@benko.com',
       access: '3',
+      email: '',
     },
     {
       avatar: '/media/avatars/300-13.jpg',
       name: 'John Miller',
       phone: 'miller@mapple.com',
       access: '3',
+      email: '',
     },
     {
       state: 'success',
       name: 'Lucy Kunic',
       phone: 'lucy.m@fentech.com',
       access: '2',
+      email: '',
     },
     {
       avatar: '/media/avatars/300-21.jpg',
       name: 'Ethan Wilder',
       phone: 'ethan@loop.com.au',
       access: '1',
+      email: '',
     },
     {
       avatar: '/media/avatars/300-12.jpg',
       name: 'Ana Crown',
       phone: 'ana.cf@limtel.com',
       access: '3',
+      email: '',
     },
   ];
 
@@ -225,4 +242,4 @@ const InviteUsers: FC = () => {
   );
 };
 
-export {InviteUsers};
+export { InviteUsers };

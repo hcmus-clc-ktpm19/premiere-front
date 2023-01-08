@@ -1,8 +1,8 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import {FC, useEffect, useRef} from 'react';
-import {KTSVG} from '../../../../helpers';
-import {getCSSVariableValue} from '../../../../assets/ts/_utils';
-import {useThemeMode} from '../../../layout/theme-mode/ThemeModeProvider';
+import { FC, useEffect, useRef } from 'react';
+import { KTSVG } from '../../../../helpers';
+import { getCSSVariableValue } from '../../../../assets/ts/_utils';
+import { useThemeMode } from '../../../layout/theme-mode/ThemeModeProvider';
 
 type Props = {
   className: string;
@@ -18,7 +18,7 @@ const CardsWidget17: FC<Props> = ({
   chartRotate = 145,
 }) => {
   const chartRef = useRef<HTMLDivElement | null>(null);
-  const {mode} = useThemeMode();
+  const { mode } = useThemeMode();
   useEffect(() => {
     refreshChart();
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -60,7 +60,7 @@ const CardsWidget17: FC<Props> = ({
           <div
             id='kt_card_widget_17_chart'
             ref={chartRef}
-            style={{minWidth: chartSize + 'px', minHeight: chartSize + 'px'}}
+            style={{ minWidth: chartSize + 'px', minHeight: chartSize + 'px' }}
             data-kt-size={chartSize}
             data-kt-line={chartLine}
           ></div>
@@ -80,7 +80,7 @@ const CardsWidget17: FC<Props> = ({
           <div className='d-flex fw-semibold align-items-center'>
             <div
               className='bullet w-8px h-3px rounded-2 me-3'
-              style={{backgroundColor: '#E4E6EF'}}
+              style={{ backgroundColor: '#E4E6EF' }}
             ></div>
             <div className='text-gray-500 flex-grow-1 me-4'>Others</div>
             <div className=' fw-bolder text-gray-700 text-xxl-end'>$45,257</div>
@@ -152,4 +152,4 @@ const initChart = function (
   drawCircle(getCSSVariableValue('--kt-success'), options.lineWidth, 100 / 250);
 };
 
-export {CardsWidget17};
+export { CardsWidget17 };

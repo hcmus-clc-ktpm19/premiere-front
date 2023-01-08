@@ -1,10 +1,10 @@
-import {useListView} from '../../core/ListViewProvider';
-import {UsersListToolbar} from './UserListToolbar';
-import {UsersListGrouping} from './UsersListGrouping';
-import {UsersListSearchComponent} from './UsersListSearchComponent';
+import { useListView } from '../../core/ListViewProvider';
+import { UsersListToolbar } from './UserListToolbar';
+import { UsersListGrouping } from './UsersListGrouping';
+import { UsersListSearchComponent } from './UsersListSearchComponent';
 
 const UsersListHeader = () => {
-  const {selected} = useListView();
+  const { selected } = useListView();
   return (
     <div className='card-header border-0 pt-6'>
       <UsersListSearchComponent />
@@ -19,4 +19,4 @@ const UsersListHeader = () => {
   );
 };
 
-export {UsersListHeader};
+export { UsersListHeader };

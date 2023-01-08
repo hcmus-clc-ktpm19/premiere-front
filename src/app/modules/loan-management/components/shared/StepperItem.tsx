@@ -8,7 +8,7 @@ interface Props {
 }
 
 const StepperItem: React.FC<Props> = (props: Props) => {
-  const {className, stepperNumber, stepperTitle, stepperDescription} = props;
+  const { className, stepperNumber, stepperTitle, stepperDescription } = props;
 
   return (
     <div className={`stepper-item ${className}`} data-kt-stepper-element='nav'>

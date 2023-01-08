@@ -1,13 +1,13 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import React from 'react';
-import {KTSVG, toAbsoluteUrl} from '../../../helpers';
-import {Dropdown1} from '../../content/dropdown/Dropdown1';
+import { KTSVG, toAbsoluteUrl } from '../../../helpers';
+import { Dropdown1 } from '../../content/dropdown/Dropdown1';
 
 type Props = {
   className: string;
 };
 
-const TablesWidget1: React.FC<Props> = ({className}) => {
+const TablesWidget1: React.FC<Props> = ({ className }) => {
   return (
     <div className={`card ${className}`}>
       {/* begin::Header */}
@@ -79,7 +79,7 @@ const TablesWidget1: React.FC<Props> = ({className}) => {
                       <div
                         className='progress-bar bg-primary'
                         role='progressbar'
-                        style={{width: '70%'}}
+                        style={{ width: '70%' }}
                       ></div>
                     </div>
                   </div>
@@ -117,7 +117,7 @@ const TablesWidget1: React.FC<Props> = ({className}) => {
                       <div
                         className='progress-bar bg-primary'
                         role='progressbar'
-                        style={{width: '50%'}}
+                        style={{ width: '50%' }}
                       ></div>
                     </div>
                   </div>
@@ -155,7 +155,7 @@ const TablesWidget1: React.FC<Props> = ({className}) => {
                       <div
                         className='progress-bar bg-primary'
                         role='progressbar'
-                        style={{width: '80%'}}
+                        style={{ width: '80%' }}
                       ></div>
                     </div>
                   </div>
@@ -193,7 +193,7 @@ const TablesWidget1: React.FC<Props> = ({className}) => {
                       <div
                         className='progress-bar bg-primary'
                         role='progressbar'
-                        style={{width: '90%'}}
+                        style={{ width: '90%' }}
                       ></div>
                     </div>
                   </div>
@@ -231,7 +231,7 @@ const TablesWidget1: React.FC<Props> = ({className}) => {
                       <div
                         className='progress-bar bg-primary'
                         role='progressbar'
-                        style={{width: '70%'}}
+                        style={{ width: '70%' }}
                       ></div>
                     </div>
                   </div>
@@ -253,4 +253,4 @@ const TablesWidget1: React.FC<Props> = ({className}) => {
   );
 };
 
-export {TablesWidget1};
+export { TablesWidget1 };

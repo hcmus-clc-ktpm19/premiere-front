@@ -40,4 +40,4 @@ const EngageWidget2: React.FC<Props> = ({
   );
 };
 
-export {EngageWidget2};
+export { EngageWidget2 };

@@ -43,7 +43,7 @@ const ConfirmModal: FC<Props> = ({
                 className='btn btn-icon btn-sm btn-active-icon-primary'
                 data-kt-users-modal-action='close'
                 onClick={() => onCancel()}
-                style={{cursor: 'pointer'}}
+                style={{ cursor: 'pointer' }}
               >
                 <KTSVG path='/media/icons/duotune/arrows/arr061.svg' className='svg-icon-1' />
               </div>
@@ -65,7 +65,7 @@ const ConfirmModal: FC<Props> = ({
               <button
                 type='button'
                 className='btn btn-sm btn-danger'
-                style={{marginLeft: '30px'}}
+                style={{ marginLeft: '30px' }}
                 onClick={() => onConfirm(value)}
               >
                 <KTSVG path='/media/icons/duotune/arrows/arr075.svg' className='svg-icon-2' />
@@ -85,4 +85,4 @@ const ConfirmModal: FC<Props> = ({
   )) as JSX.Element;
 };
 
-export {ConfirmModal};
+export { ConfirmModal };

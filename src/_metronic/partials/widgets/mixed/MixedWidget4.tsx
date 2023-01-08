@@ -1,8 +1,8 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import clsx from 'clsx';
 import React from 'react';
-import {KTSVG, toAbsoluteUrl} from '../../../helpers';
-import {Dropdown1} from '../../content/dropdown/Dropdown1';
+import { KTSVG, toAbsoluteUrl } from '../../../helpers';
+import { Dropdown1 } from '../../content/dropdown/Dropdown1';
 
 type Props = {
   className: string;
@@ -13,7 +13,7 @@ type Props = {
   progress: string;
 };
 
-const MixedWidget4: React.FC<Props> = ({className, color, image, title, date, progress}) => {
+const MixedWidget4: React.FC<Props> = ({ className, color, image, title, date, progress }) => {
   return (
     <div className={`card ${className}`}>
       {/* begin::Body */}
@@ -67,7 +67,7 @@ const MixedWidget4: React.FC<Props> = ({className, color, image, title, date, pr
             <div
               className={`progress-bar bg-${color}`}
               role='progressbar'
-              style={{width: progress}}
+              style={{ width: progress }}
             ></div>
           </div>
         </div>
@@ -117,4 +117,4 @@ const MixedWidget4: React.FC<Props> = ({className, color, image, title, date, pr
   );
 };
 
-export {MixedWidget4};
+export { MixedWidget4 };

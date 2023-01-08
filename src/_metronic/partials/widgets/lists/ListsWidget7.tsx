@@ -1,13 +1,13 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import React from 'react';
-import {KTSVG, toAbsoluteUrl} from '../../../helpers';
-import {Dropdown1} from '../../content/dropdown/Dropdown1';
+import { KTSVG, toAbsoluteUrl } from '../../../helpers';
+import { Dropdown1 } from '../../content/dropdown/Dropdown1';
 
 type Props = {
   className: string;
 };
 
-const ListsWidget7: React.FC<Props> = ({className}) => {
+const ListsWidget7: React.FC<Props> = ({ className }) => {
   return (
     <div className='card card-xl-stretch mb-xl-8'>
       {/* begin::Header */}
@@ -115,7 +115,7 @@ const ListsWidget7: React.FC<Props> = ({className}) => {
           <div className='symbol symbol-60px symbol-2by3 me-4'>
             <div
               className='symbol-label'
-              style={{backgroundImage: `url(${toAbsoluteUrl('/media/stock/600x400/img-24.jpg')}`}}
+              style={{ backgroundImage: `url(${toAbsoluteUrl('/media/stock/600x400/img-24.jpg')}` }}
             ></div>
           </div>
           {/* end::Symbol */}
@@ -138,4 +138,4 @@ const ListsWidget7: React.FC<Props> = ({className}) => {
   );
 };
 
-export {ListsWidget7};
+export { ListsWidget7 };

@@ -1,9 +1,9 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import {FC} from 'react';
-import {Link} from 'react-router-dom';
-import {IconUserModel} from '../../../../app/modules/profile/ProfileModels';
-import {UsersList} from '../../../../app/modules/profile/components/UsersList';
-import {toAbsoluteUrl} from '../../../helpers';
+import { FC } from 'react';
+import { Link } from 'react-router-dom';
+import { IconUserModel } from '../../../../app/modules/profile/ProfileModels';
+import { UsersList } from '../../../../app/modules/profile/components/UsersList';
+import { toAbsoluteUrl } from '../../../helpers';
 
 type Props = {
   icon: string;
@@ -74,7 +74,7 @@ const Card2: FC<Props> = ({
           <div
             className={`bg-${statusColor} rounded h-4px`}
             role='progressbar'
-            style={{width: `${progress}%`}}
+            style={{ width: `${progress}%` }}
           ></div>
         </div>
 
@@ -84,4 +84,4 @@ const Card2: FC<Props> = ({
   );
 };
 
-export {Card2};
+export { Card2 };

@@ -1,28 +1,30 @@
 import React from 'react';
-import {KTSVG, toAbsoluteUrl} from '@_metronic/helpers';
-import {Link, useLocation} from 'react-router-dom';
-import {Dropdown1} from '@_metronic/partials';
-import {useAuth} from '@/app/modules/auth';
-import {CreditCardDto} from '@/app/modules/profile/core/_dtos';
-import {ProfileService as profileService} from '@/app/modules/profile/core/_requests';
-import {useQuery} from "react-query";
+import { KTSVG, toAbsoluteUrl } from '@_metronic/helpers';
+import { Link, useLocation } from 'react-router-dom';
+import { Dropdown1 } from '@_metronic/partials';
+import { useAuth } from '@/app/modules/auth';
+import { CreditCardDto } from '@/app/modules/profile/core/_dtos';
+import { ProfileService as profileService } from '@/app/modules/profile/core/_requests';
+import { useQuery } from 'react-query';
 
 const ProfileHeader: React.FC = () => {
   const location = useLocation();
-  const {currentUser} = useAuth();
+  const { currentUser } = useAuth();
   const [creditCard, setCreditCard] = React.useState<CreditCardDto>();
-  const {data} = useQuery('creditCard', async () => {
-        try {
-          const response = await profileService.getCreditCardByUserId(currentUser?.id);
-          setCreditCard(response);
-          return response;
-        } catch (error) {
-          console.log(error);
-        }
-      },
-      {
-        refetchOnWindowFocus: true
+  const { data } = useQuery(
+    'creditCard',
+    async () => {
+      try {
+        const response = await profileService.getCreditCardByUserId(currentUser?.id);
+        setCreditCard(response);
+        return response;
+      } catch (error) {
+        console.log(error);
       }
+    },
+    {
+      refetchOnWindowFocus: true,
+    }
   );
 
   return (
@@ -125,7 +127,7 @@ const ProfileHeader: React.FC = () => {
                 <div className='d-flex flex-wrap'>
                   <div className='border border-gray-300 border-dashed rounded min-w-125px py-3 px-4 me-6 mb-3'>
                     <div className='d-flex align-items-center'>
-                      <span className='fw-bold fs-6 text-gray-400' style={{paddingRight: 5}}>
+                      <span className='fw-bold fs-6 text-gray-400' style={{ paddingRight: 5 }}>
                         Available Balance:{' '}
                       </span>
                       <div className='fs-2 fw-bolder'>
@@ -136,7 +138,7 @@ const ProfileHeader: React.FC = () => {
                       </div>
                     </div>
                     <div className='d-flex align-items-center'>
-                      <span className='fw-bold fs-6 text-gray-400' style={{paddingRight: 5}}>
+                      <span className='fw-bold fs-6 text-gray-400' style={{ paddingRight: 5 }}>
                         Account Number:{' '}
                       </span>
                       <div className='text-gray-600 text-hover-primary fs-2 fw-bolder me-1'>
@@ -156,7 +158,7 @@ const ProfileHeader: React.FC = () => {
                   <div
                     className='bg-success rounded h-5px'
                     role='progressbar'
-                    style={{width: '50%'}}
+                    style={{ width: '50%' }}
                   ></div>
                 </div>
               </div>
@@ -206,4 +208,4 @@ const ProfileHeader: React.FC = () => {
   );
 };
 
-export {ProfileHeader};
+export { ProfileHeader };

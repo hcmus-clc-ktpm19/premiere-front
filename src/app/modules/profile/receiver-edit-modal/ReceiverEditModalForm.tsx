@@ -1,17 +1,17 @@
-import React, {FC, useContext, useState} from 'react';
+import React, { FC, useContext, useState } from 'react';
 import * as Yup from 'yup';
-import {useFormik} from 'formik';
-import {isNotEmpty, toAbsoluteUrl} from '@_metronic/helpers';
-import {CreditCardDto, ExternalUserDto, ReceiverDto} from '@/app/modules/profile/core/_dtos';
+import { useFormik } from 'formik';
+import { isNotEmpty, toAbsoluteUrl } from '@_metronic/helpers';
+import { CreditCardDto, ExternalUserDto, ReceiverDto } from '@/app/modules/profile/core/_dtos';
 import clsx from 'clsx';
-import {ReceiversListLoading} from '@/app/modules/profile/loading/ReceiversListLoading';
-import {ProfileService as profileService} from '../core/_requests';
-import {useAuth} from '@/app/modules/auth';
-import {ReceiverModalContext} from '@/app/modules/profile/components/Receivers';
-import useNotification from "@/app/modules/notifications/useNotification";
-import {AlertColor} from "@mui/material";
-import {useQuery} from "react-query";
-import {services} from "@/app/modules/loan-management/core/services";
+import { ReceiversListLoading } from '@/app/modules/profile/loading/ReceiversListLoading';
+import { ProfileService as profileService } from '../core/_requests';
+import { useAuth } from '@/app/modules/auth';
+import { ReceiverModalContext } from '@/app/modules/profile/components/Receivers';
+import useNotification from '@/app/modules/notifications/useNotification';
+import { AlertColor } from '@mui/material';
+import { useQuery } from 'react-query';
+import { services } from '@/app/modules/loan-management/core/services';
 
 type Props = {
   receiver: ReceiverDto;
@@ -23,33 +23,30 @@ const insertReceiverSchema = Yup.object().shape({
     .min(3, 'Minimum 3 symbols')
     .max(50, 'Maximum 50 symbols')
     .required('Card number is required'),
-  nickname: Yup.string()
-    .min(3, 'Minimum 3 symbols')
-    .max(50, 'Maximum 50 symbols'),
+  nickname: Yup.string().min(3, 'Minimum 3 symbols').max(50, 'Maximum 50 symbols'),
   bankName: Yup.string()
     .min(3, 'Minimum 3 symbols')
     .max(50, 'Maximum 50 symbols')
     .required('Bank name is required'),
 });
 
-const ReceiverEditModalForm: FC<Props> = ({receiver, isReceiverLoading}) => {
+const ReceiverEditModalForm: FC<Props> = ({ receiver, isReceiverLoading }) => {
   // @ts-ignore
-  const {openAddReceiverModal} = useContext(ReceiverModalContext);
-  const {currentUser} = useAuth();
-  const {setNotification} = useNotification();
+  const { openAddReceiverModal } = useContext(ReceiverModalContext);
+  const { currentUser } = useAuth();
+  const { setNotification } = useNotification();
   const [receiverToInsert] = useState<ReceiverDto>(receiver);
   const [currentUserCreditCard, setCurrentUserCreditCard] = React.useState<CreditCardDto>();
 
-  const {data} = useQuery('creditCard', async () => {
-        try {
-          const response = await profileService.getCreditCardByUserId(currentUser?.id);
-          setCurrentUserCreditCard(response);
-          return response;
-        } catch (error) {
-          console.log(error);
-        }
-      }
-  );
+  const { data } = useQuery('creditCard', async () => {
+    try {
+      const response = await profileService.getCreditCardByUserId(currentUser?.id);
+      setCurrentUserCreditCard(response);
+      return response;
+    } catch (error) {
+      console.log(error);
+    }
+  });
 
   const cancel = (withRefresh?: boolean) => {
     openAddReceiverModal();
@@ -61,11 +58,11 @@ const ReceiverEditModalForm: FC<Props> = ({receiver, isReceiverLoading}) => {
   const formik = useFormik({
     initialValues: receiverToInsert,
     validationSchema: insertReceiverSchema,
-    onSubmit: async (values, {setSubmitting}) => {
+    onSubmit: async (values, { setSubmitting }) => {
       setSubmitting(true);
       values.userId = currentUser?.id || -1;
       values.cardNumber = values.cardNumber.trim();
-      console.log("value from receiver edit modal form", values);
+      console.log('value from receiver edit modal form', values);
       try {
         if (isNotEmpty(values.id)) {
           console.log('update receiver');
@@ -80,9 +77,9 @@ const ReceiverEditModalForm: FC<Props> = ({receiver, isReceiverLoading}) => {
             } else {
               // validate external card before insert
               const res: ExternalUserDto = await services.getExternalCreditCardByCardNumber(
-                  values.cardNumber
+                values.cardNumber
               );
-              console.log('res from receiver', {res});
+              console.log('res from receiver', { res });
               if (res) {
                 values.fullName = res.data.user.name;
                 await profileService.insertReceiverExternal(values);
@@ -90,11 +87,13 @@ const ReceiverEditModalForm: FC<Props> = ({receiver, isReceiverLoading}) => {
             }
           }
         }
-      } catch (e: any) {
-        console.log({e});
-        const notificationType: AlertColor = "error";
-        const errorMessage: string = e?.response?.data?.message || e?.message || "Something went wrong!";
-        console.log("errorMessage", errorMessage);
+      } catch (e: AxiosError | any) {
+        console.log({ e });
+        const notificationType: AlertColor = 'error';
+        const errorMessage: string =
+          e?.response?.data?.message || e?.message || 'Something went wrong!';
+        console.log('errorMessage', errorMessage);
+        // eslint-disable-next-line @typescript-eslint/no-empty-function
         setNotification(true, errorMessage, notificationType, () => {});
       } finally {
         setSubmitting(true);
@@ -115,8 +114,7 @@ const ReceiverEditModalForm: FC<Props> = ({receiver, isReceiverLoading}) => {
           data-kt-scroll-max-height='auto'
           data-kt-scroll-dependencies='#kt_modal_add_user_header'
           data-kt-scroll-wrappers='#kt_modal_add_user_scroll'
-          data-kt-scroll-offset='300px'
-        >
+          data-kt-scroll-offset='300px'>
           {/* begin::Input group */}
           <div className='fv-row mb-7'>
             {/* begin::Label */}
@@ -127,13 +125,11 @@ const ReceiverEditModalForm: FC<Props> = ({receiver, isReceiverLoading}) => {
             <div
               className='image-input image-input-outline'
               data-kt-image-input='true'
-              style={{backgroundImage: `url('${blankImg}')`}}
-            >
+              style={{ backgroundImage: `url('${blankImg}')` }}>
               {/* begin::Preview existing avatar */}
               <div
                 className='image-input-wrapper w-125px h-125px'
-                style={{backgroundImage: `url('${userAvatarImg}')`}}
-              ></div>
+                style={{ backgroundImage: `url('${userAvatarImg}')` }}></div>
               {/* end::Preview existing avatar */}
             </div>
             {/* end::Image input */}
@@ -152,7 +148,7 @@ const ReceiverEditModalForm: FC<Props> = ({receiver, isReceiverLoading}) => {
               {...formik.getFieldProps('cardNumber')}
               className={clsx(
                 'form-control form-control-solid mb-3 mb-lg-0',
-                {'is-invalid': formik.touched.cardNumber && formik.errors.cardNumber},
+                { 'is-invalid': formik.touched.cardNumber && formik.errors.cardNumber },
                 {
                   'is-valid': formik.touched.cardNumber && !formik.errors.cardNumber,
                 }
@@ -185,7 +181,7 @@ const ReceiverEditModalForm: FC<Props> = ({receiver, isReceiverLoading}) => {
               name='nickname'
               className={clsx(
                 'form-control form-control-solid mb-3 mb-lg-0',
-                {'is-invalid': formik.touched.nickname && formik.errors.nickname},
+                { 'is-invalid': formik.touched.nickname && formik.errors.nickname },
                 {
                   'is-valid': formik.touched.nickname && !formik.errors.nickname,
                 }
@@ -214,8 +210,7 @@ const ReceiverEditModalForm: FC<Props> = ({receiver, isReceiverLoading}) => {
           <div className='col-lg-8 fv-row'>
             <select
               className='form-select form-select-solid form-select-lg fw-bold'
-              {...formik.getFieldProps('bankName')}
-            >
+              {...formik.getFieldProps('bankName')}>
               <option value=''>Select a bank...</option>
               <option value='Premierebank'>Premierebank</option>
               <option value='Taixiubank'>Taixiubank</option>
@@ -235,8 +230,7 @@ const ReceiverEditModalForm: FC<Props> = ({receiver, isReceiverLoading}) => {
             onClick={() => cancel()}
             className='btn btn-light me-3'
             data-kt-users-modal-action='cancel'
-            disabled={formik.isSubmitting || isReceiverLoading}
-          >
+            disabled={formik.isSubmitting || isReceiverLoading}>
             Discard
           </button>
 
@@ -246,8 +240,7 @@ const ReceiverEditModalForm: FC<Props> = ({receiver, isReceiverLoading}) => {
             data-kt-users-modal-action='submit'
             disabled={
               isReceiverLoading || formik.isSubmitting || !formik.isValid || !formik.touched
-            }
-          >
+            }>
             <span className='indicator-label'>Submit</span>
             {(formik.isSubmitting || isReceiverLoading) && (
               <span className='indicator-progress'>

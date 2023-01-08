@@ -12,7 +12,7 @@ const entries = {
 
 // remove older folders and files
 (async () => {
-  await del(distPath + '/css', {force: true});
+  await del(distPath + '/css', { force: true });
 })();
 
 module.exports = {
@@ -45,7 +45,7 @@ module.exports = {
         // hook name
         compiler.hooks.afterEmit.tap('AfterEmitPlugin', () => {
           (async () => {
-            await del(distPath + '/css/*.js', {force: true});
+            await del(distPath + '/css/*.js', { force: true });
           })();
         });
       },

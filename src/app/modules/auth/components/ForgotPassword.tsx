@@ -1,9 +1,9 @@
-import {useState} from 'react';
+import { useState } from 'react';
 import * as Yup from 'yup';
 import clsx from 'clsx';
-import {Link, useNavigate} from 'react-router-dom';
-import {useFormik} from 'formik';
-import {requestOTP} from '../core/_requests';
+import { Link, useNavigate } from 'react-router-dom';
+import { useFormik } from 'formik';
+import { requestOTP } from '../core/_requests';
 
 const initialValues = {
   email: 'admin@demo.com',
@@ -24,24 +24,27 @@ export function ForgotPassword() {
   const formik = useFormik({
     initialValues,
     validationSchema: forgotPasswordSchema,
-    onSubmit: (values, {setStatus, setSubmitting}) => {
-      console.log('click')
+    onSubmit: (values, { setStatus, setSubmitting }) => {
+      console.log('click');
       setLoading(true);
       setHasErrors(undefined);
       setTimeout(() => {
-        requestOTP({email: values.email})
-          .then(({data: {result}}) => {
+        requestOTP({ email: values.email })
+          .then(({ data: { result } }) => {
             setHasErrors(false);
             setLoading(false);
             // redirect to otp page
-            navigate({
-              pathname: '/auth/verify-otp',
-              search: `?email=${values.email}`,
-            }, {
-              state: {
-                isOTPRequested: true,
+            navigate(
+              {
+                pathname: '/auth/verify-otp',
+                search: `?email=${values.email}`,
+              },
+              {
+                state: {
+                  isOTPRequested: true,
+                },
               }
-            });
+            );
           })
           .catch(() => {
             setHasErrors(true);
@@ -96,7 +99,7 @@ export function ForgotPassword() {
           {...formik.getFieldProps('email')}
           className={clsx(
             'form-control bg-transparent',
-            {'is-invalid': formik.touched.email && formik.errors.email},
+            { 'is-invalid': formik.touched.email && formik.errors.email },
             {
               'is-valid': formik.touched.email && !formik.errors.email,
             }

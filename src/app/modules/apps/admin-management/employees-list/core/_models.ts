@@ -1,5 +1,5 @@
-import {ID} from '@_metronic/helpers';
-import {FullInfoUserDto} from "@/app/models/model";
+import { ID } from '@_metronic/helpers';
+import { FullInfoUserDto } from '@/app/models/model';
 
 export type User = {
   id?: ID;

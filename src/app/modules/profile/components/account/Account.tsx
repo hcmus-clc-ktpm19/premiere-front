@@ -1,13 +1,13 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import React, {useState} from 'react';
-import {defaultAccount, IAccount} from './AccountModel';
+import React, { useState } from 'react';
+import { defaultAccount, IAccount } from './AccountModel';
 
 export function Account() {
   const [data, setData] = useState<IAccount>(defaultAccount);
   //const [hasError, setHasError] = useState(false);
 
   const updateData = (fieldsToUpdate: Partial<IAccount>) => {
-    const updatedData = {...data, ...fieldsToUpdate};
+    const updatedData = { ...data, ...fieldsToUpdate };
     setData(updatedData);
   };
 
@@ -25,7 +25,7 @@ export function Account() {
                   className='form-control form-control-lg form-control-solid'
                   type='text'
                   value={data.username}
-                  onChange={(e) => updateData({username: e.target.value})}
+                  onChange={(e) => updateData({ username: e.target.value })}
                 />
               </div>
             </div>
@@ -45,7 +45,7 @@ export function Account() {
                   className='form-control form-control-lg form-control-solid'
                   placeholder='Email'
                   value={data.email}
-                  onChange={(e) => updateData({email: e.target.value})}
+                  onChange={(e) => updateData({ email: e.target.value })}
                 />
               </div>
               <div className='form-text'>
@@ -68,7 +68,7 @@ export function Account() {
                 data-control='select2'
                 data-placeholder='Select Language...'
                 value={data.language}
-                onChange={(e) => updateData({language: e.target.value})}
+                onChange={(e) => updateData({ language: e.target.value })}
                 defaultValue={data.language}
               >
                 <option value='id'>Bahasa Indonesia - Indonesian</option>
@@ -133,7 +133,7 @@ export function Account() {
                 data-placeholder='Select Timezone...'
                 value={data.timeZone}
                 defaultValue={data.timeZone}
-                onChange={(e) => updateData({timeZone: e.target.value})}
+                onChange={(e) => updateData({ timeZone: e.target.value })}
               >
                 <option data-offset='-39600' value='International Date Line West'>
                   (GMT-11:00) International Date Line West
@@ -667,7 +667,7 @@ export function Account() {
                   type='checkbox'
                   id='customCheck5'
                   checked={data.requireInfo}
-                  onChange={() => updateData({requireInfo: !data.requireInfo})}
+                  onChange={() => updateData({ requireInfo: !data.requireInfo })}
                 />
                 <label className='form-check-label fw-bold' htmlFor='customCheck5'>
                   Require personal information to reset your password.

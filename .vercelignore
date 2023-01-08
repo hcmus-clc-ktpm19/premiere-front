@@ -1,0 +1,9 @@
+.dockerignore
+.env
+.eslintrc.json
+.gitignore
+.prettierignore
+.prettierrc.json
+Dockerfile
+README.md
+yarn-error.log

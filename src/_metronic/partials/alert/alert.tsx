@@ -1,12 +1,16 @@
-import React, {FC} from 'react';
-import {Alert} from '@mui/material';
+import React from 'react';
+import { Alert } from '@mui/material';
 
 type Props = {
   isShow: boolean;
   content: string | undefined;
   type: 'success' | 'danger' | 'warning' | 'info';
 };
-const ArletModal: FC<Props> = ({isShow, content, type}) => {
+const AlertModal: ({ isShow, content, type }: Props) => false | (() => JSX.Element | null) = ({
+  isShow,
+  content,
+  type,
+}) => {
   return (
     isShow &&
     (() => {
@@ -42,4 +46,4 @@ const ArletModal: FC<Props> = ({isShow, content, type}) => {
   );
 };
 
-export {ArletModal};
+export { AlertModal };

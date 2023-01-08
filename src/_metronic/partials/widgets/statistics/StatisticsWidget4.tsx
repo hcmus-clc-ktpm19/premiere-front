@@ -1,10 +1,10 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import React, {useEffect, useRef} from 'react';
-import {KTSVG} from '../../../helpers';
-import ApexCharts, {ApexOptions} from 'apexcharts';
-import {getCSS, getCSSVariableValue} from '../../../assets/ts/_utils';
+import React, { useEffect, useRef } from 'react';
+import { KTSVG } from '../../../helpers';
+import ApexCharts, { ApexOptions } from 'apexcharts';
+import { getCSS, getCSSVariableValue } from '../../../assets/ts/_utils';
 import clsx from 'clsx';
-import {useThemeMode} from '../../layout/theme-mode/ThemeModeProvider';
+import { useThemeMode } from '../../layout/theme-mode/ThemeModeProvider';
 
 type Props = {
   className: string;
@@ -14,9 +14,9 @@ type Props = {
   description: string;
 };
 
-const StatisticsWidget4: React.FC<Props> = ({className, svgIcon, color, change, description}) => {
+const StatisticsWidget4: React.FC<Props> = ({ className, svgIcon, color, change, description }) => {
   const chartRef = useRef<HTMLDivElement | null>(null);
-  const {mode} = useThemeMode();
+  const { mode } = useThemeMode();
   const refreshChart = () => {
     if (!chartRef.current) {
       return;
@@ -69,7 +69,7 @@ const StatisticsWidget4: React.FC<Props> = ({className, svgIcon, color, change, 
         <div
           ref={chartRef}
           className='statistics-widget-4-chart card-rounded-bottom'
-          style={{height: '150px'}}
+          style={{ height: '150px' }}
         ></div>
       </div>
       {/* end::Body */}
@@ -77,7 +77,7 @@ const StatisticsWidget4: React.FC<Props> = ({className, svgIcon, color, change, 
   );
 };
 
-export {StatisticsWidget4};
+export { StatisticsWidget4 };
 
 function getChartOptions(
   height: number,

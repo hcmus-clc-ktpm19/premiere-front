@@ -1,12 +1,12 @@
-import React, {useContext, useEffect} from 'react';
-import {ReceiverEditModalHeader} from './ReceiverEditModalHeader';
-import {ReceiverEditModalFormWrapper} from './ReceiverEditModalFromWrapper';
-import {ReceiverModalContext} from '@/app/modules/profile/components/Receivers';
+import React, { useContext, useEffect } from 'react';
+import { ReceiverEditModalHeader } from './ReceiverEditModalHeader';
+import { ReceiverEditModalFormWrapper } from './ReceiverEditModalFromWrapper';
+import { ReceiverModalContext } from '@/app/modules/profile/components/Receivers';
 
 // @ts-ignore
 const ReceiverEditModal = () => {
   // @ts-ignore
-  const {modal} = useContext(ReceiverModalContext);
+  const { modal } = useContext(ReceiverModalContext);
   useEffect(() => {
     document.body.classList.add('modal-open');
     return () => {
@@ -47,4 +47,4 @@ const ReceiverEditModal = () => {
   );
 };
 
-export {ReceiverEditModal};
+export { ReceiverEditModal };

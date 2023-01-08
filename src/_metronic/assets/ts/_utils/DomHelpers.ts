@@ -1,9 +1,9 @@
-import {OffsetModel} from './models/OffsetModel';
-import {ViewPortModel} from './models/ViewPortModel';
-import {ElementStyleUtil} from './_ElementStyleUtil';
-import {DataUtil} from './_DataUtil';
-import {ElementAnimateUtil} from './ElementAnimateUtil';
-import {getObjectPropertyValueByKey, toJSON} from './_TypesHelpers';
+import { OffsetModel } from './models/OffsetModel';
+import { ViewPortModel } from './models/ViewPortModel';
+import { ElementStyleUtil } from './_ElementStyleUtil';
+import { DataUtil } from './_DataUtil';
+import { ElementAnimateUtil } from './ElementAnimateUtil';
+import { getObjectPropertyValueByKey, toJSON } from './_TypesHelpers';
 
 function getCSS(el: HTMLElement, styleProp: string) {
   const defaultView = (el.ownerDocument || document).defaultView;
@@ -98,7 +98,7 @@ function getElementOffset(el: HTMLElement): OffsetModel {
   // Running getBoundingClientRect on a
   // disconnected node in IE throws an error
   if (!el.getClientRects().length) {
-    return {top: 0, left: 0};
+    return { top: 0, left: 0 };
   }
 
   // Get document-relative position by adding viewport scroll to viewport-relative gBCR

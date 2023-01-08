@@ -1,17 +1,17 @@
 // @ts-nocheck
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import {FC} from 'react';
-import {KTSVG} from '../../../helpers';
+import { FC } from 'react';
+import { KTSVG } from '../../../helpers';
 
 type Props = {
   className: string;
   backGroundColor: string;
 };
 
-const MixedWidget15: FC<Props> = ({className, backGroundColor}) => (
+const MixedWidget15: FC<Props> = ({ className, backGroundColor }) => (
   <div
     className={`card ${className} theme-dark-bg-body`}
-    style={{backgroundColor: backGroundColor}}
+    style={{ backgroundColor: backGroundColor }}
   >
     {/* begin::Body */}
     <div className='card-body d-flex flex-column'>
@@ -126,4 +126,4 @@ const MixedWidget15: FC<Props> = ({className, backGroundColor}) => (
   </div>
 );
 
-export {MixedWidget15};
+export { MixedWidget15 };

@@ -1,12 +1,12 @@
 import clsx from 'clsx';
-import {useEffect} from 'react';
-import {ILayout, useLayout} from '../../core';
-import {SidebarMenu} from './sidebar-menu/SidebarMenu';
-import {SidebarFooter} from './SidebarFooter';
-import {SidebarLogo} from './SidebarLogo';
+import { useEffect } from 'react';
+import { ILayout, useLayout } from '../../core';
+import { SidebarMenu } from './sidebar-menu/SidebarMenu';
+import { SidebarFooter } from './SidebarFooter';
+import { SidebarLogo } from './SidebarLogo';
 
 const Sidebar = () => {
-  const {config} = useLayout();
+  const { config } = useLayout();
 
   useEffect(() => {
     updateDOM(config);
@@ -83,7 +83,7 @@ const updateDOM = (config: ILayout) => {
   );
 
   const appSidebarDefaultDrawerEnabled = config.app?.sidebar?.default?.drawer?.enabled;
-  let appSidebarDefaultDrawerAttributes: {[attrName: string]: string} = {};
+  let appSidebarDefaultDrawerAttributes: { [attrName: string]: string } = {};
   if (appSidebarDefaultDrawerEnabled) {
     appSidebarDefaultDrawerAttributes = config.app?.sidebar?.default?.drawer?.attributes as {
       [attrName: string]: string;
@@ -91,7 +91,7 @@ const updateDOM = (config: ILayout) => {
   }
 
   const appSidebarDefaultStickyEnabled = config.app?.sidebar?.default?.sticky?.enabled;
-  let appSidebarDefaultStickyAttributes: {[attrName: string]: string} = {};
+  let appSidebarDefaultStickyAttributes: { [attrName: string]: string } = {};
   if (appSidebarDefaultStickyEnabled) {
     appSidebarDefaultStickyAttributes = config.app?.sidebar?.default?.sticky?.attributes as {
       [attrName: string]: string;
@@ -126,4 +126,4 @@ const updateDOM = (config: ILayout) => {
   }, 0);
 };
 
-export {Sidebar};
+export { Sidebar };

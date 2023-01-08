@@ -1,7 +1,7 @@
 import clsx from 'clsx';
-import {KTSVG} from '../../../helpers';
-import {ThemeModeComponent} from '../../../assets/ts/layout';
-import {ThemeModeType, useThemeMode} from './ThemeModeProvider';
+import { KTSVG } from '../../../helpers';
+import { ThemeModeComponent } from '../../../assets/ts/layout';
+import { ThemeModeType, useThemeMode } from './ThemeModeProvider';
 
 /* eslint-disable jsx-a11y/anchor-is-valid */
 type Props = {
@@ -19,7 +19,7 @@ const ThemeModeSwitcher = ({
   menuPlacement = 'bottom-end',
   menuTrigger = "{default: 'click', lg: 'hover'}",
 }: Props) => {
-  const {mode, menuMode, updateMode, updateMenuMode} = useThemeMode();
+  const { mode, menuMode, updateMode, updateMenuMode } = useThemeMode();
   const calculatedMode = mode === 'system' ? systemMode : mode;
   const switchMode = (_mode: ThemeModeType) => {
     updateMenuMode(_mode);
@@ -61,7 +61,7 @@ const ThemeModeSwitcher = ({
         <div className='menu-item px-3 my-0'>
           <a
             href='#'
-            className={clsx('menu-link px-3 py-2', {active: menuMode === 'light'})}
+            className={clsx('menu-link px-3 py-2', { active: menuMode === 'light' })}
             onClick={() => switchMode('light')}
           >
             <span className='menu-icon' data-kt-element='icon'>
@@ -76,7 +76,7 @@ const ThemeModeSwitcher = ({
         <div className='menu-item px-3 my-0'>
           <a
             href='#'
-            className={clsx('menu-link px-3 py-2', {active: menuMode === 'dark'})}
+            className={clsx('menu-link px-3 py-2', { active: menuMode === 'dark' })}
             onClick={() => switchMode('dark')}
           >
             <span className='menu-icon' data-kt-element='icon'>
@@ -91,7 +91,7 @@ const ThemeModeSwitcher = ({
         <div className='menu-item px-3 my-0'>
           <a
             href='#'
-            className={clsx('menu-link px-3 py-2', {active: menuMode === 'system'})}
+            className={clsx('menu-link px-3 py-2', { active: menuMode === 'system' })}
             onClick={() => switchMode('system')}
           >
             <span className='menu-icon' data-kt-element='icon'>
@@ -107,4 +107,4 @@ const ThemeModeSwitcher = ({
   );
 };
 
-export {ThemeModeSwitcher};
+export { ThemeModeSwitcher };

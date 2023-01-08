@@ -1,5 +1,5 @@
-import {ReactNode} from 'react';
-import {MenuComponent} from '../assets/ts/components';
+import { ReactNode } from 'react';
+import { MenuComponent } from '../assets/ts/components';
 
 type WithChildren = {
   children?: ReactNode;
@@ -11,4 +11,4 @@ const reInitMenu = () => {
   }, 500);
 };
 
-export {type WithChildren, reInitMenu};
+export { type WithChildren, reInitMenu };

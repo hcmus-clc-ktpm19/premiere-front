@@ -11,7 +11,7 @@ import { PremiereRole, WebSocketAction } from '@/app/models/model';
 
 const SidebarMenuMain = () => {
   const intl = useIntl();
-  const {currentUser} = useAuth();
+  const { currentUser } = useAuth();
 
   // listen and handle notification, we need to put it here because we need to listen to the topic in the whole application
   const type: AlertColor = 'info';
@@ -20,12 +20,12 @@ const SidebarMenuMain = () => {
   useSubscription('/topic/messages', (message) => setLastMessage(message.body));
 
   const onClose = () => {
-    setLastMessage("No message received yet"); // reset the message to receive the next one
-  }
+    setLastMessage('No message received yet'); // reset the message to receive the next one
+  };
 
   useEffect(() => {
     setLastMessage(lastMessage);
-    if (lastMessage !== "No message received yet") {
+    if (lastMessage !== 'No message received yet') {
       const messageToParse = JSON.parse(lastMessage);
       // check if we have a message and if it's for the current user
       if (currentUser?.id === messageToParse.receiverId) {
@@ -138,31 +138,38 @@ const SidebarMenuMain = () => {
       )}
 
       {currentUser?.role === PremiereRole.PREMIERE_ADMIN && (
-          <>
-            <div className='menu-item'>
-              <div className='menu-content pt-8 pb-2'>
-                <span className='menu-section text-muted text-uppercase fs-8 ls-1'>Admin</span>
-              </div>
+        <>
+          <div className='menu-item'>
+            <div className='menu-content pt-8 pb-2'>
+              <span className='menu-section text-muted text-uppercase fs-8 ls-1'>Admin</span>
             </div>
-            <SidebarMenuItem
-                to='/apps/admin-management/employees'
-                title='Employee Management'
-                fontIcon='bi-archive'
-                icon='/media/icons/duotune/communication/com014.svg'>
-            </SidebarMenuItem>
+          </div>
+          <SidebarMenuItem
+            to='/apps/admin-management/employees'
+            title='Employee Management'
+            fontIcon='bi-archive'
+            icon='/media/icons/duotune/communication/com014.svg'></SidebarMenuItem>
 
-            <SidebarMenuItemWithSub
-                to='/apps/admin-management/transactions/'
-                title='Transaction Management'
-                fontIcon='bi-archive'
-                icon='/media/icons/duotune/graphs/gra001.svg'>
-              <SidebarMenuItem to='/apps/admin-management/transactions/lists' title='Lists' hasBullet={true} />
-              <SidebarMenuItem to='/apps/admin-management/transactions/statistics' title='Statistics' hasBullet={true} />
-            </SidebarMenuItemWithSub>
-          </>
+          <SidebarMenuItemWithSub
+            to='/apps/admin-management/transactions/'
+            title='Transaction Management'
+            fontIcon='bi-archive'
+            icon='/media/icons/duotune/graphs/gra001.svg'>
+            <SidebarMenuItem
+              to='/apps/admin-management/transactions/lists'
+              title='Lists'
+              hasBullet={true}
+            />
+            <SidebarMenuItem
+              to='/apps/admin-management/transactions/statistics'
+              title='Statistics'
+              hasBullet={true}
+            />
+          </SidebarMenuItemWithSub>
+        </>
       )}
     </>
   );
 };
 
-export {SidebarMenuMain};
+export { SidebarMenuMain };

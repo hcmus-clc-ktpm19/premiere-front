@@ -1,6 +1,6 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import {FC, useEffect, useState} from 'react';
-import {KTSVG, toAbsoluteUrl} from '../../../../helpers';
+import { FC, useEffect, useState } from 'react';
+import { KTSVG, toAbsoluteUrl } from '../../../../helpers';
 
 const ToolbarExtended: FC = () => {
   const [progress, setProgress] = useState<string>('1');
@@ -160,4 +160,4 @@ const ToolbarExtended: FC = () => {
   );
 };
 
-export {ToolbarExtended};
+export { ToolbarExtended };

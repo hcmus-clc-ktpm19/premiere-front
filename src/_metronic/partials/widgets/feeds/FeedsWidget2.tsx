@@ -1,13 +1,13 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import React from 'react';
-import {KTSVG, toAbsoluteUrl} from '../../../helpers';
-import {Dropdown1} from '../../content/dropdown/Dropdown1';
+import { KTSVG, toAbsoluteUrl } from '../../../helpers';
+import { Dropdown1 } from '../../content/dropdown/Dropdown1';
 
 type Props = {
   className: string;
 };
 
-const FeedsWidget2: React.FC<Props> = ({className}) => {
+const FeedsWidget2: React.FC<Props> = ({ className }) => {
   return (
     <div className={`card ${className}`}>
       {/* begin::Body */}
@@ -114,4 +114,4 @@ const FeedsWidget2: React.FC<Props> = ({className}) => {
   );
 };
 
-export {FeedsWidget2};
+export { FeedsWidget2 };

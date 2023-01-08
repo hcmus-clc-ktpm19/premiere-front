@@ -7,6 +7,8 @@ import { ReceiverModalContext } from '@/app/modules/profile/components/Receivers
 import { useAuth } from '@/app/modules/auth';
 
 const ReceiverEditModalFormWrapper = () => {
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+  // @ts-ignore
   const { receiverToUpdate, setReceiverToUpdate } = useContext(ReceiverModalContext);
   const enabledQuery: boolean = isNotEmpty(receiverToUpdate);
   const { currentUser } = useAuth();

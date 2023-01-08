@@ -1,6 +1,6 @@
-import {FC} from 'react';
-import {Link} from 'react-router-dom';
-import {toAbsoluteUrl} from '../../../../_metronic/helpers';
+import { FC } from 'react';
+import { Link } from 'react-router-dom';
+import { toAbsoluteUrl } from '../../../../_metronic/helpers';
 
 const Error404: FC = () => {
   return (
@@ -39,4 +39,4 @@ const Error404: FC = () => {
   );
 };
 
-export {Error404};
+export { Error404 };

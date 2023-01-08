@@ -1,8 +1,8 @@
 import React from 'react';
 import clsx from 'clsx';
-import {useLocation} from 'react-router';
-import {checkIsActive, KTSVG, WithChildren} from '../../../../helpers';
-import {useLayout} from '../../../core';
+import { useLocation } from 'react-router';
+import { checkIsActive, KTSVG, WithChildren } from '../../../../helpers';
+import { useLayout } from '../../../core';
 
 type Props = {
   to: string;
@@ -20,14 +20,14 @@ const SidebarMenuItemWithSub: React.FC<Props & WithChildren> = ({
   fontIcon,
   hasBullet,
 }) => {
-  const {pathname} = useLocation();
+  const { pathname } = useLocation();
   const isActive = checkIsActive(pathname, to);
-  const {config} = useLayout();
-  const {app} = config;
+  const { config } = useLayout();
+  const { app } = config;
 
   return (
     <div
-      className={clsx('menu-item', {'here show': isActive}, 'menu-accordion')}
+      className={clsx('menu-item', { 'here show': isActive }, 'menu-accordion')}
       data-kt-menu-trigger='click'
     >
       <span className='menu-link'>
@@ -47,11 +47,11 @@ const SidebarMenuItemWithSub: React.FC<Props & WithChildren> = ({
         <span className='menu-title'>{title}</span>
         <span className='menu-arrow'></span>
       </span>
-      <div className={clsx('menu-sub menu-sub-accordion', {'menu-active-bg': isActive})}>
+      <div className={clsx('menu-sub menu-sub-accordion', { 'menu-active-bg': isActive })}>
         {children}
       </div>
     </div>
   );
 };
 
-export {SidebarMenuItemWithSub};
+export { SidebarMenuItemWithSub };

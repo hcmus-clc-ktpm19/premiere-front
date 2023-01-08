@@ -1,6 +1,6 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import {useEffect, useState} from 'react';
-import {KTSVG} from '../../../../helpers';
+import { useEffect, useState } from 'react';
+import { KTSVG } from '../../../../helpers';
 
 const ToolbarReports = () => {
   const [progress, setProgress] = useState<string>('1');
@@ -118,4 +118,4 @@ const ToolbarReports = () => {
   );
 };
 
-export {ToolbarReports};
+export { ToolbarReports };

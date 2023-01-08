@@ -13,7 +13,6 @@ const UsersTable = () => {
   const users = useQueryResponseData();
   const isLoading = useQueryResponseLoading();
   const data = useMemo(() => users, [users]);
-  console.log('data', { data });
   const columns = useMemo(() => usersColumns, []);
   const { getTableProps, getTableBodyProps, headers, rows, prepareRow } = useTable({
     columns,

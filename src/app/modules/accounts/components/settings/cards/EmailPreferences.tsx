@@ -1,11 +1,11 @@
-import React, {useState} from 'react';
-import {IEmailPreferences, emailPreferences} from '../SettingsModel';
+import React, { useState } from 'react';
+import { IEmailPreferences, emailPreferences } from '../SettingsModel';
 
 const EmailPreferences: React.FC = () => {
   const [data, setData] = useState<IEmailPreferences>(emailPreferences);
 
   const updateData = (fieldsToUpdate: Partial<IEmailPreferences>) => {
-    const updatedData = {...data, ...fieldsToUpdate};
+    const updatedData = { ...data, ...fieldsToUpdate };
     setData(updatedData);
   };
 
@@ -203,7 +203,7 @@ const EmailPreferences: React.FC = () => {
             <button type='button' onClick={click} className='btn btn-primary'>
               {!loading && 'Save Changes'}
               {loading && (
-                <span className='indicator-progress' style={{display: 'block'}}>
+                <span className='indicator-progress' style={{ display: 'block' }}>
                   Please wait...{' '}
                   <span className='spinner-border spinner-border-sm align-middle ms-2'></span>
                 </span>
@@ -216,4 +216,4 @@ const EmailPreferences: React.FC = () => {
   );
 };
 
-export {EmailPreferences};
+export { EmailPreferences };

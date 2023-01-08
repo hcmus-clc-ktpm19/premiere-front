@@ -1,30 +1,31 @@
-/* eslint-disable jsx-a11y/anchor-is-valid */
 import React from 'react';
-import {KTSVG, toAbsoluteUrl} from '@_metronic/helpers';
-import {Link} from 'react-router-dom';
-import {Dropdown1} from '@_metronic/partials';
-import {useLocation} from 'react-router';
-import {useAuth} from "@/app/modules/auth";
-import {CreditCardDto} from "@/app/modules/profile/core/_dtos";
-import {useQuery} from "react-query";
-import {ProfileService as profileService} from "@/app/modules/profile/core/_requests";
+import { KTSVG, toAbsoluteUrl } from '@_metronic/helpers';
+import { Link } from 'react-router-dom';
+import { Dropdown1 } from '@_metronic/partials';
+import { useLocation } from 'react-router';
+import { useAuth } from '@/app/modules/auth';
+import { CreditCardDto } from '@/app/modules/profile/core/_dtos';
+import { useQuery } from 'react-query';
+import { ProfileService as profileService } from '@/app/modules/profile/core/_requests';
 
 const AccountHeader: React.FC = () => {
   const location = useLocation();
-  const {currentUser} = useAuth();
+  const { currentUser } = useAuth();
   const [creditCard, setCreditCard] = React.useState<CreditCardDto>();
-  const {data} = useQuery('creditCard', async () => {
-        try {
-          const response = await profileService.getCreditCardByUserId(currentUser?.id);
-          setCreditCard(response);
-          return response;
-        } catch (error) {
-          console.log(error);
-        }
-      },
-      {
-        refetchOnWindowFocus: true
+  const { data } = useQuery(
+    'creditCard',
+    async () => {
+      try {
+        const response = await profileService.getCreditCardByUserId(currentUser?.id);
+        setCreditCard(response);
+        return response;
+      } catch (error) {
+        console.log(error);
       }
+    },
+    {
+      refetchOnWindowFocus: true,
+    }
   );
 
   return (
@@ -55,8 +56,7 @@ const AccountHeader: React.FC = () => {
                     href='#'
                     className='btn btn-sm btn-light-success fw-bolder ms-2 fs-8 py-1 px-3'
                     data-bs-toggle='modal'
-                    data-bs-target='#kt_modal_upgrade_plan'
-                  >
+                    data-bs-target='#kt_modal_upgrade_plan'>
                     Upgrade to Pro
                   </a>
                 </div>
@@ -64,8 +64,7 @@ const AccountHeader: React.FC = () => {
                 <div className='d-flex flex-wrap fw-bold fs-6 mb-4 pe-2'>
                   <a
                     href='#'
-                    className='d-flex align-items-center text-gray-400 text-hover-primary me-5 mb-2'
-                  >
+                    className='d-flex align-items-center text-gray-400 text-hover-primary me-5 mb-2'>
                     <KTSVG
                       path='/media/icons/duotune/communication/com006.svg'
                       className='svg-icon-4 me-1'
@@ -74,8 +73,7 @@ const AccountHeader: React.FC = () => {
                   </a>
                   <a
                     href='#'
-                    className='d-flex align-items-center text-gray-400 text-hover-primary me-5 mb-2'
-                  >
+                    className='d-flex align-items-center text-gray-400 text-hover-primary me-5 mb-2'>
                     <KTSVG
                       path='/media/icons/duotune/general/gen018.svg'
                       className='svg-icon-4 me-1'
@@ -84,8 +82,7 @@ const AccountHeader: React.FC = () => {
                   </a>
                   <a
                     href='#'
-                    className='d-flex align-items-center text-gray-400 text-hover-primary mb-2'
-                  >
+                    className='d-flex align-items-center text-gray-400 text-hover-primary mb-2'>
                     <KTSVG
                       path='/media/icons/duotune/communication/com011.svg'
                       className='svg-icon-4 me-1'
@@ -112,8 +109,7 @@ const AccountHeader: React.FC = () => {
                   href='#'
                   className='btn btn-sm btn-primary me-3'
                   data-bs-toggle='modal'
-                  data-bs-target='#kt_modal_offer_a_deal'
-                >
+                  data-bs-target='#kt_modal_offer_a_deal'>
                   Hire Me
                 </a>
                 <div className='me-0'>
@@ -121,8 +117,7 @@ const AccountHeader: React.FC = () => {
                     className='btn btn-sm btn-icon btn-bg-light btn-active-color-primary'
                     data-kt-menu-trigger='click'
                     data-kt-menu-placement='bottom-end'
-                    data-kt-menu-flip='top-end'
-                  >
+                    data-kt-menu-flip='top-end'>
                     <i className='bi bi-three-dots fs-3'></i>
                   </button>
                   <Dropdown1 />
@@ -135,7 +130,7 @@ const AccountHeader: React.FC = () => {
                 <div className='d-flex flex-wrap'>
                   <div className='border border-gray-300 border-dashed rounded min-w-125px py-3 px-4 me-6 mb-3'>
                     <div className='d-flex align-items-center'>
-                      <span className='fw-bold fs-6 text-gray-400' style={{paddingRight: 5}}>
+                      <span className='fw-bold fs-6 text-gray-400' style={{ paddingRight: 5 }}>
                         Available Balance:{' '}
                       </span>
                       <div className='fs-2 fw-bolder'>
@@ -146,7 +141,7 @@ const AccountHeader: React.FC = () => {
                       </div>
                     </div>
                     <div className='d-flex align-items-center'>
-                      <span className='fw-bold fs-6 text-gray-400' style={{paddingRight: 5}}>
+                      <span className='fw-bold fs-6 text-gray-400' style={{ paddingRight: 5 }}>
                         Account Number:{' '}
                       </span>
                       <div className='text-gray-600 text-hover-primary fs-2 fw-bolder me-1'>
@@ -164,10 +159,9 @@ const AccountHeader: React.FC = () => {
                 </div>
                 <div className='h-5px mx-3 w-100 bg-light mb-3'>
                   <div
-                      className='bg-success rounded h-5px'
-                      role='progressbar'
-                      style={{width: '50%'}}
-                  ></div>
+                    className='bg-success rounded h-5px'
+                    role='progressbar'
+                    style={{ width: '50%' }}></div>
                 </div>
               </div>
             </div>
@@ -182,8 +176,7 @@ const AccountHeader: React.FC = () => {
                   `nav-link text-active-primary me-6 ` +
                   (location.pathname === '/crafted/account/overview' && 'active')
                 }
-                to='/crafted/account/overview'
-              >
+                to='/crafted/account/overview'>
                 Overview
               </Link>
             </li>
@@ -193,8 +186,7 @@ const AccountHeader: React.FC = () => {
                   `nav-link text-active-primary me-6 ` +
                   (location.pathname === '/crafted/account/settings' && 'active')
                 }
-                to='/crafted/account/settings'
-              >
+                to='/crafted/account/settings'>
                 Settings
               </Link>
             </li>
@@ -205,4 +197,4 @@ const AccountHeader: React.FC = () => {
   );
 };
 
-export {AccountHeader};
+export { AccountHeader };

@@ -1,4 +1,4 @@
-import React, {FC} from 'react';
+import React, { FC } from 'react';
 import {
   ChartsWidget1,
   ChartsWidget2,
@@ -60,4 +60,4 @@ const Charts: FC = () => {
   );
 };
 
-export {Charts};
+export { Charts };

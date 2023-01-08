@@ -1,6 +1,6 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import React from 'react';
-import {KTSVG, toAbsoluteUrl} from '../../../helpers';
+import { KTSVG, toAbsoluteUrl } from '../../../helpers';
 // import { toAbsoluteUrl } from "../../../helpers";
 // import { KTSVG } from "../../../helpers";
 
@@ -30,7 +30,7 @@ const EngageWidget1: React.FC<Props> = ({
     <div className={`card ${className}`}>
       <div
         className={`card-body card-rounded p-0 d-flex bg-${bgColor}`}
-        style={{backgroundColor: bgHex}}
+        style={{ backgroundColor: bgHex }}
       >
         <div
           className={`d-flex flex-column flex-lg-row-auto ${
@@ -57,11 +57,11 @@ const EngageWidget1: React.FC<Props> = ({
           className={`d-none d-md-flex flex-row-fluid mw-400px ml-auto ${
             bgImage ? 'bgi-no-repeat bgi-position-y-center bgi-position-x-left bgi-size-cover' : ''
           }`}
-          style={{backgroundImage: bgImagePath}}
+          style={{ backgroundImage: bgImagePath }}
         ></div>
       </div>
     </div>
   );
 };
 
-export {EngageWidget1};
+export { EngageWidget1 };

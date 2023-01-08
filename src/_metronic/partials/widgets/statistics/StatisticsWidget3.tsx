@@ -1,8 +1,8 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import React, {useEffect, useRef} from 'react';
-import ApexCharts, {ApexOptions} from 'apexcharts';
-import {getCSS, getCSSVariableValue} from '../../../assets/ts/_utils';
-import {useThemeMode} from '../../layout/theme-mode/ThemeModeProvider';
+import React, { useEffect, useRef } from 'react';
+import ApexCharts, { ApexOptions } from 'apexcharts';
+import { getCSS, getCSSVariableValue } from '../../../assets/ts/_utils';
+import { useThemeMode } from '../../layout/theme-mode/ThemeModeProvider';
 
 type Props = {
   className: string;
@@ -12,9 +12,9 @@ type Props = {
   color: string;
 };
 
-const StatisticsWidget3: React.FC<Props> = ({className, title, description, change, color}) => {
+const StatisticsWidget3: React.FC<Props> = ({ className, title, description, change, color }) => {
   const chartRef = useRef<HTMLDivElement | null>(null);
-  const {mode} = useThemeMode();
+  const { mode } = useThemeMode();
   const refreshChart = () => {
     if (!chartRef.current) {
       return;
@@ -59,7 +59,7 @@ const StatisticsWidget3: React.FC<Props> = ({className, title, description, chan
 
             <span
               className='text-muted fw-semibold mt-1'
-              dangerouslySetInnerHTML={{__html: description}}
+              dangerouslySetInnerHTML={{ __html: description }}
             ></span>
           </div>
 
@@ -72,7 +72,7 @@ const StatisticsWidget3: React.FC<Props> = ({className, title, description, chan
         <div
           ref={chartRef}
           className='statistics-widget-3-chart card-rounded-bottom'
-          style={{height: '150px'}}
+          style={{ height: '150px' }}
         ></div>
       </div>
       {/* end::Body */}
@@ -80,7 +80,7 @@ const StatisticsWidget3: React.FC<Props> = ({className, title, description, chan
   );
 };
 
-export {StatisticsWidget3};
+export { StatisticsWidget3 };
 
 function getChartOptions(
   height: number,

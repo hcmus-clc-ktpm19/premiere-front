@@ -1,16 +1,16 @@
-import {useIntl} from 'react-intl';
-import {MenuItem} from './MenuItem';
-import {MenuInnerWithSub} from './MenuInnerWithSub';
-import {useAuth} from '@/app/modules/auth';
-import {PremiereRole} from '@/app/models/model';
-import React from "react";
+import { useIntl } from 'react-intl';
+import { MenuItem } from './MenuItem';
+import { MenuInnerWithSub } from './MenuInnerWithSub';
+import { useAuth } from '@/app/modules/auth';
+import { PremiereRole } from '@/app/models/model';
+import React from 'react';
 
 export function MenuInner() {
   const intl = useIntl();
-  const {currentUser} = useAuth();
+  const { currentUser } = useAuth();
   return (
     <>
-      <MenuItem title={intl.formatMessage({id: 'MENU.DASHBOARD'})} to='/dashboard' />
+      <MenuItem title={intl.formatMessage({ id: 'MENU.DASHBOARD' })} to='/dashboard' />
       {/*<MenuItem title='Layout Builder' to='/builder' />*/}
       <MenuInnerWithSub
         title='Crafted'
@@ -38,21 +38,21 @@ export function MenuInner() {
               hasBullet={true}
             />
             <MenuInnerWithSub
-                to='/crafted/pages/profile/transactions'
-                title='Transactions'
-                hasBullet={true}
-                hasArrow={true}
-                menuPlacement='right-start'
-                menuTrigger={`{default:'click', lg: 'hover'}`}>
+              to='/crafted/pages/profile/transactions'
+              title='Transactions'
+              hasBullet={true}
+              hasArrow={true}
+              menuPlacement='right-start'
+              menuTrigger={`{default:'click', lg: 'hover'}`}>
               <MenuItem
-                  to='/crafted/pages/profile/transactions'
-                  title='Transactions History'
-                  hasBullet={true}
+                to='/crafted/pages/profile/transactions'
+                title='Transactions History'
+                hasBullet={true}
               />
               <MenuItem
-                  to='/crafted/pages/profile/create-transaction'
-                  title='Create Transaction'
-                  hasBullet={true}
+                to='/crafted/pages/profile/create-transaction'
+                title='Create Transaction'
+                hasBullet={true}
               />
             </MenuInnerWithSub>
             <MenuItem to='/crafted/pages/profile/receivers' title='Receivers' hasBullet={true} />
@@ -72,8 +72,7 @@ export function MenuInner() {
         </MenuInnerWithSub>
       </MenuInnerWithSub>
 
-      {
-        currentUser?.role === PremiereRole.EMPLOYEE.toString() && (
+      {currentUser?.role === PremiereRole.EMPLOYEE.toString() && (
         <MenuInnerWithSub title='Apps' to='/apps' menuPlacement='bottom-start' menuTrigger='click'>
           {/* PAGES */}
           <MenuItem
@@ -82,34 +81,41 @@ export function MenuInner() {
             title='User management'
           />
           <MenuItem
-              icon='/media/icons/duotune/finance/fin010.svg'
-              to='/apps/deposit-management/deposit-money'
-              title='Deposit Money'
+            icon='/media/icons/duotune/finance/fin010.svg'
+            to='/apps/deposit-management/deposit-money'
+            title='Deposit Money'
           />
         </MenuInnerWithSub>
       )}
 
       {currentUser?.role === PremiereRole.PREMIERE_ADMIN.toString() && (
-          <MenuInnerWithSub title='Apps' to='/apps' menuPlacement='bottom-start' menuTrigger='click'>
-            {/* PAGES */}
+        <MenuInnerWithSub title='Apps' to='/apps' menuPlacement='bottom-start' menuTrigger='click'>
+          {/* PAGES */}
+          <MenuItem
+            icon='/media/icons/duotune/general/gen051.svg'
+            to='/apps/admin-management/employees'
+            title='Employee Management'
+          />
+          <MenuInnerWithSub
+            title='Transaction Management'
+            to='/apps/admin-management/transactions/'
+            fontIcon='bi-person'
+            hasArrow={true}
+            menuPlacement='right-start'
+            menuTrigger={`{default:'click', lg: 'hover'}`}>
             <MenuItem
-                icon='/media/icons/duotune/general/gen051.svg'
-                to='/apps/admin-management/employees'
-                title='Employee Management'
+              to='/apps/admin-management/transactions/lists'
+              title='Lists'
+              hasBullet={true}
             />
-            <MenuInnerWithSub
-                title='Transaction Management'
-                to='/apps/admin-management/transactions/'
-                fontIcon='bi-person'
-                hasArrow={true}
-                menuPlacement='right-start'
-                menuTrigger={`{default:'click', lg: 'hover'}`}>
-              <MenuItem to='/apps/admin-management/transactions/lists' title='Lists' hasBullet={true} />
-              <MenuItem to='/apps/admin-management/transactions/statistics' title='Statistics' hasBullet={true} />
-            </MenuInnerWithSub>
+            <MenuItem
+              to='/apps/admin-management/transactions/statistics'
+              title='Statistics'
+              hasBullet={true}
+            />
           </MenuInnerWithSub>
+        </MenuInnerWithSub>
       )}
-
     </>
   );
 }

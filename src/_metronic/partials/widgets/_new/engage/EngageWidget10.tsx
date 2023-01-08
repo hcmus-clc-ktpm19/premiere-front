@@ -1,12 +1,12 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import {Link} from 'react-router-dom';
-import {toAbsoluteUrl} from '../../../../helpers';
+import { Link } from 'react-router-dom';
+import { toAbsoluteUrl } from '../../../../helpers';
 
 type Props = {
   className: string;
 };
 
-const EngageWidget10 = ({className}: Props) => (
+const EngageWidget10 = ({ className }: Props) => (
   <div className={`card card-flush ${className}`}>
     <div
       className='card-body d-flex flex-column justify-content-between mt-9 bgi-no-repeat bgi-size-cover bgi-position-x-center pb-0'
@@ -52,4 +52,4 @@ const EngageWidget10 = ({className}: Props) => (
     </div>
   </div>
 );
-export {EngageWidget10};
+export { EngageWidget10 };
