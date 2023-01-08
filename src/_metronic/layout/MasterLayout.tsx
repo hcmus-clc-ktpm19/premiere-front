@@ -1,11 +1,11 @@
-import {useEffect} from 'react';
-import {Outlet, useLocation} from 'react-router-dom';
-import {HeaderWrapper} from './components/header';
-import {RightToolbar} from '../partials/layout/RightToolbar';
-import {ScrollTop} from './components/scroll-top';
-import {Content} from './components/content';
-import {FooterWrapper} from './components/footer';
-import {Sidebar} from './components/sidebar';
+import { useEffect } from 'react';
+import { Outlet, useLocation } from 'react-router-dom';
+import { HeaderWrapper } from './components/header';
+import { RightToolbar } from '../partials/layout/RightToolbar';
+import { ScrollTop } from './components/scroll-top';
+import { Content } from './components/content';
+import { FooterWrapper } from './components/footer';
+import { Sidebar } from './components/sidebar';
 import {
   DrawerMessenger,
   ActivityDrawer,
@@ -13,9 +13,9 @@ import {
   UpgradePlan,
   ThemeModeProvider,
 } from '../partials';
-import {PageDataProvider} from './core';
-import {reInitMenu} from '../helpers';
-import {ToolbarWrapper} from './components/toolbar';
+import { PageDataProvider } from './core';
+import { reInitMenu } from '../helpers';
+import { ToolbarWrapper } from './components/toolbar';
 
 const MasterLayout = () => {
   const location = useLocation();
@@ -60,4 +60,4 @@ const MasterLayout = () => {
   );
 };
 
-export {MasterLayout};
+export { MasterLayout };

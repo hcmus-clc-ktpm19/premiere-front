@@ -145,4 +145,4 @@ class ScrollTopComponent {
     ElementAnimateUtil.scrollTop(0, defaultScrollTopOptions.speed);
   };
 }
-export {ScrollTopComponent, defaultScrollTopOptions};
+export { ScrollTopComponent, defaultScrollTopOptions };

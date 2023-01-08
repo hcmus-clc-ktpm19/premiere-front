@@ -1,6 +1,6 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import clsx from 'clsx';
-import {toAbsoluteUrl} from '../../../../helpers';
+import { toAbsoluteUrl } from '../../../../helpers';
 
 type Props = {
   className: string;
@@ -17,15 +17,15 @@ const items: Array<{
   src?: string;
   state?: string;
 }> = [
-  {name: 'Alan Warden', initials: 'A', state: 'warning'},
-  {name: 'Michael Eberon', src: toAbsoluteUrl('/media/avatars/300-11.jpg')},
-  {name: 'Susan Redwood', initials: 'S', state: 'primary'},
-  {name: 'Melody Macy', src: toAbsoluteUrl('/media/avatars/300-2.jpg')},
-  {name: 'Perry Matthew', initials: 'P', state: 'danger'},
-  {name: 'Barry Walter', src: toAbsoluteUrl('/media/avatars/300-12.jpg')},
+  { name: 'Alan Warden', initials: 'A', state: 'warning' },
+  { name: 'Michael Eberon', src: toAbsoluteUrl('/media/avatars/300-11.jpg') },
+  { name: 'Susan Redwood', initials: 'S', state: 'primary' },
+  { name: 'Melody Macy', src: toAbsoluteUrl('/media/avatars/300-2.jpg') },
+  { name: 'Perry Matthew', initials: 'P', state: 'danger' },
+  { name: 'Barry Walter', src: toAbsoluteUrl('/media/avatars/300-12.jpg') },
 ];
 
-const CardsWidget7 = ({className, description, icon, stats, labelColor, textColor}: Props) => (
+const CardsWidget7 = ({ className, description, icon, stats, labelColor, textColor }: Props) => (
   <div className={`card card-flush ${className}`}>
     <div className='card-header pt-5'>
       <div className='card-title d-flex flex-column'>
@@ -71,4 +71,4 @@ const CardsWidget7 = ({className, description, icon, stats, labelColor, textColo
     </div>
   </div>
 );
-export {CardsWidget7};
+export { CardsWidget7 };

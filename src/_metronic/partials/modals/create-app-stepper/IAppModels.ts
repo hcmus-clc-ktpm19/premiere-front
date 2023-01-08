@@ -20,9 +20,9 @@ export interface ICreateAppData {
 }
 
 export const defaultCreateAppData: ICreateAppData = {
-  appBasic: {appName: '', appType: 'Quick Online Courses'},
+  appBasic: { appName: '', appType: 'Quick Online Courses' },
   appFramework: 'HTML5',
-  appDatabase: {databaseName: 'db_name', databaseSolution: 'MySQL'},
+  appDatabase: { databaseName: 'db_name', databaseSolution: 'MySQL' },
   appStorage: 'Basic Server',
 };
 

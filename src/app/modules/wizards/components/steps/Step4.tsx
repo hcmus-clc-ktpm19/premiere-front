@@ -1,6 +1,6 @@
-import React, {FC} from 'react';
-import {KTSVG, toAbsoluteUrl} from '../../../../../_metronic/helpers';
-import {Field, ErrorMessage} from 'formik';
+import React, { FC } from 'react';
+import { KTSVG, toAbsoluteUrl } from '../../../../../_metronic/helpers';
+import { Field, ErrorMessage } from 'formik';
 
 const Step4: FC = () => {
   return (
@@ -164,4 +164,4 @@ const Step4: FC = () => {
   );
 };
 
-export {Step4};
+export { Step4 };

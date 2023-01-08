@@ -1,13 +1,13 @@
-import {useEffect, useState} from 'react';
-import {MenuComponent} from '@_metronic/assets/ts/components';
-import {initialQueryState, KTSVG} from '@_metronic/helpers';
-import {useQueryRequest} from '../../core/QueryRequestProvider';
-import {useQueryResponse} from '../../core/QueryResponseProvider';
-import {Gender} from "@/app/models/model";
+import { useEffect, useState } from 'react';
+import { MenuComponent } from '@_metronic/assets/ts/components';
+import { initialQueryState, KTSVG } from '@_metronic/helpers';
+import { useQueryRequest } from '../../core/QueryRequestProvider';
+import { useQueryResponse } from '../../core/QueryResponseProvider';
+import { Gender } from '@/app/models/model';
 
 const UsersListFilter = () => {
-  const {updateState} = useQueryRequest();
-  const {isLoading} = useQueryResponse();
+  const { updateState } = useQueryRequest();
+  const { isLoading } = useQueryResponse();
   const [gender, setGender] = useState<string | undefined>(Gender.MALE);
   const [enabled, setEnabled] = useState<boolean | undefined>(true);
 
@@ -16,12 +16,12 @@ const UsersListFilter = () => {
   }, []);
 
   const resetData = () => {
-    updateState({filter: undefined, ...initialQueryState});
+    updateState({ filter: undefined, ...initialQueryState });
   };
 
   const filterData = () => {
     updateState({
-      filter: {gender, enabled},
+      filter: { gender, enabled },
       ...initialQueryState,
     });
   };
@@ -127,4 +127,4 @@ const UsersListFilter = () => {
   );
 };
 
-export {UsersListFilter};
+export { UsersListFilter };

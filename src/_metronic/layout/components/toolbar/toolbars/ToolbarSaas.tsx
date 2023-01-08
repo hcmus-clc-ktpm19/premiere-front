@@ -1,6 +1,6 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import {FC, useEffect, useState} from 'react';
-import {KTSVG} from '../../../../helpers';
+import { FC, useEffect, useState } from 'react';
+import { KTSVG } from '../../../../helpers';
 
 const ToolbarSaas: FC = () => {
   const [progress, setProgress] = useState<string>('1');
@@ -123,4 +123,4 @@ const ToolbarSaas: FC = () => {
   );
 };
 
-export {ToolbarSaas};
+export { ToolbarSaas };

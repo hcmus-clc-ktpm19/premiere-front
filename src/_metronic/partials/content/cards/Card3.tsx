@@ -1,10 +1,10 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import React, {FC, useContext, useEffect} from 'react';
-import {toAbsoluteUrl, KTSVG} from '../../../helpers';
-import {ReceiverModalContext} from '@/app/modules/profile/components/Receivers';
-import {ProfileService as profileService} from '@/app/modules/profile/core/_requests';
-import {InviteUsers} from '@_metronic/partials';
-import {ConfirmModal} from '@_metronic/partials/modals/confirm/ConfirmModal';
+import React, { FC, useContext, useEffect } from 'react';
+import { toAbsoluteUrl, KTSVG } from '../../../helpers';
+import { ReceiverModalContext } from '@/app/modules/profile/components/Receivers';
+import { ProfileService as profileService } from '@/app/modules/profile/core/_requests';
+import { InviteUsers } from '@_metronic/partials';
+import { ConfirmModal } from '@_metronic/partials/modals/confirm/ConfirmModal';
 
 type Props = {
   id: number | null;
@@ -30,7 +30,7 @@ const Card3: FC<Props> = ({
   bankName,
 }) => {
   // @ts-ignore
-  const {openAddReceiverModal, setReceiverToUpdate, handleDeleteReceiver} =
+  const { openAddReceiverModal, setReceiverToUpdate, handleDeleteReceiver } =
     useContext(ReceiverModalContext);
   const [modal, setModal] = React.useState(false);
   const handleEditBtn = () => {
@@ -79,7 +79,7 @@ const Card3: FC<Props> = ({
           <button
             type='button'
             className='btn btn-sm btn-danger'
-            style={{marginLeft: '10px'}}
+            style={{ marginLeft: '10px' }}
             onClick={() => setModal(!modal)}
           >
             <KTSVG path='/media/icons/duotune/arrows/arr075.svg' className='svg-icon-2' />
@@ -100,4 +100,4 @@ const Card3: FC<Props> = ({
   );
 };
 
-export {Card3};
+export { Card3 };

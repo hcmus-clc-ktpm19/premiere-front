@@ -9,7 +9,7 @@ import {
   getCSS,
   ElementStyleUtil,
 } from '../_utils/index';
-import {CookieComponent} from './_CookieComponent';
+import { CookieComponent } from './_CookieComponent';
 
 export interface ScrollOptions {
   saveState?: boolean;
@@ -309,4 +309,4 @@ class ScrollComponent {
   }
 }
 
-export {ScrollComponent, defaultScrollOptions};
+export { ScrollComponent, defaultScrollOptions };

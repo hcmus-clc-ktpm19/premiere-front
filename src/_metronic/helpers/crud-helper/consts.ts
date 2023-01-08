@@ -5,4 +5,4 @@ const QUERIES = {
   REMINDERS_LIST: 'reminders-list',
 };
 
-export {QUERIES};
+export { QUERIES };

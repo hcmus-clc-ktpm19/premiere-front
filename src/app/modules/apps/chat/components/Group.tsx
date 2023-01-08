@@ -1,7 +1,7 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import React, {FC} from 'react';
-import {KTSVG, toAbsoluteUrl} from '../../../../../_metronic/helpers';
-import {Dropdown1, ChatInner} from '../../../../../_metronic/partials';
+import React, { FC } from 'react';
+import { KTSVG, toAbsoluteUrl } from '../../../../../_metronic/helpers';
+import { Dropdown1, ChatInner } from '../../../../../_metronic/partials';
 
 const Group: FC = () => {
   return (
@@ -328,4 +328,4 @@ const Group: FC = () => {
   );
 };
 
-export {Group};
+export { Group };

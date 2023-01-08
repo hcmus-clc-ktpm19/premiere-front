@@ -1,6 +1,6 @@
-import {DataUtil, getUniqueIdWithPrefix, EventHandlerUtil} from '../_utils/index';
+import { DataUtil, getUniqueIdWithPrefix, EventHandlerUtil } from '../_utils/index';
 // Helpers
-import {CookieComponent} from './_CookieComponent';
+import { CookieComponent } from './_CookieComponent';
 
 export interface ToggleOptions {
   saveState: boolean;
@@ -197,4 +197,4 @@ class ToggleComponent {
   };
 }
 
-export {ToggleComponent, defaultToggleOptions};
+export { ToggleComponent, defaultToggleOptions };

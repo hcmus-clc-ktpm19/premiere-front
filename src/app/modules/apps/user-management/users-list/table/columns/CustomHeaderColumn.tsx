@@ -1,13 +1,13 @@
 // @ts-nocheck
-import {FC} from 'react';
-import {ColumnInstance} from 'react-table';
-import {FullInfoUserDto} from "@/app/models/model";
+import { FC } from 'react';
+import { ColumnInstance } from 'react-table';
+import { FullInfoUserDto } from '@/app/models/model';
 
 type Props = {
   column: ColumnInstance<FullInfoUserDto>;
 };
 
-const CustomHeaderColumn: FC<Props> = ({column}) => (
+const CustomHeaderColumn: FC<Props> = ({ column }) => (
   <>
     {column.Header && typeof column.Header === 'string' ? (
       <th {...column.getHeaderProps()}>{column.render('Header')}</th>
@@ -17,4 +17,4 @@ const CustomHeaderColumn: FC<Props> = ({column}) => (
   </>
 );
 
-export {CustomHeaderColumn};
+export { CustomHeaderColumn };

@@ -1,6 +1,6 @@
-import React, {useEffect} from 'react';
-import {EmployeeEditModalHeader} from './EmployeeEditModalHeader';
-import {EmployeeEditModalFormWrapper} from './EmployeeEditModalFormWrapper';
+import React, { useEffect } from 'react';
+import { EmployeeEditModalHeader } from './EmployeeEditModalHeader';
+import { EmployeeEditModalFormWrapper } from './EmployeeEditModalFormWrapper';
 
 const EmployeeEditModal = () => {
   useEffect(() => {
@@ -41,4 +41,4 @@ const EmployeeEditModal = () => {
   );
 };
 
-export {EmployeeEditModal};
+export { EmployeeEditModal };

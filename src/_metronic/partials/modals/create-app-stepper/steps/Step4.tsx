@@ -1,7 +1,7 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import {StepProps} from '../IAppModels';
+import { StepProps } from '../IAppModels';
 
-const Step4 = ({data, updateData}: StepProps) => {
+const Step4 = ({ data, updateData }: StepProps) => {
   return (
     <>
       {/*begin::Step 4 */}
@@ -35,7 +35,7 @@ const Step4 = ({data, updateData}: StepProps) => {
                   name='appStorage'
                   value='Basic Server'
                   checked={data.appStorage === 'Basic Server'}
-                  onChange={() => updateData({appStorage: 'Basic Server'})}
+                  onChange={() => updateData({ appStorage: 'Basic Server' })}
                 />
               </span>
             </label>
@@ -63,7 +63,7 @@ const Step4 = ({data, updateData}: StepProps) => {
                   name='appStorage'
                   value='AWS'
                   checked={data.appStorage === 'AWS'}
-                  onChange={() => updateData({appStorage: 'AWS'})}
+                  onChange={() => updateData({ appStorage: 'AWS' })}
                 />
               </span>
             </label>
@@ -91,7 +91,7 @@ const Step4 = ({data, updateData}: StepProps) => {
                   name='appStorage'
                   value='Google'
                   checked={data.appStorage === 'Google'}
-                  onChange={() => updateData({appStorage: 'Google'})}
+                  onChange={() => updateData({ appStorage: 'Google' })}
                 />
               </span>
             </label>
@@ -105,4 +105,4 @@ const Step4 = ({data, updateData}: StepProps) => {
   );
 };
 
-export {Step4};
+export { Step4 };

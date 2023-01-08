@@ -1,5 +1,5 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import {FC, useState} from 'react';
+import { FC, useState } from 'react';
 import clsx from 'clsx';
 import {
   toAbsoluteUrl,
@@ -16,7 +16,7 @@ type Props = {
 
 const bufferMessages = defaultMessages;
 
-const ChatInner: FC<Props> = ({isDrawer = false}) => {
+const ChatInner: FC<Props> = ({ isDrawer = false }) => {
   const [chatUpdateFlag, toggleChatUpdateFlat] = useState<boolean>(false);
   const [message, setMessage] = useState<string>('');
   const [messages, setMessages] = useState<MessageModel[]>(bufferMessages);
@@ -54,7 +54,7 @@ const ChatInner: FC<Props> = ({isDrawer = false}) => {
       id={isDrawer ? 'kt_drawer_chat_messenger_body' : 'kt_chat_messenger_body'}
     >
       <div
-        className={clsx('scroll-y me-n5 pe-5', {'h-300px h-lg-auto': !isDrawer})}
+        className={clsx('scroll-y me-n5 pe-5', { 'h-300px h-lg-auto': !isDrawer })}
         data-kt-element='messages'
         data-kt-scroll='true'
         data-kt-scroll-activate='{default: false, lg: true}'
@@ -86,7 +86,7 @@ const ChatInner: FC<Props> = ({isDrawer = false}) => {
           return (
             <div
               key={`message${index}`}
-              className={clsx('d-flex', contentClass, 'mb-10', {'d-none': message.template})}
+              className={clsx('d-flex', contentClass, 'mb-10', { 'd-none': message.template })}
               {...templateAttr}
             >
               <div
@@ -137,7 +137,7 @@ const ChatInner: FC<Props> = ({isDrawer = false}) => {
                     `text-${message.type === 'in' ? 'start' : 'end'}`
                   )}
                   data-kt-element='message-text'
-                  dangerouslySetInnerHTML={{__html: message.text}}
+                  dangerouslySetInnerHTML={{ __html: message.text }}
                 ></div>
               </div>
             </div>
@@ -192,4 +192,4 @@ const ChatInner: FC<Props> = ({isDrawer = false}) => {
   );
 };
 
-export {ChatInner};
+export { ChatInner };

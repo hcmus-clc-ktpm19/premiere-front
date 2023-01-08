@@ -1,4 +1,4 @@
-import React, {FC} from 'react';
+import React, { FC } from 'react';
 import {
   MixedWidget1,
   MixedWidget2,
@@ -396,4 +396,4 @@ const Mixed: FC = () => {
   );
 };
 
-export {Mixed};
+export { Mixed };

@@ -1,4 +1,4 @@
-import React, {FC} from 'react';
+import React, { FC } from 'react';
 
 const ToggleHelpDrawer: FC = () => (
   <button
@@ -14,4 +14,4 @@ const ToggleHelpDrawer: FC = () => (
   </button>
 );
 
-export {ToggleHelpDrawer};
+export { ToggleHelpDrawer };

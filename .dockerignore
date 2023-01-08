@@ -1,0 +1,11 @@
+.idea
+node_modules
+build
+dist
+.eslintrc.json
+.gitignore
+.prettierignore
+.prettierrc.json
+README.md
+yarn-error.log
+.env

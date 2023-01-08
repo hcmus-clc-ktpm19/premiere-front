@@ -1,6 +1,6 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import React from 'react';
-import {toAbsoluteUrl} from '../../../helpers';
+import { toAbsoluteUrl } from '../../../helpers';
 
 type Props = {
   className: string;
@@ -10,7 +10,7 @@ type Props = {
   description: string;
 };
 
-const MixedWidget5: React.FC<Props> = ({className, time, image, title, description}) => {
+const MixedWidget5: React.FC<Props> = ({ className, time, image, title, description }) => {
   return (
     <div className={`card ${className}`}>
       {/* begin::Body */}
@@ -35,7 +35,7 @@ const MixedWidget5: React.FC<Props> = ({className, time, image, title, descripti
           {/* end::Link */}
 
           {/* begin::Desc */}
-          <p className='py-3' dangerouslySetInnerHTML={{__html: description}}></p>
+          <p className='py-3' dangerouslySetInnerHTML={{ __html: description }}></p>
           {/* end::Desc */}
         </div>
 
@@ -75,4 +75,4 @@ const MixedWidget5: React.FC<Props> = ({className, time, image, title, descripti
   );
 };
 
-export {MixedWidget5};
+export { MixedWidget5 };

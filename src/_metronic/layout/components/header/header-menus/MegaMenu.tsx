@@ -1,11 +1,11 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import {FC} from 'react';
-import {Link} from 'react-router-dom';
-import {toAbsoluteUrl} from '../../../../helpers';
-import {useLayout} from '../../../core';
+import { FC } from 'react';
+import { Link } from 'react-router-dom';
+import { toAbsoluteUrl } from '../../../../helpers';
+import { useLayout } from '../../../core';
 
 const MegaMenu: FC = () => {
-  const {setLayoutType, setToolbarType} = useLayout();
+  const { setLayoutType, setToolbarType } = useLayout();
   return (
     <div className='row'>
       {/* begin:Col */}
@@ -159,4 +159,4 @@ const MegaMenu: FC = () => {
   );
 };
 
-export {MegaMenu};
+export { MegaMenu };

@@ -1,14 +1,14 @@
-import {Navigate, Outlet, Route, Routes} from 'react-router-dom';
-import {PageLink, PageTitle} from '@_metronic/layout/core';
-import {Overview} from './components/Overview';
-import {Projects} from './components/Projects';
-import {Campaigns} from './components/Campaigns';
-import {Documents} from './components/Documents';
-import {Receivers} from './components/Receivers';
-import {ProfileHeader} from './ProfileHeader';
-import {Transactions} from '@/app/modules/profile/components/Transactions';
-import CreateInternalTransaction from "@/app/modules/profile/components/CreateInternalTransaction";
-import CreateTransaction from "@/app/modules/profile/components/CreateTransaction";
+import { Navigate, Outlet, Route, Routes } from 'react-router-dom';
+import { PageLink, PageTitle } from '@_metronic/layout/core';
+import { Overview } from './components/Overview';
+import { Projects } from './components/Projects';
+import { Campaigns } from './components/Campaigns';
+import { Documents } from './components/Documents';
+import { Receivers } from './components/Receivers';
+import { ProfileHeader } from './ProfileHeader';
+import { Transactions } from '@/app/modules/profile/components/Transactions';
+import CreateInternalTransaction from '@/app/modules/profile/components/CreateInternalTransaction';
+import CreateTransaction from '@/app/modules/profile/components/CreateTransaction';
 
 const profileBreadCrumbs: Array<PageLink> = [
   {
@@ -72,22 +72,22 @@ const ProfilePage = () => (
         }
       />
       <Route
-          path='create-transaction'
-          element={
-            <>
-              <PageTitle breadcrumbs={profileBreadCrumbs}>Create Transaction</PageTitle>
-              <CreateTransaction />
-            </>
-          }
+        path='create-transaction'
+        element={
+          <>
+            <PageTitle breadcrumbs={profileBreadCrumbs}>Create Transaction</PageTitle>
+            <CreateTransaction />
+          </>
+        }
       />
       <Route
-          path='create-transaction/internal'
-          element={
-            <>
-              <PageTitle breadcrumbs={profileBreadCrumbs}>Internal Transaction</PageTitle>
-              <CreateInternalTransaction />
-            </>
-          }
+        path='create-transaction/internal'
+        element={
+          <>
+            <PageTitle breadcrumbs={profileBreadCrumbs}>Internal Transaction</PageTitle>
+            <CreateInternalTransaction />
+          </>
+        }
       />
       <Route
         path='documents'

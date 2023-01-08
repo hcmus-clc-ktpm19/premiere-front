@@ -43,11 +43,11 @@ export interface IHeader extends ILayoutComponent {
     stacked?: boolean;
     sticky?: {
       enabled?: boolean;
-      attributes?: {[attrName: string]: string};
+      attributes?: { [attrName: string]: string };
     };
     minimize?: {
       enabled?: boolean;
-      attributes?: {[attrName: string]: string};
+      attributes?: { [attrName: string]: string };
     };
   };
 }
@@ -64,11 +64,11 @@ export interface ISidebar extends ILayoutComponent {
     };
     drawer?: {
       enabled?: boolean;
-      attributes?: {[attrName: string]: string};
+      attributes?: { [attrName: string]: string };
     };
     sticky?: {
       enabled?: boolean;
-      attributes?: {[attrName: string]: string};
+      attributes?: { [attrName: string]: string };
     };
     fixed?: {
       desktop?: boolean;
@@ -118,15 +118,15 @@ export interface IToolbar extends ILayoutComponent {
   };
   swap?: {
     enabled?: boolean;
-    attributes?: {[attrName: string]: string};
+    attributes?: { [attrName: string]: string };
   };
   sticky?: {
     enabled?: boolean;
-    attributes?: {[attrName: string]: string};
+    attributes?: { [attrName: string]: string };
   };
   minimize?: {
     enabled?: boolean;
-    attributes?: {[attrName: string]: string};
+    attributes?: { [attrName: string]: string };
   };
 
   // Custom settings

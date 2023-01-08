@@ -1,7 +1,7 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import React, {FC} from 'react';
-import {Link} from 'react-router-dom';
-import {KTSVG, toAbsoluteUrl} from '../../../helpers';
+import React, { FC } from 'react';
+import { Link } from 'react-router-dom';
+import { KTSVG, toAbsoluteUrl } from '../../../helpers';
 
 const QuickLinks: FC = () => (
   <div
@@ -10,7 +10,7 @@ const QuickLinks: FC = () => (
   >
     <div
       className='d-flex flex-column flex-center bgi-no-repeat rounded-top px-9 py-10'
-      style={{backgroundImage: `url('${toAbsoluteUrl('/media/misc/pattern-1.jpg')}')`}}
+      style={{ backgroundImage: `url('${toAbsoluteUrl('/media/misc/pattern-1.jpg')}')` }}
     >
       <h3 className='text-white fw-bold mb-3'>Quick Links</h3>
 
@@ -77,4 +77,4 @@ const QuickLinks: FC = () => (
   </div>
 );
 
-export {QuickLinks};
+export { QuickLinks };

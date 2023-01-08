@@ -19,7 +19,7 @@ const DepositMoneyPage: React.FC = () => {
   const handleOnSubmit = async (values: DepositMoneyRequestDto): Promise<void> => {
     try {
       await depositMoneyService.depositMoney(values);
-      await depositMoneyService.pushDepositSuccessNotification(values)
+      await depositMoneyService.pushDepositSuccessNotification(values);
       navigate('/dashboard');
     } catch (e: CreditCardNotFoundException | any) {
       if (e instanceof CreditCardNotFoundException) {
@@ -33,13 +33,15 @@ const DepositMoneyPage: React.FC = () => {
   return (
     <div
       className='stepper stepper-pills stepper-column d-flex flex-column flex-xl-row flex-row-fluid'
-      id='kt_create_account_stepper'>
+      id='kt_create_account_stepper'
+    >
       <div className='d-flex flex-row-fluid flex-center bg-body rounded'>
         <Formik
           validationSchema={depositMoneyService.depositMoneyValidationSchemas}
           onSubmit={handleOnSubmit}
           initialValues={initValues}
-          validateOnChange={false}>
+          validateOnChange={false}
+        >
           {(props: FormikProps<any>) => (
             <Form className='py-20 w-100 w-xl-700px px-9' noValidate id='kt_create_account_form'>
               <div className='current' data-kt-stepper-element='content'>
@@ -55,7 +57,8 @@ const DepositMoneyPage: React.FC = () => {
                   <button
                     type='submit'
                     disabled={!props.isValid}
-                    className='btn btn-lg btn-primary me-3'>
+                    className='btn btn-lg btn-primary me-3'
+                  >
                     <span className='indicator-label'>
                       Submit
                       <KTSVG

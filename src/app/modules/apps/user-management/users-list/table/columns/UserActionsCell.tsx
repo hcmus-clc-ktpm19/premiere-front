@@ -1,24 +1,24 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import {FC, useEffect} from 'react';
-import {useMutation, useQueryClient} from 'react-query';
-import {MenuComponent} from '@_metronic/assets/ts/components';
-import {ID, KTSVG, QUERIES} from '@_metronic/helpers';
-import {useListView} from '../../core/ListViewProvider';
-import {useQueryResponse} from '../../core/QueryResponseProvider';
-import {disableCustomerCreditCard} from '../../core/_requests';
-import {ProfileService as profileService} from "@/app/modules/profile/core/_requests";
-import useNotification from "@/app/modules/notifications/useNotification";
-import {useNavigate} from "react-router-dom";
+import { FC, useEffect } from 'react';
+import { useMutation, useQueryClient } from 'react-query';
+import { MenuComponent } from '@_metronic/assets/ts/components';
+import { ID, KTSVG, QUERIES } from '@_metronic/helpers';
+import { useListView } from '../../core/ListViewProvider';
+import { useQueryResponse } from '../../core/QueryResponseProvider';
+import { disableCustomerCreditCard } from '../../core/_requests';
+import { ProfileService as profileService } from '@/app/modules/profile/core/_requests';
+import useNotification from '@/app/modules/notifications/useNotification';
+import { useNavigate } from 'react-router-dom';
 
 type Props = {
   id: ID;
 };
 
-const UserActionsCell: FC<Props> = ({id}) => {
-  const {setItemIdForUpdate} = useListView();
-  const {query} = useQueryResponse();
+const UserActionsCell: FC<Props> = ({ id }) => {
+  const { setItemIdForUpdate } = useListView();
+  const { query } = useQueryResponse();
   const queryClient = useQueryClient();
-  const {setNotification} = useNotification();
+  const { setNotification } = useNotification();
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -99,4 +99,4 @@ const UserActionsCell: FC<Props> = ({id}) => {
   );
 };
 
-export {UserActionsCell};
+export { UserActionsCell };

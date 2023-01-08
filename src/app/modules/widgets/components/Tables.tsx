@@ -1,4 +1,4 @@
-import React, {FC} from 'react';
+import React, { FC } from 'react';
 import {
   TablesWidget1,
   TablesWidget2,
@@ -95,4 +95,4 @@ const Tables: FC = () => {
   );
 };
 
-export {Tables};
+export { Tables };

@@ -1,5 +1,5 @@
-import {FC, createContext, useContext, useState, useEffect} from 'react';
-import {DefaultConfig} from './_LayoutConfig';
+import { FC, createContext, useContext, useState, useEffect } from 'react';
+import { DefaultConfig } from './_LayoutConfig';
 import {
   setLayoutIntoLocalStorage,
   getEmptyCssClasses,
@@ -15,7 +15,7 @@ import {
   LayoutType,
   ToolbarType,
 } from './_Models';
-import {WithChildren} from '../../helpers';
+import { WithChildren } from '../../helpers';
 
 export interface LayoutContextModel {
   config: ILayout;
@@ -51,7 +51,7 @@ const disableSplashScreen = () => {
   }
 };
 
-const LayoutProvider: FC<WithChildren> = ({children}) => {
+const LayoutProvider: FC<WithChildren> = ({ children }) => {
   const [config, setConfig] = useState(LayoutSetup.config);
   const [classes, setClasses] = useState(LayoutSetup.classes);
   const [attributes, setAttributes] = useState(LayoutSetup.attributes);
@@ -72,7 +72,7 @@ const LayoutProvider: FC<WithChildren> = ({children}) => {
   };
 
   const setToolbarType = (toolbarType: ToolbarType) => {
-    const updatedConfig = {...config};
+    const updatedConfig = { ...config };
     if (updatedConfig.app?.toolbar) {
       updatedConfig.app.toolbar.layout = toolbarType;
     }
@@ -82,7 +82,7 @@ const LayoutProvider: FC<WithChildren> = ({children}) => {
   };
 
   const setLayoutType = (layoutType: LayoutType) => {
-    const updatedLayout = {...config, layoutType};
+    const updatedLayout = { ...config, layoutType };
     setLayoutIntoLocalStorage(updatedLayout);
     window.location.reload();
   };
@@ -104,7 +104,7 @@ const LayoutProvider: FC<WithChildren> = ({children}) => {
   return <LayoutContext.Provider value={value}>{children}</LayoutContext.Provider>;
 };
 
-export {LayoutContext, LayoutProvider};
+export { LayoutContext, LayoutProvider };
 
 export function useLayout() {
   return useContext(LayoutContext);

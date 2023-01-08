@@ -1,17 +1,17 @@
-import {FC} from 'react';
+import { FC } from 'react';
 
 type Props = {
   two_steps?: boolean;
 };
 
-const EmployeeTwoStepsCell: FC<Props> = ({two_steps}) => (
-    <>
-      {two_steps ? (
-          <div className='badge badge-light-success fw-bolder'>Enabled</div>
-          ) : (
-          <div className='badge badge-light-danger fw-bolder'>Disabled</div>
-          )}
-    </>
+const EmployeeTwoStepsCell: FC<Props> = ({ two_steps }) => (
+  <>
+    {two_steps ? (
+      <div className='badge badge-light-success fw-bolder'>Enabled</div>
+    ) : (
+      <div className='badge badge-light-danger fw-bolder'>Disabled</div>
+    )}
+  </>
 );
 
-export {EmployeeTwoStepsCell};
+export { EmployeeTwoStepsCell };

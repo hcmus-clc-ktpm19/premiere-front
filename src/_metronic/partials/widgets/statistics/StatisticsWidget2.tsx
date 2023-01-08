@@ -1,6 +1,6 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import React from 'react';
-import {toAbsoluteUrl} from '../../../helpers';
+import { toAbsoluteUrl } from '../../../helpers';
 
 type Props = {
   className: string;
@@ -9,7 +9,7 @@ type Props = {
   avatar: string;
 };
 
-const StatisticsWidget2: React.FC<Props> = ({className, title, description, avatar}) => {
+const StatisticsWidget2: React.FC<Props> = ({ className, title, description, avatar }) => {
   return (
     <div className={`card ${className}`}>
       {/* begin::Body */}
@@ -21,7 +21,7 @@ const StatisticsWidget2: React.FC<Props> = ({className, title, description, avat
 
           <span
             className='fw-semibold text-muted fs-5'
-            dangerouslySetInnerHTML={{__html: description}}
+            dangerouslySetInnerHTML={{ __html: description }}
           ></span>
         </div>
 
@@ -32,4 +32,4 @@ const StatisticsWidget2: React.FC<Props> = ({className, title, description, avat
   );
 };
 
-export {StatisticsWidget2};
+export { StatisticsWidget2 };

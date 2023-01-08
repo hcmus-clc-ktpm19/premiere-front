@@ -1,19 +1,19 @@
-import React, {FC, useEffect, useState} from 'react';
-import {ErrorMessage, Field, FormikProps} from 'formik';
-import {services} from '@/app/modules/loan-management/core/services';
-import {ErrorDto, UserDto} from '@/app/models/model';
-import {NavLink} from 'react-router-dom';
-import {useIntl} from 'react-intl';
-import {KTSVG} from "@_metronic/helpers";
-import ReceiverListModal from "@/app/modules/profile/receiver-list-modal/ReceiverListModal";
-import {ReceiverDto} from "@/app/modules/profile/core/_dtos";
+import React, { FC, useEffect, useState } from 'react';
+import { ErrorMessage, Field, FormikProps } from 'formik';
+import { services } from '@/app/modules/loan-management/core/services';
+import { ErrorDto, UserDto } from '@/app/models/model';
+import { NavLink } from 'react-router-dom';
+import { useIntl } from 'react-intl';
+import { KTSVG } from '@_metronic/helpers';
+import ReceiverListModal from '@/app/modules/profile/receiver-list-modal/ReceiverListModal';
+import { ReceiverDto } from '@/app/modules/profile/core/_dtos';
 
 interface Props {
   formikProps: FormikProps<any>;
 }
 
 const CreateLoanReminderStep1: FC<Props> = (props: Props) => {
-  const {formikProps} = props;
+  const { formikProps } = props;
   const [accountNumber, setAccountNumber] = useState<string>('');
   const [error, setError] = useState<ErrorDto | null>(null);
   const [isShowModal, setIsShowModal] = useState<boolean>(false);
@@ -25,10 +25,10 @@ const CreateLoanReminderStep1: FC<Props> = (props: Props) => {
   };
 
   const handleOnConfirmBtn = (selectedReceiver: ReceiverDto | null) => {
-    console.log("selectedReceiver", selectedReceiver);
+    console.log('selectedReceiver', selectedReceiver);
     setAccountNumber(selectedReceiver!.cardNumber);
     setIsShowModal(false);
-  }
+  };
 
   useEffect(() => {
     setError(null);
@@ -73,13 +73,13 @@ const CreateLoanReminderStep1: FC<Props> = (props: Props) => {
         </div>
 
         <button
-            className='btn btn-danger btn-sm float-end'
-            data-bs-toggle='tooltip'
-            title='Choose from your receiver list'
-            type={'button'}
-            onClick={() => setIsShowModal(true)}
+          className='btn btn-danger btn-sm float-end'
+          data-bs-toggle='tooltip'
+          title='Choose from your receiver list'
+          type={'button'}
+          onClick={() => setIsShowModal(true)}
         >
-          <KTSVG path='/media/icons/duotune/arrows/arr075.svg' className='svg-icon-2'/>
+          <KTSVG path='/media/icons/duotune/arrows/arr075.svg' className='svg-icon-2' />
           Contacts
         </button>
       </div>
@@ -98,7 +98,7 @@ const CreateLoanReminderStep1: FC<Props> = (props: Props) => {
 
         {error && (
           <div className='form-text text-danger'>
-            {intl.formatMessage({id: error.i18nPlaceHolder})}
+            {intl.formatMessage({ id: error.i18nPlaceHolder })}
           </div>
         )}
       </div>
@@ -148,13 +148,14 @@ const CreateLoanReminderStep1: FC<Props> = (props: Props) => {
           <ErrorMessage name='debtorPhone' />
         </div>
       </div>
-      <ReceiverListModal isShow={isShowModal}
-                         setIsShowModal={setIsShowModal}
-                         handleOnConfirmBtn={handleOnConfirmBtn}
-                         isInternal={true}
+      <ReceiverListModal
+        isShow={isShowModal}
+        setIsShowModal={setIsShowModal}
+        handleOnConfirmBtn={handleOnConfirmBtn}
+        isInternal={true}
       />
     </div>
   );
 };
 
-export {CreateLoanReminderStep1};
+export { CreateLoanReminderStep1 };

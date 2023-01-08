@@ -1,8 +1,8 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import clsx from 'clsx';
-import React, {useState} from 'react';
-import {KTSVG, toAbsoluteUrl} from '../../../_metronic/helpers';
-import {getLayoutFromLocalStorage, ILayout, LayoutSetup} from '../../../_metronic/layout/core';
+import React, { useState } from 'react';
+import { KTSVG, toAbsoluteUrl } from '../../../_metronic/helpers';
+import { getLayoutFromLocalStorage, ILayout, LayoutSetup } from '../../../_metronic/layout/core';
 
 const BuilderPage: React.FC = () => {
   const [tab, setTab] = useState('Sidebar');
@@ -71,7 +71,7 @@ const BuilderPage: React.FC = () => {
           >
             <li className='nav-item'>
               <a
-                className={clsx(`nav-link cursor-pointer`, {active: tab === 'Sidebar'})}
+                className={clsx(`nav-link cursor-pointer`, { active: tab === 'Sidebar' })}
                 onClick={() => setTab('Sidebar')}
                 role='tab'
               >
@@ -80,7 +80,7 @@ const BuilderPage: React.FC = () => {
             </li>
             <li className='nav-item'>
               <a
-                className={clsx(`nav-link cursor-pointer`, {active: tab === 'Header'})}
+                className={clsx(`nav-link cursor-pointer`, { active: tab === 'Header' })}
                 onClick={() => setTab('Header')}
                 role='tab'
               >
@@ -89,7 +89,7 @@ const BuilderPage: React.FC = () => {
             </li>
             <li className='nav-item'>
               <a
-                className={clsx(`nav-link cursor-pointer`, {active: tab === 'Toolbar'})}
+                className={clsx(`nav-link cursor-pointer`, { active: tab === 'Toolbar' })}
                 onClick={() => setTab('Toolbar')}
                 role='tab'
               >
@@ -102,7 +102,7 @@ const BuilderPage: React.FC = () => {
         <form className='form'>
           <div className='card-body'>
             <div className='tab-content pt-3'>
-              <div className={clsx('tab-pane', {active: tab === 'Sidebar'})}>
+              <div className={clsx('tab-pane', { active: tab === 'Sidebar' })}>
                 <div className='form-group d-flex flex-stack'>
                   <div className='d-flex flex-column'>
                     <h4 className='fw-bold text-dark'>Fixed</h4>
@@ -120,7 +120,7 @@ const BuilderPage: React.FC = () => {
                           name='model.app.sidebar.default.fixed.desktop'
                           checked={config.app?.sidebar?.default?.fixed?.desktop}
                           onChange={() => {
-                            const con = {...config};
+                            const con = { ...config };
                             if (
                               con.app &&
                               con.app.sidebar &&
@@ -129,7 +129,7 @@ const BuilderPage: React.FC = () => {
                             ) {
                               con.app.sidebar.default.fixed.desktop =
                                 !con.app.sidebar.default.fixed.desktop;
-                              setConfig({...con});
+                              setConfig({ ...con });
                             }
                           }}
                         />
@@ -157,7 +157,7 @@ const BuilderPage: React.FC = () => {
                           id='kt_builder_sidebar_minimize_desktop_enabled'
                           checked={config.app?.sidebar?.default?.minimize?.desktop?.enabled}
                           onChange={() => {
-                            const con = {...config};
+                            const con = { ...config };
                             if (
                               con.app &&
                               con.app.sidebar &&
@@ -167,7 +167,7 @@ const BuilderPage: React.FC = () => {
                             ) {
                               con.app.sidebar.default.minimize.desktop.enabled =
                                 !con.app.sidebar.default.minimize.desktop.enabled;
-                              setConfig({...con});
+                              setConfig({ ...con });
                             }
                           }}
                         />
@@ -192,7 +192,7 @@ const BuilderPage: React.FC = () => {
                           name='model.app.sidebar.default.minimize.desktop.hoverable'
                           checked={config.app?.sidebar?.default?.minimize?.desktop?.hoverable}
                           onChange={() => {
-                            const con = {...config};
+                            const con = { ...config };
                             if (
                               con.app &&
                               con.app.sidebar &&
@@ -202,7 +202,7 @@ const BuilderPage: React.FC = () => {
                             ) {
                               con.app.sidebar.default.minimize.desktop.hoverable =
                                 !con.app.sidebar.default.minimize.desktop.hoverable;
-                              setConfig({...con});
+                              setConfig({ ...con });
                             }
                           }}
                         />
@@ -227,7 +227,7 @@ const BuilderPage: React.FC = () => {
                           name='model.app.sidebar.default.minimize.desktop.default'
                           checked={config.app?.sidebar?.default?.minimize?.desktop?.default}
                           onChange={() => {
-                            const con = {...config};
+                            const con = { ...config };
                             if (
                               con.app &&
                               con.app.sidebar &&
@@ -237,7 +237,7 @@ const BuilderPage: React.FC = () => {
                             ) {
                               con.app.sidebar.default.minimize.desktop.default =
                                 !con.app.sidebar.default.minimize.desktop.default;
-                              setConfig({...con});
+                              setConfig({ ...con });
                             }
                           }}
                         />
@@ -255,7 +255,7 @@ const BuilderPage: React.FC = () => {
                 </div>
               </div>
 
-              <div className={clsx('tab-pane', {active: tab === 'Header'})}>
+              <div className={clsx('tab-pane', { active: tab === 'Header' })}>
                 <div className='form-group d-flex flex-stack'>
                   <div className='d-flex flex-column'>
                     <h4 className='fw-bold text-dark'>Fixed</h4>
@@ -275,7 +275,7 @@ const BuilderPage: React.FC = () => {
                           name='model.app.header.default.fixed.desktop'
                           checked={config.app?.header?.default?.fixed?.desktop}
                           onChange={() => {
-                            const con = {...config};
+                            const con = { ...config };
                             if (
                               con.app &&
                               con.app.header &&
@@ -284,7 +284,7 @@ const BuilderPage: React.FC = () => {
                             ) {
                               con.app.header.default.fixed.desktop =
                                 !con.app.header.default.fixed.desktop;
-                              setConfig({...con});
+                              setConfig({ ...con });
                             }
                           }}
                           // [(ngModel)]="model.app.header.default.fixed.desktop"
@@ -306,10 +306,10 @@ const BuilderPage: React.FC = () => {
                         type='radio'
                         checked={config.app?.header?.default?.content === 'menu'}
                         onChange={() => {
-                          const con = {...config};
+                          const con = { ...config };
                           if (con.app && con.app.header && con.app.header.default) {
                             con.app.header.default.content = 'menu';
-                            setConfig({...con});
+                            setConfig({ ...con });
                           }
                         }}
                         // [(ngModel)]="model.app.header.default.content}
@@ -332,10 +332,10 @@ const BuilderPage: React.FC = () => {
                         id='kt_builder_header_content_page-title'
                         checked={config.app?.header?.default?.content === 'page-title'}
                         onChange={() => {
-                          const con = {...config};
+                          const con = { ...config };
                           if (con.app && con.app.header && con.app.header.default) {
                             con.app.header.default.content = 'page-title';
-                            setConfig({...con});
+                            setConfig({ ...con });
                           }
                         }}
                       />
@@ -350,7 +350,7 @@ const BuilderPage: React.FC = () => {
                 </div>
               </div>
 
-              <div className={clsx('tab-pane', {active: tab === 'Toolbar'})}>
+              <div className={clsx('tab-pane', { active: tab === 'Toolbar' })}>
                 <div className='form-group d-flex flex-stack'>
                   <div className='d-flex flex-column'>
                     <h4 className='fw-bold text-dark'>Fixed</h4>
@@ -366,10 +366,10 @@ const BuilderPage: React.FC = () => {
                           name='model.app.toolbar.fixed.desktop'
                           checked={config.app?.toolbar?.fixed?.desktop}
                           onChange={() => {
-                            const con = {...config};
+                            const con = { ...config };
                             if (con.app && con.app.toolbar && con.app.toolbar.fixed) {
                               con.app.toolbar.fixed.desktop = !con.app.toolbar.fixed.desktop;
-                              setConfig({...con});
+                              setConfig({ ...con });
                             }
                           }}
                         />
@@ -387,10 +387,10 @@ const BuilderPage: React.FC = () => {
                           name='model.app.toolbar.fixed.mobile'
                           checked={config.app?.toolbar?.fixed?.mobile}
                           onChange={() => {
-                            const con = {...config};
+                            const con = { ...config };
                             if (con.app && con.app.toolbar && con.app.toolbar.fixed) {
                               con.app.toolbar.fixed.mobile = !con.app.toolbar.fixed.mobile;
-                              setConfig({...con});
+                              setConfig({ ...con });
                             }
                           }}
                           id='kt_builder_toolbar_fixed_mobile'
@@ -439,10 +439,10 @@ const BuilderPage: React.FC = () => {
                         name='model.app.toolbar.layout'
                         checked={config.app?.toolbar?.layout === 'classic'}
                         onChange={() => {
-                          const con = {...config};
+                          const con = { ...config };
                           if (con.app && con.app.toolbar) {
                             con.app.toolbar.layout = 'classic';
-                            setConfig({...con});
+                            setConfig({ ...con });
                           }
                         }}
                         // [(ngModel)]="model.app.toolbar.layout"
@@ -471,10 +471,10 @@ const BuilderPage: React.FC = () => {
                         name='model.app.toolbar.layout'
                         checked={config.app?.toolbar?.layout === 'saas'}
                         onChange={() => {
-                          const con = {...config};
+                          const con = { ...config };
                           if (con.app && con.app.toolbar) {
                             con.app.toolbar.layout = 'saas';
-                            setConfig({...con});
+                            setConfig({ ...con });
                           }
                         }}
                         // [(ngModel)]="model.app.toolbar.layout"
@@ -503,10 +503,10 @@ const BuilderPage: React.FC = () => {
                         name='model.app.toolbar.layout'
                         checked={config.app?.toolbar?.layout === 'accounting'}
                         onChange={() => {
-                          const con = {...config};
+                          const con = { ...config };
                           if (con.app && con.app.toolbar) {
                             con.app.toolbar.layout = 'accounting';
-                            setConfig({...con});
+                            setConfig({ ...con });
                           }
                         }}
                         // [(ngModel)]="model.app.toolbar.layout"
@@ -535,10 +535,10 @@ const BuilderPage: React.FC = () => {
                         name='model.app.toolbar.layout'
                         checked={config.app?.toolbar?.layout === 'extended'}
                         onChange={() => {
-                          const con = {...config};
+                          const con = { ...config };
                           if (con.app && con.app.toolbar) {
                             con.app.toolbar.layout = 'extended';
-                            setConfig({...con});
+                            setConfig({ ...con });
                           }
                         }}
                         // [(ngModel)]="model.app.toolbar.layout"
@@ -570,10 +570,10 @@ const BuilderPage: React.FC = () => {
                         name='model.app.toolbar.layout'
                         checked={config.app?.toolbar?.layout === 'reports'}
                         onChange={() => {
-                          const con = {...config};
+                          const con = { ...config };
                           if (con.app && con.app.toolbar) {
                             con.app.toolbar.layout = 'reports';
-                            setConfig({...con});
+                            setConfig({ ...con });
                           }
                         }}
                         // [(ngModel)]="model.app.toolbar.layout"
@@ -596,7 +596,7 @@ const BuilderPage: React.FC = () => {
                   <button type='button' onClick={updateConfig} className='btn btn-primary me-2'>
                     {!configLoading && <span className='indicator-label'>Preview</span>}
                     {configLoading && (
-                      <span className='indicator-progress' style={{display: 'block'}}>
+                      <span className='indicator-progress' style={{ display: 'block' }}>
                         Please wait...{' '}
                         <span className='spinner-border spinner-border-sm align-middle ms-2'></span>
                       </span>
@@ -611,7 +611,7 @@ const BuilderPage: React.FC = () => {
                   >
                     {!resetLoading && <span className='indicator-label'>Reset</span>}
                     {resetLoading && (
-                      <span className='indicator-progress' style={{display: 'block'}}>
+                      <span className='indicator-progress' style={{ display: 'block' }}>
                         Please wait...{' '}
                         <span className='spinner-border spinner-border-sm align-middle ms-2'></span>
                       </span>
@@ -627,4 +627,4 @@ const BuilderPage: React.FC = () => {
   );
 };
 
-export {BuilderPage};
+export { BuilderPage };

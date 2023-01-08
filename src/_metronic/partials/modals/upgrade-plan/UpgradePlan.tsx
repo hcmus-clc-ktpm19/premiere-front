@@ -1,6 +1,6 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import React, {FC, useState} from 'react';
-import {KTSVG} from '../../../helpers';
+import React, { FC, useState } from 'react';
+import { KTSVG } from '../../../helpers';
 
 const plans = [
   {
@@ -340,4 +340,4 @@ const UpgradePlan: FC = () => {
   );
 };
 
-export {UpgradePlan};
+export { UpgradePlan };

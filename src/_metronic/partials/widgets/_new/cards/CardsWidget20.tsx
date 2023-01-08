@@ -5,7 +5,7 @@ type Props = {
   img: string;
 };
 
-const CardsWidget20 = ({className, description, color, img}: Props) => (
+const CardsWidget20 = ({ className, description, color, img }: Props) => (
   <div
     className={`card card-flush bgi-no-repeat bgi-size-contain bgi-position-x-end ${className}`}
     style={{
@@ -31,7 +31,7 @@ const CardsWidget20 = ({className, description, color, img}: Props) => (
           <div
             className='bg-white rounded h-8px'
             role='progressbar'
-            style={{width: '72%'}}
+            style={{ width: '72%' }}
             aria-valuenow={50}
             aria-valuemin={0}
             aria-valuemax={100}
@@ -41,4 +41,4 @@ const CardsWidget20 = ({className, description, color, img}: Props) => (
     </div>
   </div>
 );
-export {CardsWidget20};
+export { CardsWidget20 };

@@ -1,6 +1,6 @@
-import {useEffect} from 'react';
-import {UserEditModalHeader} from './UserEditModalHeader';
-import {UserEditModalFormWrapper} from './UserEditModalFormWrapper';
+import { useEffect } from 'react';
+import { UserEditModalHeader } from './UserEditModalHeader';
+import { UserEditModalFormWrapper } from './UserEditModalFormWrapper';
 
 const UserEditModal = () => {
   useEffect(() => {
@@ -41,4 +41,4 @@ const UserEditModal = () => {
   );
 };
 
-export {UserEditModal};
+export { UserEditModal };

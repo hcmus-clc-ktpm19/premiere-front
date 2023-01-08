@@ -1,14 +1,14 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import React from 'react';
-import {toAbsoluteUrl} from '../../../helpers';
-import {KTSVG} from '../../../helpers';
-import {Dropdown1} from '../../content/dropdown/Dropdown1';
+import { toAbsoluteUrl } from '../../../helpers';
+import { KTSVG } from '../../../helpers';
+import { Dropdown1 } from '../../content/dropdown/Dropdown1';
 
 type Props = {
   className: string;
 };
 
-const TablesWidget2: React.FC<Props> = ({className}) => {
+const TablesWidget2: React.FC<Props> = ({ className }) => {
   return (
     <div className={`card ${className}`}>
       {/* begin::Header */}
@@ -219,4 +219,4 @@ const TablesWidget2: React.FC<Props> = ({className}) => {
   );
 };
 
-export {TablesWidget2};
+export { TablesWidget2 };

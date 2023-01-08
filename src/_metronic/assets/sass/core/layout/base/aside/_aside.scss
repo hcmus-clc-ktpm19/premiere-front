@@ -205,7 +205,7 @@
     background-color: var(--kt-app-aside-base-bg-color-mobile);
     box-shadow: var(--kt-app-aside-base-box-shadow-mobile);
     border-left: var(--kt-app-aside-base-border-start-mobile);
-    order-right: var(--kt-app-aside-base-border-end-mobile);
+    border-right: var(--kt-app-aside-base-border-end-mobile);
 
     @include property(margin-left, $app-aside-base-gap-start-mobile);
     @include property(margin-right, $app-aside-base-gap-end-mobile);

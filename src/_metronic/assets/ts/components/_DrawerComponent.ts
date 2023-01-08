@@ -382,4 +382,4 @@ class DrawerComponent {
   };
 }
 
-export {DrawerComponent, defaultDrawerOptions};
+export { DrawerComponent, defaultDrawerOptions };

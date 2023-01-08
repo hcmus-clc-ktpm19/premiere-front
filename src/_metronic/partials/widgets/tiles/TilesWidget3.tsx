@@ -1,6 +1,6 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import clsx from 'clsx';
-import {KTSVG, toAbsoluteUrl} from '../../../helpers';
+import { KTSVG, toAbsoluteUrl } from '../../../helpers';
 
 type Props = {
   className?: string;
@@ -17,7 +17,7 @@ const TilesWidget3 = ({
   return (
     <div
       className={clsx('card h-100 bgi-no-repeat bgi-size-cover', className)}
-      style={{backgroundImage: `url("${toAbsoluteUrl('/media/misc/bg-2.jpg')}")`}}
+      style={{ backgroundImage: `url("${toAbsoluteUrl('/media/misc/bg-2.jpg')}")` }}
     >
       {/* begin::Body */}
       <div className='card-body d-flex flex-column justify-content-between'>
@@ -43,4 +43,4 @@ const TilesWidget3 = ({
   );
 };
 
-export {TilesWidget3};
+export { TilesWidget3 };

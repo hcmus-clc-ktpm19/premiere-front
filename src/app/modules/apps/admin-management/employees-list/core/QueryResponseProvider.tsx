@@ -1,23 +1,24 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import {FC, useContext, useEffect, useMemo, useState} from 'react';
-import {useQuery} from 'react-query';
+import { FC, useContext, useEffect, useMemo, useState } from 'react';
+import { useQuery } from 'react-query';
 import {
   createResponseContext,
   initialQueryResponse,
   initialQueryState,
   PaginationState,
-  QUERIES, QueryState,
+  QUERIES,
+  QueryState,
   stringifyRequestQuery,
   WithChildren,
 } from '@_metronic/helpers';
-import {getEmployees} from './_requests';
-import {useQueryRequest} from './QueryRequestProvider';
-import {FullInfoUserDto} from "@/app/models/model";
+import { getEmployees } from './_requests';
+import { useQueryRequest } from './QueryRequestProvider';
+import { FullInfoUserDto } from '@/app/models/model';
 
 const QueryResponseContext = createResponseContext<FullInfoUserDto>(initialQueryResponse);
-const QueryResponseProvider: FC<WithChildren> = ({children}) => {
-  const {state} = useQueryRequest();
-  console.log('state in QueryResponseProvider', {state});
+const QueryResponseProvider: FC<WithChildren> = ({ children }) => {
+  const { state } = useQueryRequest();
+  console.log('state in QueryResponseProvider', { state });
   const [query, setQuery] = useState<string>(stringifyRequestQuery(state));
   const updatedQuery = useMemo(() => stringifyRequestQuery(state), [state]);
 
@@ -27,35 +28,33 @@ const QueryResponseProvider: FC<WithChildren> = ({children}) => {
     }
   }, [updatedQuery]);
 
-  const {
-    isFetching,
-    refetch,
-    data,
-  } = useQuery(
-      `${QUERIES.EMPLOYEES_LIST}-${query}`,
-      () => {
-        return getEmployees().then((data) => {
-          console.log('data', {data});
+  const { isFetching, refetch, data } = useQuery(
+    `${QUERIES.EMPLOYEES_LIST}-${query}`,
+    () => {
+      return getEmployees()
+        .then((data) => {
+          console.log('data', { data });
           return data;
-        }).catch((error) => {
+        })
+        .catch((error) => {
           console.log(error);
         });
-      },
-      {cacheTime: 0, keepPreviousData: true, refetchOnWindowFocus: false}
+    },
+    { cacheTime: 0, keepPreviousData: true, refetchOnWindowFocus: false }
   );
   const response = filterData(data || [], state);
 
   return (
-      <QueryResponseContext.Provider value={{isLoading: isFetching, refetch, response, query}}>
-        {children}
-      </QueryResponseContext.Provider>
+    <QueryResponseContext.Provider value={{ isLoading: isFetching, refetch, response, query }}>
+      {children}
+    </QueryResponseContext.Provider>
   );
 };
 
 const useQueryResponse = () => useContext(QueryResponseContext);
 
 const useQueryResponseData = () => {
-  const {response} = useQueryResponse();
+  const { response } = useQueryResponse();
 
   if (!response) {
     return [];
@@ -70,7 +69,7 @@ const useQueryResponsePagination = () => {
     ...initialQueryState,
   };
 
-  const {response} = useQueryResponse();
+  const { response } = useQueryResponse();
   if (!response || !response.payload || !response.payload.pagination) {
     return defaultPaginationState;
   }
@@ -80,7 +79,9 @@ const useQueryResponsePagination = () => {
 
 const filterData = (data: FullInfoUserDto[], state: QueryState) => {
   if (state.search) {
-    data = data.filter((item) => item.email.toLowerCase().indexOf(state.search?.toLowerCase() || '') > - 1 );
+    data = data.filter(
+      (item) => item.email.toLowerCase().indexOf(state.search?.toLowerCase() || '') > -1
+    );
   }
 
   if (state.sort && state.order) {
@@ -91,21 +92,25 @@ const filterData = (data: FullInfoUserDto[], state: QueryState) => {
         return a[columnToSort] < b[columnToSort] ? -1 : 1;
       } else {
         // @ts-ignore
-        return a[columnToSort] < b[columnToSort] ? 1 : - 1;
+        return a[columnToSort] < b[columnToSort] ? 1 : -1;
       }
     });
   }
 
   if (state.filter) {
     // @ts-ignore
-    data = data.filter((item) => item.enabled === state.filter.enabled && (item.gender === state.filter.gender || state.filter.gender === 'ALL'));
+    data = data.filter(
+      (item) =>
+        item.enabled === state.filter.enabled &&
+        (item.gender === state.filter.gender || state.filter.gender === 'ALL')
+    );
   }
 
   return data;
-}
+};
 
 const useQueryResponseLoading = (): boolean => {
-  const {isLoading} = useQueryResponse();
+  const { isLoading } = useQueryResponse();
   return isLoading;
 };
 

@@ -1,6 +1,6 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import clsx from 'clsx';
-import {KTSVG} from '../../../helpers';
+import { KTSVG } from '../../../helpers';
 
 type Props = {
   className?: string;
@@ -12,7 +12,7 @@ type Props = {
   description?: string;
 };
 const TilesWidget5 = (props: Props) => {
-  const {className, svgIcon, titleClass, descriptionClass, iconClass, title, description} = props;
+  const { className, svgIcon, titleClass, descriptionClass, iconClass, title, description } = props;
   return (
     <a href='#' className={clsx('card', className)}>
       <div className='card-body d-flex flex-column justify-content-between'>
@@ -26,4 +26,4 @@ const TilesWidget5 = (props: Props) => {
   );
 };
 
-export {TilesWidget5};
+export { TilesWidget5 };

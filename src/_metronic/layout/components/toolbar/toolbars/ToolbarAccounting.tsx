@@ -1,6 +1,6 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import {FC, useEffect, useState} from 'react';
-import {KTSVG} from '../../../../helpers';
+import { FC, useEffect, useState } from 'react';
+import { KTSVG } from '../../../../helpers';
 
 const ToolbarAccounting: FC = () => {
   const [progress, setProgress] = useState<string>('1');
@@ -78,7 +78,7 @@ const ToolbarAccounting: FC = () => {
             <div
               className='progress-bar rounded bg-success fs-7 fw-bold'
               role='progressbar'
-              style={{width: '72%'}}
+              style={{ width: '72%' }}
               aria-valuenow={72}
               aria-valuemin={0}
               aria-valuemax={100}
@@ -136,4 +136,4 @@ const ToolbarAccounting: FC = () => {
   );
 };
 
-export {ToolbarAccounting};
+export { ToolbarAccounting };

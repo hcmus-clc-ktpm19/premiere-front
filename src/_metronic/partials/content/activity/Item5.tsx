@@ -1,6 +1,6 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import {FC} from 'react';
-import {KTSVG, toAbsoluteUrl} from '../../../helpers';
+import { FC } from 'react';
+import { KTSVG, toAbsoluteUrl } from '../../../helpers';
 
 const Item5: FC = () => {
   return (
@@ -91,4 +91,4 @@ const Item5: FC = () => {
   );
 };
 
-export {Item5};
+export { Item5 };

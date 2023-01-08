@@ -1,9 +1,9 @@
-import {KTSVG} from '@_metronic/helpers';
-import {useListView} from '../../core/ListViewProvider';
-import {UsersListFilter} from './UsersListFilter';
+import { KTSVG } from '@_metronic/helpers';
+import { useListView } from '../../core/ListViewProvider';
+import { UsersListFilter } from './UsersListFilter';
 
 const UsersListToolbar = () => {
-  const {setItemIdForUpdate} = useListView();
+  const { setItemIdForUpdate } = useListView();
   const openAddUserModal = () => {
     setItemIdForUpdate(null);
   };
@@ -29,4 +29,4 @@ const UsersListToolbar = () => {
   );
 };
 
-export {UsersListToolbar};
+export { UsersListToolbar };

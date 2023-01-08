@@ -1,13 +1,13 @@
-import {useQueryClient, useMutation} from 'react-query';
-import {QUERIES} from '@_metronic/helpers';
-import {useListView} from '../../core/ListViewProvider';
-import {useQueryResponse} from '../../core/QueryResponseProvider';
-import {deleteSelectedUsers} from '../../core/_requests';
+import { useQueryClient, useMutation } from 'react-query';
+import { QUERIES } from '@_metronic/helpers';
+import { useListView } from '../../core/ListViewProvider';
+import { useQueryResponse } from '../../core/QueryResponseProvider';
+import { deleteSelectedUsers } from '../../core/_requests';
 
 const UsersListGrouping = () => {
-  const {selected, clearSelected} = useListView();
+  const { selected, clearSelected } = useListView();
   const queryClient = useQueryClient();
-  const {query} = useQueryResponse();
+  const { query } = useQueryResponse();
 
   const deleteSelectedItems = useMutation(() => deleteSelectedUsers(selected), {
     // 💡 response of the mutation is passed to onSuccess
@@ -35,4 +35,4 @@ const UsersListGrouping = () => {
   );
 };
 
-export {UsersListGrouping};
+export { UsersListGrouping };

@@ -1,11 +1,11 @@
-import React, {useState} from 'react';
-import {INotifications, notifications} from '../SettingsModel';
+import React, { useState } from 'react';
+import { INotifications, notifications } from '../SettingsModel';
 
 const Notifications: React.FC = () => {
   const [data, setData] = useState<INotifications>(notifications);
 
   const updateData = (fieldsToUpdate: Partial<INotifications>) => {
-    const updatedData = {...data, ...fieldsToUpdate};
+    const updatedData = { ...data, ...fieldsToUpdate };
     setData(updatedData);
   };
 
@@ -278,7 +278,7 @@ const Notifications: React.FC = () => {
             <button type='button' onClick={click} className='btn btn-primary'>
               {!loading && 'Save Changes'}
               {loading && (
-                <span className='indicator-progress' style={{display: 'block'}}>
+                <span className='indicator-progress' style={{ display: 'block' }}>
                   Please wait...{' '}
                   <span className='spinner-border spinner-border-sm align-middle ms-2'></span>
                 </span>
@@ -291,4 +291,4 @@ const Notifications: React.FC = () => {
   );
 };
 
-export {Notifications};
+export { Notifications };

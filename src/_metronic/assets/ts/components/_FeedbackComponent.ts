@@ -149,4 +149,4 @@ class FeedbackComponent {
   }
 }
 
-export {FeedbackComponent, defaultFeedbackOptions};
+export { FeedbackComponent, defaultFeedbackOptions };

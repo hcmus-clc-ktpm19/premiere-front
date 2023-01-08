@@ -1,8 +1,8 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import {KTSVG} from '../../../../../_metronic/helpers';
-import {StepProps} from '../IAppModels';
+import { KTSVG } from '../../../../../_metronic/helpers';
+import { StepProps } from '../IAppModels';
 
-const Step1 = ({data, updateData, hasError}: StepProps) => {
+const Step1 = ({ data, updateData, hasError }: StepProps) => {
   return (
     <div className='current' data-kt-stepper-element='content'>
       <div className='w-100'>
@@ -182,4 +182,4 @@ const Step1 = ({data, updateData, hasError}: StepProps) => {
   );
 };
 
-export {Step1};
+export { Step1 };

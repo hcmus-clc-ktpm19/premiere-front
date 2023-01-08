@@ -1,6 +1,6 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import React from 'react';
-import {KTSVG} from '../../../helpers';
+import { KTSVG } from '../../../helpers';
 
 type Props = {
   className: string;
@@ -36,4 +36,4 @@ const StatisticsWidget5: React.FC<Props> = ({
   );
 };
 
-export {StatisticsWidget5};
+export { StatisticsWidget5 };

@@ -1,12 +1,12 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import React from 'react';
-import {KTSVG} from '../../../helpers';
+import { KTSVG } from '../../../helpers';
 
 type Props = {
   className: string;
 };
 
-const TablesWidget8: React.FC<Props> = ({className}) => {
+const TablesWidget8: React.FC<Props> = ({ className }) => {
   return (
     <div className={`card ${className}`}>
       {/* begin::Header */}
@@ -490,4 +490,4 @@ const TablesWidget8: React.FC<Props> = ({className}) => {
   );
 };
 
-export {TablesWidget8};
+export { TablesWidget8 };

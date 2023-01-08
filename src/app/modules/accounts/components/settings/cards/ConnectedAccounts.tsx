@@ -1,13 +1,13 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import React, {useState} from 'react';
-import {KTSVG, toAbsoluteUrl} from '../../../../../../_metronic/helpers';
-import {IConnectedAccounts, connectedAccounts} from '../SettingsModel';
+import React, { useState } from 'react';
+import { KTSVG, toAbsoluteUrl } from '../../../../../../_metronic/helpers';
+import { IConnectedAccounts, connectedAccounts } from '../SettingsModel';
 
 const ConnectedAccounts: React.FC = () => {
   const [data, setData] = useState<IConnectedAccounts>(connectedAccounts);
 
   const updateData = (fieldsToUpdate: Partial<IConnectedAccounts>) => {
-    const updatedData = {...data, ...fieldsToUpdate};
+    const updatedData = { ...data, ...fieldsToUpdate };
     setData(updatedData);
   };
 
@@ -165,7 +165,7 @@ const ConnectedAccounts: React.FC = () => {
           <button onClick={click} className='btn btn-primary'>
             {!loading && 'Save Changes'}
             {loading && (
-              <span className='indicator-progress' style={{display: 'block'}}>
+              <span className='indicator-progress' style={{ display: 'block' }}>
                 Please wait...{' '}
                 <span className='spinner-border spinner-border-sm align-middle ms-2'></span>
               </span>
@@ -177,4 +177,4 @@ const ConnectedAccounts: React.FC = () => {
   );
 };
 
-export {ConnectedAccounts};
+export { ConnectedAccounts };

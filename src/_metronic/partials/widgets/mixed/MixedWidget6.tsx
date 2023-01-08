@@ -1,10 +1,10 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import React, {useEffect, useRef} from 'react';
-import ApexCharts, {ApexOptions} from 'apexcharts';
-import {KTSVG} from '../../../helpers';
-import {getCSSVariableValue} from '../../../assets/ts/_utils';
-import {Dropdown1} from '../../content/dropdown/Dropdown1';
-import {useThemeMode} from '../../layout/theme-mode/ThemeModeProvider';
+import React, { useEffect, useRef } from 'react';
+import ApexCharts, { ApexOptions } from 'apexcharts';
+import { KTSVG } from '../../../helpers';
+import { getCSSVariableValue } from '../../../assets/ts/_utils';
+import { Dropdown1 } from '../../content/dropdown/Dropdown1';
+import { useThemeMode } from '../../layout/theme-mode/ThemeModeProvider';
 
 type Props = {
   className: string;
@@ -12,9 +12,9 @@ type Props = {
   chartColor: string;
 };
 
-const MixedWidget6: React.FC<Props> = ({className, chartHeight, chartColor}) => {
+const MixedWidget6: React.FC<Props> = ({ className, chartHeight, chartColor }) => {
   const chartRef = useRef<HTMLDivElement | null>(null);
-  const {mode} = useThemeMode();
+  const { mode } = useThemeMode();
   const refreshChart = () => {
     if (!chartRef.current) {
       return;
@@ -145,7 +145,7 @@ const MixedWidget6: React.FC<Props> = ({className, chartHeight, chartColor}) => 
           ref={chartRef}
           className='mixed-widget-3-chart card-rounded-bottom'
           data-kt-chart-color={chartColor}
-          style={{height: chartHeight}}
+          style={{ height: chartHeight }}
         ></div>
         {/* end::Chart */}
       </div>
@@ -277,4 +277,4 @@ const chartOptions = (chartHeight: string, chartColor: string): ApexOptions => {
   };
 };
 
-export {MixedWidget6};
+export { MixedWidget6 };

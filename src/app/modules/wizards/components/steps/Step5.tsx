@@ -1,6 +1,6 @@
-import React, {FC} from 'react';
-import {KTSVG} from '../../../../../_metronic/helpers';
-import {Link} from 'react-router-dom';
+import React, { FC } from 'react';
+import { KTSVG } from '../../../../../_metronic/helpers';
+import { Link } from 'react-router-dom';
 
 const Step5: FC = () => {
   return (
@@ -48,4 +48,4 @@ const Step5: FC = () => {
   );
 };
 
-export {Step5};
+export { Step5 };

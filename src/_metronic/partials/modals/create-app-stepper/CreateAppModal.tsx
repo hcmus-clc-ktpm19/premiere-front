@@ -1,16 +1,16 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import {useState, useRef} from 'react';
-import {createPortal} from 'react-dom';
-import {Modal} from 'react-bootstrap';
-import {defaultCreateAppData, ICreateAppData} from './IAppModels';
-import {StepperComponent} from '../../../assets/ts/components';
-import {KTSVG} from '../../../helpers';
-import {Step1} from './steps/Step1';
-import {Step2} from './steps/Step2';
-import {Step3} from './steps/Step3';
-import {Step4} from './steps/Step4';
-import {Step5} from './steps/Step5';
+import { useState, useRef } from 'react';
+import { createPortal } from 'react-dom';
+import { Modal } from 'react-bootstrap';
+import { defaultCreateAppData, ICreateAppData } from './IAppModels';
+import { StepperComponent } from '../../../assets/ts/components';
+import { KTSVG } from '../../../helpers';
+import { Step1 } from './steps/Step1';
+import { Step2 } from './steps/Step2';
+import { Step3 } from './steps/Step3';
+import { Step4 } from './steps/Step4';
+import { Step5 } from './steps/Step5';
 
 type Props = {
   show: boolean;
@@ -19,7 +19,7 @@ type Props = {
 
 const modalsRoot = document.getElementById('root-modals') || document.body;
 
-const CreateAppModal = ({show, handleClose}: Props) => {
+const CreateAppModal = ({ show, handleClose }: Props) => {
   const stepperRef = useRef<HTMLDivElement | null>(null);
   const stepper = useRef<StepperComponent | null>(null);
   const [data, setData] = useState<ICreateAppData>(defaultCreateAppData);
@@ -30,7 +30,7 @@ const CreateAppModal = ({show, handleClose}: Props) => {
   };
 
   const updateData = (fieldsToUpdate: Partial<ICreateAppData>) => {
-    const updatedData = {...data, ...fieldsToUpdate};
+    const updatedData = { ...data, ...fieldsToUpdate };
     setData(updatedData);
   };
 
@@ -317,4 +317,4 @@ const CreateAppModal = ({show, handleClose}: Props) => {
   );
 };
 
-export {CreateAppModal};
+export { CreateAppModal };

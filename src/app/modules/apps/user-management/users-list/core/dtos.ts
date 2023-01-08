@@ -1,4 +1,4 @@
-import {ID} from '@_metronic/helpers';
+import { ID } from '@_metronic/helpers';
 
 export interface UserDto {
   id?: ID;

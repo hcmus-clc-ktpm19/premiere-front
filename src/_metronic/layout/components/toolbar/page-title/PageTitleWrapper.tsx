@@ -1,8 +1,8 @@
-import {useLayout} from '../../../core';
-import {PageTitle} from './PageTitle';
+import { useLayout } from '../../../core';
+import { PageTitle } from './PageTitle';
 
 const PageTitleWrapper = () => {
-  const {config} = useLayout();
+  const { config } = useLayout();
   if (!config.app?.pageTitle?.display) {
     return null;
   }
@@ -10,4 +10,4 @@ const PageTitleWrapper = () => {
   return <PageTitle />;
 };
 
-export {PageTitleWrapper};
+export { PageTitleWrapper };

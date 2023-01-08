@@ -1,6 +1,6 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import clsx from 'clsx';
-import {toAbsoluteUrl} from '../../../helpers';
+import { toAbsoluteUrl } from '../../../helpers';
 
 type Props = {
   className?: string;
@@ -33,4 +33,4 @@ const TilesWidget1 = ({
   );
 };
 
-export {TilesWidget1};
+export { TilesWidget1 };

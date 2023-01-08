@@ -1,7 +1,7 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import React from 'react';
-import {Modal} from 'react-bootstrap';
-import {KTSVG, toAbsoluteUrl} from '../../helpers';
+import { Modal } from 'react-bootstrap';
+import { KTSVG, toAbsoluteUrl } from '../../helpers';
 // import {ListsWidget4, ListsWidget5} from '../widgets'
 
 type Props = {
@@ -9,7 +9,7 @@ type Props = {
   handleClose: () => void;
 };
 
-const SearchModal: React.FC<Props> = ({show, handleClose}) => {
+const SearchModal: React.FC<Props> = ({ show, handleClose }) => {
   return (
     <Modal
       className='bg-body'
@@ -149,4 +149,4 @@ const SearchModal: React.FC<Props> = ({show, handleClose}) => {
   );
 };
 
-export {SearchModal};
+export { SearchModal };

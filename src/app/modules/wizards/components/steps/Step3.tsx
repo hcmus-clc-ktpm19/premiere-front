@@ -1,5 +1,5 @@
-import React, {FC} from 'react';
-import {Field, ErrorMessage} from 'formik';
+import React, { FC } from 'react';
+import { Field, ErrorMessage } from 'formik';
 
 const Step3: FC = () => {
   return (
@@ -88,4 +88,4 @@ const Step3: FC = () => {
   );
 };
 
-export {Step3};
+export { Step3 };

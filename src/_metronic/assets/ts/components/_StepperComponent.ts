@@ -329,4 +329,4 @@ class StepperComponent {
   }
 }
 
-export {StepperComponent, defaultStepperOptions};
+export { StepperComponent, defaultStepperOptions };

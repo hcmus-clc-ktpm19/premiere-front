@@ -1,4 +1,4 @@
-import React, {FC} from 'react';
+import React, { FC } from 'react';
 import {
   FeedsWidget2,
   FeedsWidget3,
@@ -31,4 +31,4 @@ const Feeds: FC = () => {
   );
 };
 
-export {Feeds};
+export { Feeds };

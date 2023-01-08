@@ -207,4 +207,4 @@ window.addEventListener('resize', function () {
   );
 });
 
-export {SwapperComponent, defaultSwapperOptions, defaultSwapperQueires};
+export { SwapperComponent, defaultSwapperOptions, defaultSwapperQueires };

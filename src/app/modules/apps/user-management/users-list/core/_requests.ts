@@ -1,7 +1,10 @@
 import axios, { AxiosResponse } from 'axios';
-import { ID } from '@_metronic/helpers';
-import { ErrorDto, FullInfoUserDto } from '@/app/models/model';
+import { ID, Response } from '@_metronic/helpers';
+import { User, UsersQueryResponse } from './_models';
+import { ResponseDto, UserDto } from '@/app/modules/apps/user-management/users-list/core/dtos';
 import { CustomerQueryResponse } from '@/app/modules/apps/user-management/users-list/core/_models';
+import { ErrorDto, FullInfoUserDto } from '@/app/models/model';
+import { REGISTER_CUSTOMER_URL, REGISTER_EMPLOYEE_URL } from '@/app/modules/auth/core/_requests';
 
 const PREMIERE_API_URL = import.meta.env.VITE_PREMIERE_API_URL;
 const GET_CUSTOMERS_URL = `${PREMIERE_API_URL}/auth/get-customers`;

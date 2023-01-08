@@ -1,8 +1,8 @@
-import {FC} from 'react';
-import {useLocation} from 'react-router';
-import {Link} from 'react-router-dom';
+import { FC } from 'react';
+import { useLocation } from 'react-router';
+import { Link } from 'react-router-dom';
 import clsx from 'clsx';
-import {checkIsActive, KTSVG} from '../../../../helpers';
+import { checkIsActive, KTSVG } from '../../../../helpers';
 
 type Props = {
   to: string;
@@ -13,8 +13,15 @@ type Props = {
   hasBullet?: boolean;
 };
 
-const MenuItem: FC<Props> = ({to, title, icon, fontIcon, hasArrow = false, hasBullet = false}) => {
-  const {pathname} = useLocation();
+const MenuItem: FC<Props> = ({
+  to,
+  title,
+  icon,
+  fontIcon,
+  hasArrow = false,
+  hasBullet = false,
+}) => {
+  const { pathname } = useLocation();
 
   return (
     <div className='menu-item me-lg-1'>
@@ -50,4 +57,4 @@ const MenuItem: FC<Props> = ({to, title, icon, fontIcon, hasArrow = false, hasBu
   );
 };
 
-export {MenuItem};
+export { MenuItem };

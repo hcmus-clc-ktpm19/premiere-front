@@ -1,11 +1,11 @@
-import {useEffect} from 'react';
-import {Outlet} from 'react-router-dom';
-import {useThemeMode} from '../../../_metronic/partials';
-import {toAbsoluteUrl} from '../../../_metronic/helpers';
+import { useEffect } from 'react';
+import { Outlet } from 'react-router-dom';
+import { useThemeMode } from '../../../_metronic/partials';
+import { toAbsoluteUrl } from '../../../_metronic/helpers';
 
 const BODY_CLASSES = ['bgi-size-cover', 'bgi-position-center', 'bgi-no-repeat'];
 const ErrorsLayout = () => {
-  const {mode} = useThemeMode();
+  const { mode } = useThemeMode();
   useEffect(() => {
     BODY_CLASSES.forEach((c) => document.body.classList.add(c));
     document.body.style.backgroundImage =
@@ -34,4 +34,4 @@ const ErrorsLayout = () => {
   );
 };
 
-export {ErrorsLayout};
+export { ErrorsLayout };
