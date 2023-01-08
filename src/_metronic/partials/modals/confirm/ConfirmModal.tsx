@@ -1,6 +1,5 @@
-/* eslint-disable jsx-a11y/anchor-is-valid */
-import React, {FC} from 'react';
-import {KTSVG} from '../../../helpers';
+import React, { FC } from 'react';
+import { KTSVG } from '../../../helpers';
 
 type Props = {
   isShow: boolean;
@@ -27,8 +26,7 @@ const ConfirmModal: FC<Props> = ({
         id='kt_modal_add_user'
         role='dialog'
         tabIndex={-1}
-        aria-modal='true'
-      >
+        aria-modal='true'>
         {/* begin::Modal dialog */}
         <div className='modal-dialog modal-dialog-centered'>
           {/* begin::Modal content */}
@@ -43,14 +41,13 @@ const ConfirmModal: FC<Props> = ({
                 className='btn btn-icon btn-sm btn-active-icon-primary'
                 data-kt-users-modal-action='close'
                 onClick={() => onCancel()}
-                style={{ cursor: 'pointer' }}
-              >
+                style={{ cursor: 'pointer' }}>
                 <KTSVG path='/media/icons/duotune/arrows/arr061.svg' className='svg-icon-1' />
               </div>
               {/* end::Close */}
             </div>
             {/* begin::Modal body */}
-            <div className='modal-body scroll-y mx-5' style={{textAlign: "left"}}>
+            <div className='modal-body scroll-y mx-5' style={{ textAlign: 'left' }}>
               <span className={'fs-4 text-gray-800 text-hover-primary fw-bolder mb-0'}>
                 {content}
               </span>
@@ -66,8 +63,7 @@ const ConfirmModal: FC<Props> = ({
                 type='button'
                 className='btn btn-sm btn-danger'
                 style={{ marginLeft: '30px' }}
-                onClick={() => onConfirm(value)}
-              >
+                onClick={() => onConfirm(value)}>
                 <KTSVG path='/media/icons/duotune/arrows/arr075.svg' className='svg-icon-2' />
                 {isShowCancelBtn ? 'Yes' : 'OK'}
               </button>

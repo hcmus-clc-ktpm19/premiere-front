@@ -1,15 +1,15 @@
-import {Navigate, Outlet, Route, Routes} from 'react-router-dom';
-import {PageLink, PageTitle} from '@_metronic/layout/core';
-import {Overview} from './components/Overview';
-import {Projects} from './components/Projects';
-import {Campaigns} from './components/Campaigns';
-import {Documents} from './components/Documents';
-import {Receivers} from './components/Receivers';
-import {ProfileHeader} from './ProfileHeader';
-import {Transactions} from '@/app/modules/profile/components/Transactions';
-import CreateInternalTransaction from "@/app/modules/profile/components/CreateInternalTransaction";
-import CreateTransaction from "@/app/modules/profile/components/CreateTransaction";
-import CreateExternalTransaction from "@/app/modules/profile/components/CreateExternalTransaction";
+import { Navigate, Outlet, Route, Routes } from 'react-router-dom';
+import { PageLink, PageTitle } from '@_metronic/layout/core';
+import { Overview } from './components/Overview';
+import { Projects } from './components/Projects';
+import { Campaigns } from './components/Campaigns';
+import { Documents } from './components/Documents';
+import { Receivers } from './components/Receivers';
+import { ProfileHeader } from './ProfileHeader';
+import { Transactions } from '@/app/modules/profile/components/Transactions';
+import CreateInternalTransaction from '@/app/modules/profile/components/CreateInternalTransaction';
+import CreateTransaction from '@/app/modules/profile/components/CreateTransaction';
+import CreateExternalTransaction from '@/app/modules/profile/components/CreateExternalTransaction';
 
 const profileBreadCrumbs: Array<PageLink> = [
   {
@@ -34,8 +34,7 @@ const ProfilePage = () => (
           <ProfileHeader />
           <Outlet />
         </>
-      }
-    >
+      }>
       <Route
         path='spend_account'
         element={
@@ -91,13 +90,13 @@ const ProfilePage = () => (
         }
       />
       <Route
-          path='create-transaction/external'
-          element={
-            <>
-              <PageTitle breadcrumbs={profileBreadCrumbs}>External Transaction</PageTitle>
-              <CreateExternalTransaction />
-            </>
-          }
+        path='create-transaction/external'
+        element={
+          <>
+            <PageTitle breadcrumbs={profileBreadCrumbs}>External Transaction</PageTitle>
+            <CreateExternalTransaction />
+          </>
+        }
       />
       <Route
         path='documents'

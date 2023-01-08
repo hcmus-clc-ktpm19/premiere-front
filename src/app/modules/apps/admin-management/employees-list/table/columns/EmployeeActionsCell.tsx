@@ -1,4 +1,3 @@
-/* eslint-disable jsx-a11y/anchor-is-valid */
 import React, { FC, useEffect } from 'react';
 import { useMutation, useQueryClient } from 'react-query';
 import { MenuComponent } from '@_metronic/assets/ts/components';

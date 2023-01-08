@@ -1,10 +1,10 @@
-import React, {FC, useEffect, useState} from 'react';
+import React, { FC, useEffect, useState } from 'react';
 import { toAbsoluteUrl } from '@_metronic/helpers';
 import { TransactionStatus } from '@/app/models/model';
 import moment from 'moment';
 import TransactionDetailsModal from '@_metronic/partials/modals/transactions/TransactionDetailsModal';
 import { NavLink } from 'react-bootstrap';
-import {useThemeMode} from "@_metronic/partials";
+import { useThemeMode } from '@_metronic/partials';
 
 interface Props {
   badgeColor: string;
@@ -31,15 +31,17 @@ const Card6: FC<Props> = ({
   receiverCreditCard,
   senderCreditCard,
   senderBankId,
-  receiverBankId
+  receiverBankId,
 }) => {
   const [isShow, setIsShow] = React.useState<boolean>(false);
-  const {mode} = useThemeMode();
+  const { mode } = useThemeMode();
   const [style, setStyle] = useState({});
   useEffect(() => {
-    mode === 'dark' ? setStyle({
-      filter: 'invert(100%)'
-    }) : setStyle('');
+    mode === 'dark'
+      ? setStyle({
+          filter: 'invert(100%)',
+        })
+      : setStyle('');
   }, [mode]);
   const onCardClick = () => {
     console.log('clicked');
@@ -52,25 +54,25 @@ const Card6: FC<Props> = ({
         <div className='card-header border-0 pt-9'>
           <div className='card-title m-0'>
             <div className='symbol symbol-50px w-50px bg-light'>
-              {
-                senderBankId === 1 ? (
-                    <img src={toAbsoluteUrl('/media/logos/custom-2.svg')} alt='card2' className='p-3' />
-                ) : (
-                    <img src={toAbsoluteUrl('/media/logos/tai-xiu.svg')} alt='card2' className='p-3' />
-                )
-              }
+              {senderBankId === 1 ? (
+                <img src={toAbsoluteUrl('/media/logos/custom-2.svg')} alt='card2' className='p-3' />
+              ) : (
+                <img src={toAbsoluteUrl('/media/logos/tai-xiu.svg')} alt='card2' className='p-3' />
+              )}
             </div>
-            <div className='w-50px' style={{...style}}>
-              <img src={toAbsoluteUrl('/media/icons/duotune/arrows/arr024.svg')} alt='arrow' className='p-3' />
+            <div className='w-50px' style={{ ...style }}>
+              <img
+                src={toAbsoluteUrl('/media/icons/duotune/arrows/arr024.svg')}
+                alt='arrow'
+                className='p-3'
+              />
             </div>
             <div className='symbol symbol-50px w-50px bg-light'>
-              {
-                receiverBankId === 1 ? (
-                    <img src={toAbsoluteUrl('/media/logos/custom-2.svg')} alt='card2' className='p-3' />
-                ) : (
-                    <img src={toAbsoluteUrl('/media/logos/tai-xiu.svg')} alt='card2' className='p-3' />
-                )
-              }
+              {receiverBankId === 1 ? (
+                <img src={toAbsoluteUrl('/media/logos/custom-2.svg')} alt='card2' className='p-3' />
+              ) : (
+                <img src={toAbsoluteUrl('/media/logos/tai-xiu.svg')} alt='card2' className='p-3' />
+              )}
             </div>
           </div>
 
@@ -83,7 +85,7 @@ const Card6: FC<Props> = ({
 
         <div className='card-body p-9'>
           <div className='fs-3 fw-bolder text-dark'>
-            {type}  {transactionType}
+            {type} {transactionType}
           </div>
           <p className='text-gray-400 fw-bold fs-5 mt-1 mb-7'>{description}</p>
 

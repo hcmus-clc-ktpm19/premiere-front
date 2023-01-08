@@ -257,4 +257,4 @@ const ReceiverEditModalForm: FC<Props> = ({ receiver, isReceiverLoading }) => {
   );
 };
 
-export {ReceiverEditModalForm};
+export { ReceiverEditModalForm };

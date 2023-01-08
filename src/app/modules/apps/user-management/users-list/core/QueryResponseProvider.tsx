@@ -1,4 +1,3 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 import { FC, useContext, useEffect, useMemo, useState } from 'react';
 import { useQuery } from 'react-query';
 import {
@@ -88,18 +87,19 @@ const filterData = (data: FullInfoUserDto[], state: QueryState) => {
     const columnToSort = state.sort as keyof FullInfoUserDto;
     data = data.sort((a, b) => {
       if (state.order === 'asc') {
-        // @ts-ignore
         return a[columnToSort] < b[columnToSort] ? -1 : 1;
       } else {
-        // @ts-ignore
         return a[columnToSort] < b[columnToSort] ? 1 : -1;
       }
     });
   }
 
   if (state.filter) {
-    // @ts-ignore
-    data = data.filter((item) => item.cardEnabled === state.filter.enabled && (item.gender === state.filter.gender || state.filter.gender === 'ALL'));
+    data = data.filter(
+      (item) =>
+        item.cardEnabled === state.filter.enabled &&
+        (item.gender === state.filter.gender || state.filter.gender === 'ALL')
+    );
   }
 
   return data;

@@ -1,4 +1,3 @@
-/* eslint-disable jsx-a11y/anchor-is-valid */
 import React, { useState } from 'react';
 import { KTSVG } from '@_metronic/helpers';
 import * as Yup from 'yup';
@@ -78,19 +77,21 @@ const SignInMethod: React.FC = () => {
           newPassword: values.newPassword,
           username: currentUser?.username || '',
         };
-        console.log({passwordDto});
-        changePassword(passwordDto).then((res) => {
-          setPasswordUpdateData(values);
-          setLoading2(false);
-          setPasswordForm(false);
-          console.log('Password changed successfully');
-          setSuccess(true);
-          setError(false);
-        }).catch((err) => {
-          setError(true);
-          setLoading2(false);
-          console.log('Password change error: ', err);
-        });
+        console.log({ passwordDto });
+        changePassword(passwordDto)
+          .then((res) => {
+            setPasswordUpdateData(values);
+            setLoading2(false);
+            setPasswordForm(false);
+            console.log('Password changed successfully');
+            setSuccess(true);
+            setError(false);
+          })
+          .catch((err) => {
+            setError(true);
+            setLoading2(false);
+            console.log('Password change error: ', err);
+          });
       }, 1000);
     },
   });
@@ -102,8 +103,7 @@ const SignInMethod: React.FC = () => {
           className='card-header border-0 cursor-pointer'
           role='button'
           data-bs-toggle='collapse'
-          data-bs-target='#kt_account_signin_method'
-        >
+          data-bs-target='#kt_account_signin_method'>
           <div className='card-title m-0'>
             <h3 className='fw-bolder m-0'>Sign-in Method</h3>
           </div>
@@ -119,14 +119,12 @@ const SignInMethod: React.FC = () => {
 
               <div
                 id='kt_signin_email_edit'
-                className={'flex-row-fluid ' + (!showEmailForm && 'd-none')}
-              >
+                className={'flex-row-fluid ' + (!showEmailForm && 'd-none')}>
                 <form
                   onSubmit={formik1.handleSubmit}
                   id='kt_signin_change_email'
                   className='form'
-                  noValidate
-                >
+                  noValidate>
                   <div className='row mb-6'>
                     <div className='col-lg-6 mb-4 mb-lg-0'>
                       <div className='fv-row mb-0'>
@@ -151,8 +149,7 @@ const SignInMethod: React.FC = () => {
                       <div className='fv-row mb-0'>
                         <label
                           htmlFor='confirmemailpassword'
-                          className='form-label fs-6 fw-bolder mb-3'
-                        >
+                          className='form-label fs-6 fw-bolder mb-3'>
                           Confirm Email
                         </label>
                         <input
@@ -173,8 +170,7 @@ const SignInMethod: React.FC = () => {
                     <button
                       id='kt_signin_submit'
                       type='submit'
-                      className='btn btn-primary  me-2 px-6'
-                    >
+                      className='btn btn-primary  me-2 px-6'>
                       {!loading1 && 'Update Email'}
                       {loading1 && (
                         <span className='indicator-progress' style={{ display: 'block' }}>
@@ -189,8 +185,7 @@ const SignInMethod: React.FC = () => {
                       onClick={() => {
                         setShowEmailForm(false);
                       }}
-                      className='btn btn-color-gray-400 btn-active-light-primary px-6'
-                    >
+                      className='btn btn-color-gray-400 btn-active-light-primary px-6'>
                       Cancel
                     </button>
                   </div>
@@ -202,8 +197,7 @@ const SignInMethod: React.FC = () => {
                   onClick={() => {
                     setShowEmailForm(true);
                   }}
-                  className='btn btn-light btn-active-light-primary'
-                >
+                  className='btn btn-light btn-active-light-primary'>
                   Change Email
                 </button>
               </div>
@@ -219,8 +213,7 @@ const SignInMethod: React.FC = () => {
 
               <div
                 id='kt_signin_password_edit'
-                className={'flex-row-fluid ' + (!showPasswordForm && 'd-none')}
-              >
+                className={'flex-row-fluid ' + (!showPasswordForm && 'd-none')}>
                 {error && (
                   <div className='alert alert-danger'>
                     <div className='alert-text'>
@@ -232,8 +225,7 @@ const SignInMethod: React.FC = () => {
                   onSubmit={formik2.handleSubmit}
                   id='kt_signin_change_password'
                   className='form'
-                  noValidate
-                >
+                  noValidate>
                   <div className='row mb-1'>
                     <div className='col-lg-4'>
                       <div className='fv-row mb-0'>
@@ -304,8 +296,7 @@ const SignInMethod: React.FC = () => {
                     <button
                       id='kt_password_submit'
                       type='submit'
-                      className='btn btn-primary me-2 px-6'
-                    >
+                      className='btn btn-primary me-2 px-6'>
                       {!loading2 && 'Update Password'}
                       {loading2 && (
                         <span className='indicator-progress' style={{ display: 'block' }}>
@@ -320,8 +311,7 @@ const SignInMethod: React.FC = () => {
                       }}
                       id='kt_password_cancel'
                       type='button'
-                      className='btn btn-color-gray-400 btn-active-light-primary px-6'
-                    >
+                      className='btn btn-color-gray-400 btn-active-light-primary px-6'>
                       Cancel
                     </button>
                   </div>
@@ -330,14 +320,12 @@ const SignInMethod: React.FC = () => {
 
               <div
                 id='kt_signin_password_button'
-                className={'ms-auto ' + (showPasswordForm && 'd-none')}
-              >
+                className={'ms-auto ' + (showPasswordForm && 'd-none')}>
                 <button
                   onClick={() => {
                     setPasswordForm(true);
                   }}
-                  className='btn btn-light btn-active-light-primary'
-                >
+                  className='btn btn-light btn-active-light-primary'>
                   Reset Password
                 </button>
               </div>
@@ -360,8 +348,7 @@ const SignInMethod: React.FC = () => {
                   href='#'
                   className='btn btn-primary px-6 align-self-center text-nowrap'
                   data-bs-toggle='modal'
-                  data-bs-target='#kt_modal_two_factor_authentication'
-                >
+                  data-bs-target='#kt_modal_two_factor_authentication'>
                   Enable
                 </a>
               </div>

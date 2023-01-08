@@ -10,6 +10,7 @@ const EmployeesListGrouping = () => {
   const { setNotification } = useNotification();
 
   const deleteSelectedItems = () => {
+    // eslint-disable-next-line @typescript-eslint/no-empty-function
     setNotification(true, 'Under development', 'info', () => {});
   };
 

@@ -101,9 +101,11 @@ const CreateInternalTransaction: React.FC = () => {
           console.log('error', { e });
           // transaction validate can have some error like invalid card number, credit card not enough money, ...
           // so we need to show error message to user
-          const notificationType: AlertColor = "error";
-          const errorMessage: string = e?.response?.data['Error: '] || e?.message || "Something went wrong!";
-          console.log("errorMessage", errorMessage);
+          const notificationType: AlertColor = 'error';
+          const errorMessage: string =
+            e?.response?.data['Error: '] || e?.message || 'Something went wrong!';
+          console.log('errorMessage', errorMessage);
+          // eslint-disable-next-line @typescript-eslint/no-empty-function
           setNotification(true, errorMessage, notificationType, () => {});
         }
       } else {
@@ -207,8 +209,7 @@ const CreateInternalTransaction: React.FC = () => {
     <div
       ref={stepperRef}
       className='stepper stepper-pills stepper-column d-flex flex-column flex-xl-row flex-row-fluid'
-      id='kt_create_account_stepper'
-    >
+      id='kt_create_account_stepper'>
       {/* begin::Aside*/}
       <div className='card d-flex justify-content-center justify-content-xl-start flex-row-auto w-100 w-xl-300px w-xxl-400px me-9'>
         {/* begin::Wrapper*/}
@@ -248,8 +249,7 @@ const CreateInternalTransaction: React.FC = () => {
           validationSchema={currentSchema}
           onSubmit={submitStep}
           initialValues={initValues}
-          validateOnChange={false}
-        >
+          validateOnChange={false}>
           {(props: FormikProps<any>) => (
             <Form className='py-20 w-100 w-xl-700px px-9' noValidate id='kt_create_account_form'>
               <div className='current' data-kt-stepper-element='content'>
@@ -288,8 +288,7 @@ const CreateInternalTransaction: React.FC = () => {
                     onClick={prevStep}
                     type='button'
                     className='btn btn-lg btn-light-primary me-3'
-                    data-kt-stepper-action='previous'
-                  >
+                    data-kt-stepper-action='previous'>
                     <KTSVG
                       path='/media/icons/duotune/arrows/arr063.svg'
                       className='svg-icon-4 me-1'
@@ -302,8 +301,7 @@ const CreateInternalTransaction: React.FC = () => {
                   <button
                     type='submit'
                     disabled={!props.isValid || Object.keys(props.errors).length !== 0}
-                    className='btn btn-lg btn-primary me-3'
-                  >
+                    className='btn btn-lg btn-primary me-3'>
                     <span className='indicator-label'>
                       {stepper.current?.currentStepIndex !== stepper.current?.totalStepsNumber &&
                         'Continue'}

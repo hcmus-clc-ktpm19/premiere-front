@@ -1,4 +1,3 @@
-// @ts-nocheck
 import { Column } from 'react-table';
 import { UserInfoCell } from './UserInfoCell';
 import { UserTwoStepsCell } from './UserTwoStepsCell';
@@ -54,10 +53,12 @@ const usersColumns: ReadonlyArray<Column<FullInfoUserDto>> = [
   },
   {
     Header: (props) => (
-        <UserCustomHeader tableProps={props} title='Card Status' className='min-w-100px' />
+      <UserCustomHeader tableProps={props} title='Card Status' className='min-w-100px' />
     ),
     id: 'cardEnabled',
-    Cell: ({...props}) => <UserTwoStepsCell two_steps={props.data[props.row.index].cardEnabled} />,
+    Cell: ({ ...props }) => (
+      <UserTwoStepsCell two_steps={props.data[props.row.index].cardEnabled} />
+    ),
   },
   {
     Header: (props) => (
@@ -70,10 +71,12 @@ const usersColumns: ReadonlyArray<Column<FullInfoUserDto>> = [
       <UserCustomHeader tableProps={props} title='Actions' className='text-end min-w-100px' />
     ),
     id: 'actions',
-    Cell: ({...props}) => <UserActionsCell
+    Cell: ({ ...props }) => (
+      <UserActionsCell
         id={props.data[props.row.index].id}
         cardStatus={props.data[props.row.index].cardEnabled}
-    />,
+      />
+    ),
   },
 ];
 
