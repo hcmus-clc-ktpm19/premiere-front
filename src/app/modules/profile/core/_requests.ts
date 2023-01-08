@@ -11,7 +11,7 @@ import {
 import * as Yup from 'yup';
 
 // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-const PREMIERE_API_URL: string = process.env.PREMIERE_API_URL!;
+const PREMIERE_API_URL: string = import.meta.env.VITE_PREMIERE_API_URL;
 
 const transactionValidationSchemas = [
   Yup.object({

@@ -2,13 +2,13 @@ import axios from 'axios';
 import { AuthModel, OTPModel, PasswordResetModel, UserModel } from './_models';
 import qs from 'qs';
 
-const API_URL = process.env.REACT_APP_API_URL;
-const KEYCLOAK_ACCESS_TOKEN_URL: string = process.env.KEYCLOAK_ACCESS_TOKEN_URL!;
-const KEYCLOAK_SCOPE: string = process.env.KEYCLOAK_SCOPE!;
-const KEYCLOAK_CLIENT_ID: string = process.env.KEYCLOAK_CLIENT_ID!;
-const KEYCLOAK_CLIENT_SECRET: string = process.env.KEYCLOAK_CLIENT_SECRET!;
-const KEYCLOAK_GRANT_TYPE: string = process.env.KEYCLOAK_GRANT_TYPE!;
-const PREMIERE_API_URL: string = process.env.PREMIERE_API_URL!;
+const API_URL = import.meta.env.VITE_REACT_APP_API_URL;
+const KEYCLOAK_ACCESS_TOKEN_URL: string = import.meta.env.VITE_KEYCLOAK_ACCESS_TOKEN_URL;
+const KEYCLOAK_SCOPE: string = import.meta.env.VITE_KEYCLOAK_SCOPE;
+const KEYCLOAK_CLIENT_ID: string = import.meta.env.VITE_KEYCLOAK_CLIENT_ID;
+const KEYCLOAK_CLIENT_SECRET: string = import.meta.env.VITE_KEYCLOAK_CLIENT_SECRET;
+const KEYCLOAK_GRANT_TYPE: string = import.meta.env.VITE_KEYCLOAK_GRANT_TYPE;
+const PREMIERE_API_URL: string = import.meta.env.VITE_PREMIERE_API_URL;
 
 const keycloakAuthRequestAttributes = {
   grant_type: KEYCLOAK_GRANT_TYPE,

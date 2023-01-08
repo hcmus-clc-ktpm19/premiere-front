@@ -1,10 +1,10 @@
-import axios, {AxiosResponse} from 'axios';
-import {ID, Response} from '@_metronic/helpers';
-import {User, UsersQueryResponse} from './_models';
-import {ResponseDto, UserDto} from '@/app/modules/apps/user-management/users-list/core/dtos';
-import {REGISTER_CUSTOMER_URL, REGISTER_EMPLOYEE_URL} from '@/app/modules/auth/core/_requests';
+import axios, { AxiosResponse } from 'axios';
+import { ID, Response } from '@_metronic/helpers';
+import { User, UsersQueryResponse } from './_models';
+import { ResponseDto, UserDto } from '@/app/modules/apps/user-management/users-list/core/dtos';
+import { REGISTER_CUSTOMER_URL, REGISTER_EMPLOYEE_URL } from '@/app/modules/auth/core/_requests';
 
-const PREMIERE_API_URL = process.env.PREMIERE_API_URL!;
+const PREMIERE_API_URL = import.meta.env.VITE_PREMIERE_API_URL;
 const GET_USERS_URL = `${PREMIERE_API_URL}/users/query`;
 const USER_URL = `${PREMIERE_API_URL}/user`;
 
@@ -49,4 +49,4 @@ const deleteSelectedUsers = (userIds: Array<ID>): Promise<void> => {
   return axios.all(requests).then(() => {});
 };
 
-export {getUsers, deleteUser, deleteSelectedUsers, getUserById, createUser, updateUser};
+export { getUsers, deleteUser, deleteSelectedUsers, getUserById, createUser, updateUser };

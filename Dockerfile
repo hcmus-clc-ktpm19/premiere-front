@@ -5,4 +5,4 @@ COPY yarn.lock .
 RUN yarn install
 COPY . .
 EXPOSE 3000
-CMD ["yarn", "dev"]
+CMD ["/bin/sh", "-c", "yarn build;yarn preview"]
