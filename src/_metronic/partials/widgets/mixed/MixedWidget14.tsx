@@ -1,9 +1,9 @@
 // @ts-nocheck
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import React, {useEffect, useRef} from 'react';
-import ApexCharts, {ApexOptions} from 'apexcharts';
-import {getCSSVariableValue} from '../../../assets/ts/_utils';
-import {useThemeMode} from '../../layout/theme-mode/ThemeModeProvider';
+import React, { useEffect, useRef } from 'react';
+import ApexCharts, { ApexOptions } from 'apexcharts';
+import { getCSSVariableValue } from '../../../assets/ts/_utils';
+import { useThemeMode } from '../../layout/theme-mode/ThemeModeProvider';
 
 type Props = {
   className: string;
@@ -11,9 +11,9 @@ type Props = {
   backGroundColor: string;
 };
 
-const MixedWidget14: React.FC<Props> = ({className, backGroundColor, chartHeight = '150px'}) => {
+const MixedWidget14: React.FC<Props> = ({ className, backGroundColor, chartHeight = '150px' }) => {
   const chartRef = useRef<HTMLDivElement | null>(null);
-  const {mode} = useThemeMode();
+  const { mode } = useThemeMode();
 
   const refreshChart = () => {
     if (!chartRef.current) {
@@ -42,7 +42,7 @@ const MixedWidget14: React.FC<Props> = ({className, backGroundColor, chartHeight
   return (
     <div
       className={`card ${className} theme-dark-bg-body`}
-      style={{backgroundColor: backGroundColor}}
+      style={{ backgroundColor: backGroundColor }}
     >
       {/* begin::Body */}
       <div className='card-body d-flex flex-column'>
@@ -58,7 +58,7 @@ const MixedWidget14: React.FC<Props> = ({className, backGroundColor, chartHeight
           <div
             ref={chartRef}
             className='mixed-widget-14-chart'
-            style={{height: chartHeight, minHeight: chartHeight}}
+            style={{ height: chartHeight, minHeight: chartHeight }}
           ></div>
         </div>
         {/* end::Wrapper */}
@@ -185,4 +185,4 @@ const chartOptions = (chartHeight: string): ApexOptions => {
   };
 };
 
-export {MixedWidget14};
+export { MixedWidget14 };

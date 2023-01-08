@@ -1,7 +1,7 @@
-import {FC} from 'react';
-import {Link} from 'react-router-dom';
-import {toAbsoluteUrl} from '@_metronic/helpers';
-import {TransactionStatus} from '@/app/models/model';
+import { FC } from 'react';
+import { Link } from 'react-router-dom';
+import { toAbsoluteUrl } from '@_metronic/helpers';
+import { TransactionStatus } from '@/app/models/model';
 import moment from 'moment';
 
 interface Props {
@@ -13,7 +13,7 @@ interface Props {
   budget: string;
 }
 
-const Card6: FC<Props> = ({badgeColor, status, transactionType, description, date, budget}) => {
+const Card6: FC<Props> = ({ badgeColor, status, transactionType, description, date, budget }) => {
   return (
     <Link
       to='/crafted/pages/profile/overview'
@@ -38,20 +38,24 @@ const Card6: FC<Props> = ({badgeColor, status, transactionType, description, dat
         <p className='text-gray-400 fw-bold fs-5 mt-1 mb-7'>{description}</p>
 
         <div className='d-flex flex-wrap justify-content-between mb-5'>
-          <div className='border border-gray-300 border-dashed rounded min-w-125px py-3 px-4 me-7 mb-3' style={{flex: '1'}}>
+          <div
+            className='border border-gray-300 border-dashed rounded min-w-125px py-3 px-4 me-7 mb-3'
+            style={{ flex: '1' }}
+          >
             <div className='fs-6 text-gray-800 fw-bolder'>Created At</div>
             <div className='fw-bold text-gray-400'>
               {moment(date).local().format('h:mm:ss A')}
-              <br/>
+              <br />
               {moment(date).local().format('ll')}
             </div>
           </div>
 
-          <div className='border border-gray-300 border-dashed rounded min-w-125px py-3 px-4 mb-3' style={{flex: '1'}}>
+          <div
+            className='border border-gray-300 border-dashed rounded min-w-125px py-3 px-4 mb-3'
+            style={{ flex: '1' }}
+          >
             <div className='fs-6 text-gray-800 fw-bolder'>Total Amount</div>
-            <div className='fw-bold text-gray-400'>
-              {budget}
-            </div>
+            <div className='fw-bold text-gray-400'>{budget}</div>
           </div>
         </div>
       </div>
@@ -59,4 +63,4 @@ const Card6: FC<Props> = ({badgeColor, status, transactionType, description, dat
   );
 };
 
-export {Card6};
+export { Card6 };

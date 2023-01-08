@@ -1,9 +1,9 @@
 /* eslint-disable react/jsx-no-target-blank */
-import {useEffect} from 'react';
-import {ILayout, useLayout} from '../../core';
+import { useEffect } from 'react';
+import { ILayout, useLayout } from '../../core';
 
 const Footer = () => {
-  const {config} = useLayout();
+  const { config } = useLayout();
   useEffect(() => {
     updateDOM(config);
   }, [config]);
@@ -59,4 +59,4 @@ const updateDOM = (config: ILayout) => {
   }
 };
 
-export {Footer};
+export { Footer };

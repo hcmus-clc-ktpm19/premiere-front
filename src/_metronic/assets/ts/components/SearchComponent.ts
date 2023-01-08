@@ -10,7 +10,7 @@ import {
   throttle,
 } from '../_utils/index';
 
-import {MenuComponent, defaultMenuOptions} from './MenuComponent';
+import { MenuComponent, defaultMenuOptions } from './MenuComponent';
 
 export interface ISearchOptions {
   minLength: number; // Miniam text lenght to query search
@@ -475,4 +475,4 @@ class SearchComponent {
     SearchComponent.createInstances(selector);
   };
 }
-export {SearchComponent, defaultSearchOptions, defaultSearchQueires};
+export { SearchComponent, defaultSearchOptions, defaultSearchQueires };

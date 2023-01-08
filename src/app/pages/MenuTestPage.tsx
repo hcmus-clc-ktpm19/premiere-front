@@ -1,7 +1,7 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import {FC} from 'react';
+import { FC } from 'react';
 import SVG from 'react-inlinesvg';
-import {toAbsoluteUrl} from '../../_metronic/helpers';
+import { toAbsoluteUrl } from '../../_metronic/helpers';
 
 const MenuTestPage: FC = () => {
   return (
@@ -43,7 +43,7 @@ const MenuTestPage: FC = () => {
                   </span>
                   <div
                     className='menu-sub menu-sub-lg-down-accordion menu-sub-lg-dropdown menu-rounded-0 py-lg-4 w-100 w-lg-225px'
-                    style={{margin: '0px'}}
+                    style={{ margin: '0px' }}
                   >
                     <div
                       data-kt-menu-trigger='click'
@@ -61,7 +61,7 @@ const MenuTestPage: FC = () => {
                       </span>
                       <div
                         className='menu-sub menu-sub-accordion menu-sub-lg-dropdown menu-active-bg py-4 w-100 w-lg-225px'
-                        style={{margin: '0px'}}
+                        style={{ margin: '0px' }}
                       >
                         <div className='menu-item'>
                           <span className='menu-link py-3'>
@@ -493,7 +493,7 @@ const MenuTestPage: FC = () => {
                   </span>
                   <div
                     className='menu-sub menu-sub-lg-down-accordion menu-sub-lg-dropdown menu-rounded-0 py-lg-4 w-100 w-lg-225px'
-                    style={{margin: '0px'}}
+                    style={{ margin: '0px' }}
                   >
                     <div className='menu-item'>
                       <a
@@ -547,7 +547,7 @@ const MenuTestPage: FC = () => {
                   </span>
                   <div
                     className='menu-sub menu-sub-lg-down-accordion menu-sub-lg-dropdown w-100 w-lg-600px p-5 p-lg-5'
-                    style={{margin: '0px'}}
+                    style={{ margin: '0px' }}
                   >
                     <div className='row' data-kt-menu-dismiss='true'>
                       <div className='col-lg-4 border-left-lg-1'>
@@ -670,7 +670,7 @@ const MenuTestPage: FC = () => {
               className='menu menu-sub menu-sub-dropdown w-250px w-lg-300px px-7 py-5'
               data-kt-menu='true'
               id='kt_header_search_menu'
-              style={{margin: '0px'}}
+              style={{ margin: '0px' }}
             >
               <div
                 id='kt_header_search'
@@ -1049,4 +1049,4 @@ const MenuTestPage: FC = () => {
   );
 };
 
-export {MenuTestPage};
+export { MenuTestPage };

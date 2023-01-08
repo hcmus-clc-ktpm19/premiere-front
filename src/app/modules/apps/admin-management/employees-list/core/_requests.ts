@@ -1,9 +1,7 @@
-import axios, {AxiosResponse} from 'axios';
-import {ID} from '@_metronic/helpers';
-import {EmployeeStatusDto, ErrorDto, FullInfoUserDto} from "@/app/models/model";
-import {
-  EmployeeQueryResponse
-} from "@/app/modules/apps/admin-management/employees-list/core/_models";
+import axios, { AxiosResponse } from 'axios';
+import { ID } from '@_metronic/helpers';
+import { EmployeeStatusDto, ErrorDto, FullInfoUserDto } from '@/app/models/model';
+import { EmployeeQueryResponse } from '@/app/modules/apps/admin-management/employees-list/core/_models';
 
 const PREMIERE_API_URL = process.env.PREMIERE_API_URL!;
 const GET_EMPLOYEES_URL = `${PREMIERE_API_URL}/auth/get-employees`;
@@ -12,32 +10,32 @@ const EMPLOYEE_STATUS_URL = `${PREMIERE_API_URL}/auth/change-employee-status`;
 
 const getEmployees = (): Promise<EmployeeQueryResponse> => {
   return axios
-  .get(`${GET_EMPLOYEES_URL}`)
-  .then((response: AxiosResponse<EmployeeQueryResponse>) => response.data);
+    .get(`${GET_EMPLOYEES_URL}`)
+    .then((response: AxiosResponse<EmployeeQueryResponse>) => response.data);
 };
 
 const getEmployeeById = (id: number | null | undefined): Promise<FullInfoUserDto | ErrorDto> => {
   return axios
-  .get(`${GET_EMPLOYEES_URL}/${id}`)
-  .then((response: AxiosResponse<FullInfoUserDto | ErrorDto>) => {
-    if (response.status === 202) {
-      const res = response.data as ErrorDto;
-      return Promise.reject(res);
-    }
-    return response.data as FullInfoUserDto;
-  })
+    .get(`${GET_EMPLOYEES_URL}/${id}`)
+    .then((response: AxiosResponse<FullInfoUserDto | ErrorDto>) => {
+      if (response.status === 202) {
+        const res = response.data as ErrorDto;
+        return Promise.reject(res);
+      }
+      return response.data as FullInfoUserDto;
+    });
 };
 
 const createEmployee = (customer: FullInfoUserDto): Promise<number> => {
   return axios
-  .post(EMPLOYEE_URL, customer)
-  .then((response: AxiosResponse<number>) => response.data);
+    .post(EMPLOYEE_URL, customer)
+    .then((response: AxiosResponse<number>) => response.data);
 };
 
 const updateEmployee = (customer: FullInfoUserDto): Promise<number> => {
   return axios
-  .post(EMPLOYEE_URL, customer)
-  .then((response: AxiosResponse<number>) => response.data);
+    .post(EMPLOYEE_URL, customer)
+    .then((response: AxiosResponse<number>) => response.data);
 };
 
 const disableEmployeeAccount = (employeeStatusDto: EmployeeStatusDto): Promise<void> => {
@@ -55,5 +53,5 @@ export {
   deleteSelectedUsers,
   getEmployeeById,
   createEmployee,
-  updateEmployee
+  updateEmployee,
 };

@@ -1,7 +1,7 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import {FC} from 'react';
-import {toAbsoluteUrl, KTSVG} from '../../../helpers';
-import {Dropdown1} from '../dropdown/Dropdown1';
+import { FC } from 'react';
+import { toAbsoluteUrl, KTSVG } from '../../../helpers';
+import { Dropdown1 } from '../dropdown/Dropdown1';
 
 type Props = {
   image: string;
@@ -90,4 +90,4 @@ const Card5: FC<Props> = ({
   );
 };
 
-export {Card5};
+export { Card5 };

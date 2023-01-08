@@ -28,7 +28,8 @@ const Toast: ({ isShow, content, type, onClose, destination }: Props) => JSX.Ele
       anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}
       TransitionComponent={TransitionLeft}
       open={isShow}
-      onClose={onClose}>
+      onClose={onClose}
+    >
       <Alert onClose={onClose} severity={type} sx={{ width: '100%' }}>
         <AlertTitle>New Message</AlertTitle>
         {content} —

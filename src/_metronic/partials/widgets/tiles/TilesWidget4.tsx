@@ -4,7 +4,7 @@ import clsx from 'clsx';
 type Props = {
   className?: string;
 };
-const TilesWidget4 = ({className}: Props) => {
+const TilesWidget4 = ({ className }: Props) => {
   return (
     <div className={clsx('card h-150px', className)}>
       <div className='card-body d-flex align-items-center justify-content-between flex-wrap'>
@@ -28,4 +28,4 @@ const TilesWidget4 = ({className}: Props) => {
   );
 };
 
-export {TilesWidget4};
+export { TilesWidget4 };

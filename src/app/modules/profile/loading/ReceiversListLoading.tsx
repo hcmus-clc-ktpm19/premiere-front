@@ -12,7 +12,7 @@ const ReceiversListLoading = () => {
     left: 'calc(50% - 4rem)',
   };
 
-  return <div style={{...styles, position: 'absolute', textAlign: 'center'}}>Processing...</div>;
+  return <div style={{ ...styles, position: 'absolute', textAlign: 'center' }}>Processing...</div>;
 };
 
-export {ReceiversListLoading};
+export { ReceiversListLoading };

@@ -1,21 +1,20 @@
-import {useMemo} from 'react';
-import {ColumnInstance, Row, useTable} from 'react-table';
-import {CustomHeaderColumn} from '../table/columns/CustomHeaderColumn';
-import {CustomRow} from '../table/columns/CustomRow';
-import {useQueryResponseData, useQueryResponseLoading} from '../core/QueryResponseProvider';
-import {usersColumns} from './columns/_columns';
-import {UsersListLoading} from '../components/loading/UsersListLoading';
-import {UsersListPagination} from '../components/pagination/UsersListPagination';
-import {KTCardBody} from '@_metronic/helpers';
-import {FullInfoUserDto} from "@/app/models/model";
+import { useMemo } from 'react';
+import { ColumnInstance, Row, useTable } from 'react-table';
+import { CustomHeaderColumn } from '../table/columns/CustomHeaderColumn';
+import { CustomRow } from '../table/columns/CustomRow';
+import { useQueryResponseData, useQueryResponseLoading } from '../core/QueryResponseProvider';
+import { usersColumns } from './columns/_columns';
+import { UsersListLoading } from '../components/loading/UsersListLoading';
+import { UsersListPagination } from '../components/pagination/UsersListPagination';
+import { KTCardBody } from '@_metronic/helpers';
+import { FullInfoUserDto } from '@/app/models/model';
 
 const UsersTable = () => {
   const users = useQueryResponseData();
   const isLoading = useQueryResponseLoading();
   const data = useMemo(() => users, [users]);
-  console.log('data', {data});
   const columns = useMemo(() => usersColumns, []);
-  const {getTableProps, getTableBodyProps, headers, rows, prepareRow} = useTable({
+  const { getTableProps, getTableBodyProps, headers, rows, prepareRow } = useTable({
     columns,
     data,
   });
@@ -26,8 +25,7 @@ const UsersTable = () => {
         <table
           id='kt_table_users'
           className='table align-middle table-row-dashed fs-6 gy-5 dataTable no-footer'
-          {...getTableProps()}
-        >
+          {...getTableProps()}>
           <thead>
             <tr className='text-start text-muted fw-bolder fs-7 text-uppercase gs-0'>
               {headers.map((column: ColumnInstance<FullInfoUserDto>) => (
@@ -59,4 +57,4 @@ const UsersTable = () => {
   );
 };
 
-export {UsersTable};
+export { UsersTable };

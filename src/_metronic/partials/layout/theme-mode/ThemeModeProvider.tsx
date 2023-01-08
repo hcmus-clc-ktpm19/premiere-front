@@ -1,6 +1,6 @@
-import React, {createContext, useContext, useEffect, useState} from 'react';
-import {ThemeModeComponent} from '../../../assets/ts/layout';
-import {toAbsoluteUrl} from '../../../helpers';
+import React, { createContext, useContext, useEffect, useState } from 'react';
+import { ThemeModeComponent } from '../../../assets/ts/layout';
+import { toAbsoluteUrl } from '../../../helpers';
 
 export type ThemeModeType = 'dark' | 'light' | 'system';
 export const themeModelSKey = 'kt_theme_mode_value';
@@ -58,7 +58,7 @@ const ThemeModeContext = createContext<ThemeModeContextType>({
 
 const useThemeMode = () => useContext(ThemeModeContext);
 
-const ThemeModeProvider = ({children}: {children: React.ReactNode}) => {
+const ThemeModeProvider = ({ children }: { children: React.ReactNode }) => {
   const [mode, setMode] = useState<ThemeModeType>(defaultThemeMode.mode);
   const [menuMode, setMenuMode] = useState<ThemeModeType>(defaultThemeMode.menuMode);
 
@@ -90,10 +90,10 @@ const ThemeModeProvider = ({children}: {children: React.ReactNode}) => {
   }, []);
 
   return (
-    <ThemeModeContext.Provider value={{mode, menuMode, updateMode, updateMenuMode}}>
+    <ThemeModeContext.Provider value={{ mode, menuMode, updateMode, updateMenuMode }}>
       {children}
     </ThemeModeContext.Provider>
   );
 };
 
-export {ThemeModeProvider, useThemeMode, systemMode, themeModeSwitchHelper};
+export { ThemeModeProvider, useThemeMode, systemMode, themeModeSwitchHelper };

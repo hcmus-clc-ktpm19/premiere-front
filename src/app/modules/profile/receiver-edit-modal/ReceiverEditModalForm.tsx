@@ -38,16 +38,15 @@ const ReceiverEditModalForm: FC<Props> = ({ receiver, isReceiverLoading }) => {
   const [receiverToInsert] = useState<ReceiverDto>(receiver);
   const [currentUserCreditCard, setCurrentUserCreditCard] = React.useState<CreditCardDto>();
 
-  const {data} = useQuery('creditCard', async () => {
-        try {
-          const response = await profileService.getCreditCardByUserId(currentUser?.id);
-          setCurrentUserCreditCard(response);
-          return response;
-        } catch (error) {
-          console.log(error);
-        }
-      }
-  );
+  const { data } = useQuery('creditCard', async () => {
+    try {
+      const response = await profileService.getCreditCardByUserId(currentUser?.id);
+      setCurrentUserCreditCard(response);
+      return response;
+    } catch (error) {
+      console.log(error);
+    }
+  });
 
   const cancel = (withRefresh?: boolean) => {
     openAddReceiverModal();
@@ -77,7 +76,7 @@ const ReceiverEditModalForm: FC<Props> = ({ receiver, isReceiverLoading }) => {
           }
         }
       } catch (e: AxiosError | any) {
-        console.log({e});
+        console.log({ e });
         const notificationType: AlertColor = 'error';
         const errorMessage: string =
           e?.response?.data?.message || e?.message || 'Something went wrong!';
@@ -103,7 +102,8 @@ const ReceiverEditModalForm: FC<Props> = ({ receiver, isReceiverLoading }) => {
           data-kt-scroll-max-height='auto'
           data-kt-scroll-dependencies='#kt_modal_add_user_header'
           data-kt-scroll-wrappers='#kt_modal_add_user_scroll'
-          data-kt-scroll-offset='300px'>
+          data-kt-scroll-offset='300px'
+        >
           {/* begin::Input group */}
           <div className='fv-row mb-7'>
             {/* begin::Label */}
@@ -114,11 +114,13 @@ const ReceiverEditModalForm: FC<Props> = ({ receiver, isReceiverLoading }) => {
             <div
               className='image-input image-input-outline'
               data-kt-image-input='true'
-              style={{ backgroundImage: `url('${blankImg}')` }}>
+              style={{ backgroundImage: `url('${blankImg}')` }}
+            >
               {/* begin::Preview existing avatar */}
               <div
                 className='image-input-wrapper w-125px h-125px'
-                style={{ backgroundImage: `url('${userAvatarImg}')` }}></div>
+                style={{ backgroundImage: `url('${userAvatarImg}')` }}
+              ></div>
               {/* end::Preview existing avatar */}
             </div>
             {/* end::Image input */}
@@ -199,7 +201,8 @@ const ReceiverEditModalForm: FC<Props> = ({ receiver, isReceiverLoading }) => {
           <div className='col-lg-8 fv-row'>
             <select
               className='form-select form-select-solid form-select-lg fw-bold'
-              {...formik.getFieldProps('bankName')}>
+              {...formik.getFieldProps('bankName')}
+            >
               <option value=''>Select a bank...</option>
               <option value='Premierebank'>Premierebank</option>
               <option value='Vietcombank'>Vietcombank</option>
@@ -221,7 +224,8 @@ const ReceiverEditModalForm: FC<Props> = ({ receiver, isReceiverLoading }) => {
             onClick={() => cancel()}
             className='btn btn-light me-3'
             data-kt-users-modal-action='cancel'
-            disabled={formik.isSubmitting || isReceiverLoading}>
+            disabled={formik.isSubmitting || isReceiverLoading}
+          >
             Discard
           </button>
 
@@ -231,7 +235,8 @@ const ReceiverEditModalForm: FC<Props> = ({ receiver, isReceiverLoading }) => {
             data-kt-users-modal-action='submit'
             disabled={
               isReceiverLoading || formik.isSubmitting || !formik.isValid || !formik.touched
-            }>
+            }
+          >
             <span className='indicator-label'>Submit</span>
             {(formik.isSubmitting || isReceiverLoading) && (
               <span className='indicator-progress'>

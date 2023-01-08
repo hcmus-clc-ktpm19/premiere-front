@@ -26,19 +26,19 @@ const getCustomerById = (id: number | null | undefined): Promise<FullInfoUserDto
         return Promise.reject(res);
       }
       return response.data as FullInfoUserDto;
-    })
+    });
 };
 
 const createCustomer = (customer: FullInfoUserDto): Promise<number> => {
   return axios
-  .post(CUSTOMER_URL, customer)
-  .then((response: AxiosResponse<number>) => response.data);
+    .post(CUSTOMER_URL, customer)
+    .then((response: AxiosResponse<number>) => response.data);
 };
 
 const updateCustomer = (customer: FullInfoUserDto): Promise<number> => {
   return axios
-  .post(CUSTOMER_URL, customer)
-  .then((response: AxiosResponse<number>) => response.data);
+    .post(CUSTOMER_URL, customer)
+    .then((response: AxiosResponse<number>) => response.data);
 };
 
 const disableCustomerCreditCard = (userCreditCardNumber: string): Promise<void> => {
@@ -56,5 +56,5 @@ export {
   deleteSelectedUsers,
   getCustomerById,
   createCustomer,
-  updateCustomer
+  updateCustomer,
 };

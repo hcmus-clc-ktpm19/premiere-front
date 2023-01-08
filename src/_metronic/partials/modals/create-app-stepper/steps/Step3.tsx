@@ -1,7 +1,7 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import {StepProps} from '../IAppModels';
+import { StepProps } from '../IAppModels';
 
-const Step3 = ({data, updateData, hasError}: StepProps) => {
+const Step3 = ({ data, updateData, hasError }: StepProps) => {
   return (
     <>
       {/*begin::Step 3 */}
@@ -161,4 +161,4 @@ const Step3 = ({data, updateData, hasError}: StepProps) => {
   );
 };
 
-export {Step3};
+export { Step3 };

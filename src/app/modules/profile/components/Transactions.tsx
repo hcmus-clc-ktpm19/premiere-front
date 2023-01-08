@@ -87,7 +87,8 @@ export function Transactions() {
               data-control='select2'
               data-hide-search='true'
               className='form-select form-select-white form-select-sm'
-              defaultValue='none'>
+              defaultValue='none'
+            >
               <option value='none'></option>
               <option value={TransactionType.MONEY_TRANSFER}>Money Transfer</option>
               <option value={TransactionType.LOAN}>Loan</option>
@@ -97,14 +98,16 @@ export function Transactions() {
             onClick={handleOnRefreshClick}
             className='btn btn-primary btn-sm me-2'
             data-bs-toggle='tooltip'
-            title='refresh'>
+            title='refresh'
+          >
             Refetch
           </button>
           <button
             onClick={handleOnCreateTransactionClick}
             className='btn btn-danger btn-sm'
             data-bs-toggle='tooltip'
-            title='create new transaction'>
+            title='create new transaction'
+          >
             <KTSVG path='/media/icons/duotune/arrows/arr075.svg' className='svg-icon-2' />
             Create Transaction
           </button>
@@ -147,7 +150,8 @@ export function Transactions() {
                 key={item}
                 onClick={handleOnPageClick}
                 value={item}
-                className={`page-item ${paginationData.currPage === item - 1 && 'active'}`}>
+                className={`page-item ${paginationData.currPage === item - 1 && 'active'}`}
+              >
                 <div className='page-link'>{item}</div>
               </li>
             );

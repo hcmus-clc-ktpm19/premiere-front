@@ -79,8 +79,8 @@ export function setupAxios(axios: any) {
           console.log('No refresh token from catch');
           return Promise.reject(error);
         }
-    } else {
-      return Promise.reject(error);
+      } else {
+        return Promise.reject(error);
       }
     }
   );

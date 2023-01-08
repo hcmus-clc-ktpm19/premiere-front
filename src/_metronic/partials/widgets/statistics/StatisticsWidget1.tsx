@@ -1,7 +1,7 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import React from 'react';
-import {toAbsoluteUrl} from '../../../helpers';
-import {Link} from "react-router-dom";
+import { toAbsoluteUrl } from '../../../helpers';
+import { Link } from 'react-router-dom';
 
 type Props = {
   className: string;
@@ -9,10 +9,17 @@ type Props = {
   title: string;
   time: string;
   description: string;
-  destination?: string
+  destination?: string;
 };
 
-const StatisticsWidget1: React.FC<Props> = ({className, image, title, time, description, destination='#'}) => {
+const StatisticsWidget1: React.FC<Props> = ({
+  className,
+  image,
+  title,
+  time,
+  description,
+  destination = '#',
+}) => {
   return (
     <div
       className={`card bgi-no-repeat ${className}`}
@@ -32,7 +39,7 @@ const StatisticsWidget1: React.FC<Props> = ({className, image, title, time, desc
 
         <p
           className='text-dark-75 fw-semibold fs-5 m-0'
-          dangerouslySetInnerHTML={{__html: description}}
+          dangerouslySetInnerHTML={{ __html: description }}
         ></p>
       </div>
       {/* end::Body */}
@@ -40,4 +47,4 @@ const StatisticsWidget1: React.FC<Props> = ({className, image, title, time, desc
   );
 };
 
-export {StatisticsWidget1};
+export { StatisticsWidget1 };

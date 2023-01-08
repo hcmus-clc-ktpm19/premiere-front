@@ -1,8 +1,8 @@
-import React, {useState} from 'react';
-import {toAbsoluteUrl} from '../../../../../../_metronic/helpers';
-import {IProfileDetails, profileDetailsInitValues as initialValues} from '../SettingsModel';
+import React, { useState } from 'react';
+import { toAbsoluteUrl } from '../../../../../../_metronic/helpers';
+import { IProfileDetails, profileDetailsInitValues as initialValues } from '../SettingsModel';
 import * as Yup from 'yup';
-import {useFormik} from 'formik';
+import { useFormik } from 'formik';
 
 const profileDetailsSchema = Yup.object().shape({
   fName: Yup.string().required('First name is required'),
@@ -64,11 +64,11 @@ const ProfileDetails: React.FC = () => {
                 <div
                   className='image-input image-input-outline'
                   data-kt-image-input='true'
-                  style={{backgroundImage: `url(${toAbsoluteUrl('/media/avatars/blank.png')})`}}
+                  style={{ backgroundImage: `url(${toAbsoluteUrl('/media/avatars/blank.png')})` }}
                 >
                   <div
                     className='image-input-wrapper w-125px h-125px'
-                    style={{backgroundImage: `url(${toAbsoluteUrl(data.avatar)})`}}
+                    style={{ backgroundImage: `url(${toAbsoluteUrl(data.avatar)})` }}
                   ></div>
                 </div>
               </div>
@@ -753,7 +753,7 @@ const ProfileDetails: React.FC = () => {
                     id='allowmarketing'
                     defaultChecked={data.allowMarketing}
                     onChange={() => {
-                      updateData({allowMarketing: !data.allowMarketing});
+                      updateData({ allowMarketing: !data.allowMarketing });
                     }}
                   />
                   <label className='form-check-label'></label>
@@ -766,7 +766,7 @@ const ProfileDetails: React.FC = () => {
             <button type='submit' className='btn btn-primary' disabled={loading}>
               {!loading && 'Save Changes'}
               {loading && (
-                <span className='indicator-progress' style={{display: 'block'}}>
+                <span className='indicator-progress' style={{ display: 'block' }}>
                   Please wait...{' '}
                   <span className='spinner-border spinner-border-sm align-middle ms-2'></span>
                 </span>
@@ -779,4 +779,4 @@ const ProfileDetails: React.FC = () => {
   );
 };
 
-export {ProfileDetails};
+export { ProfileDetails };

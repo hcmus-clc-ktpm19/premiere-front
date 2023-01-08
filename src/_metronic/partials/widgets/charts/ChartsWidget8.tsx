@@ -1,16 +1,16 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import React, {useEffect, useRef} from 'react';
-import ApexCharts, {ApexOptions} from 'apexcharts';
-import {getCSS, getCSSVariableValue} from '../../../assets/ts/_utils';
-import {useThemeMode} from '../../layout/theme-mode/ThemeModeProvider';
+import React, { useEffect, useRef } from 'react';
+import ApexCharts, { ApexOptions } from 'apexcharts';
+import { getCSS, getCSSVariableValue } from '../../../assets/ts/_utils';
+import { useThemeMode } from '../../layout/theme-mode/ThemeModeProvider';
 
 type Props = {
   className: string;
 };
 
-const ChartsWidget8: React.FC<Props> = ({className}) => {
+const ChartsWidget8: React.FC<Props> = ({ className }) => {
   const chartRef = useRef<HTMLDivElement | null>(null);
-  const {mode} = useThemeMode();
+  const { mode } = useThemeMode();
   const refreshChart = () => {
     if (!chartRef.current) {
       return;
@@ -79,7 +79,7 @@ const ChartsWidget8: React.FC<Props> = ({className}) => {
         <div
           ref={chartRef}
           id='kt_charts_widget_8_chart'
-          style={{height: '350px'}}
+          style={{ height: '350px' }}
           className='card-rounded-bottom'
         ></div>
         {/* end::Chart */}
@@ -89,7 +89,7 @@ const ChartsWidget8: React.FC<Props> = ({className}) => {
   );
 };
 
-export {ChartsWidget8};
+export { ChartsWidget8 };
 
 function getChartOptions(height: number): ApexOptions {
   const labelColor = getCSSVariableValue('--kt-gray-500');

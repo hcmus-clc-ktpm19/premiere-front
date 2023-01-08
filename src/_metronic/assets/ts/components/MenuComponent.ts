@@ -1,4 +1,4 @@
-import {createPopper, VirtualElement} from '@popperjs/core';
+import { createPopper, VirtualElement } from '@popperjs/core';
 import {
   getElementChild,
   getElementParents,
@@ -1085,4 +1085,4 @@ class MenuComponent {
   };
 }
 
-export {MenuComponent, defaultMenuOptions};
+export { MenuComponent, defaultMenuOptions };

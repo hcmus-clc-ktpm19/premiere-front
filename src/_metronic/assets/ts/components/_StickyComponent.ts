@@ -285,4 +285,4 @@ class StickyComponent {
   }
 }
 
-export {StickyComponent, defaultStickyOptions};
+export { StickyComponent, defaultStickyOptions };

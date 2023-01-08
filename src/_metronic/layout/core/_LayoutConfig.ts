@@ -1,4 +1,4 @@
-import {ILayout} from './_Models';
+import { ILayout } from './_Models';
 
 export const DefaultConfig: ILayout = {
   layoutType: 'dark-sidebar',

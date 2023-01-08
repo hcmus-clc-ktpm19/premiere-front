@@ -1,4 +1,4 @@
-import React, {FC} from 'react';
+import React, { FC } from 'react';
 
 const DemosToggleDrawer: FC = () => (
   <button
@@ -14,4 +14,4 @@ const DemosToggleDrawer: FC = () => (
   </button>
 );
 
-export {DemosToggleDrawer};
+export { DemosToggleDrawer };

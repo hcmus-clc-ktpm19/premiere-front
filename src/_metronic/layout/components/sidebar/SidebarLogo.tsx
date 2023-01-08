@@ -1,10 +1,10 @@
-import {Link} from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import clsx from 'clsx';
-import {KTSVG, toAbsoluteUrl} from '../../../helpers';
-import {useLayout} from '../../core';
+import { KTSVG, toAbsoluteUrl } from '../../../helpers';
+import { useLayout } from '../../core';
 
 const SidebarLogo = () => {
-  const {config} = useLayout();
+  const { config } = useLayout();
   const appSidebarDefaultMinimizeDesktopEnabled =
     config?.app?.sidebar?.default?.minimize?.desktop?.enabled;
   const appSidebarDefaultCollapseDesktopEnabled =
@@ -38,9 +38,9 @@ const SidebarLogo = () => {
             {/*  className='h-25px app-sidebar-logo-default theme-dark-show'*/}
             {/*/>*/}
             <img
-                alt='Logo'
-                src={toAbsoluteUrl('/media/logos/premiere-logo-2.svg')}
-                className='h-25px app-sidebar-logo-default theme-dark-show'
+              alt='Logo'
+              src={toAbsoluteUrl('/media/logos/premiere-logo-2.svg')}
+              className='h-25px app-sidebar-logo-default theme-dark-show'
             />
           </>
         )}
@@ -57,7 +57,7 @@ const SidebarLogo = () => {
           id='kt_app_sidebar_toggle'
           className={clsx(
             'app-sidebar-toggle btn btn-icon btn-shadow btn-sm btn-color-muted btn-active-color-primary body-bg h-30px w-30px position-absolute top-50 start-100 translate-middle rotate',
-            {active: appSidebarDefaultMinimizeDefault}
+            { active: appSidebarDefaultMinimizeDefault }
           )}
           data-kt-toggle='true'
           data-kt-toggle-state={toggleState}
@@ -71,4 +71,4 @@ const SidebarLogo = () => {
   );
 };
 
-export {SidebarLogo};
+export { SidebarLogo };

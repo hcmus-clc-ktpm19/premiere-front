@@ -1,12 +1,12 @@
-import {useQuery} from 'react-query';
-import {EmployeeEditModalForm} from './EmployeeEditModalForm';
-import {isNotEmpty, QUERIES} from '@_metronic/helpers';
-import {useListView} from '../core/ListViewProvider';
-import {getEmployeeById} from '../core/_requests';
-import React from "react";
+import { useQuery } from 'react-query';
+import { EmployeeEditModalForm } from './EmployeeEditModalForm';
+import { isNotEmpty, QUERIES } from '@_metronic/helpers';
+import { useListView } from '../core/ListViewProvider';
+import { getEmployeeById } from '../core/_requests';
+import React from 'react';
 
 const EmployeeEditModalFormWrapper = () => {
-  const {itemIdForUpdate, setItemIdForUpdate} = useListView();
+  const { itemIdForUpdate, setItemIdForUpdate } = useListView();
   const enabledQuery: boolean = isNotEmpty(itemIdForUpdate);
   const {
     isLoading,
@@ -56,4 +56,4 @@ const EmployeeEditModalFormWrapper = () => {
   return null;
 };
 
-export {EmployeeEditModalFormWrapper};
+export { EmployeeEditModalFormWrapper };

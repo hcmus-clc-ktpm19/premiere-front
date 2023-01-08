@@ -1,5 +1,5 @@
-import {ILayout, ILayoutCSSClasses, ILayoutHTMLAttributes, ILayoutCSSVariables} from './_Models';
-import {DefaultConfig} from './_LayoutConfig';
+import { ILayout, ILayoutCSSClasses, ILayoutHTMLAttributes, ILayoutCSSVariables } from './_Models';
+import { DefaultConfig } from './_LayoutConfig';
 
 const LAYOUT_CONFIG_KEY = import.meta.env.VITE_REACT_APP_BASE_LAYOUT_CONFIG_KEY || 'LayoutConfig';
 
@@ -85,7 +85,7 @@ class LayoutSetup {
   }
 
   private static initLayoutSettings(config: ILayout): ILayout {
-    const updatedConfig = {...config};
+    const updatedConfig = { ...config };
     // clear body classes
     const bodyClasses = document.body.classList.value.split(' ');
     bodyClasses.forEach((cssClass) => document.body.classList.remove(cssClass));
@@ -128,21 +128,21 @@ class LayoutSetup {
           ...content,
           ...footer,
         };
-        return {...updatedConfig, app: updatedApp};
+        return { ...updatedConfig, app: updatedApp };
       }
     }
     return updatedConfig;
   }
 
   private static initToolbarSetting(config: ILayout): ILayout {
-    const updatedConfig = {...config};
+    const updatedConfig = { ...config };
     const appHeaderDefaultContent = updatedConfig.app?.header?.default?.content;
     if (appHeaderDefaultContent === 'page-title') {
       const toolbar = updatedConfig.app?.toolbar;
       if (toolbar) {
         toolbar.display = false;
-        const updatedApp = {...updatedConfig.app, ...toolbar};
-        return {...updatedConfig, app: updatedApp};
+        const updatedApp = { ...updatedConfig.app, ...toolbar };
+        return { ...updatedConfig, app: updatedApp };
       }
       return updatedConfig;
     }
@@ -151,15 +151,15 @@ class LayoutSetup {
     if (pageTitle) {
       pageTitle.description = false;
       pageTitle.breadCrumb = true;
-      const updatedApp = {...updatedConfig.app, ...pageTitle};
-      return {...updatedConfig, app: updatedApp};
+      const updatedApp = { ...updatedConfig.app, ...pageTitle };
+      return { ...updatedConfig, app: updatedApp };
     }
 
     return updatedConfig;
   }
 
   private static initWidthSettings(config: ILayout): ILayout {
-    const updatedConfig = {...config};
+    const updatedConfig = { ...config };
     const pageWidth = updatedConfig.app?.general?.pageWidth;
     if (!pageWidth || pageWidth === 'default') {
       return config;
@@ -188,12 +188,12 @@ class LayoutSetup {
       ...content,
       ...footer,
     };
-    return {...updatedConfig, app: updatedApp};
+    return { ...updatedConfig, app: updatedApp };
   }
 
   public static updatePartialConfig(fieldsToUpdate: Partial<ILayout>): ILayout {
     const config = LayoutSetup.config;
-    const updatedConfig = {...config, ...fieldsToUpdate};
+    const updatedConfig = { ...config, ...fieldsToUpdate };
     LayoutSetup.initCSSClasses();
     LayoutSetup.initCSSVariables();
     LayoutSetup.initHTMLAttributes();

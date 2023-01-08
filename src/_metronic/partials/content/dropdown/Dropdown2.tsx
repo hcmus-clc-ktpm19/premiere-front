@@ -1,5 +1,5 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import {FC} from 'react';
+import { FC } from 'react';
 
 const Dropdown2: FC = () => {
   return (
@@ -76,4 +76,4 @@ const Dropdown2: FC = () => {
   );
 };
 
-export {Dropdown2};
+export { Dropdown2 };

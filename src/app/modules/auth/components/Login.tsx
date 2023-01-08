@@ -79,7 +79,8 @@ export function Login() {
       className='form w-100'
       onSubmit={formik.handleSubmit}
       noValidate
-      id='kt_login_signin_form'>
+      id='kt_login_signin_form'
+    >
       {/* begin::Heading */}
       <div className='text-center mb-11'>
         <h1 className='text-dark fw-bolder mb-3'>Sign In</h1>
@@ -176,7 +177,8 @@ export function Login() {
           type='submit'
           id='kt_sign_in_submit'
           className='btn btn-primary'
-          disabled={formik.isSubmitting || !formik.isValid}>
+          disabled={formik.isSubmitting || !formik.isValid}
+        >
           {!loading && <span className='indicator-label'>Continue</span>}
           {loading && (
             <span className='indicator-progress' style={{ display: 'block' }}>

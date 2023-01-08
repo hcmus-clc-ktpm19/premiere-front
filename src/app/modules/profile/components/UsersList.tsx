@@ -1,13 +1,13 @@
-import {FC} from 'react';
-import {IconUserModel} from '../ProfileModels';
-import {toAbsoluteUrl} from '../../../../_metronic/helpers';
-import {OverlayTrigger, Tooltip} from 'react-bootstrap';
+import { FC } from 'react';
+import { IconUserModel } from '../ProfileModels';
+import { toAbsoluteUrl } from '../../../../_metronic/helpers';
+import { OverlayTrigger, Tooltip } from 'react-bootstrap';
 
 type Props = {
   users?: Array<IconUserModel>;
 };
 
-const UsersList: FC<Props> = ({users = undefined}) => {
+const UsersList: FC<Props> = ({ users = undefined }) => {
   return (
     <>
       {users &&
@@ -33,4 +33,4 @@ const UsersList: FC<Props> = ({users = undefined}) => {
   );
 };
 
-export {UsersList};
+export { UsersList };

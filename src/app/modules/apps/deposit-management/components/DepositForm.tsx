@@ -1,9 +1,9 @@
-import React, {useState} from 'react';
-import {ErrorMessage, Field, FormikProps} from 'formik';
+import React, { useState } from 'react';
+import { ErrorMessage, Field, FormikProps } from 'formik';
 import { NavLink } from 'react-router-dom';
 
 interface Props {
-  formikProps: FormikProps<any>
+  formikProps: FormikProps<any>;
 }
 
 const DepositForm: React.FC<Props> = ({ formikProps }) => {

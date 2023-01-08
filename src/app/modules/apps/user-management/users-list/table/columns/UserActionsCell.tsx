@@ -1,23 +1,23 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import {FC, useEffect} from 'react';
-import {useMutation, useQueryClient} from 'react-query';
-import {MenuComponent} from '@_metronic/assets/ts/components';
-import {ID, KTSVG, QUERIES} from '@_metronic/helpers';
-import {useListView} from '../../core/ListViewProvider';
-import {useQueryResponse} from '../../core/QueryResponseProvider';
-import {disableCustomerCreditCard} from '../../core/_requests';
-import {ProfileService as profileService} from "@/app/modules/profile/core/_requests";
-import useNotification from "@/app/modules/notifications/useNotification";
+import { FC, useEffect } from 'react';
+import { useMutation, useQueryClient } from 'react-query';
+import { MenuComponent } from '@_metronic/assets/ts/components';
+import { ID, KTSVG, QUERIES } from '@_metronic/helpers';
+import { useListView } from '../../core/ListViewProvider';
+import { useQueryResponse } from '../../core/QueryResponseProvider';
+import { disableCustomerCreditCard } from '../../core/_requests';
+import { ProfileService as profileService } from '@/app/modules/profile/core/_requests';
+import useNotification from '@/app/modules/notifications/useNotification';
 
 type Props = {
   id: ID;
 };
 
-const UserActionsCell: FC<Props> = ({id}) => {
-  const {setItemIdForUpdate} = useListView();
-  const {query} = useQueryResponse();
+const UserActionsCell: FC<Props> = ({ id }) => {
+  const { setItemIdForUpdate } = useListView();
+  const { query } = useQueryResponse();
   const queryClient = useQueryClient();
-  const {setNotification} = useNotification();
+  const { setNotification } = useNotification();
 
   useEffect(() => {
     MenuComponent.reinitialization();
@@ -27,22 +27,25 @@ const UserActionsCell: FC<Props> = ({id}) => {
     setItemIdForUpdate(id);
   };
 
-  const deleteItem = useMutation(() => {
-    console.log('disable', id);
-    const userId = id as number;
-    profileService.getCreditCardByUserId(userId).then((res) => {
-      console.log('res', res);
-      return disableCustomerCreditCard(res.cardNumber);
-    });
-    return Promise.resolve();
-  }, {
-    // 💡 response of the mutation is passed to onSuccess
-    onSuccess: () => {
-      // ✅ update detail view directly
-      queryClient.invalidateQueries([`${QUERIES.USERS_LIST}-${query}`]);
-      setNotification(true, 'Disable user credit card successfully.', 'success', () => {});
+  const deleteItem = useMutation(
+    () => {
+      console.log('disable', id);
+      const userId = id as number;
+      profileService.getCreditCardByUserId(userId).then((res) => {
+        console.log('res', res);
+        return disableCustomerCreditCard(res.cardNumber);
+      });
+      return Promise.resolve();
     },
-  });
+    {
+      // 💡 response of the mutation is passed to onSuccess
+      onSuccess: () => {
+        // ✅ update detail view directly
+        queryClient.invalidateQueries([`${QUERIES.USERS_LIST}-${query}`]);
+        setNotification(true, 'Disable user credit card successfully.', 'success', () => {});
+      },
+    }
+  );
 
   return (
     <>
@@ -85,4 +88,4 @@ const UserActionsCell: FC<Props> = ({id}) => {
   );
 };
 
-export {UserActionsCell};
+export { UserActionsCell };

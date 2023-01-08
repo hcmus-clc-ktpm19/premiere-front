@@ -63,7 +63,8 @@ const Demos: FC = () => {
                 import.meta.env.VITE_REACT_APP_THEME_DEMO === item.name
                   ? 'border border-4 border-success'
                   : 'border border-4 border-gray-200'
-              } rounded`}>
+              } rounded`}
+            >
               <div className='overlay-wrapper'>
                 <img
                   src={toAbsoluteUrl(`/media/demos/${item.name}.png`)}
@@ -76,7 +77,8 @@ const Demos: FC = () => {
                 {item.available && (
                   <a
                     href={`${import.meta.env.VITE_REACT_APP_PREVIEW_REACT_URL}/${item.name}`}
-                    className='btn btn-sm btn-success shadow'>
+                    className='btn btn-sm btn-success shadow'
+                  >
                     {item.name.charAt(0).toUpperCase() + item.name.slice(1)}
                   </a>
                 )}

@@ -1,12 +1,12 @@
-import {useEffect} from 'react';
-import {useLocation} from 'react-router';
+import { useEffect } from 'react';
+import { useLocation } from 'react-router';
 import clsx from 'clsx';
-import {useLayout} from '../../core';
-import {DrawerComponent} from '../../../assets/ts/components';
-import {WithChildren} from '../../../helpers';
+import { useLayout } from '../../core';
+import { DrawerComponent } from '../../../assets/ts/components';
+import { WithChildren } from '../../../helpers';
 
-const Content = ({children}: WithChildren) => {
-  const {config, classes} = useLayout();
+const Content = ({ children }: WithChildren) => {
+  const { config, classes } = useLayout();
   const location = useLocation();
   useEffect(() => {
     DrawerComponent.hideAll();
@@ -39,4 +39,4 @@ const Content = ({children}: WithChildren) => {
   );
 };
 
-export {Content};
+export { Content };

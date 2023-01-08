@@ -58,4 +58,4 @@ const accountsInit: ICreateAccount = {
   saveCard: '1',
 };
 
-export {createAccountSchemas, accountsInit};
+export { createAccountSchemas, accountsInit };

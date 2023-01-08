@@ -1,7 +1,7 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import {StepProps} from '../IAppModels';
+import { StepProps } from '../IAppModels';
 
-const Step2 = ({data, updateData}: StepProps) => {
+const Step2 = ({ data, updateData }: StepProps) => {
   return (
     <div className='pb-5' data-kt-stepper-element='content'>
       <div className='w-100'>
@@ -39,7 +39,7 @@ const Step2 = ({data, updateData}: StepProps) => {
                 name='appFramework'
                 value='HTML5'
                 checked={data.appFramework === 'HTML5'}
-                onChange={() => updateData({appFramework: 'HTML5'})}
+                onChange={() => updateData({ appFramework: 'HTML5' })}
               />
             </span>
           </label>
@@ -67,7 +67,7 @@ const Step2 = ({data, updateData}: StepProps) => {
                 name='appFramework'
                 value='ReactJS'
                 checked={data.appFramework === 'ReactJS'}
-                onChange={() => updateData({appFramework: 'ReactJS'})}
+                onChange={() => updateData({ appFramework: 'ReactJS' })}
               />
             </span>
           </label>
@@ -95,7 +95,7 @@ const Step2 = ({data, updateData}: StepProps) => {
                 name='appFramework'
                 value='Angular'
                 checked={data.appFramework === 'Angular'}
-                onChange={() => updateData({appFramework: 'Angular'})}
+                onChange={() => updateData({ appFramework: 'Angular' })}
               />
             </span>
           </label>
@@ -123,7 +123,7 @@ const Step2 = ({data, updateData}: StepProps) => {
                 name='appFramework'
                 value='Vue'
                 checked={data.appFramework === 'Vue'}
-                onChange={() => updateData({appFramework: 'Vue'})}
+                onChange={() => updateData({ appFramework: 'Vue' })}
               />
             </span>
           </label>
@@ -135,4 +135,4 @@ const Step2 = ({data, updateData}: StepProps) => {
   );
 };
 
-export {Step2};
+export { Step2 };

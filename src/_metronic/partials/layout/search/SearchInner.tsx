@@ -1,5 +1,5 @@
-import {useState} from 'react';
-import {KTSVG} from '../../../helpers';
+import { useState } from 'react';
+import { KTSVG } from '../../../helpers';
 
 const SearchInner = () => {
   const [search, setSearch] = useState<string>('');
@@ -34,4 +34,4 @@ const SearchInner = () => {
   );
 };
 
-export {SearchInner};
+export { SearchInner };

@@ -1,16 +1,16 @@
-import {lazy, FC, Suspense} from 'react';
-import {Route, Routes, Navigate, Outlet} from 'react-router-dom';
-import {MasterLayout} from '@_metronic/layout/MasterLayout';
+import { lazy, FC, Suspense } from 'react';
+import { Route, Routes, Navigate, Outlet } from 'react-router-dom';
+import { MasterLayout } from '@_metronic/layout/MasterLayout';
 import TopBarProgress from 'react-topbar-progress-indicator';
-import {DashboardWrapper} from '@pages/dashboard/DashboardWrapper';
-import {MenuTestPage} from '@pages/MenuTestPage';
-import {getCSSVariableValue} from '@_metronic/assets/ts/_utils';
-import {WithChildren} from '@_metronic/helpers';
+import { DashboardWrapper } from '@pages/dashboard/DashboardWrapper';
+import { MenuTestPage } from '@pages/MenuTestPage';
+import { getCSSVariableValue } from '@_metronic/assets/ts/_utils';
+import { WithChildren } from '@_metronic/helpers';
 import BuilderPageWrapper from '../pages/layout-builder/BuilderPageWrapper';
 import LoanManagementPage from '@/app/modules/loan-management/LoanManagementPage';
-import {useAuth} from '@/app/modules/auth';
-import {DepositMoneyPage} from '@/app/modules/apps/deposit-management/DepositMoneyPage';
-import {PremiereRole} from '@/app/models/model';
+import { useAuth } from '@/app/modules/auth';
+import { DepositMoneyPage } from '@/app/modules/apps/deposit-management/DepositMoneyPage';
+import { PremiereRole } from '@/app/models/model';
 
 const PrivateRoutes = () => {
   const ProfilePage = lazy(() => import('../modules/profile/ProfilePage'));
@@ -20,7 +20,7 @@ const PrivateRoutes = () => {
   const ChatPage = lazy(() => import('../modules/apps/chat/ChatPage'));
   const UsersPage = lazy(() => import('../modules/apps/user-management/UsersPage'));
   const AdminPage = lazy(() => import('../modules/apps/admin-management/AdminPage'));
-  const {currentUser} = useAuth();
+  const { currentUser } = useAuth();
 
   return (
     <Routes>
@@ -80,7 +80,8 @@ const PrivateRoutes = () => {
               isAllowed={
                 currentUser?.role === PremiereRole.PREMIERE_ADMIN.toString() ||
                 currentUser?.role === PremiereRole.EMPLOYEE.toString()
-              }>
+              }
+            >
               <SuspensedView>
                 <UsersPage />
               </SuspensedView>
@@ -88,18 +89,17 @@ const PrivateRoutes = () => {
           }
         />
         <Route
-            path='apps/admin-management/*'
-            element={
-              <ProtectedRoute
-                  redirectPath='/dashboard'
-                  isAllowed={
-                      currentUser?.role === PremiereRole.PREMIERE_ADMIN.toString()
-                  }>
-                <SuspensedView>
-                  <AdminPage />
-                </SuspensedView>
-              </ProtectedRoute>
-            }
+          path='apps/admin-management/*'
+          element={
+            <ProtectedRoute
+              redirectPath='/dashboard'
+              isAllowed={currentUser?.role === PremiereRole.PREMIERE_ADMIN.toString()}
+            >
+              <SuspensedView>
+                <AdminPage />
+              </SuspensedView>
+            </ProtectedRoute>
+          }
         />
         <Route
           path='apps/deposit-management/*'
@@ -109,7 +109,8 @@ const PrivateRoutes = () => {
               isAllowed={
                 currentUser?.role === PremiereRole.PREMIERE_ADMIN ||
                 currentUser?.role === PremiereRole.EMPLOYEE
-              }>
+              }
+            >
               <SuspensedView>
                 <DepositMoneyPage />
               </SuspensedView>
@@ -131,7 +132,7 @@ const PrivateRoutes = () => {
   );
 };
 
-const SuspensedView: FC<WithChildren> = ({children}) => {
+const SuspensedView: FC<WithChildren> = ({ children }) => {
   const baseColor = getCSSVariableValue('--kt-primary');
   TopBarProgress.config({
     barColors: {
@@ -161,4 +162,4 @@ const ProtectedRoute = ({
   return children || <Outlet />;
 };
 
-export {PrivateRoutes};
+export { PrivateRoutes };

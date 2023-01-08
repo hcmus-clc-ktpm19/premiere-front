@@ -1,8 +1,8 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import clsx from 'clsx';
-import {FC} from 'react';
-import {Link} from 'react-router-dom';
-import {KTSVG, toAbsoluteUrl, defaultAlerts, defaultLogs} from '../../../helpers';
+import { FC } from 'react';
+import { Link } from 'react-router-dom';
+import { KTSVG, toAbsoluteUrl, defaultAlerts, defaultLogs } from '../../../helpers';
 
 const HeaderNotificationsMenu: FC = () => (
   <div
@@ -11,7 +11,7 @@ const HeaderNotificationsMenu: FC = () => (
   >
     <div
       className='d-flex flex-column bgi-no-repeat rounded-top'
-      style={{backgroundImage: `url('${toAbsoluteUrl('/media/misc/menu-header-bg.jpg')}')`}}
+      style={{ backgroundImage: `url('${toAbsoluteUrl('/media/misc/menu-header-bg.jpg')}')` }}
     >
       <h3 className='text-white fw-bold px-9 mt-10 mb-6'>
         Notifications <span className='fs-8 opacity-75 ps-3'>24 reports</span>
@@ -151,4 +151,4 @@ const HeaderNotificationsMenu: FC = () => (
   </div>
 );
 
-export {HeaderNotificationsMenu};
+export { HeaderNotificationsMenu };
