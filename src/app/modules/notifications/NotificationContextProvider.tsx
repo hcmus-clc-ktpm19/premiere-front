@@ -9,19 +9,21 @@ export const NotificationContextProvider = ({children}: { children: React.ReactN
   const [isShow, setIsShow] = useState<boolean>(false);
   const [content, setContent] = useState<string>('');
   const [type, setType] = useState<AlertColor>('info');
-  const [onClose, setOnClose] = useState<(event: Event | SyntheticEvent<Element, Event>) => void>(() => () => {
-  });
+  const [onClose, setOnClose] = useState<(event: Event | SyntheticEvent<Element, Event>) => void>(() => () => {});
+  const [destination, setDestination] = useState<string>('/');
 
-  const setNotification = (isShow: boolean, content: string, type: AlertColor, onClose: (event: Event | SyntheticEvent<Element, Event>) => void) => {
+  const setNotification = (isShow: boolean, content: string, type: AlertColor, onClose: (event: Event | SyntheticEvent<Element, Event>) => void, destination: string = '/') => {
     setIsShow(isShow);
     setContent(content);
     setType(type);
     setOnClose(onClose);
+    setDestination(destination);
     setTimeout(() => {
       setIsShow(false);
       setContent('');
       setType('info');
       setOnClose(onClose);
+      setDestination(destination);
     }, NOTIFICATION_TIMEOUT);
   }
 
@@ -31,6 +33,7 @@ export const NotificationContextProvider = ({children}: { children: React.ReactN
         content,
         type,
         onClose,
+        destination,
         setNotification
       }}>
         {children}

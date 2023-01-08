@@ -1,12 +1,12 @@
-import {FC, useState, createContext, useContext, useMemo} from 'react';
+import {createContext, FC, useContext, useMemo, useState} from 'react';
 import {
-  ID,
   calculatedGroupingIsDisabled,
   calculateIsAllDataSelected,
   groupingOnSelect,
+  groupingOnSelectAll,
+  ID,
   initialListView,
   ListViewContextProps,
-  groupingOnSelectAll,
   WithChildren,
 } from '@_metronic/helpers';
 import {useQueryResponse, useQueryResponseData} from './QueryResponseProvider';
@@ -18,7 +18,10 @@ const ListViewProvider: FC<WithChildren> = ({children}) => {
   const [itemIdForUpdate, setItemIdForUpdate] = useState<ID>(initialListView.itemIdForUpdate);
   const {isLoading} = useQueryResponse();
   const data = useQueryResponseData();
+  console.log('data', {data});
+  // @ts-ignore
   const disabled = useMemo(() => calculatedGroupingIsDisabled(isLoading, data), [isLoading, data]);
+  // @ts-ignore
   const isAllSelected = useMemo(() => calculateIsAllDataSelected(data, selected), [data, selected]);
 
   return (
@@ -33,6 +36,7 @@ const ListViewProvider: FC<WithChildren> = ({children}) => {
           groupingOnSelect(id, selected, setSelected);
         },
         onSelectAll: () => {
+          // @ts-ignore
           groupingOnSelectAll(isAllSelected, setSelected, data);
         },
         clearSelected: () => {

@@ -2,7 +2,7 @@ import React, { FC, useContext, useState } from 'react';
 import * as Yup from 'yup';
 import { useFormik } from 'formik';
 import { isNotEmpty, toAbsoluteUrl } from '@_metronic/helpers';
-import { ReceiverDto } from '@/app/modules/profile/core/_dtos';
+import { CreditCardDto, ReceiverDto } from '@/app/modules/profile/core/_dtos';
 import clsx from 'clsx';
 import { ReceiversListLoading } from '@/app/modules/profile/loading/ReceiversListLoading';
 import { ProfileService as profileService } from '../core/_requests';
@@ -10,7 +10,8 @@ import { useAuth } from '@/app/modules/auth';
 import { ReceiverModalContext } from '@/app/modules/profile/components/Receivers';
 import useNotification from '@/app/modules/notifications/useNotification';
 import { AlertColor } from '@mui/material';
-import {AxiosError} from 'axios';
+import { AxiosError } from 'axios';
+import { useQuery } from 'react-query';
 
 type Props = {
   receiver: ReceiverDto;
@@ -35,6 +36,18 @@ const ReceiverEditModalForm: FC<Props> = ({ receiver, isReceiverLoading }) => {
   const { currentUser } = useAuth();
   const { setNotification } = useNotification();
   const [receiverToInsert] = useState<ReceiverDto>(receiver);
+  const [currentUserCreditCard, setCurrentUserCreditCard] = React.useState<CreditCardDto>();
+
+  const {data} = useQuery('creditCard', async () => {
+        try {
+          const response = await profileService.getCreditCardByUserId(currentUser?.id);
+          setCurrentUserCreditCard(response);
+          return response;
+        } catch (error) {
+          console.log(error);
+        }
+      }
+  );
 
   const cancel = (withRefresh?: boolean) => {
     openAddReceiverModal();
@@ -49,6 +62,7 @@ const ReceiverEditModalForm: FC<Props> = ({ receiver, isReceiverLoading }) => {
     onSubmit: async (values, { setSubmitting }) => {
       setSubmitting(true);
       values.userId = currentUser?.id || -1;
+      values.cardNumber = values.cardNumber.trim();
       console.log('value from receiver edit modal form', values);
       try {
         if (isNotEmpty(values.id)) {
@@ -56,13 +70,17 @@ const ReceiverEditModalForm: FC<Props> = ({ receiver, isReceiverLoading }) => {
           await profileService.updateReceiver(values);
         } else {
           console.log('insert receiver');
-          await profileService.insertReceiver(values);
+          if (values.cardNumber === currentUserCreditCard?.cardNumber) {
+            setNotification(true, 'You cannot add yourself as  a receiver', 'error', () => {});
+          } else {
+            await profileService.insertReceiver(values);
+          }
         }
-      } catch (ex: AxiosError | any) {
-        console.error(ex);
-        console.log('error', ex);
+      } catch (e: AxiosError | any) {
+        console.log({e});
         const notificationType: AlertColor = 'error';
-        const errorMessage: string = ex.response.data['Error: '] || 'Something went wrong!';
+        const errorMessage: string =
+          e?.response?.data?.message || e?.message || 'Something went wrong!';
         console.log('errorMessage', errorMessage);
         // eslint-disable-next-line @typescript-eslint/no-empty-function
         setNotification(true, errorMessage, notificationType, () => {});

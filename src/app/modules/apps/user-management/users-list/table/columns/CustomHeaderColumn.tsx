@@ -1,10 +1,10 @@
 // @ts-nocheck
 import {FC} from 'react';
 import {ColumnInstance} from 'react-table';
-import {User} from '../../core/_models';
+import {FullInfoUserDto} from "@/app/models/model";
 
 type Props = {
-  column: ColumnInstance<User>;
+  column: ColumnInstance<FullInfoUserDto>;
 };
 
 const CustomHeaderColumn: FC<Props> = ({column}) => (

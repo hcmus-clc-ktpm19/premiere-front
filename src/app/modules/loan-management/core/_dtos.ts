@@ -23,4 +23,5 @@ export interface LoanReminderMessageDto {
   receiverName: string;
   receiverId: number;
   message: string;
+  destination: string;
 }

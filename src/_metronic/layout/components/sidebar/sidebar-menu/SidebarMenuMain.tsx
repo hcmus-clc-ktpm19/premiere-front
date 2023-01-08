@@ -29,7 +29,7 @@ const SidebarMenuMain = () => {
       const messageToParse = JSON.parse(lastMessage);
       // check if we have a message and if it's for the current user
       if (currentUser?.id === messageToParse.receiverId) {
-        setNotification(true, messageToParse.message, type, onClose);
+        setNotification(true, messageToParse.message, type, onClose, messageToParse.destination);
       }
       if (messageToParse.action === WebSocketAction.DEPOSIT_MONEY) {
         setNotification(true, messageToParse.message, type, onClose);
@@ -127,6 +127,7 @@ const SidebarMenuMain = () => {
           <SidebarMenuItem to='/crafted/pages/wizards/vertical' title='Vertical' hasBullet={true} />
         </SidebarMenuItemWithSub>
       </SidebarMenuItemWithSub>
+
       <SidebarMenuItemWithSub
         to='/crafted/accounts'
         title='Accounts'
@@ -135,6 +136,7 @@ const SidebarMenuMain = () => {
         <SidebarMenuItem to='/crafted/account/overview' title='Overview' hasBullet={true} />
         <SidebarMenuItem to='/crafted/account/settings' title='Settings' hasBullet={true} />
       </SidebarMenuItemWithSub>
+
       <SidebarMenuItemWithSub
         to='/error'
         title='Errors'
@@ -143,6 +145,7 @@ const SidebarMenuMain = () => {
         <SidebarMenuItem to='/error/404' title='Error 404' hasBullet={true} />
         <SidebarMenuItem to='/error/500' title='Error 500' hasBullet={true} />
       </SidebarMenuItemWithSub>
+
       <SidebarMenuItemWithSub
         to='/crafted/widgets'
         title='Widgets'
@@ -166,16 +169,32 @@ const SidebarMenuMain = () => {
           <SidebarMenuItem
             to='/apps/user-management/users'
             icon='/media/icons/duotune/general/gen051.svg'
-            title='User management'
+            title='User Management'
             fontIcon='bi-layers'
           />
           <SidebarMenuItem
             to='/apps/deposit-management/deposit-money'
             icon='/media/icons/duotune/finance/fin010.svg'
-            title='Deposit money'
+            title='Deposit Money'
             fontIcon='bi-layers'
           />
         </>
+      )}
+
+      {currentUser?.role === PremiereRole.PREMIERE_ADMIN && (
+          <>
+            <div className='menu-item'>
+              <div className='menu-content pt-8 pb-2'>
+                <span className='menu-section text-muted text-uppercase fs-8 ls-1'>Admin</span>
+              </div>
+            </div>
+            <SidebarMenuItem
+                to='/apps/admin-management/employees'
+                title='Employee Management'
+                fontIcon='bi-archive'
+                icon='/media/icons/duotune/communication/com014.svg'>
+            </SidebarMenuItem>
+          </>
       )}
     </>
   );

@@ -32,10 +32,15 @@ const SidebarLogo = () => {
               src={toAbsoluteUrl('/media/logos/default.svg')}
               className='h-25px app-sidebar-logo-default theme-light-show'
             />
+            {/*<img*/}
+            {/*  alt='Logo'*/}
+            {/*  src={toAbsoluteUrl('/media/logos/default-dark.svg')}*/}
+            {/*  className='h-25px app-sidebar-logo-default theme-dark-show'*/}
+            {/*/>*/}
             <img
-              alt='Logo'
-              src={toAbsoluteUrl('/media/logos/default-dark.svg')}
-              className='h-25px app-sidebar-logo-default theme-dark-show'
+                alt='Logo'
+                src={toAbsoluteUrl('/media/logos/premiere-logo-2.svg')}
+                className='h-25px app-sidebar-logo-default theme-dark-show'
             />
           </>
         )}

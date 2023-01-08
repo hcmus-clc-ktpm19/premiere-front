@@ -2,51 +2,59 @@ import axios, { AxiosResponse } from 'axios';
 import { ID, Response } from '@_metronic/helpers';
 import { User, UsersQueryResponse } from './_models';
 import { ResponseDto, UserDto } from '@/app/modules/apps/user-management/users-list/core/dtos';
+import { CustomerQueryResponse } from '@/app/modules/apps/user-management/users-list/core/_models';
+import { ErrorDto, FullInfoUserDto } from '@/app/models/model';
 import { REGISTER_CUSTOMER_URL, REGISTER_EMPLOYEE_URL } from '@/app/modules/auth/core/_requests';
 
 const PREMIERE_API_URL = import.meta.env.VITE_PREMIERE_API_URL;
-const GET_USERS_URL = `${PREMIERE_API_URL}/users/query`;
-const USER_URL = `${PREMIERE_API_URL}/user`;
+const GET_CUSTOMERS_URL = `${PREMIERE_API_URL}/auth/get-customers`;
+const CUSTOMER_URL = `${PREMIERE_API_URL}/auth/save-customer`;
+const CREDIT_CARD_URL = `${PREMIERE_API_URL}/credit-card`;
 
-const getUsers = (query: string): Promise<UsersQueryResponse> => {
+const getCustomers = (): Promise<CustomerQueryResponse> => {
   return axios
-    .get(`${GET_USERS_URL}?${query}`)
-    .then((d: AxiosResponse<UsersQueryResponse>) => d.data);
+    .get(`${GET_CUSTOMERS_URL}`)
+    .then((response: AxiosResponse<CustomerQueryResponse>) => response.data);
 };
 
-const getUserById = (id: ID): Promise<UserDto | undefined> => {
+const getCustomerById = (id: number | null | undefined): Promise<FullInfoUserDto | ErrorDto> => {
   return axios
-    .get(`${USER_URL}/${id}`)
-    .then((response: AxiosResponse<Response<UserDto>>) => response.data)
-    .then((response: Response<UserDto>) => response.data);
+    .get(`${GET_CUSTOMERS_URL}/${id}`)
+    .then((response: AxiosResponse<FullInfoUserDto | ErrorDto>) => {
+      if (response.status === 202) {
+        const res = response.data as ErrorDto;
+        return Promise.reject(res);
+      }
+      return response.data as FullInfoUserDto;
+    })
 };
 
-const createUser = (user: UserDto): Promise<ResponseDto> => {
-  if (user.role === 'CUSTOMER') {
-    return axios
-      .post(REGISTER_CUSTOMER_URL, user)
-      .then((response: AxiosResponse<ResponseDto>) => response.data);
-  } else {
-    return axios
-      .post(REGISTER_EMPLOYEE_URL, user)
-      .then((response: AxiosResponse<ResponseDto>) => response.data);
-  }
-};
-
-const updateUser = (user: User): Promise<User | undefined> => {
+const createCustomer = (customer: FullInfoUserDto): Promise<number> => {
   return axios
-    .post(`${USER_URL}/${user.id}`, user)
-    .then((response: AxiosResponse<Response<User>>) => response.data)
-    .then((response: Response<User>) => response.data);
+  .post(CUSTOMER_URL, customer)
+  .then((response: AxiosResponse<number>) => response.data);
 };
 
-const deleteUser = (userId: ID): Promise<void> => {
-  return axios.delete(`${USER_URL}/${userId}`).then(() => {});
+const updateCustomer = (customer: FullInfoUserDto): Promise<number> => {
+  return axios
+  .post(CUSTOMER_URL, customer)
+  .then((response: AxiosResponse<number>) => response.data);
+};
+
+const disableCustomerCreditCard = (userCreditCardNumber: string): Promise<void> => {
+  return axios.get(`${CREDIT_CARD_URL}/disable/${userCreditCardNumber}`).then(() => {});
 };
 
 const deleteSelectedUsers = (userIds: Array<ID>): Promise<void> => {
-  const requests = userIds.map((id) => axios.delete(`${USER_URL}/${id}`));
+  const requests = userIds.map((id) => axios.delete(`${CUSTOMER_URL}/${id}`));
   return axios.all(requests).then(() => {});
 };
 
-export { getUsers, deleteUser, deleteSelectedUsers, getUserById, createUser, updateUser };
+export {
+  getCustomers,
+  disableCustomerCreditCard,
+  deleteSelectedUsers,
+  getCustomerById,
+  createCustomer,
+  updateCustomer
+};

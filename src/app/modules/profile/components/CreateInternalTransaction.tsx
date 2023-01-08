@@ -124,6 +124,8 @@ const CreateInternalTransaction: React.FC = () => {
               bankName: values.receiverBankName
             });
           } else {
+            const notificationType: AlertColor = "success";
+            setNotification(true, 'Transfer money success. Redirecting to transactions page...', notificationType, () => {});
             // wait 3s then navigate to transactions page
             setTimeout(() => {
               navigate('/crafted/pages/profile/transactions');
@@ -155,6 +157,8 @@ const CreateInternalTransaction: React.FC = () => {
     setModalShow(false);
     profileService.insertReceiver(receiver).then((data: ReceiverDto) => {
       console.log("receiver added", data);
+      const notificationType: AlertColor = "success";
+      setNotification(true, 'Transfer money success. Redirecting to transactions page...', notificationType, () => {});
       // wait 3s then navigate to transactions page
       setTimeout(() => {
         navigate('/crafted/pages/profile/transactions');
@@ -166,6 +170,8 @@ const CreateInternalTransaction: React.FC = () => {
 
   const onAddReceiverCancel = () => {
     setModalShow(false);
+    const notificationType: AlertColor = "success";
+    setNotification(true, 'Transfer money success. Redirecting to transactions page...', notificationType, () => {});
     // wait 3s then navigate to transactions page
     setTimeout(() => {
       navigate('/crafted/pages/profile/transactions');
