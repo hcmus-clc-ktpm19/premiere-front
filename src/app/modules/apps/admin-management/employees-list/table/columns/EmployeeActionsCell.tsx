@@ -76,7 +76,9 @@ const EmployeeActionsCell: FC<Props> = ({id, username, enabled}) => {
                 data-kt-users-table-filter='delete_row'
                 onClick={async () => await deleteItem.mutateAsync()}
             >
-              Change Account Status
+              {
+                enabled ? 'Disable' : 'Enable'
+              }
             </a>
           </div>
           {/* end::Menu item */}

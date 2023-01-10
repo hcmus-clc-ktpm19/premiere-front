@@ -63,6 +63,14 @@ const UserActionsCell: FC<Props> = ({id}) => {
         {/* begin::Menu item */}
         <div className='menu-item px-3'>
           <a className='menu-link px-3' onClick={openEditModal}>
+            Transactions
+          </a>
+        </div>
+        {/* end::Menu item */}
+
+        {/* begin::Menu item */}
+        <div className='menu-item px-3'>
+          <a className='menu-link px-3' onClick={openEditModal}>
             Edit
           </a>
         </div>

@@ -11,9 +11,10 @@ interface Props {
   description: string;
   date: string;
   budget: string;
+  type: string;
 }
 
-const Card6: FC<Props> = ({badgeColor, status, transactionType, description, date, budget}) => {
+const Card6: FC<Props> = ({badgeColor, status, transactionType, description, date, budget, type}) => {
   return (
     <Link
       to='/crafted/pages/profile/overview'
@@ -34,7 +35,7 @@ const Card6: FC<Props> = ({badgeColor, status, transactionType, description, dat
       </div>
 
       <div className='card-body p-9'>
-        <div className='fs-3 fw-bolder text-dark'>{transactionType}</div>
+        <div className='fs-3 fw-bolder text-dark'>{type} - {transactionType}</div>
         <p className='text-gray-400 fw-bold fs-5 mt-1 mb-7'>{description}</p>
 
         <div className='d-flex flex-wrap justify-content-between mb-5'>

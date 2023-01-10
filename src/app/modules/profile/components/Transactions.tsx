@@ -38,6 +38,13 @@ export function Transactions() {
     { refetchOnWindowFocus: false }
   );
 
+  const { data: currentUserCardNumber } = useQuery(
+      'transactions-credit-card',
+      () => ProfileService.getCreditCardByUserId(currentUser?.id as number),
+      { refetchOnWindowFocus: false }
+  );
+  console.log('res', { res }, {currentUserCardNumber });
+
   const typeRef = useRef<HTMLSelectElement>(null);
 
   const handleOnRefreshClick: MouseEventHandler<HTMLButtonElement> = async () => {
@@ -124,6 +131,7 @@ export function Transactions() {
                   style: 'currency',
                   currency: 'VND',
                 })}
+                type={item.senderCreditCardNumber === currentUserCardNumber?.cardNumber ? 'Outgoing' : 'Incoming'}
               />
             </div>
           );
