@@ -8,6 +8,7 @@ import {useQueryResponse} from '../../core/QueryResponseProvider';
 import {disableCustomerCreditCard} from '../../core/_requests';
 import {ProfileService as profileService} from "@/app/modules/profile/core/_requests";
 import useNotification from "@/app/modules/notifications/useNotification";
+import {useNavigate} from "react-router-dom";
 
 type Props = {
   id: ID;
@@ -18,6 +19,7 @@ const UserActionsCell: FC<Props> = ({id}) => {
   const {query} = useQueryResponse();
   const queryClient = useQueryClient();
   const {setNotification} = useNotification();
+  const navigate = useNavigate();
 
   useEffect(() => {
     MenuComponent.reinitialization();
@@ -26,6 +28,10 @@ const UserActionsCell: FC<Props> = ({id}) => {
   const openEditModal = () => {
     setItemIdForUpdate(id);
   };
+
+  const onTransactionBtnHandler = () => {
+    navigate(`/apps/user-management/users/transactions?userId=${id}`);
+  }
 
   const deleteItem = useMutation(() => {
     console.log('disable', id);
@@ -62,7 +68,7 @@ const UserActionsCell: FC<Props> = ({id}) => {
       >
         {/* begin::Menu item */}
         <div className='menu-item px-3'>
-          <a className='menu-link px-3' onClick={openEditModal}>
+          <a className='menu-link px-3' onClick={onTransactionBtnHandler}>
             Transactions
           </a>
         </div>

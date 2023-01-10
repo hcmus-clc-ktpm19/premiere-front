@@ -12,12 +12,13 @@ import { useQuery } from 'react-query';
 import {useNavigate} from "react-router-dom";
 import {KTSVG} from "@_metronic/helpers";
 
-const badgeColors = {
+export const badgeColors = {
   COMPLETED: 'success',
   CHECKING: 'warning',
+  FAILED: 'danger',
 };
 
-const tiles = {
+export const tiles = {
   MONEY_TRANSFER: 'Money Transfer',
   LOAN: 'Loan',
 };
