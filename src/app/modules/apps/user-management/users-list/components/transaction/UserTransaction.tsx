@@ -104,11 +104,13 @@ const UserTransaction = () => {
                       transactionType={tiles[item.type]}
                       description={item.transactionRemark}
                       date={item.createdAt.toString()}
-                      budget={item.amount.toLocaleString('it-IT', {
+                      budget={(item.amount + item.fee).toLocaleString('it-IT', {
                         style: 'currency',
                         currency: 'VND',
                       })}
                       type={item.senderCreditCardNumber === customerCardNumber?.cardNumber ? 'Outgoing' : 'Incoming'}
+                      senderCreditCard={item.senderCreditCardNumber}
+                      receiverCreditCard={item.receiverCreditCardNumber}
                   />
                 </div>
             );

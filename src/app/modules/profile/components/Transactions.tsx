@@ -128,11 +128,13 @@ export function Transactions() {
                 transactionType={tiles[item.type]}
                 description={item.transactionRemark}
                 date={item.createdAt.toString()}
-                budget={item.amount.toLocaleString('it-IT', {
+                budget={(item.amount + item.fee).toLocaleString('it-IT', {
                   style: 'currency',
                   currency: 'VND',
                 })}
                 type={item.senderCreditCardNumber === currentUserCardNumber?.cardNumber ? 'Outgoing' : 'Incoming'}
+                receiverCreditCard={item.receiverCreditCardNumber}
+                senderCreditCard={item.senderCreditCardNumber}
               />
             </div>
           );
