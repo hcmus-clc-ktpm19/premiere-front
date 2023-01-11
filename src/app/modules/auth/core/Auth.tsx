@@ -11,7 +11,7 @@ import {
 import { LayoutSplashScreen } from '@_metronic/layout/core';
 import { AuthModel, UserModel } from './_models';
 import * as authHelper from './AuthHelpers';
-import { getUserByToken } from './_requests';
+import { AuthService, getUserByToken } from './_requests';
 import { WithChildren } from '@_metronic/helpers';
 
 type AuthContextProps = {
@@ -24,9 +24,12 @@ type AuthContextProps = {
 
 const initAuthContextPropsState = {
   auth: authHelper.getAuth(),
+  // eslint-disable-next-line @typescript-eslint/no-empty-function
   saveAuth: () => {},
   currentUser: undefined,
+  // eslint-disable-next-line @typescript-eslint/no-empty-function
   setCurrentUser: () => {},
+  // eslint-disable-next-line @typescript-eslint/no-empty-function
   logout: () => {},
 };
 
@@ -75,12 +78,17 @@ const AuthInit: FC<WithChildren> = ({ children }) => {
   const [showSplashScreen, setShowSplashScreen] = useState(true);
   // We should request user by authToken (IN OUR EXAMPLE IT'S API_TOKEN) before rendering the application
   useEffect(() => {
-    const requestUser = async (apiToken: string) => {
+    const requestUser = async () => {
       try {
-        if (!didRequest.current) {
-          const { data } = await getUserByToken();
-          if (data) {
-            setCurrentUser(data);
+        if (auth?.refresh_token) {
+          const { data: refreshAuth } = await AuthService.getToken(auth.refresh_token);
+          saveAuth(refreshAuth);
+
+          if (!didRequest.current) {
+            const res = await getUserByToken();
+            if (res) {
+              setCurrentUser(res.data);
+            }
           }
         }
       } catch (error) {
@@ -96,7 +104,7 @@ const AuthInit: FC<WithChildren> = ({ children }) => {
     };
 
     if (auth && auth.access_token) {
-      requestUser(auth.access_token);
+      requestUser();
     } else {
       logout();
       setShowSplashScreen(false);
