@@ -9,7 +9,7 @@ import axios, { AxiosResponse } from 'axios';
 import * as Yup from 'yup';
 import { LoanReminderDto, LoanReminderMessageDto } from '@/app/modules/loan-management/core/_dtos';
 
-const API_URL: string = process.env.PREMIERE_API_URL!;
+const API_URL: string = import.meta.env.VITE_PREMIERE_API_URL;
 const LOAN_REMINDER_API = `${API_URL}/loan-management`;
 const CREDIT_CARD_API = `${API_URL}/credit-card`;
 const LOAN_REMINDER_SOCKET_API = `${API_URL}/notification`;

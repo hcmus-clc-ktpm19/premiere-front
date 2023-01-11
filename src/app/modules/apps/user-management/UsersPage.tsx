@@ -1,8 +1,7 @@
-import {Navigate, Outlet, Route, Routes} from 'react-router-dom';
-import {PageLink, PageTitle} from '@_metronic/layout/core';
-import {UsersListWrapper} from './users-list/UsersList';
-import UserTransaction
-  from "@/app/modules/apps/user-management/users-list/components/transaction/UserTransaction";
+import { Navigate, Outlet, Route, Routes } from 'react-router-dom';
+import { PageLink, PageTitle } from '@_metronic/layout/core';
+import { UsersListWrapper } from './users-list/UsersList';
+import { Transactions } from '@/app/modules/profile/components/Transactions';
 
 const usersBreadcrumbs: Array<PageLink> = [
   {
@@ -33,13 +32,13 @@ const UsersPage = () => {
           }
         />
         <Route
-            path='users/transactions'
-            element={
-              <>
-                <PageTitle breadcrumbs={usersBreadcrumbs}>User transactions</PageTitle>
-                <UserTransaction />
-              </>
-            }
+          path='users/transactions'
+          element={
+            <>
+              <PageTitle breadcrumbs={usersBreadcrumbs}>User transactions</PageTitle>
+              <Transactions />
+            </>
+          }
         />
       </Route>
       <Route index element={<Navigate to='/apps/user-management/users' />} />

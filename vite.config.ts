@@ -1,9 +1,9 @@
-import {defineConfig, loadEnv} from 'vite';
+import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
 import path from 'path';
 
 // https://vitejs.dev/config/
-export default ({mode}: any) => {
+export default () => {
   // Load app-level env vars to node-level env vars.
   return defineConfig({
     plugins: [react()],
@@ -17,9 +17,6 @@ export default ({mode}: any) => {
     },
     define: {
       global: 'window',
-      process: {
-        env: {...loadEnv(mode, process.cwd(), '')},
-      },
     },
     resolve: {
       alias: {

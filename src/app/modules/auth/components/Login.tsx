@@ -9,7 +9,7 @@ import { useAuth } from '../core/Auth';
 import ReCAPTCHA from 'react-google-recaptcha';
 import { UserModel } from '@/app/modules/auth';
 
-const RECAPTCHA_SITE_KEY: string = process.env.GOOGLE_RECAPTCHA_SITE_KEY!;
+const RECAPTCHA_SITE_KEY: string = import.meta.env.VITE_GOOGLE_RECAPTCHA_SITE_KEY;
 
 // const phoneRegExp = /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/
 

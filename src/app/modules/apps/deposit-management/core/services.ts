@@ -4,7 +4,7 @@ import * as Yup from 'yup';
 import CreditCardNotFoundException from '@/app/models/exceptions/CreditCardNotFoundException';
 
 // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-const API_URL: string = process.env.PREMIERE_API_URL!;
+const API_URL: string = import.meta.env.VITE_PREMIERE_API_URL;
 const CREDIT_CARD_API = `${API_URL}/credit-card`;
 const WEB_SOCKET_API = `${API_URL}/notification`;
 

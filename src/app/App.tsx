@@ -7,7 +7,7 @@ import { AuthInit } from './modules/auth';
 import { StompSessionProvider } from 'react-stomp-hooks';
 import { NotificationContextProvider } from '@/app/modules/notifications/NotificationContextProvider';
 
-const PREMIERE_SOCKET_ENDPOINT: string = process.env.PREMIERE_SOCKET_ENDPOINT!;
+const PREMIERE_SOCKET_ENDPOINT: string = import.meta.env.VITE_PREMIERE_SOCKET_ENDPOINT;
 const App = () => {
   return (
     <Suspense fallback={<LayoutSplashScreen />}>

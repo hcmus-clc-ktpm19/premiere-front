@@ -1,9 +1,9 @@
-import axios, {AxiosResponse} from 'axios';
-import {ID} from '@_metronic/helpers';
-import {ErrorDto, FullInfoUserDto} from "@/app/models/model";
-import {CustomerQueryResponse} from "@/app/modules/apps/user-management/users-list/core/_models";
+import axios, { AxiosResponse } from 'axios';
+import { ID } from '@_metronic/helpers';
+import { ErrorDto, FullInfoUserDto } from '@/app/models/model';
+import { CustomerQueryResponse } from '@/app/modules/apps/user-management/users-list/core/_models';
 
-const PREMIERE_API_URL = process.env.PREMIERE_API_URL!;
+const PREMIERE_API_URL = import.meta.env.VITE_PREMIERE_API_URL;
 const GET_CUSTOMERS_URL = `${PREMIERE_API_URL}/auth/get-customers`;
 const CUSTOMER_URL = `${PREMIERE_API_URL}/auth/save-customer`;
 const CREDIT_CARD_URL = `${PREMIERE_API_URL}/credit-card`;
@@ -23,19 +23,19 @@ const getCustomerById = (id: number | null | undefined): Promise<FullInfoUserDto
         return Promise.reject(res);
       }
       return response.data as FullInfoUserDto;
-    })
+    });
 };
 
 const createCustomer = (customer: FullInfoUserDto): Promise<number> => {
   return axios
-  .post(CUSTOMER_URL, customer)
-  .then((response: AxiosResponse<number>) => response.data);
+    .post(CUSTOMER_URL, customer)
+    .then((response: AxiosResponse<number>) => response.data);
 };
 
 const updateCustomer = (customer: FullInfoUserDto): Promise<number> => {
   return axios
-  .post(CUSTOMER_URL, customer)
-  .then((response: AxiosResponse<number>) => response.data);
+    .post(CUSTOMER_URL, customer)
+    .then((response: AxiosResponse<number>) => response.data);
 };
 
 const disableCustomerCreditCard = (userCreditCardNumber: string): Promise<void> => {
@@ -53,5 +53,5 @@ export {
   deleteSelectedUsers,
   getCustomerById,
   createCustomer,
-  updateCustomer
+  updateCustomer,
 };
