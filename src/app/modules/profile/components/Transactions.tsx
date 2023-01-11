@@ -10,7 +10,7 @@ import {
 import { Card6 } from '@_metronic/partials/content/cards/Card6';
 import { useAuth } from '@/app/modules/auth';
 import { useQuery } from 'react-query';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useSearchParams } from 'react-router-dom';
 import { KTSVG } from '@_metronic/helpers';
 
 export const badgeColors = {
@@ -38,7 +38,11 @@ const styles = {
 };
 
 export function Transactions() {
+  const [searchParams] = useSearchParams();
+  const userIdParam: string | null = searchParams.get('userId');
   const { currentUser } = useAuth();
+  const userId: number = userIdParam ? parseInt(userIdParam) : (currentUser?.id as number);
+
   const navigate = useNavigate();
   const typeRef = useRef<HTMLSelectElement>(null);
 
@@ -53,14 +57,14 @@ export function Transactions() {
     refetch,
     isLoading: transactionsAreFetching,
   } = useQuery(
-    `transactions-${typeRef.current?.value}-${paginationData.currPage}-${currentUser?.id}`,
-    () => ProfileService.getTransactionByCustomerId(currentUser?.id as number, transactionCriteria),
+    `transactions-${typeRef.current?.value}-${paginationData.currPage}-${userId}`,
+    () => ProfileService.getTransactionByCustomerId(userId, transactionCriteria),
     { refetchOnWindowFocus: false }
   );
 
   const { data: currentUserCardNumber } = useQuery(
-    `transactions-credit-card-${currentUser?.id}`,
-    () => ProfileService.getCreditCardByUserId(currentUser?.id as number),
+    `transactions-credit-card-${userId}`,
+    () => ProfileService.getCreditCardByUserId(userId),
     { refetchOnWindowFocus: false }
   );
 
@@ -110,7 +114,7 @@ export function Transactions() {
     <>
       <div className='d-flex flex-wrap flex-stack mb-6'>
         <h3 className='fw-bolder mx-2 my-2'>
-          My Transactions
+          {userId ? "Customer's Transactions" : 'My Transactions'}
           <span className='fs-6 text-gray-400 fw-bold ms-1'>30 Days</span>
         </h3>
 
@@ -137,14 +141,16 @@ export function Transactions() {
             title='refresh'>
             Refetch
           </button>
-          <button
-            onClick={handleOnCreateTransactionClick}
-            className='btn btn-danger btn-sm'
-            data-bs-toggle='tooltip'
-            title='create new transaction'>
-            <KTSVG path='/media/icons/duotune/arrows/arr075.svg' className='svg-icon-2' />
-            Create Transaction
-          </button>
+          {!userId && (
+            <button
+              onClick={handleOnCreateTransactionClick}
+              className='btn btn-danger btn-sm'
+              data-bs-toggle='tooltip'
+              title='create new transaction'>
+              <KTSVG path='/media/icons/duotune/arrows/arr075.svg' className='svg-icon-2' />
+              Create Transaction
+            </button>
+          )}
         </div>
       </div>
 

@@ -1,10 +1,9 @@
-import React, {FC} from 'react';
-import {Link} from 'react-router-dom';
-import {toAbsoluteUrl} from '@_metronic/helpers';
-import {TransactionStatus} from '@/app/models/model';
+import React, { FC } from 'react';
+import { toAbsoluteUrl } from '@_metronic/helpers';
+import { TransactionStatus } from '@/app/models/model';
 import moment from 'moment';
-import TransactionDetailsModal
-  from "@_metronic/partials/modals/transactions/TransactionDetailsModal";
+import TransactionDetailsModal from '@_metronic/partials/modals/transactions/TransactionDetailsModal';
+import { NavLink } from 'react-bootstrap';
 
 interface Props {
   badgeColor: string;
@@ -18,24 +17,27 @@ interface Props {
   receiverCreditCard: string;
 }
 
-const Card6: FC<Props> = ({badgeColor, status,
-                            transactionType, description,
-                            date, budget, type,
-                            receiverCreditCard, senderCreditCard}) => {
+const Card6: FC<Props> = ({
+  badgeColor,
+  status,
+  transactionType,
+  description,
+  date,
+  budget,
+  type,
+  receiverCreditCard,
+  senderCreditCard,
+}) => {
   const [isShow, setIsShow] = React.useState<boolean>(false);
 
   const onCardClick = () => {
     console.log('clicked');
     setIsShow(true);
-  }
+  };
 
   return (
     <>
-      <Link
-          to='#'
-          onClick={onCardClick}
-          className='card border border-2 border-gray-300 border-hover'
-      >
+      <NavLink onClick={onCardClick} className='card border border-2 border-gray-300 border-hover'>
         <div className='card-header border-0 pt-9'>
           <div className='card-title m-0'>
             <div className='symbol symbol-50px w-50px bg-light'>
@@ -44,47 +46,54 @@ const Card6: FC<Props> = ({badgeColor, status,
           </div>
 
           <div className='card-toolbar'>
-          <span className={`badge badge-light-${badgeColor} fw-bolder me-auto px-4 py-3`}>
-            {status}
-          </span>
+            <span className={`badge badge-light-${badgeColor} fw-bolder me-auto px-4 py-3`}>
+              {status}
+            </span>
           </div>
         </div>
 
         <div className='card-body p-9'>
-          <div className='fs-3 fw-bolder text-dark'>{type} - {transactionType}</div>
+          <div className='fs-3 fw-bolder text-dark'>
+            {type} - {transactionType}
+          </div>
           <p className='text-gray-400 fw-bold fs-5 mt-1 mb-7'>{description}</p>
 
           <div className='d-flex flex-wrap justify-content-between mb-5'>
-            <div className='border border-gray-300 border-dashed rounded min-w-125px py-3 px-4 me-7 mb-3' style={{flex: '1'}}>
+            <div
+              className='border border-gray-300 border-dashed rounded min-w-125px py-3 px-4 me-7 mb-3'
+              style={{ flex: '1' }}>
               <div className='fs-6 text-gray-800 fw-bolder'>Created At</div>
               <div className='fw-bold text-gray-400'>
                 {moment(date).local().format('h:mm:ss A')}
-                <br/>
+                <br />
                 {moment(date).local().format('ll')}
               </div>
             </div>
 
-            <div className='border border-gray-300 border-dashed rounded min-w-125px py-3 px-4 mb-3' style={{flex: '1'}}>
+            <div
+              className='border border-gray-300 border-dashed rounded min-w-125px py-3 px-4 mb-3'
+              style={{ flex: '1' }}>
               <div className='fs-6 text-gray-800 fw-bolder'>Total Amount</div>
-              <div className='fw-bold text-gray-400'>
-                {budget}
-              </div>
+              <div className='fw-bold text-gray-400'>{budget}</div>
             </div>
           </div>
         </div>
-      </Link>
-      <TransactionDetailsModal isShow={isShow} setIsShow={setIsShow}
-                               badgeColor={badgeColor}
-                               status={status}
-                               transactionType={transactionType}
-                               description={description}
-                               date={date}
-                               budget={budget}
-                               type={type}
-                               receiverCreditCard={receiverCreditCard}
-                               senderCreditCard={senderCreditCard}/>
+      </NavLink>
+      <TransactionDetailsModal
+        isShow={isShow}
+        setIsShow={setIsShow}
+        badgeColor={badgeColor}
+        status={status}
+        transactionType={transactionType}
+        description={description}
+        date={date}
+        budget={budget}
+        type={type}
+        receiverCreditCard={receiverCreditCard}
+        senderCreditCard={senderCreditCard}
+      />
     </>
   );
 };
 
-export {Card6};
+export { Card6 };
