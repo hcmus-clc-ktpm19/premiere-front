@@ -136,7 +136,7 @@ const TransactionDetailsModal: FC<Props> = ({
                             Transaction Type
                           </a>
                           <div
-                              className='text-gray-400 fw-semibold fs-7'>{type} - {transactionType}</div>
+                              className='text-gray-400 fw-semibold fs-7'>{type}  {transactionType}</div>
                         </div>
                         {/* end::Title */}
                       </div>

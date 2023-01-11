@@ -194,6 +194,13 @@ const SidebarMenuMain = () => {
                 fontIcon='bi-archive'
                 icon='/media/icons/duotune/communication/com014.svg'>
             </SidebarMenuItem>
+
+            <SidebarMenuItem
+                to='/apps/admin-management/transactions'
+                title='Transaction Management'
+                fontIcon='bi-archive'
+                icon='/media/icons/duotune/graphs/gra001.svg'>
+            </SidebarMenuItem>
           </>
       )}
     </>

@@ -175,8 +175,8 @@ export function Transactions() {
                   })}
                   type={
                     item.senderCreditCardNumber === currentUserCardNumber?.cardNumber
-                      ? 'Outgoing'
-                      : 'Incoming'
+                        ? 'Outgoing - '
+                        : 'Incoming - '
                   }
                   receiverCreditCard={item.receiverCreditCardNumber}
                   senderCreditCard={item.senderCreditCardNumber}

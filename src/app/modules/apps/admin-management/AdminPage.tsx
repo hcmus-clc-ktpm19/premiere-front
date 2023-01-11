@@ -4,6 +4,8 @@ import {Navigate, Outlet, Route, Routes} from "react-router-dom";
 import {
   EmployeesListWrapper
 } from "@/app/modules/apps/admin-management/employees-list/ListOfEmployees";
+import ListOfTransactions
+  from "@/app/modules/apps/admin-management/transactions-list/ListOfTransactions";
 
 const loanBreadCrumbs: Array<PageLink> = [
   {
@@ -30,6 +32,15 @@ const AdminPage = () => {
                   <>
                     <PageTitle breadcrumbs={loanBreadCrumbs}>Employees List</PageTitle>
                     <EmployeesListWrapper />
+                  </>
+                }
+            />
+            <Route
+                path='/transactions'
+                element={
+                  <>
+                    <PageTitle breadcrumbs={loanBreadCrumbs}>Transactions List</PageTitle>
+                    <ListOfTransactions />
                   </>
                 }
             />

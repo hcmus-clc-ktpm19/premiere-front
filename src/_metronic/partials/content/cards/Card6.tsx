@@ -54,7 +54,7 @@ const Card6: FC<Props> = ({
 
         <div className='card-body p-9'>
           <div className='fs-3 fw-bolder text-dark'>
-            {type} - {transactionType}
+            {type}  {transactionType}
           </div>
           <p className='text-gray-400 fw-bold fs-5 mt-1 mb-7'>{description}</p>
 
