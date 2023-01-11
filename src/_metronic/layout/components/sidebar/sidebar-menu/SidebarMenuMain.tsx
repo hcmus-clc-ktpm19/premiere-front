@@ -158,8 +158,8 @@ const SidebarMenuMain = () => {
         <SidebarMenuItem to='/crafted/widgets/tables' title='Tables' hasBullet={true} />
         <SidebarMenuItem to='/crafted/widgets/feeds' title='Feeds' hasBullet={true} />
       </SidebarMenuItemWithSub>
-      {(currentUser?.role === PremiereRole.PREMIERE_ADMIN ||
-        currentUser?.role === PremiereRole.EMPLOYEE) && (
+      {
+        currentUser?.role === PremiereRole.EMPLOYEE && (
         <>
           <div className='menu-item'>
             <div className='menu-content pt-8 pb-2'>

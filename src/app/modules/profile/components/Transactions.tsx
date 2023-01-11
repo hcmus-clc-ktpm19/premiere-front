@@ -114,7 +114,7 @@ export function Transactions() {
     <>
       <div className='d-flex flex-wrap flex-stack mb-6'>
         <h3 className='fw-bolder mx-2 my-2'>
-          {userId ? "Customer's Transactions" : 'My Transactions'}
+          {userId === currentUser?.id ? 'My Transactions' : "Customer's Transactions" }
           <span className='fs-6 text-gray-400 fw-bold ms-1'>30 Days</span>
         </h3>
 
@@ -141,16 +141,18 @@ export function Transactions() {
             title='refresh'>
             Refetch
           </button>
-          {!userId && (
-            <button
-              onClick={handleOnCreateTransactionClick}
-              className='btn btn-danger btn-sm'
-              data-bs-toggle='tooltip'
-              title='create new transaction'>
-              <KTSVG path='/media/icons/duotune/arrows/arr075.svg' className='svg-icon-2' />
-              Create Transaction
-            </button>
-          )}
+          {
+            userId === currentUser?.id && (
+                  <button
+                      onClick={handleOnCreateTransactionClick}
+                      className='btn btn-danger btn-sm'
+                      data-bs-toggle='tooltip'
+                      title='create new transaction'>
+                    <KTSVG path='/media/icons/duotune/arrows/arr075.svg' className='svg-icon-2' />
+                    Create Transaction
+                  </button>
+              )
+          }
         </div>
       </div>
 

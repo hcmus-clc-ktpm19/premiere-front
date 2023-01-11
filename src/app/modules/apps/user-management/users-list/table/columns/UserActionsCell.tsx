@@ -1,5 +1,5 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import {FC, useEffect} from 'react';
+import React, {FC, useEffect} from 'react';
 import {useMutation, useQueryClient} from 'react-query';
 import {MenuComponent} from '@_metronic/assets/ts/components';
 import {ID, KTSVG, QUERIES} from '@_metronic/helpers';
@@ -9,6 +9,7 @@ import {disableCustomerCreditCard} from '../../core/_requests';
 import {ProfileService as profileService} from "@/app/modules/profile/core/_requests";
 import useNotification from "@/app/modules/notifications/useNotification";
 import {useNavigate} from "react-router-dom";
+import {ConfirmModal} from "@_metronic/partials/modals/confirm/ConfirmModal";
 
 type Props = {
   id: ID;
@@ -20,6 +21,7 @@ const UserActionsCell: FC<Props> = ({id}) => {
   const queryClient = useQueryClient();
   const {setNotification} = useNotification();
   const navigate = useNavigate();
+  const [isDisableModalOpen, setIsDisableModalOpen] = React.useState<boolean>(false);
 
   useEffect(() => {
     MenuComponent.reinitialization();
@@ -33,7 +35,16 @@ const UserActionsCell: FC<Props> = ({id}) => {
     navigate(`/apps/user-management/users/transactions?userId=${id}`);
   }
 
-  const deleteItem = useMutation(() => {
+  const onDisableBtnHandler = () => {
+    setIsDisableModalOpen(true);
+  }
+
+  const onConfirmDisable = async (value: any) => {
+    await disableUserCreditCard.mutateAsync();
+    setIsDisableModalOpen(false);
+  }
+
+  const disableUserCreditCard = useMutation(() => {
     console.log('disable', id);
     const userId = id as number;
     profileService.getCreditCardByUserId(userId).then((res) => {
@@ -87,7 +98,7 @@ const UserActionsCell: FC<Props> = ({id}) => {
           <a
             className='menu-link px-3'
             data-kt-users-table-filter='delete_row'
-            onClick={async () => await deleteItem.mutateAsync()}
+            onClick={onDisableBtnHandler}
           >
             Disable Card
           </a>
@@ -95,6 +106,15 @@ const UserActionsCell: FC<Props> = ({id}) => {
         {/* end::Menu item */}
       </div>
       {/* end::Menu */}
+      <ConfirmModal
+          isShow={isDisableModalOpen}
+          header={'Disable User Credit Card Confirmation'}
+          content={'Are you sure you want to disable this credit card?'}
+          onConfirm={onConfirmDisable}
+          onCancel={() => setIsDisableModalOpen(false)}
+          value={null}
+          isShowCancelBtn={true}
+      />
     </>
   );
 };
