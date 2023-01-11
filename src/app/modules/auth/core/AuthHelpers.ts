@@ -62,6 +62,7 @@ export function setupAxios(axios: any) {
     },
     (err: any) => Promise.reject(err)
   );
+
   axios.interceptors.response.use(
     (response: AxiosResponse) => response,
     async (error: AxiosError) => {
@@ -72,15 +73,13 @@ export function setupAxios(axios: any) {
             const { data: auth } = await AuthService.getToken(refreshToken);
             setAuth(auth);
           } else {
-            console.log('No refresh token from else');
             return Promise.reject(error);
           }
         } catch (e) {
-          console.log('No refresh token from catch');
           return Promise.reject(error);
         }
-    } else {
-      return Promise.reject(error);
+      } else {
+        return Promise.reject(error);
       }
     }
   );

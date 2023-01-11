@@ -7,11 +7,16 @@ const KEYCLOAK_ACCESS_TOKEN_URL: string = process.env.KEYCLOAK_ACCESS_TOKEN_URL!
 const KEYCLOAK_SCOPE: string = process.env.KEYCLOAK_SCOPE!;
 const KEYCLOAK_CLIENT_ID: string = process.env.KEYCLOAK_CLIENT_ID!;
 const KEYCLOAK_CLIENT_SECRET: string = process.env.KEYCLOAK_CLIENT_SECRET!;
-const KEYCLOAK_GRANT_TYPE: string = process.env.KEYCLOAK_GRANT_TYPE!;
 const PREMIERE_API_URL: string = process.env.PREMIERE_API_URL!;
 
-const keycloakAuthRequestAttributes = {
-  grant_type: KEYCLOAK_GRANT_TYPE,
+interface KeycloakAuthRequestAttributes {
+  grant_type?: string;
+  scope: string;
+  client_id: string;
+  client_secret: string;
+}
+
+const keycloakAuthRequestAttributes: KeycloakAuthRequestAttributes = {
   scope: KEYCLOAK_SCOPE,
   client_id: KEYCLOAK_CLIENT_ID,
   client_secret: KEYCLOAK_CLIENT_SECRET,
@@ -90,6 +95,7 @@ export const AuthService = {
   getUserByToken,
 
   loginKeycloak(username: string, password: string) {
+    keycloakAuthRequestAttributes.grant_type = 'password';
     return axios.post<AuthModel>(
       KEYCLOAK_ACCESS_TOKEN_URL,
       qs.stringify({

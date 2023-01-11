@@ -10,6 +10,7 @@
 
 # production
 /build
+/dist
 /src/app/models/model.ts
 
 # misc
@@ -31,3 +32,4 @@ yarn-error.log*
 *.njsproj
 *.sln
 *.sw?
+.vercel
