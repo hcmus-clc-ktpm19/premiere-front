@@ -1,6 +1,7 @@
 import React, { MouseEventHandler, useEffect, useRef, useState } from 'react';
 import { ProfileService } from '@/app/modules/profile/core/_requests';
 import {
+  MoneyTransferCriteria,
   PaginationDto,
   TransactionCriteriaDto,
   TransactionDto,
@@ -9,8 +10,8 @@ import {
 import { Card6 } from '@_metronic/partials/content/cards/Card6';
 import { useAuth } from '@/app/modules/auth';
 import { useQuery } from 'react-query';
-import {useNavigate} from "react-router-dom";
-import {KTSVG} from "@_metronic/helpers";
+import { useNavigate } from 'react-router-dom';
+import { KTSVG } from '@_metronic/helpers';
 
 export const badgeColors = {
   COMPLETED: 'success',
@@ -23,9 +24,23 @@ export const tiles = {
   LOAN: 'Loan',
 };
 
+const styles = {
+  borderRadius: '0.475rem',
+  boxShadow: '0 0 50px 0 rgb(82 63 105 / 15%)',
+  backgroundColor: '#fff',
+  color: '#7e8299',
+  fontWeight: '500',
+  margin: '0',
+  width: 'auto',
+  padding: '1rem 2rem',
+  top: 'calc(50% - 2rem)',
+  left: 'calc(50% - 4rem)',
+};
+
 export function Transactions() {
   const { currentUser } = useAuth();
   const navigate = useNavigate();
+  const typeRef = useRef<HTMLSelectElement>(null);
 
   const [paginationData, setPaginationData] = React.useState<PaginationDto>(
     ProfileService.paginationInit
@@ -33,34 +48,47 @@ export function Transactions() {
   const [paginationArray] = useState(Array.from({ length: 3 }, (_, i) => i + 1));
   const [transactionCriteria, setTransactionCriteria] = useState<TransactionCriteriaDto>({});
 
-  const { data: res, refetch } = useQuery(
-    `transactions-${paginationData.currPage}`,
+  const {
+    data: res,
+    refetch,
+    isLoading: transactionsAreFetching,
+  } = useQuery(
+    `transactions-${typeRef.current?.value}-${paginationData.currPage}-${currentUser?.id}`,
     () => ProfileService.getTransactionByCustomerId(currentUser?.id as number, transactionCriteria),
     { refetchOnWindowFocus: false }
   );
 
   const { data: currentUserCardNumber } = useQuery(
-      'transactions-credit-card',
-      () => ProfileService.getCreditCardByUserId(currentUser?.id as number),
-      { refetchOnWindowFocus: false }
+    `transactions-credit-card-${currentUser?.id}`,
+    () => ProfileService.getCreditCardByUserId(currentUser?.id as number),
+    { refetchOnWindowFocus: false }
   );
-  console.log('res', { res }, {currentUserCardNumber });
 
-  const typeRef = useRef<HTMLSelectElement>(null);
+  const handleOnRefreshClick: MouseEventHandler<HTMLButtonElement> = () => {
+    const currValue: string | undefined = typeRef.current?.value;
+    let transactionType: TransactionType | undefined;
+    let moneyTransferCriteria: MoneyTransferCriteria | undefined;
+    if (
+      MoneyTransferCriteria.OUTGOING === currValue ||
+      MoneyTransferCriteria.INCOMING === currValue
+    ) {
+      moneyTransferCriteria = currValue;
+    } else {
+      transactionType = currValue ? (currValue as TransactionType) : undefined;
+    }
 
-  const handleOnRefreshClick: MouseEventHandler<HTMLButtonElement> = async () => {
     setTransactionCriteria({
       ...transactionCriteria,
-      transactionType:
-        typeRef.current?.value === 'none' ? undefined : (typeRef.current?.value as TransactionType),
+      transactionType,
+      moneyTransferCriteria,
     });
   };
 
   const handleOnCreateTransactionClick: MouseEventHandler<HTMLButtonElement> = () => {
-    navigate("/crafted/pages/profile/create-transaction")
-  }
+    navigate('/crafted/pages/profile/create-transaction');
+  };
 
-  const handleOnPageClick = async (e: React.MouseEvent<HTMLLIElement>) => {
+  const handleOnPageClick = (e: React.MouseEvent<HTMLLIElement>) => {
     setTransactionCriteria({
       ...transactionCriteria,
       page: Number(e.currentTarget.innerText) - 1,
@@ -95,8 +123,10 @@ export function Transactions() {
               data-hide-search='true'
               className='form-select form-select-white form-select-sm'
               defaultValue='none'>
-              <option value='none'></option>
+              <option></option>
               <option value={TransactionType.MONEY_TRANSFER}>Money Transfer</option>
+              <option value={MoneyTransferCriteria.INCOMING}>Incoming</option>
+              <option value={MoneyTransferCriteria.OUTGOING}>Outgoing</option>
               <option value={TransactionType.LOAN}>Loan</option>
             </select>
           </div>
@@ -108,37 +138,45 @@ export function Transactions() {
             Refetch
           </button>
           <button
-              onClick={handleOnCreateTransactionClick}
-              className='btn btn-danger btn-sm'
-              data-bs-toggle='tooltip'
-              title='create new transaction'>
-            <KTSVG path='/media/icons/duotune/arrows/arr075.svg' className='svg-icon-2'/>
+            onClick={handleOnCreateTransactionClick}
+            className='btn btn-danger btn-sm'
+            data-bs-toggle='tooltip'
+            title='create new transaction'>
+            <KTSVG path='/media/icons/duotune/arrows/arr075.svg' className='svg-icon-2' />
             Create Transaction
           </button>
         </div>
       </div>
 
       <div className='row g-6 g-xl-9'>
-        {res?.payload.map<JSX.Element>((item: TransactionDto) => {
-          return (
-            <div key={item.id} className='col-md-6 col-xl-4'>
-              <Card6
-                badgeColor={badgeColors[item.status]}
-                status={item.status}
-                transactionType={tiles[item.type]}
-                description={item.transactionRemark}
-                date={item.createdAt.toString()}
-                budget={(item.amount + item.fee).toLocaleString('it-IT', {
-                  style: 'currency',
-                  currency: 'VND',
-                })}
-                type={item.senderCreditCardNumber === currentUserCardNumber?.cardNumber ? 'Outgoing' : 'Incoming'}
-                receiverCreditCard={item.receiverCreditCardNumber}
-                senderCreditCard={item.senderCreditCardNumber}
-              />
-            </div>
-          );
-        })}
+        {transactionsAreFetching ? (
+          <div style={{ ...styles, position: 'absolute', textAlign: 'center' }}>Processing...</div>
+        ) : (
+          res?.payload.map<JSX.Element>((item: TransactionDto) => {
+            return (
+              <div key={item.id} className='col-md-6 col-xl-4'>
+                <Card6
+                  badgeColor={badgeColors[item.status]}
+                  status={item.status}
+                  transactionType={tiles[item.type]}
+                  description={item.transactionRemark}
+                  date={item.createdAt.toString()}
+                  budget={(item.amount + item.fee).toLocaleString('it-IT', {
+                    style: 'currency',
+                    currency: 'VND',
+                  })}
+                  type={
+                    item.senderCreditCardNumber === currentUserCardNumber?.cardNumber
+                      ? 'Outgoing'
+                      : 'Incoming'
+                  }
+                  receiverCreditCard={item.receiverCreditCardNumber}
+                  senderCreditCard={item.senderCreditCardNumber}
+                />
+              </div>
+            );
+          })
+        )}
       </div>
 
       <div className='d-flex flex-stack flex-wrap pt-10'>
