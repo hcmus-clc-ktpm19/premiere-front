@@ -162,91 +162,102 @@ const ListOfLoanReminders = () => {
                   {/* begin::Table body */}
                   <tbody>
                   {
-                    loanReminders.filter((reminder) => reminder.status === status || status === '').map((reminder: LoanReminderDto) => (
-                        <tr key={reminder.id}>
-                          <td>
-                            <a href='#' className='text-dark fw-bold text-hover-primary fs-6'>
-                              {reminder.id}
-                            </a>
-                          </td>
-                          <td>
-                            <a href='#' className='text-dark fw-bold text-hover-primary fs-6'>
-                              {reminder.version}
-                            </a>
-                          </td>
-                          <td>
-                            <a href='#'
-                               className='text-dark fw-bold text-hover-primary d-block mb-1 fs-6'>
-                              {reminder.senderCreditCardNumber}
-                            </a>
-                            <span
-                                className='text-muted fw-semibold text-muted d-block fs-7'>{reminder.senderName}</span>
-                          </td>
-                          <td>
-                            <a href='#'
-                               className='text-dark fw-bold text-hover-primary d-block mb-1 fs-6'>
-                              {reminder.receiverCreditCardNumber}
-                            </a>
-                            <span
-                                className='text-muted fw-semibold text-muted d-block fs-7'>{reminder.receiverName}</span>
-                          </td>
-                          <td className='text-dark fw-bold text-hover-primary fs-6'>
-                            {reminder.transferAmount.toLocaleString('it-IT', {
-                              style: 'currency',
-                              currency: 'VND',
-                            })
-                            }
-                          </td>
-                          <td>
-                            {
-                              reminder.status === 'PENDING' ? (
-                                  <span className='badge badge-light-primary'>PENDING</span>
-                              ) : reminder.status === 'PAID' ? (
-                                  <span className='badge badge-light-success'>PAID</span>
-                              ) : (
-                                  <span className='badge badge-light-danger'>CANCELLED</span>
-                              )
-                            }
-                          </td>
-                          <td>
-                            <a href='#'
-                               className='text-dark fw-bold text-hover-primary d-block mb-1 fs-6'>
-                              {new Date(reminder.time).toLocaleDateString()}
-                            </a>
-                            <span className='text-muted fw-semibold text-muted d-block fs-7'>
+                    loanReminders.length > 0 ? (
+                        loanReminders.filter((reminder) => reminder.status === status || status === '').map((reminder: LoanReminderDto) => (
+                            <tr key={reminder.id}>
+                              <td>
+                                <a href='#' className='text-dark fw-bold text-hover-primary fs-6'>
+                                  {reminder.id}
+                                </a>
+                              </td>
+                              <td>
+                                <a href='#' className='text-dark fw-bold text-hover-primary fs-6'>
+                                  {reminder.version}
+                                </a>
+                              </td>
+                              <td>
+                                <a href='#'
+                                   className='text-dark fw-bold text-hover-primary d-block mb-1 fs-6'>
+                                  {reminder.senderCreditCardNumber}
+                                </a>
+                                <span
+                                    className='text-muted fw-semibold text-muted d-block fs-7'>{reminder.senderName}</span>
+                              </td>
+                              <td>
+                                <a href='#'
+                                   className='text-dark fw-bold text-hover-primary d-block mb-1 fs-6'>
+                                  {reminder.receiverCreditCardNumber}
+                                </a>
+                                <span
+                                    className='text-muted fw-semibold text-muted d-block fs-7'>{reminder.receiverName}</span>
+                              </td>
+                              <td className='text-dark fw-bold text-hover-primary fs-6'>
+                                {reminder.transferAmount.toLocaleString('it-IT', {
+                                  style: 'currency',
+                                  currency: 'VND',
+                                })
+                                }
+                              </td>
+                              <td>
+                                {
+                                  reminder.status === 'PENDING' ? (
+                                      <span className='badge badge-light-primary'>PENDING</span>
+                                  ) : reminder.status === 'PAID' ? (
+                                      <span className='badge badge-light-success'>PAID</span>
+                                  ) : (
+                                      <span className='badge badge-light-danger'>CANCELLED</span>
+                                  )
+                                }
+                              </td>
+                              <td>
+                                <a href='#'
+                                   className='text-dark fw-bold text-hover-primary d-block mb-1 fs-6'>
+                                  {new Date(reminder.time).toLocaleDateString()}
+                                </a>
+                                <span className='text-muted fw-semibold text-muted d-block fs-7'>
                             {new Date(reminder.time).toLocaleTimeString()}
                           </span>
-                          </td>
+                              </td>
 
-                          <td>
-                            <a href='#'
-                               className='text-dark fw-bold text-hover-primary d-block mb-1 fs-6'>
-                              {new Date(reminder.updatedTime).toLocaleDateString()}
-                            </a>
-                            <span className='text-muted fw-semibold text-muted d-block fs-7'>
+                              <td>
+                                <a href='#'
+                                   className='text-dark fw-bold text-hover-primary d-block mb-1 fs-6'>
+                                  {new Date(reminder.updatedTime).toLocaleDateString()}
+                                </a>
+                                <span className='text-muted fw-semibold text-muted d-block fs-7'>
                             {new Date(reminder.updatedTime).toLocaleTimeString()}
                           </span>
-                          </td>
+                              </td>
 
-                          <td className='text-end'>
-                            <button type='button'
-                                    onClick={() => {
-                                      onPayReminderHandler(reminder)
-                                    }}
-                                    className='btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1'>
-                              <KTSVG path='/media/icons/duotune/general/gen024.svg' className='svg-icon-1' />
-                            </button>
-                            <button type='button'
-                                    onClick={() => {
-                                      deleteLoanReminderHandler(reminder)
-                                    }}
-                                    className='btn btn-icon btn-bg-light btn-active-color-primary btn-sm'>
-                              <KTSVG path='/media/icons/duotune/general/gen027.svg'
-                                     className='svg-icon-3'/>
-                            </button>
+                              <td className='text-end'>
+                                <button type='button'
+                                        onClick={() => {
+                                          onPayReminderHandler(reminder)
+                                        }}
+                                        className='btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1'>
+                                  <KTSVG path='/media/icons/duotune/general/gen024.svg'
+                                         className='svg-icon-1'/>
+                                </button>
+                                <button type='button'
+                                        onClick={() => {
+                                          deleteLoanReminderHandler(reminder)
+                                        }}
+                                        className='btn btn-icon btn-bg-light btn-active-color-primary btn-sm'>
+                                  <KTSVG path='/media/icons/duotune/general/gen027.svg'
+                                         className='svg-icon-3'/>
+                                </button>
+                              </td>
+                            </tr>
+                        ))) : (
+                        <tr>
+                          <td colSpan={10}>
+                            <div
+                                className='d-flex text-center w-100 align-content-center justify-content-center'>
+                              No matching records found
+                            </div>
                           </td>
                         </tr>
-                    ))
+                    )
                   }
                   </tbody>
                   {/* end::Table body */}

@@ -1,6 +1,8 @@
 import {Navigate, Outlet, Route, Routes} from 'react-router-dom';
 import {PageLink, PageTitle} from '@_metronic/layout/core';
 import {UsersListWrapper} from './users-list/UsersList';
+import UserTransaction
+  from "@/app/modules/apps/user-management/users-list/components/transaction/UserTransaction";
 
 const usersBreadcrumbs: Array<PageLink> = [
   {
@@ -29,6 +31,15 @@ const UsersPage = () => {
               <UsersListWrapper />
             </>
           }
+        />
+        <Route
+            path='users/transactions'
+            element={
+              <>
+                <PageTitle breadcrumbs={usersBreadcrumbs}>User transactions</PageTitle>
+                <UserTransaction />
+              </>
+            }
         />
       </Route>
       <Route index element={<Navigate to='/apps/user-management/users' />} />

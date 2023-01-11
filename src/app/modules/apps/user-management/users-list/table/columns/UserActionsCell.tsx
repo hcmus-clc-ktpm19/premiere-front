@@ -8,6 +8,7 @@ import {useQueryResponse} from '../../core/QueryResponseProvider';
 import {disableCustomerCreditCard} from '../../core/_requests';
 import {ProfileService as profileService} from "@/app/modules/profile/core/_requests";
 import useNotification from "@/app/modules/notifications/useNotification";
+import {useNavigate} from "react-router-dom";
 
 type Props = {
   id: ID;
@@ -18,6 +19,7 @@ const UserActionsCell: FC<Props> = ({id}) => {
   const {query} = useQueryResponse();
   const queryClient = useQueryClient();
   const {setNotification} = useNotification();
+  const navigate = useNavigate();
 
   useEffect(() => {
     MenuComponent.reinitialization();
@@ -26,6 +28,10 @@ const UserActionsCell: FC<Props> = ({id}) => {
   const openEditModal = () => {
     setItemIdForUpdate(id);
   };
+
+  const onTransactionBtnHandler = () => {
+    navigate(`/apps/user-management/users/transactions?userId=${id}`);
+  }
 
   const deleteItem = useMutation(() => {
     console.log('disable', id);
@@ -60,6 +66,14 @@ const UserActionsCell: FC<Props> = ({id}) => {
         className='menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-600 menu-state-bg-light-primary fw-bold fs-7 w-125px py-4'
         data-kt-menu='true'
       >
+        {/* begin::Menu item */}
+        <div className='menu-item px-3'>
+          <a className='menu-link px-3' onClick={onTransactionBtnHandler}>
+            Transactions
+          </a>
+        </div>
+        {/* end::Menu item */}
+
         {/* begin::Menu item */}
         <div className='menu-item px-3'>
           <a className='menu-link px-3' onClick={openEditModal}>

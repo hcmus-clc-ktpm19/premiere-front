@@ -12,12 +12,13 @@ import { useQuery } from 'react-query';
 import {useNavigate} from "react-router-dom";
 import {KTSVG} from "@_metronic/helpers";
 
-const badgeColors = {
+export const badgeColors = {
   COMPLETED: 'success',
   CHECKING: 'warning',
+  FAILED: 'danger',
 };
 
-const tiles = {
+export const tiles = {
   MONEY_TRANSFER: 'Money Transfer',
   LOAN: 'Loan',
 };
@@ -37,6 +38,13 @@ export function Transactions() {
     () => ProfileService.getTransactionByCustomerId(currentUser?.id as number, transactionCriteria),
     { refetchOnWindowFocus: false }
   );
+
+  const { data: currentUserCardNumber } = useQuery(
+      'transactions-credit-card',
+      () => ProfileService.getCreditCardByUserId(currentUser?.id as number),
+      { refetchOnWindowFocus: false }
+  );
+  console.log('res', { res }, {currentUserCardNumber });
 
   const typeRef = useRef<HTMLSelectElement>(null);
 
@@ -120,10 +128,13 @@ export function Transactions() {
                 transactionType={tiles[item.type]}
                 description={item.transactionRemark}
                 date={item.createdAt.toString()}
-                budget={item.amount.toLocaleString('it-IT', {
+                budget={(item.amount + item.fee).toLocaleString('it-IT', {
                   style: 'currency',
                   currency: 'VND',
                 })}
+                type={item.senderCreditCardNumber === currentUserCardNumber?.cardNumber ? 'Outgoing' : 'Incoming'}
+                receiverCreditCard={item.receiverCreditCardNumber}
+                senderCreditCard={item.senderCreditCardNumber}
               />
             </div>
           );
