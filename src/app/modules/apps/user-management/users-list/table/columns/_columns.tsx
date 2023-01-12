@@ -55,6 +55,13 @@ const usersColumns: ReadonlyArray<Column<FullInfoUserDto>> = [
     Cell: ({...props}) => <UserTwoStepsCell two_steps={props.data[props.row.index].enabled} />,
   },
   {
+    Header: (props) => (
+        <UserCustomHeader tableProps={props} title='Card Status' className='min-w-100px' />
+    ),
+    id: 'cardEnabled',
+    Cell: ({...props}) => <UserTwoStepsCell two_steps={props.data[props.row.index].cardEnabled} />,
+  },
+  {
     Header: (props) => <UserCustomHeader tableProps={props} title='Pan Number' className='min-w-125px' />,
     accessor: 'panNumber',
   },

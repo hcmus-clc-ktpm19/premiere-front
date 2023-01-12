@@ -1,9 +1,10 @@
-import React, { FC } from 'react';
+import React, {FC, useEffect, useState} from 'react';
 import { toAbsoluteUrl } from '@_metronic/helpers';
 import { TransactionStatus } from '@/app/models/model';
 import moment from 'moment';
 import TransactionDetailsModal from '@_metronic/partials/modals/transactions/TransactionDetailsModal';
 import { NavLink } from 'react-bootstrap';
+import {useThemeMode} from "@_metronic/partials";
 
 interface Props {
   badgeColor: string;
@@ -29,7 +30,13 @@ const Card6: FC<Props> = ({
   senderCreditCard,
 }) => {
   const [isShow, setIsShow] = React.useState<boolean>(false);
-
+  const {mode} = useThemeMode();
+  const [style, setStyle] = useState({});
+  useEffect(() => {
+    mode === 'dark' ? setStyle({
+      filter: 'invert(100%)'
+    }) : setStyle('');
+  }, [mode]);
   const onCardClick = () => {
     console.log('clicked');
     setIsShow(true);
@@ -40,6 +47,12 @@ const Card6: FC<Props> = ({
       <NavLink onClick={onCardClick} className='card border border-2 border-gray-300 border-hover'>
         <div className='card-header border-0 pt-9'>
           <div className='card-title m-0'>
+            <div className='symbol symbol-50px w-50px bg-light'>
+              <img src={toAbsoluteUrl('/media/logos/custom-2.svg')} alt='card2' className='p-3' />
+            </div>
+            <div className='w-50px' style={{...style}}>
+              <img src={toAbsoluteUrl('/media/icons/duotune/arrows/arr024.svg')} alt='arrow' className='p-3' />
+            </div>
             <div className='symbol symbol-50px w-50px bg-light'>
               <img src={toAbsoluteUrl('/media/logos/custom-2.svg')} alt='card2' className='p-3' />
             </div>

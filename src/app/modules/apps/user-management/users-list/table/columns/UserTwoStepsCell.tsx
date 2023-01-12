@@ -5,7 +5,13 @@ type Props = {
 };
 
 const UserTwoStepsCell: FC<Props> = ({two_steps}) => (
-  <> {two_steps && <div className='badge badge-light-success fw-bolder'>Enabled</div>}</>
+    <>
+      {two_steps ? (
+          <div className='badge badge-light-success fw-bolder'>Enabled</div>
+      ) : (
+          <div className='badge badge-light-danger fw-bolder'>Disabled</div>
+      )}
+    </>
 );
 
 export {UserTwoStepsCell};
