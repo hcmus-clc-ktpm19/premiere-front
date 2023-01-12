@@ -53,9 +53,10 @@ const insertReceiver = (receiver: ReceiverDto): Promise<ReceiverDto> => {
   // return (await axios.post<ReceiverDto>(`${PREMIERE_API_URL}/receivers`, receiver)).data;
 };
 
-const deleteReceiver = async (creditCardNumber: string): Promise<ReceiverDto> => {
-  return (await axios.delete<ReceiverDto>(`${PREMIERE_API_URL}/receivers/${creditCardNumber}`))
-    .data;
+const deleteReceiver = async (userId: number, receiverCardNumber: string): Promise<ReceiverDto> => {
+  return (
+    await axios.delete<ReceiverDto>(`${PREMIERE_API_URL}/receivers/${userId}/${receiverCardNumber}`)
+  ).data;
 };
 
 const updateReceiver = async (receiver: ReceiverDto): Promise<ReceiverDto> => {

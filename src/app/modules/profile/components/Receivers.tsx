@@ -34,14 +34,14 @@ export function Receivers() {
     });
   };
 
-  const handleDeleteReceiver  = async (cardNumber: string) => {
+  const handleDeleteReceiver = async (cardNumber: string) => {
     try {
-      await profileService.deleteReceiver(cardNumber);
+      await profileService.deleteReceiver(currentUser?.id as number, cardNumber);
       setReceivers(receivers.filter((receiver) => receiver.cardNumber !== cardNumber));
-    }catch (e) {
+    } catch (e) {
       console.error(e);
     }
-  }
+  };
 
   const handleAddReceiverBtn = () => {
     setReceiverToUpdate(undefined);
