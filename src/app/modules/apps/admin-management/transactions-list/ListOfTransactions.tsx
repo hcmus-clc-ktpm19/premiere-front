@@ -246,6 +246,7 @@ function ListOfTransactions() {
                               value={fromDate}
                               onChange={(newValue) => {
                                 setFromDate(newValue);
+                                setToDate(newValue!.add(30, 'day'));
                               }}
                               renderInput={(params) => (
                                   <div className='mb-10'>
