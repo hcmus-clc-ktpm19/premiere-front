@@ -1,6 +1,6 @@
 /* tslint:disable */
 /* eslint-disable */
-// Generated using typescript-generator version 3.0.1157 on 2023-01-09 19:58:43.
+// Generated using typescript-generator version 3.0.1157 on 2023-01-12 10:06:01.
 
 export interface CreateLoanReminderDto {
     creditorCreditCardNumber: string;
@@ -136,6 +136,7 @@ export interface TransactionCriteriaDto {
     page?: number;
     size?: number;
     transactionType?: TransactionType;
+    moneyTransferCriteria?: MoneyTransferCriteria;
     asc?: boolean;
 }
 
@@ -213,6 +214,11 @@ export const enum LoanStatus {
     REJECTED = "REJECTED",
     CANCELLED = "CANCELLED",
     PAID = "PAID",
+}
+
+export const enum MoneyTransferCriteria {
+    INCOMING = "INCOMING",
+    OUTGOING = "OUTGOING",
 }
 
 export const enum PremiereRole {
