@@ -15,12 +15,15 @@ type Props = {
   type: string;
   senderCreditCard: string;
   receiverCreditCard: string;
+  senderBankId: number;
+  receiverBankId: number;
 }
 const TransactionDetailsModal: FC<Props> = ({
                                               isShow, setIsShow, badgeColor, status,
                                               transactionType, description,
                                               date, budget, type,
-                                              receiverCreditCard, senderCreditCard
+                                              receiverCreditCard, senderCreditCard,
+                                              senderBankId, receiverBankId
                                             }) => {
 
   if (!isShow) return null;
@@ -113,6 +116,48 @@ const TransactionDetailsModal: FC<Props> = ({
                             Receiver Credit Card
                           </a>
                           <div className='text-gray-400 fw-semibold fs-7'>{receiverCreditCard}</div>
+                        </div>
+                        {/* end::Title */}
+                      </div>
+                      {/* end::Description */}
+                    </div>
+                    {/* end::Item */}
+                    {/* begin::Item */}
+                    <div className='d-flex align-items-center mb-6'>
+                      {/* begin::Symbol */}
+                      <div className='symbol symbol-45px w-40px me-5'>
+              <span className='symbol-label bg-lighten'>
+                <KTSVG path='/media/icons/duotune/electronics/elc005.svg' className='svg-icon-1'/>
+              </span>
+                      </div>
+                      {/* end::Symbol */}
+                      {/* begin::Description */}
+                      <div className='d-flex align-items-center flex-wrap w-100'>
+                        {/* begin::Title */}
+                        <div className='mb-1 pe-3 flex-grow-1'>
+                          <a href='#' className='fs-5 text-gray-800 text-hover-primary fw-bold'>
+                            Sender Bank
+                          </a>
+                          <div className='text-gray-400 fw-semibold fs-7'>{senderBankId === 1 ? 'Premiere Bank' : 'TaiXiu Bank'}</div>
+                        </div>
+                        {/* end::Title */}
+                      </div>
+                      {/* end::Description */}
+                      {/* begin::Symbol */}
+                      <div className='symbol symbol-45px w-40px me-5'>
+              <span className='symbol-label bg-lighten'>
+                <KTSVG path='/media/icons/duotune/general/gen024.svg' className='svg-icon-1'/>
+              </span>
+                      </div>
+                      {/* end::Symbol */}
+                      {/* begin::Description */}
+                      <div className='d-flex align-items-center flex-wrap w-100'>
+                        {/* begin::Title */}
+                        <div className='mb-1 pe-3 flex-grow-1'>
+                          <a href='#' className='fs-5 text-gray-800 text-hover-primary fw-bold'>
+                            Receiver Bank
+                          </a>
+                          <div className='text-gray-400 fw-semibold fs-7'>{receiverBankId === 1 ? 'Premiere Bank' : 'TaiXiu Bank'}</div>
                         </div>
                         {/* end::Title */}
                       </div>

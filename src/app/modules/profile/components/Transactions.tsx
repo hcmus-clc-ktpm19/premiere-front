@@ -174,12 +174,18 @@ export function Transactions() {
                     currency: 'VND',
                   })}
                   type={
-                    item.senderCreditCardNumber === currentUserCardNumber?.cardNumber
-                        ? 'Outgoing - '
-                        : 'Incoming - '
+                    item.type === TransactionType.MONEY_TRANSFER ? (
+                        item.senderCreditCardNumber === currentUserCardNumber?.cardNumber
+                            ? 'Outgoing - '
+                            : 'Incoming - '
+                    ) : (
+                      ''
+                    )
                   }
                   receiverCreditCard={item.receiverCreditCardNumber}
                   senderCreditCard={item.senderCreditCardNumber}
+                  senderBankId={item.senderBankId}
+                  receiverBankId={item.receiverBankId}
                 />
               </div>
             );

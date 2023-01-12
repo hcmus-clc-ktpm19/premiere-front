@@ -116,6 +116,11 @@ function ListOfTransactions() {
     setToDate(dayjs());
     setBank(1);
     setSearchTerm('');
+    setTransactionCriteria({
+      ...transactionCriteria,
+      fromDate: formatDay(fromDate!),
+      toDate: formatDay(toDate!),
+    });
   }
 
   const validateDateRange =(fromDate: Dayjs, toDate: Dayjs) => {
@@ -230,9 +235,9 @@ function ListOfTransactions() {
                               onChange={(e) => setBank(Number(e.target.value))}
                               value={bank}
                           >
-                            <option value='0'>ALL</option>
+                            <option value='0'>All</option>
                             <option value='1'>Premiere</option>
-                            <option value='2'>TaiXiu</option>
+                            <option value='5'>TaiXiu</option>
                           </select>
                         </div>
                         {/* end::Input group */}
@@ -334,6 +339,8 @@ function ListOfTransactions() {
                               type={''}
                               receiverCreditCard={item.receiverCreditCardNumber}
                               senderCreditCard={item.senderCreditCardNumber}
+                              senderBankId={item.senderBankId}
+                              receiverBankId={item.receiverBankId}
                           />
                         </div>
                     );

@@ -16,6 +16,8 @@ interface Props {
   type: string;
   senderCreditCard: string;
   receiverCreditCard: string;
+  senderBankId: number;
+  receiverBankId: number;
 }
 
 const Card6: FC<Props> = ({
@@ -28,6 +30,8 @@ const Card6: FC<Props> = ({
   type,
   receiverCreditCard,
   senderCreditCard,
+  senderBankId,
+  receiverBankId
 }) => {
   const [isShow, setIsShow] = React.useState<boolean>(false);
   const {mode} = useThemeMode();
@@ -48,13 +52,25 @@ const Card6: FC<Props> = ({
         <div className='card-header border-0 pt-9'>
           <div className='card-title m-0'>
             <div className='symbol symbol-50px w-50px bg-light'>
-              <img src={toAbsoluteUrl('/media/logos/custom-2.svg')} alt='card2' className='p-3' />
+              {
+                senderBankId === 1 ? (
+                    <img src={toAbsoluteUrl('/media/logos/custom-2.svg')} alt='card2' className='p-3' />
+                ) : (
+                    <img src={toAbsoluteUrl('/media/logos/tai-xiu.svg')} alt='card2' className='p-3' />
+                )
+              }
             </div>
             <div className='w-50px' style={{...style}}>
               <img src={toAbsoluteUrl('/media/icons/duotune/arrows/arr024.svg')} alt='arrow' className='p-3' />
             </div>
             <div className='symbol symbol-50px w-50px bg-light'>
-              <img src={toAbsoluteUrl('/media/logos/custom-2.svg')} alt='card2' className='p-3' />
+              {
+                receiverBankId === 1 ? (
+                    <img src={toAbsoluteUrl('/media/logos/custom-2.svg')} alt='card2' className='p-3' />
+                ) : (
+                    <img src={toAbsoluteUrl('/media/logos/tai-xiu.svg')} alt='card2' className='p-3' />
+                )
+              }
             </div>
           </div>
 
@@ -104,6 +120,8 @@ const Card6: FC<Props> = ({
         type={type}
         receiverCreditCard={receiverCreditCard}
         senderCreditCard={senderCreditCard}
+        senderBankId={senderBankId}
+        receiverBankId={receiverBankId}
       />
     </>
   );
