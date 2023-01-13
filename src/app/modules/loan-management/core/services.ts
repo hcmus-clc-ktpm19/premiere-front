@@ -8,11 +8,13 @@ import {
 import axios, { AxiosResponse } from 'axios';
 import * as Yup from 'yup';
 import { LoanReminderDto, LoanReminderMessageDto } from '@/app/modules/loan-management/core/_dtos';
+import {ExternalUserDto} from "@/app/modules/profile/core/_dtos";
 
 const API_URL: string = import.meta.env.VITE_PREMIERE_API_URL;
 const LOAN_REMINDER_API = `${API_URL}/loan-management`;
 const CREDIT_CARD_API = `${API_URL}/credit-card`;
 const LOAN_REMINDER_SOCKET_API = `${API_URL}/notification`;
+const EXTERNAL_USER_API = `${CREDIT_CARD_API}/external-bank/Taixiubank`;
 
 const loanReminderValidationSchemas = [
   Yup.object({
@@ -37,6 +39,12 @@ const getUserByCardNumber = (cardNumber: string): Promise<UserDto | ErrorDto> =>
       return response.data as UserDto;
     });
 };
+
+const getExternalCreditCardByCardNumber = async (cardNumber: string): Promise<ExternalUserDto> => {
+  return (
+      await axios.get(`${EXTERNAL_USER_API}/${cardNumber}`)
+  ).data.data;
+}
 
 const getCreditCardByCardNumber = (cardNumber: string): Promise<CreditCardDto | ErrorDto> => {
   return axios
@@ -92,6 +100,7 @@ const payLoanReminder = (loanReminderPayDto: TransferMoneyRequestDto): Promise<a
 export const services = {
   loanReminderValidationSchemas,
   getUserByCardNumber,
+  getExternalCreditCardByCardNumber,
   getCreditCardByCardNumber,
   saveLoanReminder,
   getLoanRemindersByUserCreditCardNumber,
