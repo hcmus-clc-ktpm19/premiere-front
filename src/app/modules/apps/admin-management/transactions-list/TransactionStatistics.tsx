@@ -23,6 +23,7 @@ const TransactionStatistics = () => {
   const {setNotification} = useNotification();
   const [amounts, setAmounts] = useState<number[]>([]);
   const [totalAmount, setTotalAmount] = useState<number>(0);
+  const [bankId, setBankId] = useState<number>(1);
 
   const formatDay = (date: Dayjs) => {
     return dayjs(date).format('YYYY-MM-DD');
@@ -48,7 +49,7 @@ const TransactionStatistics = () => {
   }
 
   useEffect(() => {
-    TransactionService.getTotalAmountInDateRange(formatDay(fromDate!), formatDay(toDate!)).then((res) => {
+    TransactionService.getTotalAmountInDateRange(formatDay(fromDate!), formatDay(toDate!), bankId).then((res) => {
       setAmounts(res);
       TransactionService.getTotalAmountOfAllTime().then((res) => {
         setTotalAmount(res);
@@ -141,7 +142,7 @@ const TransactionStatistics = () => {
                       fromDate && toDate ? ` ${formatDay(fromDate)} to ${formatDay(toDate)}` : ''
                     }
                   </span>
-                  <span className='text-muted fw-semibold fs-7'>Total statistics this range: &nbsp;
+                  <span className='text-muted fw-semibold fs-7'>Total statistics in this range: &nbsp;
                     <strong>
                       {
                         amounts.reduce((a, b) => a + b, 0).toLocaleString('it-IT', {
@@ -175,7 +176,22 @@ const TransactionStatistics = () => {
 
                     <div className='separator border-gray-200'></div>
 
-                    <div className='px-7 py-5'>
+
+
+                    <div className='px-7 py-5' data-kt-user-table-filter='form'>
+                      <div className='mb-5'>
+                        <label className='form-label fs-6 fw-bold'>Bank:</label>
+                        <select
+                            name='status'
+                            data-control='select2'
+                            data-hide-search='true'
+                            className='form-select form-select-solid fw-bolder'
+                            onChange={(e) => setBankId(+e.target.value)}
+                            defaultValue='none'>
+                          <option value='1'>Premierebank</option>
+                          <option value='5'>Taixiubank</option>
+                        </select>
+                      </div>
                       <div className='mb-10'>
                         <LocalizationProvider dateAdapter={AdapterDayjs}>
                           <DatePicker
@@ -185,7 +201,7 @@ const TransactionStatistics = () => {
                                 // setToDate(newValue!.add(12, 'months'));
                               }}
                               renderInput={(params) => (
-                                  <div className='mb-10'>
+                                  <div className='mb-5'>
                                     <label className='form-label fs-6 fw-bold'>From Date:</label>
                                     <TextField {...params}
                                                className='form-select form-select-solid fw-bolder'

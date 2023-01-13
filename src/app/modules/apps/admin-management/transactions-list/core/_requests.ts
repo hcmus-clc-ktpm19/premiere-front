@@ -19,9 +19,9 @@ const getTransactions = async (bankId: number,
   ).data;
 }
 
-const getTotalAmountInDateRange = async (fromDate: string, toDate: string): Promise<number[]> => {
+const getTotalAmountInDateRange = async (fromDate: string, toDate: string, bankId: number): Promise<number[]> => {
   return (
-      await axios.get(`${GET_TRANSACTIONS_URL}/total-amount/${fromDate}/${toDate}`)
+      await axios.get(`${GET_TRANSACTIONS_URL}/${bankId}/total-amount/${fromDate}/${toDate}`)
   ).data;
 }
 
