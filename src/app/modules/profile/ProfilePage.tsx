@@ -9,6 +9,7 @@ import {ProfileHeader} from './ProfileHeader';
 import {Transactions} from '@/app/modules/profile/components/Transactions';
 import CreateInternalTransaction from "@/app/modules/profile/components/CreateInternalTransaction";
 import CreateTransaction from "@/app/modules/profile/components/CreateTransaction";
+import CreateExternalTransaction from "@/app/modules/profile/components/CreateExternalTransaction";
 
 const profileBreadCrumbs: Array<PageLink> = [
   {
@@ -86,6 +87,15 @@ const ProfilePage = () => (
             <>
               <PageTitle breadcrumbs={profileBreadCrumbs}>Internal Transaction</PageTitle>
               <CreateInternalTransaction />
+            </>
+          }
+      />
+      <Route
+          path='create-transaction/external'
+          element={
+            <>
+              <PageTitle breadcrumbs={profileBreadCrumbs}>External Transaction</PageTitle>
+              <CreateExternalTransaction />
             </>
           }
       />

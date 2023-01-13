@@ -24,7 +24,7 @@ const CreateTransaction = () => {
                 title='External Transfer'
                 time='10% Fee'
                 description='Quickly and easily transfer money to people who have accounts other than your bank.'
-                destination={'/crafted/pages/profile/create-transaction'}
+                destination={'/crafted/pages/profile/create-transaction/external'}
             />
           </div>
 
