@@ -142,7 +142,7 @@ const TransactionStatistics = () => {
                       fromDate && toDate ? ` ${formatDay(fromDate)} to ${formatDay(toDate)}` : ''
                     }
                   </span>
-                  <span className='text-muted fw-semibold fs-7'>Total statistics in this range: &nbsp;
+                  <span className='text-muted fw-semibold fs-7'>Total transfer amount in this range: &nbsp;
                     <strong>
                       {
                         amounts.reduce((a, b) => a + b, 0).toLocaleString('it-IT', {

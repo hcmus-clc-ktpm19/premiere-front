@@ -235,8 +235,8 @@ function ListOfTransactions() {
                               value={bank}
                           >
                             <option value='0'>All</option>
-                            <option value='1'>Premiere</option>
-                            <option value='5'>TaiXiu</option>
+                            <option value='1'>Premierebank</option>
+                            <option value='5'>Taixiubank</option>
                           </select>
                         </div>
                         {/* end::Input group */}

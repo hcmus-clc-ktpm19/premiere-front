@@ -7,7 +7,7 @@ interface Props {
 }
 
 const DepositForm: React.FC<Props> = ({ formikProps }) => {
-  const [depositWithPhone, setDepositWithPhone] = useState(true);
+  const [depositWithPhone, setDepositWithPhone] = useState(false);
 
   return (
     <div className='w-100'>
@@ -26,26 +26,10 @@ const DepositForm: React.FC<Props> = ({ formikProps }) => {
 
       <div className='fv-row mb-10 flex-row justify-content-center'>
         <label className='form-label required me-4'>
-          Use phone or credit card number to deposit:
+          Use user's credit card number to deposit:
         </label>
 
         <div className='btn-group' role='group' aria-label='Basic radio toggle button group'>
-          <input
-            onChange={() => {
-              setDepositWithPhone(true);
-              formikProps.setFieldValue('creditCardNumber', '');
-            }}
-            type='radio'
-            className='btn-check'
-            name='depositWith'
-            id='phoneNumber'
-            autoComplete='off'
-            defaultChecked={true}
-          />
-          <label className='btn btn-outline-primary' htmlFor='phoneNumber'>
-            Phone Number
-          </label>
-
           <input
             onChange={() => {
               setDepositWithPhone(false);
@@ -56,6 +40,7 @@ const DepositForm: React.FC<Props> = ({ formikProps }) => {
             name='depositWith'
             id='creditCardNumber'
             autoComplete='off'
+            defaultChecked={true}
           />
           <label className='btn btn-outline-primary' htmlFor='creditCardNumber'>
             Credit Card Number
