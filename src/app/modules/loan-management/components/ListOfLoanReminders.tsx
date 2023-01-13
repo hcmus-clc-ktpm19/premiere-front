@@ -116,9 +116,10 @@ const ListOfLoanReminders = () => {
             <span className='fs-6 text-gray-400 fw-bold ms-1'>
               (
               {
-                loanReminders.filter(
+                loanReminders.length > 0 ? (
+                    loanReminders.filter(
                   (loanReminder) => loanReminder.status === status || status === ''
-                ).length
+                ).length) : 0
               }
               )
             </span>

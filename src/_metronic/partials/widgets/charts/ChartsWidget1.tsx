@@ -2,9 +2,9 @@
 import React, {useEffect, useRef} from 'react';
 import ApexCharts, {ApexOptions} from 'apexcharts';
 import {KTSVG} from '../../../helpers';
-import {Dropdown1} from '../../content/dropdown/Dropdown1';
+import {Dropdown1} from '@_metronic/partials';
 import {getCSS, getCSSVariableValue} from '../../../assets/ts/_utils';
-import {useThemeMode} from '../../layout/theme-mode/ThemeModeProvider';
+import {useThemeMode} from '@_metronic/partials';
 
 type Props = {
   className: string;
@@ -57,7 +57,7 @@ const ChartsWidget1: React.FC<Props> = ({className}) => {
           <button
             type='button'
             className='btn btn-sm btn-icon btn-color-primary btn-active-light-primary'
-            data-kt-menu-trigger='click'
+            // data-kt-menu-trigger='click'
             data-kt-menu-placement='bottom-end'
             data-kt-menu-flip='top-end'
           >
@@ -93,11 +93,11 @@ function getChartOptions(height: number): ApexOptions {
     series: [
       {
         name: 'Net Profit',
-        data: [44, 55, 57, 56, 61, 58],
+        data: [44, 55, 57, 56, 61, 58, 44, 55, 57, 56, 61, 58],
       },
       {
         name: 'Revenue',
-        data: [76, 85, 101, 98, 87, 105],
+        data: [76, 85, 101, 98, 87, 105, 44, 55, 57, 56, 61, 58],
       },
     ],
     chart: {
@@ -127,7 +127,7 @@ function getChartOptions(height: number): ApexOptions {
       colors: ['transparent'],
     },
     xaxis: {
-      categories: ['Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul'],
+      categories: ['Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul'],
       axisBorder: {
         show: false,
       },

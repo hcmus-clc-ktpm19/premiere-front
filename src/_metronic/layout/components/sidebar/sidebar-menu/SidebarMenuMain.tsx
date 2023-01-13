@@ -195,12 +195,14 @@ const SidebarMenuMain = () => {
                 icon='/media/icons/duotune/communication/com014.svg'>
             </SidebarMenuItem>
 
-            <SidebarMenuItem
-                to='/apps/admin-management/transactions'
+            <SidebarMenuItemWithSub
+                to='/apps/admin-management/transactions/'
                 title='Transaction Management'
                 fontIcon='bi-archive'
                 icon='/media/icons/duotune/graphs/gra001.svg'>
-            </SidebarMenuItem>
+              <SidebarMenuItem to='/apps/admin-management/transactions/lists' title='Lists' hasBullet={true} />
+              <SidebarMenuItem to='/apps/admin-management/transactions/statistics' title='Statistics' hasBullet={true} />
+            </SidebarMenuItemWithSub>
           </>
       )}
     </>

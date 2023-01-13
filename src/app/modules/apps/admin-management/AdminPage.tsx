@@ -6,6 +6,8 @@ import {
 } from "@/app/modules/apps/admin-management/employees-list/ListOfEmployees";
 import ListOfTransactions
   from "@/app/modules/apps/admin-management/transactions-list/ListOfTransactions";
+import TransactionStatistics
+  from "@/app/modules/apps/admin-management/transactions-list/TransactionStatistics";
 
 const loanBreadCrumbs: Array<PageLink> = [
   {
@@ -36,11 +38,20 @@ const AdminPage = () => {
                 }
             />
             <Route
-                path='/transactions'
+                path='/transactions/lists'
                 element={
                   <>
                     <PageTitle breadcrumbs={loanBreadCrumbs}>Transactions List</PageTitle>
                     <ListOfTransactions />
+                  </>
+                }
+            />
+            <Route
+                path='/transactions/statistics'
+                element={
+                  <>
+                    <PageTitle breadcrumbs={loanBreadCrumbs}>Transactions Statistics</PageTitle>
+                    <TransactionStatistics />
                   </>
                 }
             />

@@ -1,4 +1,4 @@
-import React, {useEffect, useRef, useState} from 'react';
+import React, {useEffect, useLayoutEffect, useRef, useState} from 'react';
 import {PaginationDto, TransactionDto,} from '@/app/models/model';
 import {Card6} from '@_metronic/partials/content/cards/Card6';
 import {useAuth} from '@/app/modules/auth';
@@ -68,7 +68,7 @@ function ListOfTransactions() {
     return dayjs(date).format('YYYY-MM-DD');
   }
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     setColor(mode === 'light' ? ['#f5f8fa' ,'#151521'] : ['#151521' ,'#f5f8fa']);
   }, [mode]);
 
@@ -81,7 +81,6 @@ function ListOfTransactions() {
       () => TransactionService.getTransactions(bank === 0 ? 1 : bank, formatDay(fromDate!), formatDay(toDate!), transactionCriteria),
       {refetchOnWindowFocus: false}
   );
-  console.log({res});
 
   const {data: currentUserCardNumber} = useQuery(
       `transactions-credit-card-${userId}`,

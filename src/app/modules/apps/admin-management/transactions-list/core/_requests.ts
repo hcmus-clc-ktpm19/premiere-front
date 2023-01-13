@@ -19,6 +19,18 @@ const getTransactions = async (bankId: number,
   ).data;
 }
 
+const getTotalAmountInDateRange = async (fromDate: string, toDate: string): Promise<number[]> => {
+  return (
+      await axios.get(`${GET_TRANSACTIONS_URL}/total-amount/${fromDate}/${toDate}`)
+  ).data;
+}
+
+const getTotalAmountOfAllTime = async (): Promise<number> => {
+  return (
+      await axios.get(`${GET_TRANSACTIONS_URL}/total-amount-of-all-time`)
+  ).data;
+}
+
 const paginationInits: PaginationDto = {
   currPage: 0,
   currPageTotalElements: 0,
@@ -31,5 +43,7 @@ const paginationInits: PaginationDto = {
 
 export const TransactionService = {
   paginationInit: paginationInits,
+  getTotalAmountInDateRange,
+  getTotalAmountOfAllTime,
   getTransactions
 };
