@@ -2,7 +2,7 @@ import React, {FC, useContext, useState} from 'react';
 import * as Yup from 'yup';
 import {useFormik} from 'formik';
 import {isNotEmpty, toAbsoluteUrl} from '@_metronic/helpers';
-import {CreditCardDto, ReceiverDto} from '@/app/modules/profile/core/_dtos';
+import {CreditCardDto, ExternalUserDto, ReceiverDto} from '@/app/modules/profile/core/_dtos';
 import clsx from 'clsx';
 import {ReceiversListLoading} from '@/app/modules/profile/loading/ReceiversListLoading';
 import {ProfileService as profileService} from '../core/_requests';
@@ -11,6 +11,7 @@ import {ReceiverModalContext} from '@/app/modules/profile/components/Receivers';
 import useNotification from "@/app/modules/notifications/useNotification";
 import {AlertColor} from "@mui/material";
 import {useQuery} from "react-query";
+import {services} from "@/app/modules/loan-management/core/services";
 
 type Props = {
   receiver: ReceiverDto;
@@ -74,7 +75,19 @@ const ReceiverEditModalForm: FC<Props> = ({receiver, isReceiverLoading}) => {
           if (values.cardNumber === currentUserCreditCard?.cardNumber) {
             setNotification(true, 'You cannot add yourself as  a receiver', 'error', () => {});
           } else {
-            await profileService.insertReceiver(values);
+            if (values.bankName === 'Premierebank') {
+              await profileService.insertReceiver(values);
+            } else {
+              // validate external card before insert
+              const res: ExternalUserDto = await services.getExternalCreditCardByCardNumber(
+                  values.cardNumber
+              );
+              console.log('res from receiver', {res});
+              if (res) {
+                values.fullName = res.data.user.name;
+                await profileService.insertReceiverExternal(values);
+              }
+            }
           }
         }
       } catch (e: any) {
@@ -205,9 +218,7 @@ const ReceiverEditModalForm: FC<Props> = ({receiver, isReceiverLoading}) => {
             >
               <option value=''>Select a bank...</option>
               <option value='Premierebank'>Premierebank</option>
-              <option value='Vietcombank'>Vietcombank</option>
-              <option value='Vietinbank'>Vietinbank</option>
-              <option value='Techcombank'>Techcombank</option>
+              <option value='Taixiubank'>Taixiubank</option>
             </select>
             {formik.touched.bankName && formik.errors.bankName && (
               <div className='fv-plugins-message-container'>

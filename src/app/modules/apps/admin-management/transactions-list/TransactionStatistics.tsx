@@ -142,12 +142,14 @@ const TransactionStatistics = () => {
                     }
                   </span>
                   <span className='text-muted fw-semibold fs-7'>Total statistics this range: &nbsp;
-                    {
-                      amounts.reduce((a, b) => a + b, 0).toLocaleString('it-IT', {
-                        style: 'currency',
-                        currency: 'VND',
-                      })
-                    }
+                    <strong>
+                      {
+                        amounts.reduce((a, b) => a + b, 0).toLocaleString('it-IT', {
+                          style: 'currency',
+                          currency: 'VND',
+                        })
+                      }
+                    </strong>
                   </span>
                 </h3>
                 {/* end::Title */}
@@ -266,7 +268,7 @@ function getChartOptions(height: number, amounts: number[], months: string[]): A
   return {
     series: [
       {
-        name: 'Net Profit',
+        name: 'Transfer Amount',
         data: amounts,
       },
 

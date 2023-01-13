@@ -100,15 +100,18 @@ const paginationInits: PaginationDto = {
   totalPages: 0,
 };
 
-const validateTransferMoney = async (
+const validateTransferMoney = (
   transactionRequestDto: TransactionRequestDto
 ): Promise<any> => {
-  return (
-    await axios.post(
+  return axios.post(
       `${PREMIERE_API_URL}/transactions/money-transfer/validate`,
       transactionRequestDto
-    )
-  ).data;
+  ).then((res) => {
+    if (res.status === 202) {
+      return Promise.reject(res.data);
+    }
+    return res.data;
+  });
 };
 
 const transferMoney = async (transferMoneyRequestDto: TransferMoneyRequestDto): Promise<any> => {

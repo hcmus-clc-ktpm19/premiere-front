@@ -41,10 +41,10 @@ const getUserByCardNumber = (cardNumber: string): Promise<UserDto | ErrorDto> =>
 };
 
 const getExternalCreditCardByCardNumber = async (cardNumber: string): Promise<ExternalUserDto> => {
-  return (
-      await axios.get(`${EXTERNAL_USER_API}/${cardNumber}`)
-  ).data.data;
-}
+  return await axios
+    .get<ExternalUserDto>(`${EXTERNAL_USER_API}/${cardNumber}`)
+    .then((response: AxiosResponse<ExternalUserDto>) => response.data);
+};
 
 const getCreditCardByCardNumber = (cardNumber: string): Promise<CreditCardDto | ErrorDto> => {
   return axios

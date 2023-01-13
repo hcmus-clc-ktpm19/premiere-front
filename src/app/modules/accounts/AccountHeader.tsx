@@ -1,12 +1,31 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import React from 'react';
-import {KTSVG, toAbsoluteUrl} from '../../../_metronic/helpers';
+import {KTSVG, toAbsoluteUrl} from '@_metronic/helpers';
 import {Link} from 'react-router-dom';
-import {Dropdown1} from '../../../_metronic/partials';
+import {Dropdown1} from '@_metronic/partials';
 import {useLocation} from 'react-router';
+import {useAuth} from "@/app/modules/auth";
+import {CreditCardDto} from "@/app/modules/profile/core/_dtos";
+import {useQuery} from "react-query";
+import {ProfileService as profileService} from "@/app/modules/profile/core/_requests";
 
 const AccountHeader: React.FC = () => {
   const location = useLocation();
+  const {currentUser} = useAuth();
+  const [creditCard, setCreditCard] = React.useState<CreditCardDto>();
+  const {data} = useQuery('creditCard', async () => {
+        try {
+          const response = await profileService.getCreditCardByUserId(currentUser?.id);
+          setCreditCard(response);
+          return response;
+        } catch (error) {
+          console.log(error);
+        }
+      },
+      {
+        refetchOnWindowFocus: true
+      }
+  );
 
   return (
     <div className='card mb-5 mb-xl-10'>
@@ -24,7 +43,7 @@ const AccountHeader: React.FC = () => {
               <div className='d-flex flex-column'>
                 <div className='d-flex align-items-center mb-2'>
                   <a href='#' className='text-gray-800 text-hover-primary fs-2 fw-bolder me-1'>
-                    Max Smith
+                    {currentUser?.firstName} {currentUser?.lastName}
                   </a>
                   <a href='#'>
                     <KTSVG
@@ -51,7 +70,7 @@ const AccountHeader: React.FC = () => {
                       path='/media/icons/duotune/communication/com006.svg'
                       className='svg-icon-4 me-1'
                     />
-                    Developer
+                    {currentUser?.role}
                   </a>
                   <a
                     href='#'
@@ -61,7 +80,7 @@ const AccountHeader: React.FC = () => {
                       path='/media/icons/duotune/general/gen018.svg'
                       className='svg-icon-4 me-1'
                     />
-                    SF, Bay Area
+                    {currentUser?.address || 'Ho Chi Minh City'}
                   </a>
                   <a
                     href='#'
@@ -71,7 +90,7 @@ const AccountHeader: React.FC = () => {
                       path='/media/icons/duotune/communication/com011.svg'
                       className='svg-icon-4 me-1'
                     />
-                    max@kt.com
+                    {currentUser?.email}
                   </a>
                 </div>
               </div>
@@ -116,52 +135,38 @@ const AccountHeader: React.FC = () => {
                 <div className='d-flex flex-wrap'>
                   <div className='border border-gray-300 border-dashed rounded min-w-125px py-3 px-4 me-6 mb-3'>
                     <div className='d-flex align-items-center'>
-                      <KTSVG
-                        path='/media/icons/duotune/arrows/arr066.svg'
-                        className='svg-icon-3 svg-icon-success me-2'
-                      />
-                      <div className='fs-2 fw-bolder'>4500$</div>
+                      <span className='fw-bold fs-6 text-gray-400' style={{paddingRight: 5}}>
+                        Available Balance:{' '}
+                      </span>
+                      <div className='fs-2 fw-bolder'>
+                        {creditCard?.balance?.toLocaleString('it-IT', {
+                          style: 'currency',
+                          currency: 'VND',
+                        })}
+                      </div>
                     </div>
-
-                    <div className='fw-bold fs-6 text-gray-400'>Earnings</div>
-                  </div>
-
-                  <div className='border border-gray-300 border-dashed rounded min-w-125px py-3 px-4 me-6 mb-3'>
                     <div className='d-flex align-items-center'>
-                      <KTSVG
-                        path='/media/icons/duotune/arrows/arr065.svg'
-                        className='svg-icon-3 svg-icon-danger me-2'
-                      />
-                      <div className='fs-2 fw-bolder'>75</div>
+                      <span className='fw-bold fs-6 text-gray-400' style={{paddingRight: 5}}>
+                        Account Number:{' '}
+                      </span>
+                      <div className='text-gray-600 text-hover-primary fs-2 fw-bolder me-1'>
+                        {creditCard?.cardNumber}
+                      </div>
                     </div>
-
-                    <div className='fw-bold fs-6 text-gray-400'>Projects</div>
-                  </div>
-
-                  <div className='border border-gray-300 border-dashed rounded min-w-125px py-3 px-4 me-6 mb-3'>
-                    <div className='d-flex align-items-center'>
-                      <KTSVG
-                        path='/media/icons/duotune/arrows/arr066.svg'
-                        className='svg-icon-3 svg-icon-success me-2'
-                      />
-                      <div className='fs-2 fw-bolder'>60%</div>
-                    </div>
-
-                    <div className='fw-bold fs-6 text-gray-400'>Success Rate</div>
                   </div>
                 </div>
               </div>
 
               <div className='d-flex align-items-center w-200px w-sm-300px flex-column mt-3'>
                 <div className='d-flex justify-content-between w-100 mt-auto mb-2'>
-                  <span className='fw-bold fs-6 text-gray-400'>Profile Compleation</span>
+                  <span className='fw-bold fs-6 text-gray-400'>Profile Completion</span>
                   <span className='fw-bolder fs-6'>50%</span>
                 </div>
                 <div className='h-5px mx-3 w-100 bg-light mb-3'>
                   <div
-                    className='bg-success rounded h-5px'
-                    role='progressbar'
-                    style={{width: '50%'}}
+                      className='bg-success rounded h-5px'
+                      role='progressbar'
+                      style={{width: '50%'}}
                   ></div>
                 </div>
               </div>

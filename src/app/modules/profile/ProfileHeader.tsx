@@ -70,7 +70,7 @@ const ProfileHeader: React.FC = () => {
                       path='/media/icons/duotune/general/gen018.svg'
                       className='svg-icon-4 me-1'
                     />
-                    SF, Bay Area
+                    {currentUser?.address || 'Ho Chi Minh City'}
                   </a>
                   <a
                     href='#'
@@ -149,7 +149,7 @@ const ProfileHeader: React.FC = () => {
 
               <div className='d-flex align-items-center w-200px w-sm-300px flex-column mt-3'>
                 <div className='d-flex justify-content-between w-100 mt-auto mb-2'>
-                  <span className='fw-bold fs-6 text-gray-400'>Profile Compleation</span>
+                  <span className='fw-bold fs-6 text-gray-400'>Profile Completion</span>
                   <span className='fw-bolder fs-6'>50%</span>
                 </div>
                 <div className='h-5px mx-3 w-100 bg-light mb-3'>
@@ -181,44 +181,11 @@ const ProfileHeader: React.FC = () => {
               <Link
                 className={
                   `nav-link text-active-primary me-6 ` +
-                  (location.pathname === '/crafted/pages/profile/projects' && 'active')
-                }
-                to='/crafted/pages/profile/projects'
-              >
-                Projects
-              </Link>
-            </li>
-            <li className='nav-item'>
-              <Link
-                className={
-                  `nav-link text-active-primary me-6 ` +
-                  (location.pathname === '/crafted/pages/profile/campaigns' && 'active')
-                }
-                to='/crafted/pages/profile/campaigns'
-              >
-                Campaigns
-              </Link>
-            </li>
-            <li className='nav-item'>
-              <Link
-                className={
-                  `nav-link text-active-primary me-6 ` +
                   (location.pathname === '/crafted/pages/profile/transactions' && 'active')
                 }
                 to='/crafted/pages/profile/transactions'
               >
                 Transactions
-              </Link>
-            </li>
-            <li className='nav-item'>
-              <Link
-                className={
-                  `nav-link text-active-primary me-6 ` +
-                  (location.pathname === '/crafted/pages/profile/documents' && 'active')
-                }
-                to='/crafted/pages/profile/documents'
-              >
-                Documents
               </Link>
             </li>
             <li className='nav-item'>
