@@ -181,44 +181,11 @@ const ProfileHeader: React.FC = () => {
               <Link
                 className={
                   `nav-link text-active-primary me-6 ` +
-                  (location.pathname === '/crafted/pages/profile/projects' && 'active')
-                }
-                to='/crafted/pages/profile/projects'
-              >
-                Projects
-              </Link>
-            </li>
-            <li className='nav-item'>
-              <Link
-                className={
-                  `nav-link text-active-primary me-6 ` +
-                  (location.pathname === '/crafted/pages/profile/campaigns' && 'active')
-                }
-                to='/crafted/pages/profile/campaigns'
-              >
-                Campaigns
-              </Link>
-            </li>
-            <li className='nav-item'>
-              <Link
-                className={
-                  `nav-link text-active-primary me-6 ` +
                   (location.pathname === '/crafted/pages/profile/transactions' && 'active')
                 }
                 to='/crafted/pages/profile/transactions'
               >
                 Transactions
-              </Link>
-            </li>
-            <li className='nav-item'>
-              <Link
-                className={
-                  `nav-link text-active-primary me-6 ` +
-                  (location.pathname === '/crafted/pages/profile/documents' && 'active')
-                }
-                to='/crafted/pages/profile/documents'
-              >
-                Documents
               </Link>
             </li>
             <li className='nav-item'>
