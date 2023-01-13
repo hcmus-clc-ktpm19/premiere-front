@@ -68,5 +68,6 @@
   "ECOMMERCE.CUSTOMERS.EDIT.UPDATE_MESSAGE": "Customer has been updated",
   "ECOMMERCE.CUSTOMERS.EDIT.ADD_MESSAGE": "Customer has been created",
   "CREDIT_CARD.NOT_FOUND": "Credit card with this number is not found",
-  "PREMIERE.INTERNAL_SERVER_ERROR": "Internal server error"
+  "PREMIERE.INTERNAL_SERVER_ERROR": "Internal server error",
+  "CREDIT_CARD.DISABLED": "Credit card is disabled"
 }

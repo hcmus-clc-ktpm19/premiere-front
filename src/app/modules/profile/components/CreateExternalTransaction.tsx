@@ -95,7 +95,7 @@ const CreateExternalTransaction: React.FC = () => {
           // transaction validate can have some error like invalid card number, credit card not enough money, ...
           // so we need to show error message to user
           const notificationType: AlertColor = "error";
-          const errorMessage: string = e.response.data['Error: '] || "Something went wrong!";
+          const errorMessage: string = e?.response?.data['Error: '] || e?.message || "Something went wrong!";
           console.log("errorMessage", errorMessage);
           setNotification(true, errorMessage, notificationType, () => {});
         }
