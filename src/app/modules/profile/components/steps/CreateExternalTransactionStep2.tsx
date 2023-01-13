@@ -32,9 +32,7 @@ const CreateExternalTransactionStep2: FC<Props> = (props: Props) => {
     setAccountNumber(selectedReceiver!.cardNumber);
     setReceiver(selectedReceiver);
     setIsShowModal(false);
-  }
-
-
+  };
 
   useEffect(() => {
     setError(null);
@@ -50,20 +48,20 @@ const CreateExternalTransactionStep2: FC<Props> = (props: Props) => {
         formikProps.setErrors({});
       } else {
         try {
-          const res: ExternalUserDto = (await services.getExternalCreditCardByCardNumber(accountNumber)) as ExternalUserDto; // TODO: change to get user by card number external
-          console.log("res", {res});
+          const res: ExternalUserDto = await services.getExternalCreditCardByCardNumber(
+            accountNumber
+          );
           formikProps.setFieldValue('receiverCardNumber', accountNumber);
           formikProps.setFieldValue('receiverName', `${res.user.name}`);
           formikProps.setFieldValue('receiverBankName', 'Taixiubank');
           formikProps.setErrors({});
         } catch (e: ErrorDto | any) {
-          console.log('error happen')
           formikProps.setFieldValue('receiverCardNumber', accountNumber);
           formikProps.setFieldValue('receiverName', '');
           formikProps.setFieldValue('receiverBankName', 'Taixiubank');
-          formikProps.setErrors(e);
+          formikProps.setErrors(e.response.data);
 
-          setError(e);
+          setError(e.response.data);
         } finally {
           clearInterval(intervalId);
         }
@@ -71,7 +69,6 @@ const CreateExternalTransactionStep2: FC<Props> = (props: Props) => {
     }, 1000);
 
     return () => clearInterval(intervalId);
-
   }, [accountNumber]);
 
   return (
@@ -114,8 +111,7 @@ const CreateExternalTransactionStep2: FC<Props> = (props: Props) => {
 
           {error && (
               <div className='form-text text-danger'>
-                {/*{intl.formatMessage({id: error.i18nPlaceHolder})}*/}
-                Credit card with this number is not found
+                {intl.formatMessage({id: error.i18nPlaceHolder})}
               </div>
           )}
         </div>
