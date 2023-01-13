@@ -1,5 +1,5 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import React, {Dispatch, FC, SetStateAction} from 'react';
+import React, {FC} from 'react';
 import {KTSVG} from '../../../helpers';
 
 type Props = {
@@ -50,7 +50,7 @@ const ConfirmModal: FC<Props> = ({
               {/* end::Close */}
             </div>
             {/* begin::Modal body */}
-            <div className='modal-body scroll-y mx-5'>
+            <div className='modal-body scroll-y mx-5' style={{textAlign: "left"}}>
               <span className={'fs-4 text-gray-800 text-hover-primary fw-bolder mb-0'}>
                 {content}
               </span>

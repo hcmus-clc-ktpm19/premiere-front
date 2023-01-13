@@ -77,7 +77,7 @@ const UsersListFilter = () => {
 
           {/* begin::Input group */}
           <div className='mb-10'>
-            <label className='form-label fs-6 fw-bold'>Account Status:</label>
+            <label className='form-label fs-6 fw-bold'>Credit Card Status:</label>
             <select
               className='form-select form-select-solid fw-bolder'
               data-kt-select2='true'

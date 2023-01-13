@@ -98,7 +98,7 @@ const filterData = (data: FullInfoUserDto[], state: QueryState) => {
 
   if (state.filter) {
     // @ts-ignore
-    data = data.filter((item) => item.enabled === state.filter.enabled && (item.gender === state.filter.gender || state.filter.gender === 'ALL'));
+    data = data.filter((item) => item.cardEnabled === state.filter.enabled && (item.gender === state.filter.gender || state.filter.gender === 'ALL'));
   }
 
   return data;

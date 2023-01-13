@@ -1,5 +1,5 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import {FC, useEffect} from 'react';
+import React, {FC, useEffect} from 'react';
 import {useMutation, useQueryClient} from 'react-query';
 import {MenuComponent} from '@_metronic/assets/ts/components';
 import {ID, KTSVG, QUERIES} from '@_metronic/helpers';
@@ -8,6 +8,8 @@ import {useQueryResponse} from '../../core/QueryResponseProvider';
 import {disableEmployeeAccount} from '../../core/_requests';
 import useNotification from "@/app/modules/notifications/useNotification";
 import {EmployeeStatusDto} from "@/app/models/model";
+import {ConfirmModal} from "@_metronic/partials/modals/confirm/ConfirmModal";
+import {AlertColor} from "@mui/material";
 
 type Props = {
   id: ID;
@@ -20,6 +22,7 @@ const EmployeeActionsCell: FC<Props> = ({id, username, enabled}) => {
   const {query} = useQueryResponse();
   const queryClient = useQueryClient();
   const {setNotification} = useNotification();
+  const [isDisableModalOpen, setIsDisableModalOpen] = React.useState<boolean>(false);
 
   useEffect(() => {
     MenuComponent.reinitialization();
@@ -29,7 +32,16 @@ const EmployeeActionsCell: FC<Props> = ({id, username, enabled}) => {
     setItemIdForUpdate(id);
   };
 
-  const deleteItem = useMutation(() => {
+  const onDisableBtnHandler = () => {
+    setIsDisableModalOpen(true);
+  }
+
+  const onConfirmDisable = async (value: any) => {
+    await disableAccount.mutateAsync();
+    setIsDisableModalOpen(false);
+  }
+
+  const disableAccount = useMutation(() => {
     console.log('disable', id);
     const employeeStatus: EmployeeStatusDto = {
       username: username,
@@ -41,7 +53,9 @@ const EmployeeActionsCell: FC<Props> = ({id, username, enabled}) => {
     onSuccess: () => {
       // ✅ update detail view directly
       queryClient.invalidateQueries([`${QUERIES.EMPLOYEES_LIST}-${query}`]);
-      setNotification(true, 'Disable employee account successfully.', 'success', () => {});
+      const message = enabled ? 'Disable employee account successfully.' : 'Enable employee account successfully.';
+      const type: AlertColor = enabled ? 'error' : 'success';
+      setNotification(true, message, type, () => {});
     },
   });
 
@@ -74,7 +88,7 @@ const EmployeeActionsCell: FC<Props> = ({id, username, enabled}) => {
             <a
                 className='menu-link px-3'
                 data-kt-users-table-filter='delete_row'
-                onClick={async () => await deleteItem.mutateAsync()}
+                onClick={onDisableBtnHandler}
             >
               {
                 enabled ? 'Disable' : 'Enable'
@@ -84,6 +98,19 @@ const EmployeeActionsCell: FC<Props> = ({id, username, enabled}) => {
           {/* end::Menu item */}
         </div>
         {/* end::Menu */}
+        <ConfirmModal
+            isShow={isDisableModalOpen}
+            header={
+              enabled ? 'Disable Employee Account' : 'Enable Employee Account'
+            }
+            content={
+              enabled ? 'Are you sure you want to disable this account?' : 'Are you sure you want to enable this account?'
+            }
+            onConfirm={onConfirmDisable}
+            onCancel={() => setIsDisableModalOpen(false)}
+            value={null}
+            isShowCancelBtn={true}
+        />
       </>
   );
 };

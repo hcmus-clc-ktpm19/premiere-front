@@ -1,14 +1,16 @@
 import axios from 'axios';
-import { CreditCardDto, ReceiverDto } from '@/app/modules/profile/core/_dtos';
+import {CreditCardDto, ReceiverDto} from '@/app/modules/profile/core/_dtos';
 import {
   PaginationDto,
   PremierePaginationResponseDto,
-  TransactionCriteriaDto,
   TransactionDto,
   TransactionRequestDto,
   TransferMoneyRequestDto,
 } from '@/app/models/model';
 import * as Yup from 'yup';
+import {
+  TransactionCriteriaDtoCustom
+} from "@/app/modules/apps/admin-management/transactions-list/core/_dtos";
 
 const PREMIERE_API_URL: string = import.meta.env.VITE_PREMIERE_API_URL;
 
@@ -69,7 +71,7 @@ const getCreditCardByUserId = async (userId: number | undefined): Promise<Credit
 
 const getTransactionByCustomerId = async (
   customerId: number,
-  transactionCriteria: TransactionCriteriaDto
+  transactionCriteria: TransactionCriteriaDtoCustom
 ): Promise<PremierePaginationResponseDto<TransactionDto>> => {
   return (
     await axios.post<PremierePaginationResponseDto<TransactionDto>>(
