@@ -13,11 +13,15 @@ export interface CreditCardDto {
 }
 
 export interface ExternalUserDto {
-  accountNumber: string;
-  user: {
-    id: number;
-    username: string;
-    name: string;
-    phone: string;
-  };
+  data: {
+    accountNumber: string;
+    user: {
+      id: number;
+      username: string;
+      name: string;
+      phone: string;
+    };
+  },
+  statusCode: number;
+  message: string;
 }

@@ -23,7 +23,7 @@ const ReceiverListModal: FC<Props> = ({isShow, setIsShowModal, handleOnConfirmBt
       if (isInternal) {
         setReceivers(data.filter((receiver) => receiver.bankName === 'Premierebank'));
       } else {
-        setReceivers(data.filter((receiver) => receiver.bankName !== 'Premierebank'));
+        setReceivers(data.filter((receiver) => receiver.bankName === 'Taixiubank'));
       }
     }).catch((error) => {
       console.log(error);
@@ -77,41 +77,44 @@ const ReceiverListModal: FC<Props> = ({isShow, setIsShowModal, handleOnConfirmBt
                         </thead>
                         {/* begin::Table body */}
                         <tbody>
-                        {receivers.map((receiver: ReceiverDto) => (
-                            <tr key={receiver.id}>
-                              <td>
-                                <div
-                                    className='form-check form-check-sm form-check-custom form-check-solid'>
-                                  <input className='form-check-input widget-9-check'
-                                         type='checkbox'
-                                         name={'receiverCheckbox'}
-                                         checked={selectedReceiver?.id === receiver.id}
-                                         onChange={() => {
-                                           setSelectedReceiver(receiver);
-                                         }}
-                                  />
-                                </div>
-                              </td>
-                              <td>
-                                <div className='d-flex flex-column ms-3 text-center'>
-                                  <a href='#' className='text-gray-800 text-hover-primary fs-6 fw-bolder'>
-                                    {receiver.nickname}
-                                  </a>
-                                </div>
-                              </td>
-                              <td>
-                                <div className='d-flex align-items-center'>
-                                  <Card className={'creditcard'}
-                                        bankName={receiver.bankName}
-                                        cardHolder={receiver.fullName}
-                                        cardNumber={receiver.cardNumber}
-                                        issuer='visa'
-                                        theme={mode}
-                                  />
-                                </div>
-                              </td>
-                            </tr>
-                        ))}
+                        {receivers.map((receiver: ReceiverDto) => {
+
+                            return (
+                                <tr key={receiver.id}>
+                                  <td>
+                                    <div
+                                        className='form-check form-check-sm form-check-custom form-check-solid'>
+                                      <input className='form-check-input widget-9-check'
+                                             type='checkbox'
+                                             name={'receiverCheckbox'}
+                                             checked={selectedReceiver?.id === receiver.id}
+                                             onChange={() => {
+                                               setSelectedReceiver(receiver);
+                                             }}
+                                      />
+                                    </div>
+                                  </td>
+                                  <td>
+                                    <div className='d-flex flex-column ms-3 text-center'>
+                                      <a href='#' className='text-gray-800 text-hover-primary fs-6 fw-bolder'>
+                                        {receiver.nickname}
+                                      </a>
+                                    </div>
+                                  </td>
+                                  <td>
+                                    <div className='d-flex align-items-center'>
+                                      <Card className={'creditcard'}
+                                            bankName={receiver.bankName}
+                                            cardHolder={receiver.fullName}
+                                            cardNumber={receiver.cardNumber}
+                                            issuer='visa'
+                                            theme={mode}
+                                      />
+                                    </div>
+                                  </td>
+                                </tr>
+                            )
+                        })}
                         </tbody>
                         {/* end::Table body */}
                       </table>

@@ -1,13 +1,11 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import React, {useCallback, useEffect} from 'react';
-import {Card3} from '../../../../_metronic/partials/content/cards/Card3';
+import React, {useEffect} from 'react';
+import {Card3} from '@_metronic/partials/content/cards/Card3';
 import {ProfileService as profileService} from '@/app/modules/profile/core/_requests';
 import {ReceiverDto} from '@/app/modules/profile/core/_dtos';
 import {useAuth} from '@/app/modules/auth';
 import {KTSVG} from '@_metronic/helpers';
-import {useListView} from "@/app/modules/apps/user-management/users-list/core/ListViewProvider";
 import {ReceiverEditModal} from "@/app/modules/profile/receiver-edit-modal/ReceiverEditModal";
-import {InviteUsers} from "@_metronic/partials";
 
 export const ReceiverModalContext = React.createContext({});
 
@@ -55,7 +53,11 @@ export function Receivers() {
           <div className='d-flex flex-wrap flex-stack mb-6'>
             <h3 className='fw-bolder my-2'>
               My Receivers
-              <span className='fs-6 text-gray-400 fw-bold ms-1'>({receivers.filter((receiver) => receiver.bankName === bank || bank === '').length})</span>
+              <span className='fs-6 text-gray-400 fw-bold ms-1'>(
+                {receivers
+                .filter((receiver) => receiver.bankName === 'Premierebank' || receiver.bankName === 'Taixiubank')
+                .filter((receiver) => receiver.bankName === bank || bank === '').length}
+                )</span>
             </h3>
 
             <div className={'d-flex flex-center flex-wrap mb-5'}>
@@ -70,9 +72,7 @@ export function Receivers() {
                 >
                   <option value=''>Select a bank...</option>
                   <option value='Premierebank'>Premierebank</option>
-                  <option value='Vietcombank'>Vietcombank</option>
-                  <option value='Vietinbank'>Vietinbank</option>
-                  <option value='Techcombank'>Techcombank</option>
+                  <option value='Taixiubank'>Taixiubank</option>
                 </select>
               </div>
               <button type='button' className='btn btn-sm btn-primary' style={{marginLeft: '10px'}}
@@ -85,21 +85,24 @@ export function Receivers() {
 
           <div className='row g-6 g-xl-9'>
             {
-              receivers.filter((receiver) => receiver.bankName === bank || bank === '').map((receiver: ReceiverDto) => {
-                return (
-                    <div className='col-md-6 col-xxl-4' key={receiver.id}>
-                      <Card3
-                          id={receiver.id}
-                          userId={receiver.userId}
-                          avatar='/media/avatars/300-6.jpg'
-                          name={receiver.fullName}
-                          nickname={receiver.nickname}
-                          online={true}
-                          cardNumber={receiver.cardNumber}
-                          bankName={receiver.bankName}
-                      />
-                    </div>
-                );
+              receivers
+              .filter((receiver) => receiver.bankName === bank || bank === '').map((receiver: ReceiverDto) => {
+                if (receiver.bankName === 'Premierebank' || receiver.bankName === 'Taixiubank') {
+                  return (
+                      <div className='col-md-6 col-xxl-4' key={receiver.id}>
+                        <Card3
+                            id={receiver.id}
+                            userId={receiver.userId}
+                            avatar='/media/avatars/300-6.jpg'
+                            name={receiver.fullName}
+                            nickname={receiver.nickname}
+                            online={true}
+                            cardNumber={receiver.cardNumber}
+                            bankName={receiver.bankName}
+                        />
+                      </div>
+                  );
+                }
               })
             }
           </div>

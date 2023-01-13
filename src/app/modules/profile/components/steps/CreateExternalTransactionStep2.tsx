@@ -52,7 +52,7 @@ const CreateExternalTransactionStep2: FC<Props> = (props: Props) => {
             accountNumber
           );
           formikProps.setFieldValue('receiverCardNumber', accountNumber);
-          formikProps.setFieldValue('receiverName', `${res.user.name}`);
+          formikProps.setFieldValue('receiverName', `${res.data.user.name}`);
           formikProps.setFieldValue('receiverBankName', 'Taixiubank');
           formikProps.setErrors({});
         } catch (e: ErrorDto | any) {
@@ -111,7 +111,8 @@ const CreateExternalTransactionStep2: FC<Props> = (props: Props) => {
 
           {error && (
               <div className='form-text text-danger'>
-                {intl.formatMessage({id: error.i18nPlaceHolder})}
+                {/*{intl.formatMessage({id: error.i18nPlaceHolder})}*/}
+                Credit card with this number is not found
               </div>
           )}
         </div>
