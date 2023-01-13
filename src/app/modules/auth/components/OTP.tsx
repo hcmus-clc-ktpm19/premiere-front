@@ -86,6 +86,9 @@ export function OTP() {
           <div className='text-gray-500 fw-semibold fs-6'>
             Enter the OTP code sent to {email} for verification.
           </div>
+          <div className='text-gray-500 fw-semibold fs-6'>
+            <strong>Check your spam folder if you can't find it.</strong>
+          </div>
           {/* end::Link */}
         </div>
 

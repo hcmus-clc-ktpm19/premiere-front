@@ -73,11 +73,13 @@ const SignInMethod: React.FC = () => {
     onSubmit: (values) => {
       setLoading2(true);
       setTimeout(() => {
-        changePassword({
-            currentPassword: values.currentPassword,
-            newPassword: values.newPassword,
-            username: currentUser?.username || '',
-          }).then((res) => {
+        const passwordDto = {
+          currentPassword: values.currentPassword,
+          newPassword: values.newPassword,
+          username: currentUser?.username || '',
+        };
+        console.log({passwordDto});
+        changePassword(passwordDto).then((res) => {
           setPasswordUpdateData(values);
           setLoading2(false);
           setPasswordForm(false);

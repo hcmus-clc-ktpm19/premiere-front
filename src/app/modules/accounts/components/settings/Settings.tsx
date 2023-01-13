@@ -9,8 +9,8 @@ import {DeactivateAccount} from './cards/DeactivateAccount';
 export function Settings() {
   return (
     <>
-      <ProfileDetails />
       <SignInMethod />
+      <ProfileDetails />
       <ConnectedAccounts />
       <EmailPreferences />
       <Notifications />
