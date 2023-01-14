@@ -35,7 +35,7 @@ const ToolbarReports = () => {
               <a
                 className='nav-link btn btn-sm btn-color-muted btn-active-color-primary btn-active-light fw-semibold fs-7 px-4 me-1'
                 data-bs-toggle='tab'
-                href=''
+                href='#'
               >
                 Week
               </a>

@@ -52,7 +52,7 @@ export function DemosDrawer() {
                 <div className='d-flex flex-stack'>
                   <h3 className='mb-0'>{import.meta.env.VITE_REACT_APP_THEME_NAME} Licenses</h3>
 
-                  <a href='https://themeforest.net/licenses/standard' className='fw-bold'>
+                  <a href='#' className='fw-bold'>
                     License FAQs
                   </a>
                 </div>
@@ -122,7 +122,7 @@ export function DemosDrawer() {
                   </div>
 
                   <div className='text-nowrap'>
-                    <a href='https://keenthemes.com/contact/' className='btn btn-sm btn-success'>
+                    <a href='#' className='btn btn-sm btn-success'>
                       Contact Us
                     </a>
                   </div>

@@ -318,8 +318,7 @@ export function Registration() {
           <span>
             I Accept the{' '}
             <a
-              href='https://keenthemes.com/metronic/?page=faq'
-              target='_blank'
+              href='#'
               className='ms-1 link-primary'
             >
               Terms

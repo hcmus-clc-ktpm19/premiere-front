@@ -160,7 +160,7 @@ const Search: FC = () => {
                 </h3>
 
                 <a
-                  href='/#'
+                  href='#'
                   className='d-flex text-dark text-hover-primary align-items-center mb-5'
                 >
                   <div className='symbol symbol-40px me-4'>
@@ -174,7 +174,7 @@ const Search: FC = () => {
                 </a>
 
                 <a
-                  href='/#'
+                  href='#'
                   className='d-flex text-dark text-hover-primary align-items-center mb-5'
                 >
                   <div className='symbol symbol-40px me-4'>
@@ -188,7 +188,7 @@ const Search: FC = () => {
                 </a>
 
                 <a
-                  href='/#'
+                  href='#'
                   className='d-flex text-dark text-hover-primary align-items-center mb-5'
                 >
                   <div className='symbol symbol-40px me-4'>
@@ -202,7 +202,7 @@ const Search: FC = () => {
                 </a>
 
                 <a
-                  href='/#'
+                  href='#'
                   className='d-flex text-dark text-hover-primary align-items-center mb-5'
                 >
                   <div className='symbol symbol-40px me-4'>
@@ -216,7 +216,7 @@ const Search: FC = () => {
                 </a>
 
                 <a
-                  href='/#'
+                  href='#'
                   className='d-flex text-dark text-hover-primary align-items-center mb-5'
                 >
                   <div className='symbol symbol-40px me-4'>
@@ -237,7 +237,7 @@ const Search: FC = () => {
                 </h3>
 
                 <a
-                  href='/#'
+                  href='#'
                   className='d-flex text-dark text-hover-primary align-items-center mb-5'
                 >
                   <div className='symbol symbol-40px me-4'>
@@ -257,7 +257,7 @@ const Search: FC = () => {
                 </a>
 
                 <a
-                  href='/#'
+                  href='#'
                   className='d-flex text-dark text-hover-primary align-items-center mb-5'
                 >
                   <div className='symbol symbol-40px me-4'>
@@ -277,7 +277,7 @@ const Search: FC = () => {
                 </a>
 
                 <a
-                  href='/#'
+                  href='#'
                   className='d-flex text-dark text-hover-primary align-items-center mb-5'
                 >
                   <div className='symbol symbol-40px me-4'>
@@ -297,7 +297,7 @@ const Search: FC = () => {
                 </a>
 
                 <a
-                  href='/#'
+                  href='#'
                   className='d-flex text-dark text-hover-primary align-items-center mb-5'
                 >
                   <div className='symbol symbol-40px me-4'>
@@ -317,7 +317,7 @@ const Search: FC = () => {
                 </a>
 
                 <a
-                  href='/#'
+                  href='#'
                   className='d-flex text-dark text-hover-primary align-items-center mb-5'
                 >
                   <div className='symbol symbol-40px me-4'>
@@ -344,7 +344,7 @@ const Search: FC = () => {
                 </h3>
 
                 <a
-                  href='/#'
+                  href='#'
                   className='d-flex text-dark text-hover-primary align-items-center mb-5'
                 >
                   <div className='symbol symbol-40px me-4'>
@@ -363,7 +363,7 @@ const Search: FC = () => {
                 </a>
 
                 <a
-                  href='/#'
+                  href='#'
                   className='d-flex text-dark text-hover-primary align-items-center mb-5'
                 >
                   <div className='symbol symbol-40px me-4'>
@@ -382,7 +382,7 @@ const Search: FC = () => {
                 </a>
 
                 <a
-                  href='/#'
+                  href='#'
                   className='d-flex text-dark text-hover-primary align-items-center mb-5'
                 >
                   <div className='symbol symbol-40px me-4'>
@@ -401,7 +401,7 @@ const Search: FC = () => {
                 </a>
 
                 <a
-                  href='/#'
+                  href='#'
                   className='d-flex text-dark text-hover-primary align-items-center mb-5'
                 >
                   <div className='symbol symbol-40px me-4'>
@@ -438,7 +438,7 @@ const Search: FC = () => {
                   </div>
 
                   <div className='d-flex flex-column'>
-                    <a href='/#' className='fs-6 text-gray-800 text-hover-primary fw-bold'>
+                    <a href='#' className='fs-6 text-gray-800 text-hover-primary fw-bold'>
                       BoomApp by Keenthemes
                     </a>
                     <span className='fs-7 text-muted fw-bold'>#45789</span>
@@ -456,7 +456,7 @@ const Search: FC = () => {
                   </div>
 
                   <div className='d-flex flex-column'>
-                    <a href='/#' className='fs-6 text-gray-800 text-hover-primary fw-bold'>
+                    <a href='#' className='fs-6 text-gray-800 text-hover-primary fw-bold'>
                       "Kept API Project Meeting
                     </a>
                     <span className='fs-7 text-muted fw-bold'>#84050</span>
@@ -474,7 +474,7 @@ const Search: FC = () => {
                   </div>
 
                   <div className='d-flex flex-column'>
-                    <a href='/#' className='fs-6 text-gray-800 text-hover-primary fw-bold'>
+                    <a href='#' className='fs-6 text-gray-800 text-hover-primary fw-bold'>
                       "KPI Monitoring App Launch
                     </a>
                     <span className='fs-7 text-muted fw-bold'>#84250</span>
@@ -492,7 +492,7 @@ const Search: FC = () => {
                   </div>
 
                   <div className='d-flex flex-column'>
-                    <a href='/#' className='fs-6 text-gray-800 text-hover-primary fw-bold'>
+                    <a href='#' className='fs-6 text-gray-800 text-hover-primary fw-bold'>
                       Project Reference FAQ
                     </a>
                     <span className='fs-7 text-muted fw-bold'>#67945</span>
@@ -510,7 +510,7 @@ const Search: FC = () => {
                   </div>
 
                   <div className='d-flex flex-column'>
-                    <a href='/#' className='fs-6 text-gray-800 text-hover-primary fw-bold'>
+                    <a href='#' className='fs-6 text-gray-800 text-hover-primary fw-bold'>
                       "FitPro App Development
                     </a>
                     <span className='fs-7 text-muted fw-bold'>#84250</span>
@@ -528,7 +528,7 @@ const Search: FC = () => {
                   </div>
 
                   <div className='d-flex flex-column'>
-                    <a href='/#' className='fs-6 text-gray-800 text-hover-primary fw-bold'>
+                    <a href='#' className='fs-6 text-gray-800 text-hover-primary fw-bold'>
                       Shopix Mobile App
                     </a>
                     <span className='fs-7 text-muted fw-bold'>#45690</span>
@@ -546,7 +546,7 @@ const Search: FC = () => {
                   </div>
 
                   <div className='d-flex flex-column'>
-                    <a href='/#' className='fs-6 text-gray-800 text-hover-primary fw-bold'>
+                    <a href='#' className='fs-6 text-gray-800 text-hover-primary fw-bold'>
                       "Landing UI Design" Launch
                     </a>
                     <span className='fs-7 text-muted fw-bold'>#24005</span>
@@ -715,7 +715,7 @@ const Search: FC = () => {
               </button>
 
               <a
-                href='/#'
+                href='#'
                 className='btn btn-sm fw-bolder btn-primary'
                 data-kt-search-element='advanced-options-form-search'
               >

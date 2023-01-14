@@ -34,7 +34,7 @@ const defaultMessages: Array<MessageModel> = [
   {
     user: 4,
     type: 'in',
-    text: 'You can unwatch this repository immediately by clicking here: <a href="https://keenthemes.com">Keenthemes.com</a>',
+    text: 'You can unwatch this repository immediately by clicking here: <a href="#">Keenthemes.com</a>',
     time: '3 Hours',
   },
   {
